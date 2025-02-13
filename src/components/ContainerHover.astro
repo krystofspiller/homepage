@@ -1,0 +1,7 @@
+---
+const { href, target = "_blank" } = Astro.props;
+---
+
+<a class="hover:bg-zinc-800 hover:border-orange border border-transparent p-2 rounded-md transition hover:text-orange" href={href} target={target}>
+  <slot/>
+</a>

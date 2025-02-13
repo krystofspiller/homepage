@@ -1,0 +1,102 @@
+---
+import NarrowLayout from '@layouts/NarrowLayout.astro'
+import SkillsSection from '@components/SkillsSection.astro'
+import IconContainer from "@components/IconContainer.astro";
+import { Image } from 'astro:assets'
+import Duolingo from '@assets/icons/duolingo.astro'
+import modelUnpricedRounds from '@assets/images/model-unpriced-rounds.gif'
+
+let showDuolingo = true
+
+async function getDuolingoStreak() {
+  const url = "https://www.duolingo.com/2017-06-30/users/1102654541"
+  try {
+    const response = await fetch(url)
+    if (!response.ok) {
+      showDuolingo = false
+    }
+
+    const json = await response.json()
+    return json.streak
+  } catch (error) {
+    showDuolingo = false
+  }
+}
+
+const duolingoStreak = await getDuolingoStreak()
+---
+
+<style>
+  svg {
+    width: 250px;
+    display: block;
+    position: absolute;
+    top: -20px;
+    left: 0px;
+    z-index: 1;
+    
+    .path {
+      stroke-dasharray: 820;
+      stroke-dashoffset: 0;
+    }
+  }
+</style>
+
+<NarrowLayout>
+  <div class="flex flex-col items-center justify-center mt-20 mb-16">
+    <h1 class="text-4xl font-light block">Hi 👋 I'm
+      <span class="relative">
+        <svg width="576" height="193" viewBox="0 0 576 193" version="1.1">
+          <path fill="transparent" stroke="#e6805f" stroke-width="4" d="M2.75003 7.00006C26.75 1.99994 69.5 2 128.5 2C322.5 2.00024 324.75 12.0002 128.75 12.0002C-40.25 12.0002 -40.25 24 128.75 24C256.75 24 270.75 18 270.75 18" class="path animate-dash"></path>
+        </svg>
+        <span style="position: relative; z-index: 2;">Krystof</span>
+      </span>
+    </h1>
+    <p class="text-2xl text-zinc-400"><em>Fullstack software engineer</em></p>
+  </div>
+  <section class="my-10">
+    <p class="leading-8 text-lg mb-3 text-zinc-400"></p>
+    <p class="leading-8 text-lg mb-3 text-zinc-400">I'm a software engineer with most experience in <strong class="text-zinc-100 font-medium">fullstack web development</strong>. I have a detail-oriented approach and always strive to find the simplest solution.</p>
+    <p class="leading-8 text-lg text-zinc-400">Check out my professional contributions in more detail below as well as my side project and skills or just have a look at <a class="underline hover:text-orange transition" target="_blank" href="https://laegas.github.io/cv/typst/cv.pdf">my CV.</a></p>
+  </section>
+  <section class="my-10">
+    <h2 class="text-2xl font-semibold mb-2">Professional experience</h2>
+    <hr class="mb-6 border-zinc-600">
+    <h3 class="text-xl font-semibold mb-1">Carta</h3>
+    <h4 class="text-lg font-semibold mb-1">Public calculator page</h4>
+    <p class="leading-8 text-lg mb-3 text-zinc-400">I have created a public page with a calculator to model unpriced rounds. The solution involved an <abbr title="Request For Comments">RFC</abbr> to come up with the best solution as this was the first public page (i.e. not behind auth), excluding a sign in/sign up flow. At the time we were also in a rebranding transition where the homepage was already transitioned and the idea was to use the new design on all public facing pages so the claculator should also follow the new design. It uses many primitive components and other more complex components some of which I helped building. <a class="underline" target="_blank" href="https://www.app.europe.carta.com/convertible_securities_calculator/?skip=true">Check it out for yourself!</a> See an example usage below:</p>
+    <Image src={modelUnpricedRounds} alt="Model unpriced rounds" />
+
+
+    <h3 class="text-xl font-semibold mb-1">Capdesk</h3>
+  </section>
+  
+  <section class="my-10">
+    <!-- <h2 class="text-2xl font-semibold mb-2">Proyectos</h2>
+    <hr class="mb-6 border-zinc-600">
+  
+    <ProjectCard projectTitle="Centro Digital" projectDescription="Aplicación web que ayuda a los usuarios a buscar negocios locales cercanos, proporcionando información detallada, contactos, y mapas interactivos." projectLink="https://github.com/garaven/centro-digital" image="/images/centro-digital.png">
+      <React />
+      <Supabase />
+      <Tailwind />
+      <Typescript />
+    </ProjectCard>
+  
+    <ProjectCard projectTitle="StockIn" projectDescription="Sistema de gestión de inventario eficiente para Pymes, que simplifica el seguimiento, el control y la optimización de los niveles de existencias para satisfacer sus necesidades específicas." projectLink="https://github.com/Gothsec/StockIn-demo" image="/images/stockin.png">
+      <React />
+      <Supabase />
+      <Tailwind />
+    </ProjectCard> -->
+  </section>
+  {showDuolingo && 
+    <IconContainer name="Duolingo 🇰🇷">
+      <div class="relative w-12">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/4 text-sm text-black">{duolingoStreak}</div>
+        <Duolingo size="size-12" />
+        {/* <Image src={} alt="Duolingo owl" width="50" height="50" /> */}
+      </div>
+    </IconContainer>
+  }
+  
+  <SkillsSection />
+</NarrowLayout>

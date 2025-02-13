@@ -1,0 +1,16 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+
+const { title } = Astro.props;
+---
+<BaseLayout title={title}>
+  <div class="min-w-[535px] flex flex-col h-full max-w-screen-sm mx-auto p-8 pb-0 selection:bg-gray-600 selection:text-white">
+      <Header />
+      <main class="flex-[2]">
+        <slot />
+      </main>
+      <Footer />
+  </div>
+</BaseLayout>
