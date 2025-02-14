@@ -30,7 +30,14 @@ const duolingoStreak = await getDuolingoStreak()
     <h1 class="text-4xl font-light block">Hi 👋 I'm
       <span class="relative">
         <svg width="576" height="193" viewBox="0 0 576 193" version="1.1" class="w-[250px] block absolute top-[-18px] left-0 z-0">
-          <path fill="transparent" stroke="#e6805f" stroke-width="4" d="M2.75003 7.00006C26.75 1.99994 69.5 2 128.5 2C322.5 2.00024 324.75 12.0002 128.75 12.0002C-40.25 12.0002 -40.25 24 128.75 24C256.75 24 270.75 18 270.75 18" class="[stroke-dasharray:820] [stroke-dashoffset:0] animate-dash"></path>
+          <defs>
+            <linearGradient id="linear" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#e6c75f"/>
+              <stop offset="100%" stop-color="#e65f5f"/>
+            </linearGradient>
+          </defs>
+          
+          <path fill="transparent" stroke="url(#linear)" stroke-width="4" d="M2.75003 7.00006C26.75 1.99994 69.5 2 128.5 2C322.5 2.00024 324.75 12.0002 128.75 12.0002C-40.25 12.0002 -40.25 24 128.75 24C256.75 24 270.75 18 270.75 18" class="[stroke-dasharray:820] [stroke-dashoffset:0] animate-dash" />
         </svg>
         <span class="relative z-10 bg-gradient-accent bg-clip-text text-transparent">Krystof</span>
       </span>
