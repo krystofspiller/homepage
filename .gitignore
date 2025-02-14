@@ -5,5 +5,8 @@
 .astro
 dist
 
+# Cloudflare
+.wrangler
+
 # macOS
 .DS_Store
