@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@astrojs/tailwind": "^5.1.4",
@@ -15,6 +16,9 @@
     "tippy.js": "^6.3.7"
   },
   "devDependencies": {
+    "prettier": "^3.5.1",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "wrangler": "^3.109.0"
   }
 }

@@ -1,37 +1,42 @@
 ---
-import Tooltip from '@components/Tooltip.astro'
-import { ClientRouter } from 'astro:transitions'
-const title = Astro.props.title ? `${Astro.props.title} | Krystof Spiller` : "Krystof Spiller"
+import Tooltip from "@components/Tooltip.astro"
+import { ClientRouter } from "astro:transitions"
+const title = Astro.props.title
+  ? `${Astro.props.title} | Krystof Spiller`
+  : "Krystof Spiller"
 ---
 
 <!doctype html>
 <html lang="es" class="h-full">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
-		<title>{title}</title>
-		<ClientRouter />
-		<Tooltip />
-	</head>
-	<body class="h-full min-h-[100vh] selection:bg-orange selection:text-white">
-	<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+    <ClientRouter />
+    <Tooltip />
+  </head>
+  <body class="h-full min-h-[100vh] selection:bg-orange selection:text-white">
+    <slot />
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-		font-family: 'Geist', sans-serif;
-		font-optical-sizing: auto;
-		font-style: normal;
-		background-color: #181818;
-		color: #fff;
-	}
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Geist", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    background-color: #181818;
+    color: #fff;
+  }
 </style>

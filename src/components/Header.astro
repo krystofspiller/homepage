@@ -5,19 +5,13 @@ import ContainerHover from "@components/ContainerHover.astro"
 ---
 
 <header>
-  <nav class="w-full flex justify-between items-center">
-    <div class="flex gap-1 items-center">
-      <ContainerHover href="/" target="_self">
-        Home
-      </ContainerHover>
-      <ContainerHover href="/about/" target="_self">
-        About
-      </ContainerHover>
-      <ContainerHover href="/posts/" target="_self">
-        Posts
-      </ContainerHover>
+  <nav class="flex w-full items-center justify-between">
+    <div class="flex items-center gap-1">
+      <ContainerHover href="/" target="_self">Home</ContainerHover>
+      <ContainerHover href="/about/" target="_self">About</ContainerHover>
+      <ContainerHover href="/posts/" target="_self">Posts</ContainerHover>
     </div>
-    <div class="flex gap-3 items-center">
+    <div class="flex items-center gap-3">
       <ContainerHover href="mailto:krystof.spiller@gmail.com">
         <Email />
       </ContainerHover>

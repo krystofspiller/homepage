@@ -1,8 +1,15 @@
 ---
 const year = new Date().getFullYear()
 ---
+
 <footer>
-  <div class="bottom-0 left-0 flex justify-center items-center w-full p-4">
-    <span class="text-zinc-400">© {year}</span>
+  <div class="bottom-0 left-0 flex w-full items-center justify-center p-4">
+    <span class="text-zinc-400"
+      >&copy;&nbsp;<span id="footer-year">{year}</span></span
+    >
   </div>
 </footer>
+
+<script is:inline>
+  document.getElementById("footer-year").innerText = new Date().getFullYear()
+</script>

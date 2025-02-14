@@ -1,6 +1,7 @@
 ---
 import "tippy.js/dist/tippy.css"
 ---
+
 <style is:global>
   abbr {
     cursor: help;
@@ -10,24 +11,28 @@ import "tippy.js/dist/tippy.css"
     text-decoration-thickness: 1.5px;
     font-weight: 500;
   }
-  .tippy-box[data-theme~='gradient-accent'] {
+  .tippy-box[data-theme~="gradient-accent"] {
     background-color: black;
   }
-  .tippy-box[data-theme~='gradient-accent'] > .tippy-content {
+  .tippy-box[data-theme~="gradient-accent"] > .tippy-content {
     background: linear-gradient(45deg, #e6c75f, #e65f5f);
     color: transparent;
     background-clip: text;
   }
-  .tippy-box[data-theme~='gradient-accent'][data-placement^='top'] > .tippy-arrow::before {
+  .tippy-box[data-theme~="gradient-accent"][data-placement^="top"]
+    > .tippy-arrow::before {
     border-top-color: black;
   }
-  .tippy-box[data-theme~='gradient-accent'][data-placement^='bottom'] > .tippy-arrow::before {
+  .tippy-box[data-theme~="gradient-accent"][data-placement^="bottom"]
+    > .tippy-arrow::before {
     border-bottom-color: black;
   }
-  .tippy-box[data-theme~='gradient-accent'][data-placement^='left'] > .tippy-arrow::before {
+  .tippy-box[data-theme~="gradient-accent"][data-placement^="left"]
+    > .tippy-arrow::before {
     border-left-color: black;
   }
-  .tippy-box[data-theme~='gradient-accent'][data-placement^='right'] > .tippy-arrow::before {
+  .tippy-box[data-theme~="gradient-accent"][data-placement^="right"]
+    > .tippy-arrow::before {
     border-right-color: black;
   }
 </style>
@@ -37,14 +42,14 @@ import "tippy.js/dist/tippy.css"
   document.addEventListener("astro:page-load", () => {
     const tips = document.querySelectorAll("abbr")
     tips.forEach((t) => {
-      if (t.hasAttribute('title')) {
-        t.setAttribute('data-title', t.getAttribute('title')!)
-        t.removeAttribute('title')
+      if (t.hasAttribute("title")) {
+        t.setAttribute("data-title", t.getAttribute("title")!)
+        t.removeAttribute("title")
       }
       tippy(t, {
         content: t.attributes.getNamedItem("data-title")?.textContent || "",
         interactive: true,
-        theme: 'gradient-accent'
+        theme: "gradient-accent",
       })
     })
   })
