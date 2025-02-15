@@ -2,10 +2,18 @@
 import NarrowLayout from "@layouts/NarrowLayout.astro"
 import SkillsSection from "@components/SkillsSection.astro"
 import IconContainer from "@components/IconContainer.astro"
+
 import { Image } from "astro:assets"
-import Duolingo from "@assets/icons/duolingo.astro"
-import modelUnpricedRounds from "@assets/images/model-unpriced-rounds.gif"
 import Link from "@components/Link.astro"
+
+import Duolingo from "@assets/icons/duolingo.astro"
+
+import cartaLogo from "@assets/images/carta.svg"
+import modelUnpricedRounds from "@assets/images/model-unpriced-rounds.gif"
+import funAtParties from "@assets/images/fun-at-parties.svg"
+import ProjectCard from "@components/ProjectCard.astro"
+import React from "@assets/icons/react.astro"
+import Tailwind from "@assets/icons/tailwind.astro"
 
 let showDuolingo = true
 
@@ -28,9 +36,9 @@ const duolingoStreak = await getDuolingoStreak()
 ---
 
 <NarrowLayout>
-  <div class="mb-16 mt-20 flex flex-col items-center justify-center">
+  <div class="bg-light-glow-accent pb-20 pt-20 flex flex-col items-center justify-center">
     <h1 class="block text-4xl font-light">
-      Hi 👋 I'm
+      Hi <span class="inline-block animate-wave hover:animate-wave-infinite origin-[75%_75%]">👋</span> I'm
       <span class="relative">
         <svg
           width="576"
@@ -62,7 +70,7 @@ const duolingoStreak = await getDuolingoStreak()
     </h1>
     <p class="text-2xl text-zinc-400"><em>Fullstack software engineer</em></p>
   </div>
-  <section class="my-10">
+  <section class="mt-10 mb-16">
     <p class="mb-3 text-lg leading-8 text-zinc-400"></p>
     <p class="mb-3 text-lg leading-8 text-zinc-400">
       I'm a software engineer with most experience in <strong
@@ -71,17 +79,26 @@ const duolingoStreak = await getDuolingoStreak()
       simplest solution.
     </p>
     <p class="text-lg leading-8 text-zinc-400">
-      Check out more about me including my professional contributions in more
-      detail below or just have a look at <Link
+      Find out more about my <Link href="#professional-contributions">professional contributions</Link><span>, </span><Link href="#projects">hobby project</Link>, <Link href="#skills">skills</Link> and <span class="relative"><Link href="#general-fun"><Image class="absolute left-[10px] top-[18px]" src={funAtParties} alt="I'm fun at parties" /></a><Link href="#general">me in general</Link></span>
+      below or just have a look at <Link
         target="_blank"
         href="https://laegas.github.io/cv/typst/cv.pdf">my CV</Link
       >.
     </p>
   </section>
   <section class="my-10">
-    <h2 class="mb-2 text-2xl font-semibold">Professional experience</h2>
+    <h2 id="professional-contributions" class="mb-2 text-2xl font-semibold">Professional contributions</h2>
     <hr class="mb-6 border-zinc-600" />
-    <h3 class="mb-1 text-xl font-semibold">Carta</h3>
+    <div class="flex flex-col items-center justify-center gap-1 mb-2">
+      <div class="flex items-center">
+        <Image class="h-8 w-auto" src={cartaLogo} alt="Carta logo" />
+        <h3 class="text-xl font-semibold">&nbsp;-&nbsp;Carta</h3>
+      </div>
+      <span class="text-zinc-400">
+        2022-2025
+      </span>
+    </div>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">A few examples of some of my more unique contributions follows:</p>
     <h4 class="mb-1 text-lg font-semibold">
       <Link
         target="_blank"
@@ -93,9 +110,9 @@ const duolingoStreak = await getDuolingoStreak()
       I have created a public page with a calculator to model unpriced rounds.
       The solution involved an <abbr title="Request For Comments">RFC</abbr> to come
       up with the best solution as this was the first public page (i.e. not behind
-      auth), excluding a sign in/sign up flow. At the time we were also in a rebranding
+      auth, obviously excluding a sign in/sign up flow). At the time we were also in a rebranding
       transition where the homepage was already transitioned and the idea was to
-      use the new design on all public facing pages so the claculator should also
+      use the new design on all public facing pages so the calculator should also
       follow the new design. It uses many primitive components and other more complex
       components some of which I helped building. <Link
         target="_blank"
@@ -107,30 +124,21 @@ const duolingoStreak = await getDuolingoStreak()
 
     <h3 class="mb-1 text-xl font-semibold">Capdesk</h3>
   </section>
-
-  <section class="my-10">
-    <!-- <h2 class="text-2xl font-semibold mb-2">Proyectos</h2>
-    <hr class="mb-6 border-zinc-600">
-  
-    <ProjectCard projectTitle="Centro Digital" projectDescription="Aplicación web que ayuda a los usuarios a buscar negocios locales cercanos, proporcionando información detallada, contactos, y mapas interactivos." projectLink="https://github.com/garaven/centro-digital" image="/images/centro-digital.png">
+  <section class="my-10 mb-6">
+    <h2 id="hobby-project" class="mb-2 text-2xl font-semibold">Hobby project</h2>
+    <hr class="border-zinc-600" />
+    <!-- TODO: Link to the project, add Git -->
+    <ProjectCard projectTitle="HabitVille" projectDescription="Hobby project for tracking habits and gamifying it in a tycoon-game. Started with a web app, now working on iOS mobile app." projectLink="https://github.com/Laegas/habitville" githubLink="https://github.com/Laegas/habitville">
       <React />
-      <Supabase />
       <Tailwind />
-      <Typescript />
     </ProjectCard>
-  
-    <ProjectCard projectTitle="StockIn" projectDescription="Sistema de gestión de inventario eficiente para Pymes, que simplifica el seguimiento, el control y la optimización de los niveles de existencias para satisfacer sus necesidades específicas." projectLink="https://github.com/Gothsec/StockIn-demo" image="/images/stockin.png">
-      <React />
-      <Supabase />
-      <Tailwind />
-    </ProjectCard> -->
   </section>
   {
     showDuolingo && (
       <IconContainer name="Duolingo 🇰🇷">
         <div class="relative w-12">
           <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-3/4 text-sm text-black">
-            {duolingoStreak}
+            <span id="duolingo-streak">{duolingoStreak}</span>
           </div>
           <Duolingo size="size-12" />
         </div>
@@ -140,3 +148,19 @@ const duolingoStreak = await getDuolingoStreak()
 
   <SkillsSection />
 </NarrowLayout>
+
+<script is:inline>
+  function getDuolingoStreak() {
+    const url = "https://www.duolingo.com/2017-06-30/users/1102654541"
+    try {
+      const response = fetch(url).then(res => {
+        res.json().then(json => {
+          document.getElementById("duolingo-streak").innerText = json.streak
+        })
+      })
+      
+    } catch (error) {}
+  }
+
+  getDuolingoStreak()
+</script>

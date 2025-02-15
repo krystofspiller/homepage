@@ -2,8 +2,10 @@
 const projectTitle = Astro.props.projectTitle
 const projectDescription = Astro.props.projectDescription
 const projectLink = Astro.props.projectLink
+const githubLink = Astro.props.githubLink
 const image = Astro.props.image
-import ArrowLink from "@assets/icons/arrow-link.astro"
+import Github from "@assets/icons/github.astro"
+import Link from "./Link.astro"
 ---
 
 <article
@@ -13,24 +15,25 @@ import ArrowLink from "@assets/icons/arrow-link.astro"
   class="mb-7 flex flex-col-reverse justify-between rounded-lg border border-zinc-700 bg-zinc-900 bg-opacity-40 p-8 shadow-xl md:flex-row"
 >
   <div>
-    <a
-      class="mb-2 inline-flex items-center gap-2 text-xl transition hover:opacity-60"
-      target="_blank"
-      href={projectLink}
-    >
-      <h3 class="inline-block text-xl font-semibold">{projectTitle}</h3>
-      <span class="text-zinc-400">
-        <ArrowLink size="w-5 h-5" />
-      </span>
-    </a>
+    <div class="mb-4 flex justify-between">
+      <Link
+        target="_blank"
+        href={projectLink}
+      >
+        <h3 class="inline-block text-xl font-semibold">{projectTitle}</h3>
+      </Link>
+      <a class="hover:text-orange transition" href={githubLink}><Github /></a>
+    </div>
     <p class="mb-4 pr-2 text-sm text-zinc-400">{projectDescription}</p>
     <div class="flex items-center gap-3">
       <slot />
     </div>
   </div>
-  <img
-    class="mb-5 w-full rounded-lg shadow-xl md:mb-0 md:w-52"
-    src={image}
-    alt={`${projectTitle} image`}
-  />
+  {image &&
+    <img
+      class="mb-5 w-full rounded-lg shadow-xl md:mb-0 md:w-52"
+      src={image}
+      alt={`${projectTitle} image`}
+    />
+}
 </article>

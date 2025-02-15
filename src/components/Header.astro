@@ -2,16 +2,19 @@
 import Github from "@assets/icons/github.astro"
 import Email from "@assets/icons/email.astro"
 import ContainerHover from "@components/ContainerHover.astro"
+import Linkedin from "@assets/icons/linkedin.astro"
 ---
 
 <header>
   <nav class="flex w-full items-center justify-between">
     <div class="flex items-center gap-1">
-      <ContainerHover href="/" target="_self">Home</ContainerHover>
-      <ContainerHover href="/about/" target="_self">About</ContainerHover>
-      <ContainerHover href="/posts/" target="_self">Posts</ContainerHover>
+      <!-- <ContainerHover href="/" target="_self">Home</ContainerHover>
+      <ContainerHover href="/posts/" target="_self">Posts</ContainerHover> -->
     </div>
     <div class="flex items-center gap-3">
+      <ContainerHover href="https://www.linkedin.com/in/krystof-spiller/">
+        <Linkedin />
+      </ContainerHover>
       <ContainerHover href="mailto:krystof.spiller@gmail.com">
         <Email />
       </ContainerHover>
