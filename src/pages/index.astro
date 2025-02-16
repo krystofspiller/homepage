@@ -9,7 +9,7 @@ import Link from "@components/Link.astro"
 import Duolingo from "@assets/icons/duolingo.astro"
 
 import cartaLogo from "@assets/images/carta.svg"
-import modelUnpricedRounds from "@assets/images/model-unpriced-rounds.gif"
+import trollface from "@assets/images/trollface.svg"
 import ProjectCard from "@components/ProjectCard.astro"
 import React from "@assets/icons/react.astro"
 import Tailwind from "@assets/icons/tailwind.astro"
@@ -93,7 +93,7 @@ const duolingoStreak = await getDuolingoStreak()
       ><span>, </span><Link href="#hobby-project">hobby project</Link>, <Link
         href="#skills">skills</Link
       > and <span class="relative"
-        ><Link href="#general-fun"
+        ><Link href="/fun-at-parties"
           ><FunAtParties className="absolute left-[10px] top-[18px] hover:[&_path]:fill-[url(#linear)]"
           /></Link
         ><Link href="#general">me in general</Link></span
@@ -128,7 +128,7 @@ const duolingoStreak = await getDuolingoStreak()
     </h4>
     <p class="mb-3 text-lg leading-8 text-zinc-400">
       I have created a public page with a calculator to model unpriced rounds.
-      The solution involved an <abbr title="Request For Comments">RFC</abbr> to come
+      The solution involved an <abbr title="<a href=&quot;https://en.wikipedia.org/wiki/Request_for_Comments&quot; target=&quot;_blank&quot;>Request For Comments</a>">RFC</abbr>-like process to come
       up with the best solution as this was the first public page (i.e. not behind
       auth, obviously excluding a sign in/sign up flow). At the time we were also
       in a rebranding transition where the homepage was already transitioned and
@@ -138,11 +138,14 @@ const duolingoStreak = await getDuolingoStreak()
         target="_blank"
         href="https://www.app.europe.carta.com/convertible_securities_calculator/?skip=true"
         >Check it out for yourself!</Link
-      > See an example usage below:
+      > See an example below:
     </p>
-    <Image src={modelUnpricedRounds} alt="Model unpriced rounds" />
+    <video controls loop autoplay muted>
+      <source src="/src/assets/videos/model-unpriced-rounds.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
 
-    <h3 class="mb-1 text-xl font-semibold">Capdesk</h3>
+    <!-- <h3 class="mb-1 text-xl font-semibold">Capdesk</h3> -->
   </section>
   <section class="my-10 mb-6">
     <h2 id="hobby-project" class="mb-2 text-2xl font-semibold">
@@ -190,10 +193,6 @@ const duolingoStreak = await getDuolingoStreak()
     Other stuff about me
   </h2>
   <hr class="mb-6 border-zinc-600" />
-
-  <h2 id="general-fun" class="mb-2 text-2xl font-semibold">
-    I'm fun at parties
-  </h2>
 </section>
   
 </NarrowLayout>
