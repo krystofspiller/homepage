@@ -86,7 +86,7 @@ const duolingoStreak = await getDuolingoStreak()
     <p class="text-lg leading-8 text-zinc-400">
       Find out more about my <Link href="#professional-contributions"
         >professional contributions</Link
-      ><span>, </span><Link href="#projects">hobby project</Link>, <Link
+      ><span>, </span><Link href="#hobby-project">hobby project</Link>, <Link
         href="#skills">skills</Link
       > and <span class="relative"
         ><Link href="#general-fun"
@@ -108,7 +108,7 @@ const duolingoStreak = await getDuolingoStreak()
     <hr class="mb-6 border-zinc-600" />
     <div class="mb-2 flex flex-col items-center justify-center gap-1">
       <div class="flex items-center">
-        <Image class="h-8 w-auto" src={cartaLogo} alt="Carta logo" />
+        <Image class="h-8 w-auto" loading="eager" src={cartaLogo} alt="Carta logo" />
         <h3 class="text-xl font-semibold">&nbsp;-&nbsp;Carta</h3>
       </div>
       <span class="text-zinc-400"> 2022-2025 </span>
@@ -170,7 +170,25 @@ const duolingoStreak = await getDuolingoStreak()
     )
   }
 
+<section class="my-10 mb-6">
+  <h2 id="skills" class="mb-2 text-2xl font-semibold">
+    Skills
+  </h2>
+  <hr class="mb-6 border-zinc-600" />
   <SkillsSection />
+</section>
+
+<section class="my-10 mb-6">
+  <h2 id="general" class="mb-2 text-2xl font-semibold">
+    Other stuff about me
+  </h2>
+  <hr class="mb-6 border-zinc-600" />
+
+  <h2 id="general-fun" class="mb-2 text-2xl font-semibold">
+    I'm fun at parties
+  </h2>
+</section>
+  
 </NarrowLayout>
 
 <script is:inline>
