@@ -6,13 +6,15 @@ const { href, target = "_self" } = Astro.props
   // Since gradient is used on hover making the font color transparent, the underline is done
   // using `text-decoration-line` and the color needs to be set dynamically from parent element
   const anchors = document.querySelectorAll("a")
-  anchors.forEach(anchor => {
-    anchor.style.textDecorationColor = getComputedStyle(anchor.parentElement!)['color']
+  anchors.forEach((anchor) => {
+    anchor.style.textDecorationColor = getComputedStyle(anchor.parentElement!)[
+      "color"
+    ]
   })
 </script>
 
 <a
-  class="inline-flex underline hover:bg-gradient-accent hover:bg-clip-text hover:text-transparent"
+  class="underline transition duration-0 hover:bg-gradient-accent hover:bg-clip-text hover:text-transparent hover:duration-150"
   target={target}
   href={href}><slot /></a
 >

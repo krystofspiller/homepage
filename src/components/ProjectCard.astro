@@ -16,24 +16,23 @@ import Link from "./Link.astro"
 >
   <div>
     <div class="mb-4 flex justify-between">
-      <Link
-        target="_blank"
-        href={projectLink}
-      >
+      <Link target="_blank" href={projectLink}>
         <h3 class="inline-block text-xl font-semibold">{projectTitle}</h3>
       </Link>
-      <a class="hover:text-orange transition" href={githubLink}><Github /></a>
+      <a class="transition hover:text-orange" href={githubLink}><Github /></a>
     </div>
     <p class="mb-4 pr-2 text-sm text-zinc-400">{projectDescription}</p>
     <div class="flex items-center gap-3">
       <slot />
     </div>
   </div>
-  {image &&
-    <img
-      class="mb-5 w-full rounded-lg shadow-xl md:mb-0 md:w-52"
-      src={image}
-      alt={`${projectTitle} image`}
-    />
-}
+  {
+    image && (
+      <img
+        class="mb-5 w-full rounded-lg shadow-xl md:mb-0 md:w-52"
+        src={image}
+        alt={`${projectTitle} image`}
+      />
+    )
+  }
 </article>
