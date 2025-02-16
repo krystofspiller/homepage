@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+:root {
+  --accent-gradient: "linear-gradient(45deg, #e6c75f, #e65f5f)";
+}
+
+@theme {
+  --animate-wave: wave 1.2s linear;
+  --animate-wave-infinite: wave 1.2s linear infinite;
+  --animate-dash: dash 2s ease-in-out;
+
+  --color-orange: #e6805f;
+  --color-orange-30: --alpha(var(--color-orange) / 30%);
+
+  @keyframes dash {
+    0% { 
+      stroke-dashoffset: 820;
+    }
+    100% { 
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes wave {
+    0% { transform: rotate(0.0deg) }
+    15% { transform: rotate(14deg) }
+    30% { transform: rotate(-8deg) }
+    45% { transform: rotate(14deg) }
+    60% { transform: rotate(-4deg) }
+    75% { transform: rotate(10.0deg) }
+    90% { transform: rotate(0.0deg) }
+    100% { transform: rotate(0.0deg) }
+  }
+}
