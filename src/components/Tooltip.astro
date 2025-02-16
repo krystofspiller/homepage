@@ -3,7 +3,7 @@ import "tippy.js/dist/tippy.css"
 ---
 
 <style is:global>
-  abbr {
+  abbr, span[data-tooltip] {
     cursor: help;
     text-decoration-style: dotted;
     text-decoration-line: underline;
@@ -16,6 +16,15 @@ import "tippy.js/dist/tippy.css"
   }
   .tippy-box[data-theme~="gradient-accent"] > .tippy-content {
     background: linear-gradient(45deg, #e6c75f, #e65f5f);
+    color: transparent;
+    background-clip: text;
+  }
+  .tippy-box[data-theme~="gradient-accent"] > .tippy-content > a {
+    text-decoration: underline;
+    text-decoration-color: #e6805f;
+  }
+  .tippy-box[data-theme~="gradient-accent"] > .tippy-content > a:hover {
+    background: linear-gradient(45deg, #e65f5f, #e6c75f);
     color: transparent;
     background-clip: text;
   }
@@ -40,14 +49,19 @@ import "tippy.js/dist/tippy.css"
 <script>
   import tippy from "tippy.js"
   document.addEventListener("astro:page-load", () => {
-    const tips = document.querySelectorAll("abbr")
+    const tips = document.querySelectorAll("abbr, [data-tooltip]")
     tips.forEach((t) => {
+      let content = ''
       if (t.hasAttribute("title")) {
-        t.setAttribute("data-title", t.getAttribute("title")!)
+        content = t.getAttribute("title")!
+        t.setAttribute("data-title", content)
         t.removeAttribute("title")
+      } else {
+        content = t.getAttribute("data-tooltip")!
       }
       tippy(t, {
-        content: t.attributes.getNamedItem("data-title")?.textContent || "",
+        content,
+        allowHTML: true,
         interactive: true,
         theme: "gradient-accent",
       })

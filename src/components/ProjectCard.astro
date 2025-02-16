@@ -10,7 +10,7 @@ import Link from "./Link.astro"
 
 <article
   style={{
-    backgroundImage: "radial-gradient(circle, #6c6c6c1d 0%, transparent 100%)",
+    backgroundImage: "radial-gradient(circle, #6c6c6c30 0%, transparent 100%)",
   }}
   class="mb-7 flex flex-col-reverse justify-between rounded-lg border border-zinc-700 bg-zinc-900 bg-opacity-40 p-8 shadow-xl md:flex-row"
 >
@@ -22,7 +22,7 @@ import Link from "./Link.astro"
       <a class="transition hover:text-orange" href={githubLink}><Github /></a>
     </div>
     <p class="mb-4 pr-2 text-sm text-zinc-400">{projectDescription}</p>
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-3 bg-zinc-700 p-2 w-fit">
       <slot />
     </div>
   </div>

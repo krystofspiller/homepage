@@ -14,6 +14,10 @@ import ProjectCard from "@components/ProjectCard.astro"
 import React from "@assets/icons/react.astro"
 import Tailwind from "@assets/icons/tailwind.astro"
 import FunAtParties from "@assets/images/fun-at-parties.astro"
+import Next from "@assets/icons/next.astro"
+import Expo from "@assets/icons/expo.astro"
+import Appwrite from "@assets/icons/appwrite.astro"
+import Convex from "@assets/icons/convex.astro"
 
 let showDuolingo = true
 
@@ -148,12 +152,16 @@ const duolingoStreak = await getDuolingoStreak()
     <!-- TODO: Link to the project, add Git -->
     <ProjectCard
       projectTitle="HabitVille"
-      projectDescription="Hobby project for tracking habits and gamifying it in a tycoon-game. Started with a web app, now working on iOS mobile app."
+      projectDescription="Hobby project for tracking habits and gamifying it in a tycoon-game. Started with a web app, now working on an iOS mobile app."
       projectLink="https://github.com/Laegas/habitville"
       githubLink="https://github.com/Laegas/habitville"
     >
-      <React />
-      <Tailwind />
+      <span data-tooltip="<a href=&quot;https://nextjs.org&quot; target=&quot;_blank&quot;>Next</a>"><Next /></span>
+      <span data-tooltip="<a href=&quot;https://expo.dev&quot; target=&quot;_blank&quot;>Expo</a>"><Expo /></span>
+      <span data-tooltip="<a href=&quot;https://react.dev&quot; target=&quot;_blank&quot;>React</a> & <a href=&quot;https://reactnative.dev&quot; target=&quot;_blank&quot;>React Native</a>"><React /></span>
+      <span data-tooltip="<a href=&quot;https://tailwindcss.com&quot; target=&quot;_blank&quot;>Tailwind</a>"><Tailwind /></span>
+      <span data-tooltip="<a href=&quot;https://appwrite.io&quot; target=&quot;_blank&quot;>Appwrite</a>"><Appwrite /></span>
+      <span data-tooltip="<a href=&quot;https://www.convex.dev&quot; target=&quot;_blank&quot;>Convex</a>"><Convex /></span>
     </ProjectCard>
   </section>
   {
