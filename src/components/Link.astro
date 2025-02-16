@@ -13,8 +13,28 @@ const { href, target = "_self" } = Astro.props
   })
 </script>
 
+<style>
+  a[href*="//"]:not([href*="krystofs.com"]) {
+    &:after {
+      content: '';
+      margin-left: 4px;
+      padding-left: 1em;
+      background-color: currentColor;
+      mask-image: url('/src/assets/icons/external.svg');
+      mask-size: 1em;
+      mask-position: center;
+      mask-repeat: no-repeat;
+    }
+  }
+  a[href*="//"]:not([href*="krystofs.com"]):hover {
+    &:after {
+      background-color: #e6805f;
+    }
+  }
+</style>
+
 <a
-  class="underline transition duration-0 hover:bg-linear-[90deg,#e6c75f,#e65f5f] hover:bg-clip-text hover:text-transparent hover:duration-150"
+  class="underline transition duration-0 hover:bg-linear-(--gradient-accent) hover:bg-clip-text hover:text-transparent hover:duration-150"
   target={target}
   href={href}><slot /></a
 >

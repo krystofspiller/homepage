@@ -12,6 +12,8 @@
   --color-orange: #e6805f;
   --color-orange-30: --alpha(var(--color-orange) / 30%);
 
+  --gradient-accent: 90deg,#e6c75f,#e65f5f;
+
   @keyframes dash {
     0% { 
       stroke-dashoffset: 820;
