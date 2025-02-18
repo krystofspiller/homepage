@@ -2,6 +2,7 @@
 import NarrowLayout from "@layouts/NarrowLayout.astro"
 import { Image } from "astro:assets"
 import trollface from "@assets/images/trollface.svg"
+import iamsuchanamazingdesigner from "@assets/videos/iamsuchanamazingdesigner.mp4"
 ---
 
 <NarrowLayout>
@@ -13,7 +14,7 @@ import trollface from "@assets/images/trollface.svg"
     In free time I create troll <Image class="h-8 w-auto inline-flex" src={trollface} alt="Troll face" /> websites for my favorite project managers.
   </p>
   <video controls loop autoplay muted>
-    <source src="/src/assets/videos/meria.mp4" type="video/mp4">
+    <source src={iamsuchanamazingdesigner} type="video/mp4">
     Your browser does not support the video tag.
   </video>
 </section>

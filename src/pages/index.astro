@@ -9,6 +9,7 @@ import Link from "@components/Link.astro"
 import capdeskLogo from "@assets/images/capdesk.svg"
 import cartaLogo from "@assets/images/carta.svg"
 import systematicLogo from "@assets/images/systematic.svg"
+import modelUnpricedRounds from "@assets/videos/model-unpriced-rounds.mp4"
 
 import ProjectCard from "@components/ProjectCard.astro"
 import React from "@assets/icons/react.astro"
@@ -120,7 +121,7 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
       > See an example below:
     </p>
     <video controls loop autoplay muted>
-      <source src="/src/assets/videos/model-unpriced-rounds.mp4" type="video/mp4">
+      <source src={modelUnpricedRounds} type="video/mp4">
       Your browser does not support the video tag.
     </video>
 
