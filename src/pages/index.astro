@@ -8,8 +8,10 @@ import Link from "@components/Link.astro"
 
 import Duolingo from "@assets/icons/duolingo.astro"
 
+import capdeskLogo from "@assets/images/capdesk.svg"
 import cartaLogo from "@assets/images/carta.svg"
-import trollface from "@assets/images/trollface.svg"
+import systematicLogo from "@assets/images/systematic.svg"
+
 import ProjectCard from "@components/ProjectCard.astro"
 import React from "@assets/icons/react.astro"
 import Tailwind from "@assets/icons/tailwind.astro"
@@ -20,11 +22,11 @@ import Appwrite from "@assets/icons/appwrite.astro"
 import Convex from "@assets/icons/convex.astro"
 
 let showDuolingo = true
+const duolingoUrl = "https://www.duolingo.com/2017-06-30/users/1102654541"
 
 async function getDuolingoStreak() {
-  const url = "https://www.duolingo.com/2017-06-30/users/1102654541"
   try {
-    const response = await fetch(url)
+    const response = await fetch(duolingoUrl)
     if (!response.ok) {
       showDuolingo = false
     }
@@ -109,11 +111,8 @@ const duolingoStreak = await getDuolingoStreak()
       Professional contributions
     </h2>
     <hr class="mb-6 border-zinc-600" />
-    <div class="mb-2 flex flex-col items-center justify-center gap-1">
-      <div class="flex items-center">
-        <Image class="h-8 w-auto" loading="eager" src={cartaLogo} alt="Carta logo" />
-        <h3 class="text-xl font-semibold text-zinc-100">&nbsp;-&nbsp;Carta</h3>
-      </div>
+    <div class="mb-4 flex flex-col items-center justify-center gap-1">
+      <Image class="h-8 w-auto" loading="eager" src={cartaLogo} alt="Carta logo" />
       <span class="text-zinc-400 text-sm">2022-2025</span>
     </div>
     <p class="mb-3 text-lg leading-8 text-zinc-400">
@@ -145,7 +144,135 @@ const duolingoStreak = await getDuolingoStreak()
       Your browser does not support the video tag.
     </video>
 
-    <!-- <h3 class="mb-1 text-xl font-semibold">Capdesk</h3> -->
+    <h4 id="animated-billing" class="flex mt-6 mb-1 text-lg font-semibold text-zinc-100">
+      Billing revamp&nbsp;<span class="relative"><span class="absolute w-24 opacity-0">project</span><span class="absolute w-24"><span class="animate-glow text-black">war story</span></span></span>
+    </h4>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+      This was the longest running project I worked on and wrote around 90% of it when it comes solely to the changes in the app codebase. First step was a migration <span data-tooltip="This was supposed to be relatively simple. But it's <a href=&quot;https://www.youtube.com/watch?v=Wdyndb17K58&quot; target=&quot;_blank&quot;>Stripe</a> we're talking about <span class=&quot;text-white&quot;>🙂</span> I've ran into most of the issues described in that video and many more during this project. Migrating from one instance to another is a hell that made me into the man I'm today.">from one Stripe instance to another</span>. The next step involved changing how the app is interacting with Stripe where previously it was the app recording changes to customer subscriptions using Stripe's API and now the idea was to make these changes from the <Link target="_blank" href="https://docs.stripe.com/customer-management">self-service customer portal</Link> and update the app data via webhook events from Stripe. It also involved a change to the pricing packages where there was previously a single package and additional customer features were enabled on an ad-hoc basis and now there would be multiple packages with certain pre-enabled features.
+    </p>
+
+    <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
+      Currency exchange rate provider
+    </h4>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+      While the app had a multi-currency support from the time I joined, the currencies that were supported were those available from <Link target="_blank" href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html">European Central Bank</Link> which contains 30 currencies. Meanwhile, there are <Link target="_blank" href="https://en.wikipedia.org/w/index.php?title=List_of_circulating_currencies&oldid=1275996218#:~:text=There%20are%20180%20currencies">180 currently circulating currencies recognized by UN</Link> and some of those started to appear in the app and it became cumbersome to deal with them <span data-tooltip="The exchange rate for the missing currency had to be found and manually added to the database. As we had to do this via a manual task due to compliance (<span class=&quot;text-white&quot;>💀</span>), it was anything but fun. Not to mention this exchange rate became out-of-date soon and would result in incorrect conversions. So we had to bite the <a href=&quot;https://xkcd.com/1319&quot; target=&quot;_blank&quot;>automation</a> bullet eventually.">manually</span>.
+    </p>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">I used <Link target="_blank" href="https://exchangeratesapi.io/">Exchangerates API</Link> to get a more comprehensive list of the exchange rates. As we didn't call the API everytime we needed the exchange rate but instead stored it in a database (we also needed historical exchange rates in some cases), there was a daily <span data-tooltip="Software engineer's way of saying &quot;independent script or unit of code that can be invoked either manually or by some time schedule&quot;">job</span> which added the new exchange rates in the database.
+    </p>
+
+    <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
+      Automated dead link checker
+    </h4>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+      Managing links is hard. An external link can change and suddenly you're linking to a non-existent page. At some point we encountered a few links that were invalid and instead of just fixing those and moving on with our life I wrote a script to <span data-tooltip="I thought this would be a matter of simply <span class=&quot;font-mono&quot;>curl</span>ing the page with a parameter to return the HTTP response status code. How naive I was. I had to use <a class=&quot;font-mono&quot; href=&quot;https://github.com/lwthiker/curl-impersonate&quot; target=&quot;_blank&quot;>curl-impersonate</a> to mimic a browser making the request for it to go through on many pages. There was also the question of redirecting where for example Zendesk (Support Center) puts an ID as well as the name of the support article into the URL so when the name of the article was adjusted the link still worked but returned a redirect 3xx code. I made <span class=&quot;font-mono&quot;>curl-impersonate</span> return the redirect URL as well and included it in the result message.">check external links</span> that I set up to run on GitHub Actions on a weekly basis and send a result to an #automated-checks Slack channel. In this way, these issues became more visible and otherwise invalid links that would be in the app for many months were fixed within a week.
+      <!-- TODO: implement link checker and add a note about it here -->
+    </p>
+
+    <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
+      Simpler and consistent modals
+    </h4>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+      The way we were writing most of the modals was by directly using the design system primitives as opposed to a more complete modal implementation. Every developer therefore had a lot of freedom when it came to implementation of a modal. Properly implementing a modal so that it's consistent with design and behaves in the least obstructive way possible then becomes hard. Our modals were incosistent with how disabled and loading states were handled on cancel, close (X) and submit buttons, layout of those buttons was sometimes different and when it came to modals with forms, the form being reset after a successful submit caused a flicker while the modal was fading out. I implemented a modal component and hook to make implementing consistent modals simpler, including support for forms.
+    </p>
+
+    <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
+      Data integrity checks
+    </h4>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+      Even though there are many validations in place, sometimes, some invalid data gets into the database anyway. My colleague implemented a framework for adding data integrity checks to notify us of these instances and also automatically fix them if an automatic fix is possible. I wrote checks dealing with detecting and autofixing trailing whitespace in attributes like names, emails and domain specific identifiers which could cause subtle bugs in filtering and matching items.
+    </p>
+
+    <h4 id="#linter-rules" class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
+      Linter rules
+    </h4>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+    <span data-tooltip="A process and a tool for code analysis to flag programming errors, bugs, stylistics errors and suspicious constructs.">Linting</span> is fun, who doesn't like playing around with <abbr title="Woah, two tooltips in one sentence, chill. Read more about <a href=&quot;https://en.wikipedia.org/wiki/Abstract_syntax_tree&quot; target=&quot;_blank&quot;><strong class=&quot;font-bold&quot;>A</strong>bstract <strong class=&quot;font-bold&quot;>S</strong>yntax <strong class=&quot;font-bold&quot;>T</strong>rees</a> for some light reading.">ASTs</abbr> in their free time? I made linter rules for both frontend (ESLint) and backend (RuboCop). Frontend one was about linting a stylistic error to follow our coding conventions (i.e. no more pointing it out in code reviews). In the backend, I made two linting rules which are a tad more complex:
+      <ol class="ml-6 my-3 space-y-1 list-decimal text-zinc-400 text-lg leading-8">
+        <li>
+          <strong class="font-bold"><span data-tooltip="Specification for a machine-readable interface definition language for describing web services. We used it to generate TypeScript types in the frontend.">OpenAPI</span> helper enforcement</strong> - writing the OpenAPI specifications can be a bit cumbersome, there's a lot of boilerplate that needs to be written making bigger types hundreds of lines long. I wrote a helper to simplify this where majority of the use cases that previously took anywhere from 1 to 10 lines could now be reduced to a single line of code making it more readable. Converting the whole OpenAPI specification to use this helper would a large effort for an individual and there would still be the problem with other engineers not being aware of this helper and writing new specifications without it. This linter rule therefore produced warnings (and errors in some cases) to enforce its usage suggesting fellow engineers to convert it to use the helper. The idea is that the warnings would be changed to errors once the conversion is complete so that all of the specifications would be written in this more concise and readable format.
+        </li>
+        <li>
+          <strong class="font-bold">Check strings looking like constants actually exist</strong> - in Ruby, we were sometimes forced to write a constant like a class name as a string. The static type checker for Ruby called Sorbet we used obviously didn't check strings for anything and such strings sometimes became obsolete when the class was refactored or removed and could cause an issue. This linter rule checked all strings that looked like such constants actually referred to an existing constant in the codebase.
+        </li>
+      </ol>
+    </p>
+
+    <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
+      Conventional commit message auto formatter
+    </h4>
+    <div class="mb-3 text-lg leading-8 text-zinc-400">
+      During my tenure, we have evolved our requirements for commit and branch names as follows:
+      <ol class="ml-6 my-3 space-y-1 list-decimal text-zinc-400 text-lg leading-8">
+        <li>No expected format for branches or commits</li>
+        <li><Link href="https://www.conventionalcommits.org/en/v1.0.0/" target="_blank">Conventional commits</Link> required for features</li>
+        <li>Standardized branch names and conventional commits required everything recorded in Jira</li>
+        <li>Every code change needs to have a Jira associated and hence will have standardized branch name and conventional commits</li>
+      </ol>
+      During the various stages, we have enforced this name both in CI as well as in Git commit hooks for faster feedback. At the last stage, where every change required a conventional commit message and happened on a branch called something like <span class="font-mono">feat/JIRA-123-optional-description</span> it became a bit tedious to always include <span class="font-mono">feat(JIRA-123):</span> in the commit message. I wrote a commit message Git hook that took the type of the commit and scope (Jira ticket) from the branch name and formatted an otherwise plain message according to the conventional commit specification. Small time safer but mostly one less thing to think about.
+    </div>
+
+    <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
+      Fun stuff from other CRUD-like features
+    </h4>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+      Majority of my time was spent on implementing otherwise more monotonous CRUD-like features. Sometimes these also involved something interesting like:
+      <ul class="ml-6 my-3 space-y-1 list-disc text-zinc-400 text-lg leading-8">
+        <li>
+          <Link href="https://json-schema.org/specification" target="_blank">JSON validation schemas</Link> and <span data-tooltip="In order to be able to work with for example a currency class instead of simply a string from the JSON you have to serialize it.">serializer</span> when storing <span data-tooltip="It can actually be useful to store JSON in database in some cases, stop judging me.">JSON data in database</span>. 
+        </li>
+      </ul>
+    </p>
+    
+    <hr class="my-6 border-zinc-600" />
+    
+    <div class="mb-4 flex flex-col items-center justify-center gap-1">
+      <Image class="h-8 w-auto" src={capdeskLogo} alt="Capdesk logo" />
+      <span class="text-zinc-400 text-sm">2020-2022<span class="text-xs"> (full-time from Feb 2022)</span></span>
+    </div>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+      I was working part-time due to my studies until February 2022 when I went full-time, hence smaller amount of contributions in that time period:
+    </p>
+
+    <h4 class="mb-1 text-lg font-semibold text-zinc-100">
+      Announce app releases on Slack
+    </h4>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+      We used Heroku for hosting and deployed the latest Git <span class="font-mono">main</span> branch on every new change. We had a process in place where once a week one of the engineering leads compiled a list of all the changes with their Jira ID and a short description and posted this in a #release Slack channel. I implemented a task that ran on every deployment to Heroku which compiled a list of Jiras from the last deployment, got the Jira tasks descriptions, the author (developer) of that change, found a related Slack account and tagged them in the automated Slack message (developers were encouraged to provide additional context, especially when it was related to a bug they fixed for someone from a support of other department).
+    </p>
+
+    <h4 class="mb-1 text-lg font-semibold text-zinc-100">
+      Grammar checker for translations
+    </h4>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+      Using <span data-tooltip="Basically an open source Grammarly">LanguageTool</span> I implemented a check in GitHub Actions that checked grammar including spellchecks. This involved compiling the list of translations from a YML file into a human-readable form which is what LanguageTool expects. 
+    </p>
+
+    <h4 class="mb-1 text-lg font-semibold text-zinc-100">
+      Added OpenAPI
+    </h4>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+      Found the tooling and implemented the helpers for adding OpenAPI 2.0 (later upgraded to version 3.0) and implemented on a few regular cases as well as some exceptional ones. This was used later by the team for generating TypeScript types for frontend which facilitated development.
+    </p>
+
+    <hr class="my-6 border-zinc-600" />
+    
+    <div class="mb-4 flex flex-col items-center justify-center gap-1">
+      <Image class="h-8 w-auto" src={systematicLogo} alt="Systematic logo" />
+      <span class="text-zinc-400 text-sm">2019-2020<span class="text-xs"> (part-time)</span></span>
+    </div>
+    <h4 class="mb-1 text-lg font-semibold text-zinc-100">
+      Dependency management revamp
+    </h4>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+      The team had a strict policy for dependency management and actually maintained their own repository of dependencies. This was initially done through quite a large <Link target="_blank" href="https://git-scm.com/book/en/v2/Git-Tools-Submodules">Git submodule</Link>. I've made it so that the team was able to use our own repository of dependencies as if they were using the original repository which simplified the workflow to a large extent.
+    </p>
+
+    <h4 class="mb-1 text-lg font-semibold text-zinc-100">
+      PowerShell scripting
+    </h4>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+      Gathered data that were previously compiled manually, automated minor tasks.
+    </p>
   </section>
   <section class="my-10 mb-6">
     <h2 id="hobby-project" class="mb-2 text-2xl font-semibold">
@@ -153,9 +280,10 @@ const duolingoStreak = await getDuolingoStreak()
     </h2>
     <hr class="border-zinc-600" />
     <!-- TODO: Link to the project, add Git -->
+    <!-- TODO: Link to posts when I actually write one - idea for first post, compiling iOS -->
     <ProjectCard
       projectTitle="HabitVille"
-      projectDescription="Hobby project for tracking habits and gamifying it in a tycoon-game. Started with a web app, now working on an iOS mobile app."
+      projectDescription="Track habits and gamify them in a tycoon-game. Started with a web app, now working on an iOS mobile app."
       projectLink="https://github.com/Laegas/habitville"
       githubLink="https://github.com/Laegas/habitville"
     >
@@ -197,11 +325,55 @@ const duolingoStreak = await getDuolingoStreak()
   
 </NarrowLayout>
 
-<script is:inline>
+<script is:inline define:vars={{ duolingoUrl }}>
+  function isElementInViewport (element) {
+    const rect = element.getBoundingClientRect()
+
+    return (
+        rect.bottom >= 0 &&
+        rect.left >= 0 &&
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    )
+  }
+
+  function onVisibilityChange(element, callback) {
+    let previousIsVisible = false
+     return function () {
+      const isVisible = isElementInViewport(element)
+      if (isVisible != previousIsVisible) {
+        previousIsVisible = isVisible
+        callback(element)
+      }
+    }
+  }
+
+  const handler = onVisibilityChange(document.querySelector("#animated-billing"), function(element) {
+    const projectElement = element.children[0].children[0]
+    const warStoryElement = element.children[0].children[1]
+
+    if(projectElement.classList.contains('animate-move-up-fade-out')) {
+      projectElement.classList.remove('animate-move-up-fade-out')
+      warStoryElement.classList.remove('animate-move-up-fade-in')
+    } else {
+      projectElement.classList.add('animate-move-up-fade-out')
+      warStoryElement.classList.add('animate-move-up-fade-in')
+    }
+  })
+
+  if (window.addEventListener) {
+    addEventListener('load', handler, false);
+    addEventListener('scroll', handler, false);
+    addEventListener('resize', handler, false);
+  } else if (window.attachEvent)  {
+    attachEvent('onload', handler);
+    attachEvent('onscroll', handler);
+    attachEvent('onresize', handler);
+  }
+  
   function getDuolingoStreak() {
-    const url = "https://www.duolingo.com/2017-06-30/users/1102654541"
     try {
-      const response = fetch(url).then((res) => {
+      const response = fetch(duolingoUrl).then((res) => {
         res.json().then((json) => {
           document.getElementById("duolingo-streak").innerText = json.streak
         })

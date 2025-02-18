@@ -5,10 +5,13 @@
 }
 
 @theme {
+  --animate-dash: dash 2s ease-in-out;
+  --animate-glow: glow 1s ease-in-out infinite alternate;
+  --animate-move-up-fade-in: move-up-fade-in 2.25s ease-out;
+  --animate-move-up-fade-out: move-up-fade-out 1.5s ease-in;
   --animate-wave: wave 1.2s linear;
   --animate-wave-infinite: wave 1.2s linear infinite;
-  --animate-dash: dash 2s ease-in-out;
-
+  
   --color-orange: #e6805f;
   --color-orange-30: --alpha(var(--color-orange) / 30%);
 
@@ -20,6 +23,38 @@
     }
     100% { 
       stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes glow {
+    0% {
+      text-shadow: 0 0 4px #F9E7C6, 0 0 8px #F3D068, 0 0 12px #EC9C15, 0 0 16px #E27C0D, 0 0 20px #B52208, 0 0 24px #580405;
+    }
+    
+    100% {
+      text-shadow: 0 0 2px #F9E7C6, 0 0 4px #F3D068, 0 0 6px #EC9C15, 0 0 8px #E27C0D, 0 0 10px #B52208, 0 0 12px #580405;
+    }
+  }
+  
+  @keyframes move-up-fade-in {
+    0%, 33% { 
+      opacity: 0;
+      transform: translate(0, 20px);
+    }
+    100% { 
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+
+  @keyframes move-up-fade-out {
+    0% { 
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+    100% { 
+      opacity: 0;
+      transform: translate(0, -20px);
     }
   }
 
