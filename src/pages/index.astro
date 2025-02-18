@@ -6,8 +6,6 @@ import IconContainer from "@components/IconContainer.astro"
 import { Image } from "astro:assets"
 import Link from "@components/Link.astro"
 
-import Duolingo from "@assets/icons/duolingo.astro"
-
 import capdeskLogo from "@assets/images/capdesk.svg"
 import cartaLogo from "@assets/images/carta.svg"
 import systematicLogo from "@assets/images/systematic.svg"
@@ -20,25 +18,7 @@ import Next from "@assets/icons/next.astro"
 import Expo from "@assets/icons/expo.astro"
 import Appwrite from "@assets/icons/appwrite.astro"
 import Convex from "@assets/icons/convex.astro"
-
-let showDuolingo = true
-const duolingoUrl = "https://www.duolingo.com/2017-06-30/users/1102654541"
-
-async function getDuolingoStreak() {
-  try {
-    const response = await fetch(duolingoUrl)
-    if (!response.ok) {
-      showDuolingo = false
-    }
-
-    const json = await response.json()
-    return json.streak
-  } catch (error) {
-    showDuolingo = false
-  }
-}
-
-const duolingoStreak = await getDuolingoStreak()
+import OtherAboutSection from "@components/OtherAboutSection.astro"
 ---
 
 <NarrowLayout>
@@ -295,37 +275,26 @@ const duolingoStreak = await getDuolingoStreak()
       <span data-tooltip="<a href=&quot;https://www.convex.dev&quot; target=&quot;_blank&quot;>Convex</a>"><Convex /></span>
     </ProjectCard>
   </section>
-  {
-    showDuolingo && (
-      <IconContainer name="Duolingo 🇰🇷">
-        <div class="relative w-12">
-          <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-3/4 text-sm text-black">
-            <span id="duolingo-streak">{duolingoStreak}</span>
-          </div>
-          <Duolingo size="size-12" />
-        </div>
-      </IconContainer>
-    )
-  }
 
-<section class="my-10 mb-6">
-  <h2 id="skills" class="mb-2 text-2xl font-semibold">
-    Skills
-  </h2>
-  <hr class="mb-6 border-zinc-600" />
-  <SkillsSection />
-</section>
+  <section class="my-10 mb-6">
+    <h2 id="skills" class="mb-2 text-2xl font-semibold">
+      Skills
+    </h2>
+    <hr class="mb-6 border-zinc-600" />
+    <SkillsSection />
+  </section>
 
-<section class="my-10 mb-6">
-  <h2 id="general" class="mb-2 text-2xl font-semibold">
-    Other stuff about me
-  </h2>
-  <hr class="mb-6 border-zinc-600" />
-</section>
+  <section class="my-10 mb-6">
+    <h2 id="general" class="mb-2 text-2xl font-semibold">
+      Other stuff about me
+    </h2>
+    <hr class="mb-6 border-zinc-600" />
+    <OtherAboutSection />
+  </section>
   
 </NarrowLayout>
 
-<script is:inline define:vars={{ duolingoUrl }}>
+<script is:inline>
   function isElementInViewport (element) {
     const rect = element.getBoundingClientRect()
 
@@ -370,16 +339,4 @@ const duolingoStreak = await getDuolingoStreak()
     attachEvent('onscroll', handler);
     attachEvent('onresize', handler);
   }
-  
-  function getDuolingoStreak() {
-    try {
-      const response = fetch(duolingoUrl).then((res) => {
-        res.json().then((json) => {
-          document.getElementById("duolingo-streak").innerText = json.streak
-        })
-      })
-    } catch (error) {}
-  }
-
-  getDuolingoStreak()
 </script>

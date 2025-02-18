@@ -1,0 +1,60 @@
+---
+import IconContainer from "@components/IconContainer.astro"
+
+import Duolingo from "@assets/icons/duolingo.astro"
+
+let showDuolingo = true
+const duolingoUrl = "https://www.duolingo.com/2017-06-30/users/1102654541"
+
+async function getDuolingoStreak() {
+  try {
+    const response = await fetch(duolingoUrl)
+    if (!response.ok) {
+      showDuolingo = false
+    }
+
+    const json = await response.json()
+    return json.streak
+  } catch (error) {
+    showDuolingo = false
+  }
+}
+
+const duolingoStreak = await getDuolingoStreak()
+
+// TODO: Education, Certificates, Piano, Music sections
+---
+
+<section class="my-6">
+  <p class="mb-3 text-lg leading-8 text-zinc-400">
+    Started learning Korean after watching way too many k-dramas.
+  </p>
+  {
+    showDuolingo && (
+      <div class="flex flex-wrap gap-5">
+        <IconContainer name="Duolingo 🇰🇷">
+          <div class="relative w-9">
+            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-3/4 text-xs text-black">
+              <span id="duolingo-streak">{duolingoStreak}</span>
+            </div>
+            <Duolingo size="size-9" />
+          </div>
+        </IconContainer>
+      </div>
+    )
+  }
+</section>
+
+<script is:inline define:vars={{ duolingoUrl }}>
+  function getDuolingoStreak() {
+    try {
+      const response = fetch(duolingoUrl).then((res) => {
+        res.json().then((json) => {
+          document.getElementById("duolingo-streak").innerText = json.streak
+        })
+      })
+    } catch (error) {}
+  }
+
+  getDuolingoStreak()
+</script>

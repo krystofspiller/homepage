@@ -8,5 +8,5 @@ const { name } = Astro.props
   >
     <slot />
   </div>
-  <span class="mt-1 font-sans text-sm text-zinc-400">{name}</span>
+  <span class="mt-1 font-sans text-sm text-zinc-400 text-center" set:html={name}></span>
 </div>

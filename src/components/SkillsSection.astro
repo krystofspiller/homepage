@@ -1,5 +1,7 @@
 ---
+import { Image } from "astro:assets"
 import IconContainer from "@components/IconContainer.astro"
+
 import Css from "@assets/icons/css.astro"
 import Javascript from "@assets/icons/javascript.astro"
 import React from "@assets/icons/react.astro"
@@ -10,16 +12,38 @@ import Express from "@assets/icons/express.astro"
 import Node from "@assets/icons/node.astro"
 import Mysql from "@assets/icons/mysql.astro"
 import Postgresql from "@assets/icons/postgresql.astro"
-import Bash from "@assets/icons/bash.astro"
+import ITerm from "@assets/icons/iterm.astro"
 import Git from "@assets/icons/git.astro"
 import Github from "@assets/icons/github.astro"
 import Vscode from "@assets/icons/vscode.astro"
 import Figma from "@assets/icons/figma.astro"
+import Typescript from "@assets/icons/typescript.astro"
+import Eleventy from "@assets/icons/eleventy.astro"
+import Npm from "@assets/icons/npm.astro"
+import Bun from "@assets/icons/bun.astro"
+import Yarn from "@assets/icons/yarn.astro"
+import Miro from "@assets/icons/miro.astro"
+import Notion from "@assets/icons/notion.astro"
+import Prettier from "@assets/icons/prettier.astro"
+import ESLint from "@assets/icons/eslint.astro"
+import DBngin from "@assets/images/dbngin.png"
+import TablePlus from "@assets/images/tableplus.png"
+import Typst from "@assets/images/typst.png"
+import RubyOnRails from "@assets/icons/ruby_on_rails.astro"
+import Ruby from "@assets/icons/ruby.astro"
+import Csharp from "@assets/icons/csharp.astro"
+import Go from "@assets/icons/go.astro"
+import Java from "@assets/icons/java.astro"
+import Vite from "@assets/icons/vite.astro"
+import Intellij from "@assets/icons/intellij.astro"
+import Rubymine from "@assets/icons/rubymine.astro"
+
+// TODO: Add Stripe, HubSpot, Heroku, Slack, Netlify, Docker, Electron
 ---
 
 <section class="my-6">
   <h3 class="siz mb-4 text-xl font-medium">Frontend</h3>
-  <div class="flex flex-wrap gap-5">
+  <div class="flex flex-wrap gap-x-5 items-start justify-start">
     <IconContainer name="HTML">
       <Html size="size-9" />
     </IconContainer>
@@ -29,7 +53,10 @@ import Figma from "@assets/icons/figma.astro"
     <IconContainer name="Javascript">
       <Javascript size="size-9" />
     </IconContainer>
-    <IconContainer name="React">
+    <IconContainer name="Typescript">
+      <Typescript size="size-9" />
+    </IconContainer>
+    <IconContainer name={"React<br />(+ Native)"}>
       <React size="size-9" />
     </IconContainer>
     <IconContainer name="Tailwind">
@@ -38,15 +65,30 @@ import Figma from "@assets/icons/figma.astro"
     <IconContainer name="Astro">
       <AstroIcon size="size-9" />
     </IconContainer>
+    <IconContainer name="Eleventy">
+      <Eleventy size="size-9" />
+    </IconContainer>
+    <IconContainer name="Typst">
+      <Image class="h-9 w-auto" src={Typst} alt="Typst logo" />
+    </IconContainer>
   </div>
 
   <h3 class="mb-4 mt-6 text-xl font-medium">Backend</h3>
   <div class="flex flex-wrap gap-5">
-    <IconContainer name="Node">
-      <Node size="size-9" />
+    <IconContainer name="Rails">
+      <RubyOnRails size="size-9" />
     </IconContainer>
-    <IconContainer name="Express">
-      <Express size="size-9" />
+    <IconContainer name="Ruby">
+      <Ruby size="size-9" />
+    </IconContainer>
+    <IconContainer name="Go">
+      <Go size="size-9" />
+    </IconContainer>
+    <IconContainer name="C#">
+      <Csharp size="size-9" />
+    </IconContainer>
+    <IconContainer name="Java">
+      <Java size="size-9" />
     </IconContainer>
     <IconContainer name="MySQL">
       <Mysql size="size-9" />
@@ -54,24 +96,70 @@ import Figma from "@assets/icons/figma.astro"
     <IconContainer name="PostgreSQL">
       <Postgresql size="size-9" />
     </IconContainer>
+    <IconContainer name="Node">
+      <Node size="size-9" />
+    </IconContainer>
+    <IconContainer name="Express">
+      <Express size="size-9" />
+    </IconContainer>
+  </div>
+
+  <h3 class="mb-4 mt-6 text-xl font-medium">Apps</h3>
+  <div class="flex flex-wrap gap-5">
+    <IconContainer name="GitHub">
+      <Github size="size-9" />
+    </IconContainer>
+    <IconContainer name="Miro">
+      <Miro size="size-9" />
+    </IconContainer>
+    <IconContainer name="Figma">
+      <Figma size="size-9" />
+    </IconContainer>
+    <IconContainer name="Notion">
+      <Notion size="size-9" />
+    </IconContainer>
   </div>
 
   <h3 class="mb-4 mt-6 text-xl font-medium">Tools</h3>
   <div class="flex flex-wrap gap-5">
-    <IconContainer name="Bash">
-      <Bash size="size-9" />
-    </IconContainer>
     <IconContainer name="Git">
       <Git size="size-9" />
-    </IconContainer>
-    <IconContainer name="Github">
-      <Github size="size-9" />
     </IconContainer>
     <IconContainer name="VSCode">
       <Vscode size="size-9" />
     </IconContainer>
-    <IconContainer name="Figma">
-      <Figma size="size-9" />
+    <IconContainer name="IntelliJ">
+      <Intellij size="size-9" />
+    </IconContainer>
+    <IconContainer name="RubyMine">
+      <Rubymine size="size-9" />
+    </IconContainer>
+    <IconContainer name="iTerm">
+      <ITerm size="size-9" />
+    </IconContainer>
+    <IconContainer name="DBngin">
+      <Image class="h-9 w-auto" src={DBngin} alt="DBngin logo" />
+    </IconContainer>
+    <IconContainer name="TablePlus">
+      <Image class="h-9 w-auto" src={TablePlus} alt="TablePlus logo" />
+    </IconContainer>
+    <IconContainer name="Vite">
+      <Vite size="size-9" />
+    </IconContainer>
+    <IconContainer name="npm">
+      <Npm size="size-9" />
+    </IconContainer>
+    <IconContainer name="Bun">
+      <Bun size="size-9" />
+    </IconContainer>
+    <IconContainer name="Yarn">
+      <Yarn size="size-9" />
+    </IconContainer>
+    <IconContainer name="Prettier">
+      <Prettier size="size-9" />
+    </IconContainer>
+    <IconContainer name="ESLint">
+      <ESLint size="size-9" />
     </IconContainer>
   </div>
 </section>
