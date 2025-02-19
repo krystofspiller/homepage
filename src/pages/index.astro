@@ -20,6 +20,8 @@ import Expo from "@assets/icons/expo.astro"
 import Appwrite from "@assets/icons/appwrite.astro"
 import Convex from "@assets/icons/convex.astro"
 import OtherAboutSection from "@components/OtherAboutSection.astro"
+
+// TODO References section
 ---
 
 <NarrowLayout>
@@ -160,23 +162,30 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
       Data integrity checks
     </h4>
     <p class="mb-3 text-lg leading-8 text-zinc-400">
-      Even though there are many validations in place, sometimes, some invalid data gets into the database anyway. My colleague implemented a framework for adding data integrity checks to notify us of these instances and also automatically fix them if an automatic fix is possible. I wrote checks dealing with detecting and autofixing trailing whitespace in attributes like names, emails and domain specific identifiers which could cause subtle bugs in filtering and matching items.
+      My colleague implemented a framework for adding data integrity <span data-tooltip="We had a policy for no check constraints in the database so while some of these checks could have been handled differently, this was still a better solution for majority of the checked cases due to the sheer complexity of the domain and the resultant data.">checks</span> to notify us of instances where invalid data got into the database and also automatically fix them if an automatic fix is possible. I wrote checks dealing with detecting and autofixing trailing whitespace in attributes like names, emails and domain specific identifiers which could cause subtle bugs in filtering and matching items.
     </p>
 
-    <h4 id="#linter-rules" class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
+    <h4 id="linter-rules" class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
       Linter rules
     </h4>
     <p class="mb-3 text-lg leading-8 text-zinc-400">
     <span data-tooltip="A process and a tool for code analysis to flag programming errors, bugs, stylistics errors and suspicious constructs.">Linting</span> is fun, who doesn't like playing around with <abbr title="Woah, two tooltips in one sentence, chill. Read more about <a href=&quot;https://en.wikipedia.org/wiki/Abstract_syntax_tree&quot; target=&quot;_blank&quot;><strong class=&quot;font-bold&quot;>A</strong>bstract <strong class=&quot;font-bold&quot;>S</strong>yntax <strong class=&quot;font-bold&quot;>T</strong>rees</a> for some light reading.">ASTs</abbr> in their free time? I made linter rules for both frontend (ESLint) and backend (RuboCop). Frontend one was about linting a stylistic error to follow our coding conventions (i.e. no more pointing it out in code reviews). In the backend, I made two linting rules which are a tad more complex:
       <ol class="ml-6 my-3 space-y-1 list-decimal text-zinc-400 text-lg leading-8">
         <li>
-          <strong class="font-bold"><span data-tooltip="Specification for a machine-readable interface definition language for describing web services. We used it to generate TypeScript types in the frontend.">OpenAPI</span> helper enforcement</strong> - writing the OpenAPI specifications can be a bit cumbersome, there's a lot of boilerplate that needs to be written making bigger types hundreds of lines long. I wrote a helper to simplify this where majority of the use cases that previously took anywhere from 1 to 10 lines could now be reduced to a single line of code making it more readable. Converting the whole OpenAPI specification to use this helper would a large effort for an individual and there would still be the problem with other engineers not being aware of this helper and writing new specifications without it. This linter rule therefore produced warnings (and errors in some cases) to enforce its usage suggesting fellow engineers to convert it to use the helper. The idea is that the warnings would be changed to errors once the conversion is complete so that all of the specifications would be written in this more concise and readable format.
+          <strong class="font-bold"><span data-tooltip="Specification for a machine-readable interface definition language for describing web services.">OpenAPI</span> helper enforcement</strong> - writing the OpenAPI specifications can be a bit cumbersome, there's a lot of boilerplate that needs to be written making bigger types hundreds of lines long. I wrote a helper to simplify this where majority of the use cases that previously took anywhere from 1 to 10 lines could now be reduced to a single line of code making it more readable. Converting the whole OpenAPI specification to use this helper would a large effort for an individual and there would still be the problem with other engineers not being aware of this helper and writing new specifications without it. This linter rule therefore produced warnings (and errors in some cases) to enforce its usage suggesting fellow engineers to convert it to use the helper. The idea is that the warnings would be changed to errors once the conversion is complete so that all of the specifications would be written in this more concise and readable format.
         </li>
         <li>
           <strong class="font-bold">Check strings looking like constants actually exist</strong> - in Ruby, we were sometimes forced to write a constant like a class name as a string. The static type checker for Ruby called Sorbet we used obviously didn't check strings for anything and such strings sometimes became obsolete when the class was refactored or removed and could cause an issue. This linter rule checked all strings that looked like such constants actually referred to an existing constant in the codebase.
         </li>
       </ol>
     </p>
+
+    <h4 id="type-validation" class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
+      Frontend to backend type validation
+    </h4>
+    <div class="mb-3 text-lg leading-8 text-zinc-400">
+      The OpenAPI specification was used to generate TypeScript types in the frontend. Since the OpenAPI specification was written by hand, there could be and were discrepancies between what was described in the OpenAPI schema and the actual shape of the response that the server returned. The idea of this initiative was to validate that the types in the frontend, that were generated from the OpenAPI specification manually defined in the backend, matched the actual response from the server and in the case it didn't match, report an error to Sentry which we used for frontend error tracking. As we didn't want to impose the cost of validating the types on every request in production, it was only enabled in our QA environment that we used often enough to catch majority of these errors. 
+    </div>
 
     <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
       Conventional commit message auto formatter
@@ -232,7 +241,7 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
       Added OpenAPI
     </h4>
     <p class="mb-3 text-lg leading-8 text-zinc-400">
-      Found the tooling and implemented the helpers for adding OpenAPI 2.0 (later upgraded to version 3.0) and implemented on a few regular cases as well as some exceptional ones. This was used later by the team for generating TypeScript types for frontend which facilitated development.
+      Found the tooling and implemented the helpers for adding OpenAPI 2.0 (later upgraded to version 3.0) and implemented on a few regular cases as well as some exceptional ones. This was used later by the team for generating TypeScript types for frontend which facilitated development. It led to other initiatives, such as my work on <Link href="#linter-rules">linters</Link> and <Link href="#type-validation">frontend to backend type validation</Link> later on to improve the workflow and get as much as possible from the coupling of backend to frontend this afforded us. 
     </p>
 
     <hr class="my-6 border-zinc-600" />
