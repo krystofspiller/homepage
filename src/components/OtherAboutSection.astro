@@ -1,7 +1,11 @@
 ---
 import IconContainer from "@components/IconContainer.astro"
-
 import Duolingo from "@assets/icons/duolingo.astro"
+import Via from "@assets/icons/via.astro"
+import Electron from "@assets/icons/electron.astro"
+import React from "@assets/icons/react.astro"
+import Docker from "@assets/icons/docker.astro"
+import Dtu from "@assets/icons/dtu.astro"
 
 let showDuolingo = true
 const duolingoUrl = "https://www.duolingo.com/2017-06-30/users/1102654541"
@@ -26,20 +30,63 @@ const duolingoStreak = await getDuolingoStreak()
 ---
 
 <section class="my-6">
-  <p class="mb-3 text-lg leading-8 text-zinc-400">
+  <h3 class="mb-2 text-xl font-semibold text-zinc-100">
+    Education
+  </h3>
+  <div class="mb-3 flex items-center gap-2">
+    <div><Dtu size="w-auto h-10" /></div>
+    <div class="flex flex-col grow">
+      <div class="flex justify-between items-center">
+        <span class="text-xl">Technical University of Denmark</span>
+        <span class="text-zinc-400 text-sm">Copenhagen, Denmark</span>
+      </div>
+      <div class="flex justify-between items-center">
+        <span class="flex items-center">Master of Computer Science and Engineering</span>
+        <span class="text-zinc-400 text-sm">2020-2022</span>
+      </div>
+    </div>
+  </div>
+  <span class="text-lg leading-8 text-zinc-400">Thesis: Aiding Informed Critical Thinking</span>
+
+  <div class="my-6"></div>
+
+  <div class="mb-3 flex items-center gap-2">
+    <div><Via size="size-10" /></div>
+    <div class="flex flex-col grow">
+      <div class="flex justify-between items-center">
+        <span class="text-xl">VIA University College</span>
+        <span class="text-zinc-400 text-sm">Horsens, Denmark</span>
+      </div>
+      <div class="flex justify-between items-center">
+        <span class="flex items-center">Bachelor of ICT Engineering</span>
+        <span class="text-zinc-400 text-sm">2016-2020</span>
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-between items-center">
+    <span class="text-lg leading-8 text-zinc-400">Final project: Cloud computing for end users</span>
+    <div class="flex items-center gap-3 p-2 w-fit">
+      <span data-tooltip="<a href=&quot;https://www.electronjs.org&quot; target=&quot;_blank&quot;>Electron</a>"><Electron /></span>
+      <span data-tooltip="<a href=&quot;https://react.dev&quot; target=&quot;_blank&quot;>React</a>"><React /></span>
+      <span data-tooltip="<a href=&quot;https://www.docker.com&quot; target=&quot;_blank&quot;>Docker</a>"><Docker /></span>
+    </div>
+  </div>
+  
+  <hr class="my-6 border-zinc-600" />
+
+  <p class="text-lg leading-8 text-zinc-400">
     Started learning Korean after watching way too many k-dramas.
   </p>
   {
     showDuolingo && (
-      <div class="flex flex-wrap gap-5">
-        <IconContainer name="Duolingo 🇰🇷">
-          <div class="relative w-9">
-            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-3/4 text-xs text-black">
-              <span id="duolingo-streak">{duolingoStreak}</span>
-            </div>
-            <Duolingo size="size-9" />
+      <div class="flex items-center gap-2">
+        <div class="relative w-12">
+          <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-3/4 text-sm text-black">
+            <span id="duolingo-streak">{duolingoStreak}</span>
           </div>
-        </IconContainer>
+          <Duolingo size="size-12" />
+        </div>
+        <span class="text-lg text-zinc-400">Current Duolingo streak 🇰🇷</span>
       </div>
     )
   }

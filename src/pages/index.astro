@@ -1,7 +1,6 @@
 ---
 import NarrowLayout from "@layouts/NarrowLayout.astro"
 import SkillsSection from "@components/SkillsSection.astro"
-import IconContainer from "@components/IconContainer.astro"
 
 import { Image } from "astro:assets"
 import Link from "@components/Link.astro"
@@ -75,13 +74,13 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
     <p class="text-lg leading-8 text-zinc-400">
       Find out more about my <Link href="#professional-contributions"
         >professional contributions</Link
-      ><span>, </span><Link href="#hobby-project">hobby project</Link>, <Link
+      ><span>, <Link
         href="#skills">skills</Link
-      > and <span class="relative"
+      >, </span><Link href="#hobby-project">hobby project</Link> and <span class="relative"
         ><Link href="/fun-at-parties"
           ><FunAtParties className="absolute left-[10px] top-[18px] hover:[&_path]:fill-[url(#linear)]"
           /></Link
-        ><Link href="#general">me in general</Link></span
+        ><Link href="#general">more</Link></span
       >
       below or just have a look at <Link
         target="_blank"
@@ -264,11 +263,20 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
       Gathered data that were previously compiled manually, automated minor tasks.
     </p>
   </section>
+
+  <section class="my-10 mb-6">
+    <h2 id="skills" class="mb-2 text-2xl font-semibold">
+      Skills
+    </h2>
+    <hr class="mb-6 border-zinc-600" />
+    <SkillsSection />
+  </section>
+
   <section class="my-10 mb-6">
     <h2 id="hobby-project" class="mb-2 text-2xl font-semibold">
       Hobby project
     </h2>
-    <hr class="border-zinc-600" />
+    <hr class="mb-6 border-zinc-600" />
     <!-- TODO: Link to the project, add Git -->
     <!-- TODO: Link to posts when I actually write one - idea for first post, compiling iOS -->
     <ProjectCard
@@ -284,14 +292,6 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
       <span data-tooltip="<a href=&quot;https://appwrite.io&quot; target=&quot;_blank&quot;>Appwrite</a>"><Appwrite /></span>
       <span data-tooltip="<a href=&quot;https://www.convex.dev&quot; target=&quot;_blank&quot;>Convex</a>"><Convex /></span>
     </ProjectCard>
-  </section>
-
-  <section class="my-10 mb-6">
-    <h2 id="skills" class="mb-2 text-2xl font-semibold">
-      Skills
-    </h2>
-    <hr class="mb-6 border-zinc-600" />
-    <SkillsSection />
   </section>
 
   <section class="my-10 mb-6">
