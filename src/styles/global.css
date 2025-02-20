@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -16,6 +17,8 @@
   --color-orange-30: --alpha(var(--color-orange) / 30%);
 
   --gradient-accent: 90deg,#e6c75f,#e65f5f;
+
+  --font-sans: "Geist", sans-serif;
 
   @keyframes dash {
     0% { 
