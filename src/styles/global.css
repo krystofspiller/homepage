@@ -1,15 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
 @import "tailwindcss";
 
-:root {
-  --accent-gradient: "linear-gradient(45deg, #e6c75f, #e65f5f)";
-}
-
 @theme {
   --animate-dash: dash 2s ease-in-out;
   --animate-glow: glow 1s ease-in-out infinite alternate;
   --animate-move-up-fade-in: move-up-fade-in 2.25s ease-out;
   --animate-move-up-fade-out: move-up-fade-out 1.5s ease-in;
+  --animate-scroll-infinite: scroll 15s linear infinite;
   --animate-wave: wave 1.2s linear;
   --animate-wave-infinite: wave 1.2s linear infinite;
   
@@ -17,6 +14,7 @@
   --color-orange-30: --alpha(var(--color-orange) / 30%);
 
   --gradient-accent: 90deg,#e6c75f,#e65f5f;
+  --gradient-accent-transparent: 90deg,#e6c75fa0,#e65f5fa0;
 
   --font-sans: "Geist", sans-serif;
 
@@ -60,6 +58,11 @@
       transform: translate(0, -20px);
     }
   }
+
+  @keyframes scroll {
+    0% { transform: translateX(0) }
+    100% { transform: translateX(-100%) }
+  } 
 
   @keyframes wave {
     0% { transform: rotate(0.0deg) }
