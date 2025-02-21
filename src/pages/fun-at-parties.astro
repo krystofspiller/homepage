@@ -1,5 +1,5 @@
 ---
-import NarrowLayout from "@layouts/NarrowLayout.astro"
+import BaseLayout from "@layouts/BaseLayout.astro"
 import { Image } from "astro:assets"
 import trollface from "@assets/images/trollface.svg"
 import iamsuchanamazingdesigner from "@assets/videos/iamsuchanamazingdesigner.mp4"
@@ -7,7 +7,7 @@ import iamsuchanamazingdesigner from "@assets/videos/iamsuchanamazingdesigner.mp
 // Merge iamdesigner repo into this one, link to the actual page from here
 ---
 
-<NarrowLayout>
+<BaseLayout>
 <section class="my-10">
   <h2 class="mb-2 text-2xl font-semibold flex gap-2">
     I'm fun at parties
@@ -20,4 +20,4 @@ import iamsuchanamazingdesigner from "@assets/videos/iamsuchanamazingdesigner.mp
     Your browser does not support the video tag.
   </video>
 </section>
-</NarrowLayout>
+</BaseLayout>

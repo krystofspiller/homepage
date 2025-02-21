@@ -1,5 +1,5 @@
 ---
-import NarrowLayout from "@layouts/NarrowLayout.astro"
+import BaseLayout from "@layouts/BaseLayout.astro"
 import SkillsSection from "@components/SkillsSection.astro"
 
 import { Image } from "astro:assets"
@@ -26,7 +26,7 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
 // TODO Make Link component figure out _blank automatically from href
 ---
 
-<NarrowLayout>
+<BaseLayout>
   <div
     class="flex flex-col items-center justify-center bg-radial from-(--color-orange-30) to-transparent to-70% pb-20 pt-20"
   >
@@ -67,8 +67,7 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
     <p class="text-2xl text-zinc-400">Fullstack software engineer</p>
   </div>
   <section class="mb-20">
-    <p class="mb-3 text-lg leading-8 text-zinc-400"></p>
-    <p class="mb-3 text-lg leading-8 text-zinc-400">
+    <p class="mb-3 text-base sm:text-lg leading-8 text-zinc-400">
       I'm a software engineer with most experience in <strong
         class="font-medium text-zinc-100">fullstack web development</strong
       >. I have a detail-oriented approach and always strive to find the
@@ -80,12 +79,12 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
       ><span>, <Link
         href="#skills">skills</Link
       >, </span><Link href="#hobby-project">hobby project</Link> and <span class="relative"
-        ><Link href="/fun-at-parties"
-          ><FunAtParties className="absolute left-[10px] top-[18px] hover:[&_path]:fill-[url(#linear)]"
-          /></Link
-        ><Link href="#general">more</Link></span
+        ><Link href="#general">more</Link><Link href="/fun-at-parties"
+        ><FunAtParties className="absolute -left-[10px] top-[18px] hover:[&_path]:fill-[url(#linear)]"
+        /></Link
+      ></span
       >
-      below or just have a look at <Link
+      below or see <Link
         target="_blank"
         href="https://laegas.github.io/cv/typst/cv.pdf">my CV</Link
       >.
@@ -305,7 +304,7 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
     <OtherAboutSection />
   </section>
   
-</NarrowLayout>
+</BaseLayout>
 
 <script is:inline>
   function isElementInViewport (element) {

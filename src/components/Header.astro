@@ -3,6 +3,7 @@ import Github from "@assets/icons/github.astro"
 import Email from "@assets/icons/email.astro"
 import ContainerHover from "@components/ContainerHover.astro"
 import Linkedin from "@assets/icons/linkedin.astro"
+import Cal from "@assets/icons/cal.astro"
 
 const currentPath = Astro.url.pathname
 ---
@@ -12,8 +13,12 @@ const currentPath = Astro.url.pathname
     <div class="flex items-center gap-1">
       {currentPath !== '/' && <ContainerHover href="/" target="_self">Home</ContainerHover> }
     </div>
+    <div id="cal-hidden" class="hidden" data-cal-link="laegas/meet" data-cal-namespace="meet" data-cal-config='{"layout":"month_view"}'></div>
     <div class="flex items-center gap-3">
-      <ContainerHover href="https://www.linkedin.com/in/krystof-spiller/">
+      <ContainerHover id="cal-container">
+        <Cal />
+      </ContainerHover> 
+      <ContainerHover href="https://www.linkedin.com/in/krystof-spiller">
         <Linkedin />
       </ContainerHover> 
       <ContainerHover href="mailto:krystof.spiller@gmail.com">
@@ -25,3 +30,14 @@ const currentPath = Astro.url.pathname
     </div>
   </nav>
 </header>
+
+<script>
+  // Clicking container with SVG icon didn't show Cal.com when clicking on the icon directly, therefore this workaround
+  const calContainer = document.querySelector('#cal-container')
+  const calHidden = document.querySelector('#cal-hidden') as HTMLElement
+  
+  calContainer?.addEventListener("click", (e) => {
+    e.preventDefault()
+    calHidden?.click()
+  })
+</script>

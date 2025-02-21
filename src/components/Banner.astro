@@ -3,20 +3,22 @@ import Close from '@assets/icons/close.astro'
 ---
 <div id="banner" class="flex">
   <div class="h-12"></div>
-  <div class="h-12 w-[100vw] fixed bg-neutral-950 z-60"></div>
-    <div class="h-12 w-[100vw] fixed flex justify-center items-center z-60 bg-linear-(--gradient-accent-transparent)">
-      <slot />
+  <div class="h-12 w-[100dvw] fixed bg-neutral-950 z-60"></div>
+    <div class="h-12 w-[100dvw] fixed flex justify-center items-center z-60 bg-linear-(--gradient-accent-transparent)">
+      <div class="inline text-center text-sm sm:text-base mx-12"><slot /></div>
       <div class="absolute right-0 h-12 w-12 flex justify-center items-center"><span id="close"><Close /></span></div>
     </div>
   </div>
 </div>
 
-<script is:inline>
+<script>
   document.addEventListener("astro:page-load", () => {
     const close = document.getElementById("close")
+    if (!close) return
 
     close.addEventListener("click", () => {
       const banner = document.getElementById("banner")
+      if (!banner) return
       
       banner.classList.add('hidden')
       banner.classList.remove('flex')

@@ -1,5 +1,5 @@
 ---
-const { href, target = "_self" } = Astro.props
+const { href, target = "_self", className, excludeIcon = false } = Astro.props
 ---
 
 <script>
@@ -14,7 +14,7 @@ const { href, target = "_self" } = Astro.props
 </script>
 
 <style>
-  a[href*="//"]:not([href*="krystofs.com"]) {
+  a[href*="//"][data-include-icon*="true"]:not([href*="krystofs.com"]) {
     &:after {
       content: '';
       margin-left: 4px;
@@ -34,7 +34,8 @@ const { href, target = "_self" } = Astro.props
 </style>
 
 <a
-  class="underline transition duration-0 hover:bg-linear-(--gradient-accent) hover:bg-clip-text hover:text-transparent hover:duration-150"
+  data-include-icon={!excludeIcon}
+  class=`underline transition duration-0 hover:bg-linear-(--gradient-accent) hover:bg-clip-text hover:text-transparent hover:duration-150 ${className}`
   target={target}
   href={href}><slot /></a
 >

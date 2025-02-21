@@ -4,23 +4,43 @@ import '../styles/global.css'
 import Spinner from '@components/Spinner.astro'
 import Tooltip from "@components/Tooltip.astro"
 import { ClientRouter } from "astro:transitions"
+import Header from "@components/Header.astro"
+import Footer from "@components/Footer.astro"
+import Banners from "@components/Banners.astro"
+
 const title = Astro.props.title
   ? `${Astro.props.title} | Krystof Spiller`
   : "Krystof Spiller"
+// Refactor to use TS - get rid of exclamation points
+// Set up ESLint
+// Fix Prettier autoformatting on save
 ---
 
 <!doctype html>
-<html lang="es" class="h-full">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <ClientRouter />
     <Tooltip />
+    <script type="text/javascript">
+      (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+      Cal("init", "meet", {origin:"https://cal.com"});
+    
+      Cal.ns.meet("ui", {"cssVarsPerTheme":{"light":{"cal-brand":"#0a0a0a"},"dark":{"cal-brand":"#e6805f"}},"hideEventTypeDetails":false,"layout":"month_view"});
+    </script>
   </head>
   <body class="h-full min-h-[100vh] selection:bg-orange selection:text-white bg-neutral-950 text-white font-sans">
-    <slot />
+    <Banners />
+    <div class="mx-auto flex h-full max-w-screen-sm flex-col justify-between p-8 pb-0 selection:bg-gray-600 selection:text-white">
+      <div>
+      <Header />
+        <slot />
+      </div>  
+      <Footer />
+    </div>
     <div id="loading" class="hidden z-50 absolute left-0 top-0 h-[100vh] w-[100vw] bg-neutral-950/70 items-center justify-center transition-all delay-150 duration-500 opacity-0"><Spinner /></div>
   </body>
 </html>
