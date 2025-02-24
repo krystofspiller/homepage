@@ -27,9 +27,9 @@ const title = Astro.props.title
     <Tooltip />
     <script type="text/javascript">
       (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-      Cal("init", "meet", {origin:"https://cal.com"});
-    
-      Cal.ns.meet("ui", {"cssVarsPerTheme":{"light":{"cal-brand":"#0a0a0a"},"dark":{"cal-brand":"#e6805f"}},"hideEventTypeDetails":false,"layout":"month_view"});
+      Cal("init", "chat", {origin:"https://cal.com"});
+
+      Cal.ns.chat("ui", {"cssVarsPerTheme":{"light":{"cal-brand":"#0a0a0a"},"dark":{"cal-brand":"#e6805f"}},"hideEventTypeDetails":false,"layout":"month_view"});
     </script>
   </head>
   <body class="h-full min-h-[100vh] selection:bg-orange selection:text-white bg-neutral-950 text-white font-sans">
