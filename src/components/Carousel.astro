@@ -1,7 +1,11 @@
 ---
-const ulStyle = "flex items-center justify-center md:justify-start [&_li]:mx-4 [&_img]:max-w-none animate-scroll-infinite"
+const ulStyle =
+  "flex items-center justify-center md:justify-start [&_li]:mx-4 [&_img]:max-w-none animate-scroll-infinite"
 ---
-<div class="w-full inline-flex flex-nowrap text-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_100px,_black_calc(100%-100px),transparent_100%)]">
+
+<div
+  class="inline-flex w-full flex-nowrap overflow-hidden text-nowrap [mask-image:_linear-gradient(to_right,transparent_0,_black_100px,_black_calc(100%-100px),transparent_100%)]"
+>
   <ul class={ulStyle}>
     <slot />
   </ul>

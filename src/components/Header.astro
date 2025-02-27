@@ -11,16 +11,29 @@ const currentPath = Astro.url.pathname
 <header>
   <nav class="flex w-full items-center justify-between">
     <div class="flex items-center gap-1">
-      {currentPath !== '/' && <ContainerHover href="/" target="_self">Home</ContainerHover> }
+      {
+        currentPath !== "/" && (
+          <ContainerHover href="/" target="_self">
+            Home
+          </ContainerHover>
+        )
+      }
     </div>
-    <div id="cal-hidden" class="hidden" data-cal-link="laegas/chat" data-cal-namespace="chat" data-cal-config='{"layout":"month_view"}'></div>
+    <div
+      id="cal-hidden"
+      class="hidden"
+      data-cal-link="laegas/chat"
+      data-cal-namespace="chat"
+      data-cal-config='{"layout":"month_view"}'
+    >
+    </div>
     <div class="flex items-center gap-3">
       <ContainerHover id="cal-container">
         <Cal />
-      </ContainerHover> 
+      </ContainerHover>
       <ContainerHover href="https://www.linkedin.com/in/krystof-spiller">
         <Linkedin />
-      </ContainerHover> 
+      </ContainerHover>
       <ContainerHover href="mailto:krystof.spiller@gmail.com">
         <Email />
       </ContainerHover>
@@ -33,9 +46,9 @@ const currentPath = Astro.url.pathname
 
 <script>
   // Clicking container with SVG icon didn't show Cal.com when clicking on the icon directly, therefore this workaround
-  const calContainer = document.querySelector('#cal-container')
-  const calHidden = document.querySelector('#cal-hidden') as HTMLElement
-  
+  const calContainer = document.querySelector("#cal-container")
+  const calHidden = document.querySelector("#cal-hidden") as HTMLElement
+
   calContainer?.addEventListener("click", (e) => {
     e.preventDefault()
     calHidden?.click()

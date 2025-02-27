@@ -1,7 +1,7 @@
 ---
-import '../styles/global.css'
+import "../styles/global.css"
 
-import Spinner from '@components/Spinner.astro'
+import Spinner from "@components/Spinner.astro"
 import Tooltip from "@components/Tooltip.astro"
 import { ClientRouter } from "astro:transitions"
 import Header from "@components/Header.astro"
@@ -20,28 +20,78 @@ const title = Astro.props.title
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1"
+    />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <ClientRouter />
     <Tooltip />
     <script type="text/javascript">
-      (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-      Cal("init", "chat", {origin:"https://cal.com"});
+      ;(function (C, A, L) {
+        let p = function (a, ar) {
+          a.q.push(ar)
+        }
+        let d = C.document
+        C.Cal =
+          C.Cal ||
+          function () {
+            let cal = C.Cal
+            let ar = arguments
+            if (!cal.loaded) {
+              cal.ns = {}
+              cal.q = cal.q || []
+              d.head.appendChild(d.createElement("script")).src = A
+              cal.loaded = true
+            }
+            if (ar[0] === L) {
+              const api = function () {
+                p(api, arguments)
+              }
+              const namespace = ar[1]
+              api.q = api.q || []
+              if (typeof namespace === "string") {
+                cal.ns[namespace] = cal.ns[namespace] || api
+                p(cal.ns[namespace], ar)
+                p(cal, ["initNamespace", namespace])
+              } else p(cal, ar)
+              return
+            }
+            p(cal, ar)
+          }
+      })(window, "https://app.cal.com/embed/embed.js", "init")
+      Cal("init", "chat", { origin: "https://cal.com" })
 
-      Cal.ns.chat("ui", {"cssVarsPerTheme":{"light":{"cal-brand":"#0a0a0a"},"dark":{"cal-brand":"#e6805f"}},"hideEventTypeDetails":false,"layout":"month_view"});
+      Cal.ns.chat("ui", {
+        cssVarsPerTheme: {
+          light: { "cal-brand": "#0a0a0a" },
+          dark: { "cal-brand": "#e6805f" },
+        },
+        hideEventTypeDetails: false,
+        layout: "month_view",
+      })
     </script>
   </head>
-  <body class="h-full min-h-[100vh] selection:bg-orange selection:text-white bg-neutral-950 text-white font-sans">
+  <body
+    class="selection:bg-orange h-full min-h-[100vh] bg-neutral-950 font-sans text-white selection:text-white"
+  >
     <Banners />
-    <div class="mx-auto flex h-full max-w-screen-sm flex-col justify-between p-8 pb-0 selection:bg-gray-600 selection:text-white">
+    <div
+      class="mx-auto flex h-full max-w-screen-sm flex-col justify-between p-8 pb-0 selection:bg-gray-600 selection:text-white"
+    >
       <div>
-      <Header />
+        <Header />
         <slot />
-      </div>  
+      </div>
       <Footer />
     </div>
-    <div id="loading" class="hidden z-50 absolute left-0 top-0 h-[100vh] w-[100vw] bg-neutral-950/70 items-center justify-center transition-all delay-150 duration-500 opacity-0"><Spinner /></div>
+    <div
+      id="loading"
+      class="absolute top-0 left-0 z-50 hidden h-[100vh] w-[100vw] items-center justify-center bg-neutral-950/70 opacity-0 transition-all delay-150 duration-500"
+    >
+      <Spinner />
+    </div>
   </body>
 </html>
 
@@ -57,23 +107,23 @@ const title = Astro.props.title
       })
     })
   })
-  document.addEventListener('astro:before-preparation', () => {
-    const loading = document.querySelector('#loading')
+  document.addEventListener("astro:before-preparation", () => {
+    const loading = document.querySelector("#loading")
     if (loading) {
-      loading.classList.add('flex')
-      loading.classList.remove('hidden')
+      loading.classList.add("flex")
+      loading.classList.remove("hidden")
 
-      window.setTimeout(function() {
-        loading.classList.add('opacity-100')
+      window.setTimeout(function () {
+        loading.classList.add("opacity-100")
       }, 50)
     }
   })
-  document.addEventListener('astro:after-preparation', () => {
-    const loading = document.querySelector('#loading')
+  document.addEventListener("astro:after-preparation", () => {
+    const loading = document.querySelector("#loading")
     if (loading) {
-      loading.classList.add('hidden')
-      loading.classList.remove('flex')
-      loading.classList.remove('opacity-100')
+      loading.classList.add("hidden")
+      loading.classList.remove("flex")
+      loading.classList.remove("opacity-100")
     }
   })
 </script>

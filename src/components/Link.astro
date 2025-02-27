@@ -14,19 +14,21 @@ const { href, target = "_self", className, excludeIcon = false } = Astro.props
 </script>
 
 <style>
-  a[href*="//"][data-include-icon*="true"]:not([href*="krystofs.com"]) {
+  a[href*="//"][data-include-icon*="true"]:not([href*="krystofs.com"])
+  {
     &:after {
-      content: '';
+      content: "";
       margin-left: 4px;
       padding-left: 1em;
       background-color: currentColor;
-      mask-image: url('/src/assets/icons/external.svg');
+      mask-image: url("/src/assets/icons/external.svg");
       mask-size: 3em;
       mask-position: center;
       mask-repeat: no-repeat;
     }
   }
-  a[href*="//"]:not([href*="krystofs.com"]):hover {
+  a[href*="//"]:not([href*="krystofs.com"]):hover
+  {
     &:after {
       background-color: #e6805f;
     }

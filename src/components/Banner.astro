@@ -1,12 +1,16 @@
 ---
-import Close from '@assets/icons/close.astro'
+import Close from "@assets/icons/close.astro"
 ---
+
 <div id="banner" class="flex">
   <div class="h-12"></div>
-  <div class="h-12 w-[100dvw] fixed bg-neutral-950 z-60"></div>
-    <div class="h-12 w-[100dvw] fixed flex justify-center items-center z-60 bg-linear-(--gradient-accent-transparent)">
-      <div class="inline text-center text-sm sm:text-base mx-12"><slot /></div>
-      <div class="absolute right-0 h-12 w-12 flex justify-center items-center"><span id="close"><Close /></span></div>
+  <div class="fixed z-60 h-12 w-[100dvw] bg-neutral-950"></div>
+  <div
+    class="fixed z-60 flex h-12 w-[100dvw] items-center justify-center bg-linear-(--gradient-accent-transparent)"
+  >
+    <div class="mx-12 inline text-center text-sm sm:text-base"><slot /></div>
+    <div class="absolute right-0 flex h-12 w-12 items-center justify-center">
+      <span id="close"><Close /></span>
     </div>
   </div>
 </div>
@@ -19,9 +23,9 @@ import Close from '@assets/icons/close.astro'
     close.addEventListener("click", () => {
       const banner = document.getElementById("banner")
       if (!banner) return
-      
-      banner.classList.add('hidden')
-      banner.classList.remove('flex')
+
+      banner.classList.add("hidden")
+      banner.classList.remove("flex")
     })
   })
 </script>

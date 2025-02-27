@@ -31,50 +31,69 @@ const duolingoStreak = await getDuolingoStreak()
 ---
 
 <section class="my-6">
-  <h3 class="mb-2 text-xl font-semibold text-zinc-100">
-    Education
-  </h3>
+  <h3 class="mb-2 text-xl font-semibold text-zinc-100">Education</h3>
   <div class="mb-3 flex items-center gap-2">
     <div><Dtu size="w-auto h-10" /></div>
-    <div class="flex flex-col grow">
-      <div class="flex justify-between items-center">
+    <div class="flex grow flex-col">
+      <div class="flex items-center justify-between">
         <span class="text-lg">Technical University of Denmark</span>
-        <span class="text-zinc-400 text-sm">Copenhagen, Denmark</span>
+        <span class="text-sm text-zinc-400">Copenhagen, Denmark</span>
       </div>
-      <div class="flex justify-between items-center">
-        <span class="flex items-center">Master of Computer Science and Engineering</span>
-        <span class="text-zinc-400 text-sm">2020-2022</span>
+      <div class="flex items-center justify-between">
+        <span class="flex items-center"
+          >Master of Computer Science and Engineering</span
+        >
+        <span class="text-sm text-zinc-400">2020-2022</span>
       </div>
     </div>
   </div>
-  <span class="text-base leading-8 text-zinc-400"><Link href="https://laegas.github.io/cv/assets/Master%20thesis.pdf" target="_blank">Thesis: Aiding Informed Critical Thinking</Link></span>
+  <span class="text-base leading-8 text-zinc-400"
+    ><Link
+      href="https://laegas.github.io/cv/assets/Master%20thesis.pdf"
+      target="_blank">Thesis: Aiding Informed Critical Thinking</Link
+    ></span
+  >
 
   <div class="my-6"></div>
 
   <div class="mb-3 flex items-center gap-2">
     <div><Via size="size-10" /></div>
-    <div class="flex flex-col grow">
-      <div class="flex justify-between items-center">
+    <div class="flex grow flex-col">
+      <div class="flex items-center justify-between">
         <span class="text-lg">VIA University College</span>
-        <span class="text-zinc-400 text-sm">Horsens, Denmark</span>
+        <span class="text-sm text-zinc-400">Horsens, Denmark</span>
       </div>
-      <div class="flex justify-between items-center">
+      <div class="flex items-center justify-between">
         <span class="flex items-center">Bachelor of ICT Engineering</span>
-        <span class="text-zinc-400 text-sm">2016-2020</span>
+        <span class="text-sm text-zinc-400">2016-2020</span>
       </div>
     </div>
   </div>
-  <div class="flex justify-between items-center">
+  <div class="flex items-center justify-between">
     <div class="text-base leading-8 text-zinc-400">
-      <Link href="https://laegas.github.io/cv/assets/Bachelor%20project.pdf" target="_blank">Final project: Cloud computing for end users</Link> - <Link href="https://laegas.github.io/cv/assets/Bachelor%20project%20demo.mp4" target="_blank">Demo</Link>&nbsp;
+      <Link
+        href="https://laegas.github.io/cv/assets/Bachelor%20project.pdf"
+        target="_blank">Final project: Cloud computing for end users</Link
+      > - <Link
+        href="https://laegas.github.io/cv/assets/Bachelor%20project%20demo.mp4"
+        target="_blank">Demo</Link
+      >&nbsp;
     </div>
-    <div class="flex items-center gap-3 p-2 w-fit">
-      <span data-tooltip="<a href=&quot;https://www.electronjs.org&quot; target=&quot;_blank&quot;>Electron</a>"><Electron /></span>
-      <span data-tooltip="<a href=&quot;https://react.dev&quot; target=&quot;_blank&quot;>React</a>"><React /></span>
-      <span data-tooltip="<a href=&quot;https://www.docker.com&quot; target=&quot;_blank&quot;>Docker</a>"><Docker /></span>
+    <div class="flex w-fit items-center gap-3 p-2">
+      <span
+        data-tooltip='<a href="https://www.electronjs.org" target="_blank">Electron</a>'
+        ><Electron /></span
+      >
+      <span data-tooltip='<a href="https://react.dev" target="_blank">React</a>'
+        ><React /></span
+      >
+      <span
+        data-tooltip='<a href="https://www.docker.com" target="_blank">Docker</a>'
+        ><Docker /></span
+      >
     </div>
   </div>
-  
+
   <hr class="my-6 border-zinc-600" />
 
   <p class="text-lg leading-8 text-zinc-400">
@@ -82,9 +101,9 @@ const duolingoStreak = await getDuolingoStreak()
   </p>
   {
     showDuolingo && (
-      <div class="flex items-center gap-2 mt-2">
+      <div class="mt-2 flex items-center gap-2">
         <div class="relative w-12">
-          <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-3/4 text-sm text-black">
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/4 text-sm text-black">
             <span id="duolingo-streak">{duolingoStreak}</span>
           </div>
           <Duolingo size="size-12" />

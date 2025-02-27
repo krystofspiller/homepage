@@ -12,17 +12,17 @@ import Link from "./Link.astro"
   style={{
     backgroundImage: "radial-gradient(circle, #6c6c6c30 0%, transparent 100%)",
   }}
-  class="mb-7 flex flex-col-reverse justify-between rounded-lg border border-zinc-700 bg-zinc-900 bg-opacity-40 p-8 shadow-xl md:flex-row"
+  class="bg-opacity-40 mb-7 flex flex-col-reverse justify-between rounded-lg border border-zinc-700 bg-zinc-900 p-8 shadow-xl md:flex-row"
 >
   <div>
     <div class="mb-4 flex justify-between">
       <Link target="_blank" href={projectLink}>
         <h3 class="inline-block text-xl font-semibold">{projectTitle}</h3>
       </Link>
-      <a class="transition hover:text-orange" href={githubLink}><Github /></a>
+      <a class="hover:text-orange transition" href={githubLink}><Github /></a>
     </div>
     <p class="mb-4 pr-2 text-base text-zinc-400">{projectDescription}</p>
-    <div class="flex items-center gap-3 bg-zinc-700 p-2 w-fit">
+    <div class="flex w-fit items-center gap-3 bg-zinc-700 p-2">
       <slot />
     </div>
   </div>

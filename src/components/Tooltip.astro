@@ -3,7 +3,8 @@ import "tippy.js/dist/tippy.css"
 ---
 
 <style is:global>
-  abbr, span[data-tooltip] {
+  abbr,
+  span[data-tooltip] {
     cursor: help;
     text-decoration-style: dotted;
     text-decoration-line: underline;
@@ -11,12 +12,13 @@ import "tippy.js/dist/tippy.css"
     text-decoration-thickness: 1.5px;
     transition-duration: 0ms;
   }
-  abbr, span[data-tooltip] {
+  abbr,
+  span[data-tooltip] {
     &:hover {
       transition-duration: 150ms;
       color: transparent;
       background-clip: text;
-      background-image: linear-gradient(90deg,#e6c75f,#e65f5f);
+      background-image: linear-gradient(90deg, #e6c75f, #e65f5f);
     }
   }
   .tippy-box[data-theme~="gradient-accent"] {
@@ -56,12 +58,12 @@ import "tippy.js/dist/tippy.css"
 </style>
 
 <script>
-  import tippy from 'tippy.js'
+  import tippy from "tippy.js"
 
   document.addEventListener("astro:page-load", () => {
     const tips = document.querySelectorAll("abbr, [data-tooltip]")
     tips.forEach((t) => {
-      let content = ''
+      let content = ""
       if (t.hasAttribute("title")) {
         content = t.getAttribute("title")!
         t.setAttribute("data-title", content)

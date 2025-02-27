@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -9,69 +9,102 @@
   --animate-scroll-infinite: scroll 18s linear infinite;
   --animate-wave: wave 1.2s linear;
   --animate-wave-infinite: wave 1.2s linear infinite;
-  
+
   --color-orange: #e6805f;
   --color-orange-30: --alpha(var(--color-orange) / 30%);
 
-  --gradient-accent: 90deg,#e6c75f,#e65f5f;
-  --gradient-accent-transparent: 90deg,#e6c75fa0,#e65f5fa0;
+  --gradient-accent: 90deg, #e6c75f, #e65f5f;
+  --gradient-accent-transparent: 90deg, #e6c75fa0, #e65f5fa0;
 
   --font-sans: "Geist", sans-serif;
 
   @keyframes dash {
-    0% { 
+    0% {
       stroke-dashoffset: 820;
     }
-    100% { 
+    100% {
       stroke-dashoffset: 0;
     }
   }
 
   @keyframes glow {
     0% {
-      text-shadow: 0 0 4px #F9E7C6, 0 0 8px #F3D068, 0 0 12px #EC9C15, 0 0 16px #E27C0D, 0 0 20px #B52208, 0 0 24px #580405;
+      text-shadow:
+        0 0 4px #f9e7c6,
+        0 0 8px #f3d068,
+        0 0 12px #ec9c15,
+        0 0 16px #e27c0d,
+        0 0 20px #b52208,
+        0 0 24px #580405;
     }
-    
+
     100% {
-      text-shadow: 0 0 2px #F9E7C6, 0 0 4px #F3D068, 0 0 6px #EC9C15, 0 0 8px #E27C0D, 0 0 10px #B52208, 0 0 12px #580405;
+      text-shadow:
+        0 0 2px #f9e7c6,
+        0 0 4px #f3d068,
+        0 0 6px #ec9c15,
+        0 0 8px #e27c0d,
+        0 0 10px #b52208,
+        0 0 12px #580405;
     }
   }
-  
+
   @keyframes move-up-fade-in {
-    0%, 33% { 
+    0%,
+    33% {
       opacity: 0;
       transform: translate(0, 20px);
     }
-    100% { 
+    100% {
       opacity: 1;
       transform: translate(0, 0);
     }
   }
 
   @keyframes move-up-fade-out {
-    0% { 
+    0% {
       opacity: 1;
       transform: translate(0, 0);
     }
-    100% { 
+    100% {
       opacity: 0;
       transform: translate(0, -20px);
     }
   }
 
   @keyframes scroll {
-    0% { transform: translateX(0) }
-    100% { transform: translateX(-100%) }
-  } 
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
 
   @keyframes wave {
-    0% { transform: rotate(0.0deg) }
-    15% { transform: rotate(14deg) }
-    30% { transform: rotate(-8deg) }
-    45% { transform: rotate(14deg) }
-    60% { transform: rotate(-4deg) }
-    75% { transform: rotate(10.0deg) }
-    90% { transform: rotate(0.0deg) }
-    100% { transform: rotate(0.0deg) }
+    0% {
+      transform: rotate(0deg);
+    }
+    15% {
+      transform: rotate(14deg);
+    }
+    30% {
+      transform: rotate(-8deg);
+    }
+    45% {
+      transform: rotate(14deg);
+    }
+    60% {
+      transform: rotate(-4deg);
+    }
+    75% {
+      transform: rotate(10deg);
+    }
+    90% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
   }
 }

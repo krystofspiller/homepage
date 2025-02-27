@@ -1,10 +1,17 @@
 ---
 const { href, target = "_blank", ...props } = Astro.props
-const className = "cursor-pointer rounded-md border border-transparent p-2 transition hover:border-orange hover:bg-zinc-800 hover:text-orange"
+const className =
+  "cursor-pointer rounded-md border border-transparent p-2 transition hover:border-orange hover:bg-zinc-800 hover:text-orange"
 ---
 
-{ !href ? 
-  <span {...props} class={className}><slot /></span>
-: 
-  <a class={className} href={href} target={target}><slot /></a>
+{
+  !href ? (
+    <span {...props} class={className}>
+      <slot />
+    </span>
+  ) : (
+    <a class={className} href={href} target={target}>
+      <slot />
+    </a>
+  )
 }

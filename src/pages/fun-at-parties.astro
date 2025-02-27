@@ -8,16 +8,18 @@ import iamsuchanamazingdesigner from "@assets/videos/iamsuchanamazingdesigner.mp
 ---
 
 <BaseLayout>
-<section class="my-10">
-  <h2 class="mb-2 text-2xl font-semibold flex gap-2">
-    I'm fun at parties
-  </h2>
-  <p class="mb-3 text-lg leading-8 text-zinc-400">
-    In free time I create troll <Image class="h-8 w-auto inline-flex" src={trollface} alt="Troll face" /> websites for my favorite project managers.
-  </p>
-  <video controls loop autoplay muted>
-    <source src={iamsuchanamazingdesigner} type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-</section>
+  <section class="my-10">
+    <h2 class="mb-2 flex gap-2 text-2xl font-semibold">I'm fun at parties</h2>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+      In free time I create troll <Image
+        class="inline-flex h-8 w-auto"
+        src={trollface}
+        alt="Troll face"
+      /> websites for my favorite project managers.
+    </p>
+    <video controls loop autoplay muted>
+      <source src={iamsuchanamazingdesigner} type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </section>
 </BaseLayout>
