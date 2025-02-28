@@ -11,7 +11,8 @@ import BaseLayout from "@layouts/BaseLayout.astro"
       class="relative z-10 mb-6 bg-linear-(--gradient-accent) bg-clip-text text-center text-3xl text-transparent"
     >
       I'm looking to work on something new&nbsp;<span class="text-white"
-        >✨</span>
+        >✨</span
+      >
     </p>
 
     <article
@@ -24,7 +25,6 @@ import BaseLayout from "@layouts/BaseLayout.astro"
       <Link
         excludeIcon
         className="hover:[&_svg]:text-orange mb-4 flex justify-between"
-        target="_blank"
         href="https://www.linkedin.com/in/krystof-spiller"
       >
         <h3 class="text-xl font-semibold">Reach out on LinkedIn</h3>
@@ -33,7 +33,6 @@ import BaseLayout from "@layouts/BaseLayout.astro"
 
       <Link
         className="hover:[&_svg]:text-orange flex justify-between"
-        target="_blank"
         href="mailto:krystof.spiller@gmail.com"
       >
         <h3 class="text-xl font-semibold">Write me an email</h3>
@@ -81,13 +80,13 @@ import BaseLayout from "@layouts/BaseLayout.astro"
   })(window, "https://app.cal.com/embed/embed.js", "init")
   Cal("init", "meet", { origin: "https://cal.com" })
 
-  Cal.ns.meet("inline", {
+  Cal.ns.chat("inline", {
     elementOrSelector: "#my-cal-inline",
     config: { layout: "month_view", theme: "dark" },
-    calLink: "laegas/meet",
+    calLink: "laegas/chat",
   })
 
-  Cal.ns.meet("ui", {
+  Cal.ns.chat("ui", {
     theme: "dark",
     cssVarsPerTheme: {
       light: { "cal-brand": "#0a0a0a" },

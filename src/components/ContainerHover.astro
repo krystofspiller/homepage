@@ -1,7 +1,12 @@
 ---
-const { href, target = "_blank", ...props } = Astro.props
+const { href, target, ...props } = Astro.props
 const className =
   "cursor-pointer rounded-md border border-transparent p-2 transition hover:border-orange hover:bg-zinc-800 hover:text-orange"
+const calculatedTarget =
+  target ??
+  (href?.startsWith("https://") || href?.startsWith("mailto:")
+    ? "_blank"
+    : "_self")
 ---
 
 {
@@ -10,7 +15,7 @@ const className =
       <slot />
     </span>
   ) : (
-    <a class={className} href={href} target={target}>
+    <a class={className} href={href} target={calculatedTarget}>
       <slot />
     </a>
   )

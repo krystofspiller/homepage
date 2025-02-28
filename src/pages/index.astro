@@ -22,8 +22,6 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
 
 // TODO References section
 // TODO Put styled HTML into components
-// TODO Set up renovate
-// TODO Make Link component figure out _blank automatically from href
 ---
 
 <BaseLayout>
@@ -85,10 +83,7 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
           /></Link
         ></span
       >
-      below or see <Link
-        target="_blank"
-        href="https://laegas.github.io/cv/cv.pdf">my CV</Link
-      >.
+      below or see <Link href="https://laegas.github.io/cv/cv.pdf">my CV</Link>.
     </p>
   </section>
   <section class="my-10">
@@ -113,7 +108,6 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
     </p>
     <h4 class="mb-1 text-lg font-semibold text-zinc-100">
       <Link
-        target="_blank"
         href="https://www.app.europe.carta.com/convertible_securities_calculator/?skip=true"
         >Public calculator page</Link
       >
@@ -130,7 +124,6 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
       on all public facing pages so the calculator should also follow the new
       design. It uses many primitive components and other more complex
       components some of which I helped building. <Link
-        target="_blank"
         href="https://www.app.europe.carta.com/convertible_securities_calculator/?skip=true"
         >Check it out for yourself!</Link
       > See an example below:
@@ -160,9 +153,7 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
       >. The next step involved changing how the app is interacting with Stripe
       where previously it was the app recording changes to customer
       subscriptions using Stripe's API and now the idea was to make these
-      changes from the <Link
-        target="_blank"
-        href="https://docs.stripe.com/customer-management"
+      changes from the <Link href="https://docs.stripe.com/customer-management"
         >self-service customer portal</Link
       > and update the app data via webhook events from Stripe. It also involved
       a change to the pricing packages where there was previously a single package
@@ -176,11 +167,9 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
     <p class="mb-3 text-lg leading-8 text-zinc-400">
       While the app had a multi-currency support from the time I joined, the
       currencies that were supported were those available from <Link
-        target="_blank"
         href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
         >European Central Bank</Link
       > which contains 30 currencies. Meanwhile, there are <Link
-        target="_blank"
         href="https://en.wikipedia.org/w/index.php?title=List_of_circulating_currencies&oldid=1275996218#:~:text=There%20are%20180%20currencies"
         >180 currently circulating currencies recognized by UN</Link
       > and some of those started to appear in the app and it became cumbersome to
@@ -190,10 +179,9 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
       >.
     </p>
     <p class="mb-3 text-lg leading-8 text-zinc-400">
-      I used <Link target="_blank" href="https://exchangeratesapi.io/"
-        >Exchangerates API</Link
-      > to get a more comprehensive list of the exchange rates. As we didn't call
-      the API everytime we needed the exchange rate but instead stored it in a database
+      I used <Link href="https://exchangeratesapi.io/">Exchangerates API</Link> to
+      get a more comprehensive list of the exchange rates. As we didn't call the
+      API everytime we needed the exchange rate but instead stored it in a database
       (we also needed historical exchange rates in some cases), there was a daily
       <span
         data-tooltip='Software engineer&apos;s way of saying "independent script or unit of code that can be invoked either manually or according to some time schedule"'
@@ -331,9 +319,8 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
       >
         <li>No expected format for branches or commits</li>
         <li>
-          <Link
-            href="https://www.conventionalcommits.org/en/v1.0.0/"
-            target="_blank">Conventional commits</Link
+          <Link href="https://www.conventionalcommits.org/en/v1.0.0/"
+            >Conventional commits</Link
           > required for features
         </li>
         <li>
@@ -366,7 +353,7 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
       like:
       <ul class="my-3 ml-6 list-disc space-y-1 text-lg leading-8 text-zinc-400">
         <li>
-          <Link href="https://json-schema.org/specification" target="_blank"
+          <Link href="https://json-schema.org/specification"
             >JSON validation schemas</Link
           > and <span
             data-tooltip="In order to be able to work with for example a currency class instead of simply a string from the JSON you have to serialize it."
@@ -449,7 +436,6 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
       The team had a strict policy for dependency management and actually
       maintained their own repository of dependencies. This was initially done
       through quite a large <Link
-        target="_blank"
         href="https://git-scm.com/book/en/v2/Git-Tools-Submodules"
         >Git submodule</Link
       >. I've made it so that the team was able to use our own repository of

@@ -11,13 +11,7 @@ const currentPath = Astro.url.pathname
 <header>
   <nav class="flex w-full items-center justify-between">
     <div class="flex items-center gap-1">
-      {
-        currentPath !== "/" && (
-          <ContainerHover href="/" target="_self">
-            Home
-          </ContainerHover>
-        )
-      }
+      {currentPath !== "/" && <ContainerHover href="/">Home</ContainerHover>}
     </div>
     <div
       id="cal-hidden"

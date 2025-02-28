@@ -1,5 +1,11 @@
 ---
-const { href, target = "_self", className, excludeIcon = false } = Astro.props
+const { href, target, className = "", excludeIcon = false } = Astro.props
+
+const calculatedTarget =
+  target ??
+  (href?.startsWith("https://") || href?.startsWith("mailto:")
+    ? "_blank"
+    : "_self")
 ---
 
 <script>
@@ -38,6 +44,6 @@ const { href, target = "_self", className, excludeIcon = false } = Astro.props
 <a
   data-include-icon={!excludeIcon}
   class=`underline transition duration-0 hover:bg-linear-(--gradient-accent) hover:bg-clip-text hover:text-transparent hover:duration-150 ${className}`
-  target={target}
+  target={calculatedTarget}
   href={href}><slot /></a
 >
