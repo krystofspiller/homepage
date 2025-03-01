@@ -1,5 +1,9 @@
 ---
-import IconContainer from "@components/IconContainer.astro"
+import { JSDOM } from "jsdom"
+import { Image } from "astro:assets"
+
+import Knowt from "@assets/images/knowt.png"
+import GrindIsReal from "@assets/images/grind-is-real.svg"
 import Duolingo from "@assets/icons/duolingo.astro"
 import Via from "@assets/icons/via.astro"
 import Electron from "@assets/icons/electron.astro"
@@ -7,6 +11,7 @@ import React from "@assets/icons/react.astro"
 import Docker from "@assets/icons/docker.astro"
 import Dtu from "@assets/icons/dtu.astro"
 import Link from "./Link.astro"
+import Leetcode from "@assets/icons/leetcode.astro"
 
 let showDuolingo = true
 const duolingoUrl = "https://www.duolingo.com/2017-06-30/users/1102654541"
@@ -25,12 +30,47 @@ async function getDuolingoStreak() {
   }
 }
 
-const duolingoStreak = await getDuolingoStreak()
+let showKnowt = true
+const knowtUrl =
+  "https://knowt.com/flashcards/22843cc6-d653-4f27-b0e6-02bdd1e1bc92"
+
+async function getKnowtCardCount() {
+  try {
+    const response = await fetch(knowtUrl)
+    if (!response.ok) {
+      showKnowt = false
+    }
+
+    const dom = new JSDOM(await response.text())
+
+    let cardCount = 0
+    for (const span of dom.window.document.querySelectorAll("span")) {
+      if (span.textContent?.includes("View all")) {
+        const res = span.textContent.match(/\((\d+)\)/)
+        cardCount = Number(res?.[1])
+        break
+      }
+    }
+
+    return cardCount
+  } catch (error) {
+    showKnowt = false
+  }
+}
+
+const [duolingoStreak, knowtCardCount = 0] = await Promise.all([
+  getDuolingoStreak(),
+  getKnowtCardCount(),
+])
+
+const knowtProgress = ((knowtCardCount / 150) * 100).toFixed(1)
 
 // TODO: Completed tutorials, Certificates, Piano, Music, Knowt share NeetCode problems cards section
 ---
 
-<section class="my-6">
+<section class="my-10 mb-6">
+  <hr class="mb-6 border-zinc-600" />
+
   <h3 class="mb-2 text-xl font-semibold text-zinc-100">Education</h3>
   <div class="mb-3 flex items-center gap-2">
     <div><Dtu size="w-auto h-10" /></div>
@@ -93,23 +133,68 @@ const duolingoStreak = await getDuolingoStreak()
   </div>
 
   <hr class="my-6 border-zinc-600" />
+  <Image class="w-auto h-6 [*_path]:fill-zinc-400" src={GrindIsReal} alt="Grind is real" />
 
-  <p class="text-lg leading-8 text-zinc-400">
-    Started learning Korean after watching way too many k-dramas.
-  </p>
-  {
-    showDuolingo && (
-      <div class="mt-2 flex items-center gap-2">
+  <div class="mt-3 flex items-center gap-2">
+    <div class="w-12">
+      <Leetcode size="size-12" />
+    </div>
+    <div class="w-full">
+      <div class="mb-1 flex justify-between">
+        <div class="text-lg text-zinc-400">
+          Grinding <Link href="https://neetcode.io/practice?tab=neetcode150"
+            >NeetCode 150</Link
+          >
+        </div>
+        {
+          showKnowt && (
+            <span class="text-lg font-medium text-blue-700 dark:text-white">
+              {knowtCardCount} / 150
+            </span>
+          )
+        }
+      </div>
+      {
+        showKnowt && (
+          <div class="mb-1 h-4 w-full rounded-full bg-gray-200 dark:bg-gray-700">
+            <div
+              class="bg-orange h-4 rounded-full"
+              style=`width: ${knowtProgress}%`
+            />
+        </div>
+        )
+      }
+    </div>
+  </div>
+
+  <div class="mt-2 flex items-center gap-2">
+    <div class="w-12">
+      <Image class="max-w-12 w-12" src={Knowt} alt="Knowt logo" />
+    </div>
+    <div class="w-full">
+      <div class="text-lg text-zinc-400">
+        <Link href={knowtUrl}>See flashcards</Link> I've created for <span data-tooltip='As the creator of NeetCode himself <a href="https://www.youtube.com/watch?v=aHZW7TuY_yo" target="_blank">argues</a>, it&apos;s probably a good idea to get back to already solved problems and "flex those muscles" so they don&apos;t atrophy. That&apos;s the idea behind the flashcards anyway <span class="text-white">🤷‍♂️</span>'>practicing</span> NeetCode 150.
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-2 flex items-center gap-2">
+    {
+      showDuolingo && (
         <div class="relative w-12">
           <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/4 text-sm text-black">
             <span id="duolingo-streak">{duolingoStreak}</span>
           </div>
           <Duolingo size="size-12" />
         </div>
-        <span class="text-lg text-zinc-400">Current Duolingo streak 🇰🇷</span>
+      )
+    }
+    <div class="w-full">
+      <div class="text-lg text-zinc-400">
+        Current Duolingo streak in Korean 🇰🇷 which I started on a whim after watching way too many k-dramas.
       </div>
-    )
-  }
+    </div>
+  </div>
 </section>
 
 <script is:inline define:vars={{ duolingoUrl }}>

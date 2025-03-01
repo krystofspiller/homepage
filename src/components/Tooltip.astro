@@ -30,11 +30,11 @@ import "tippy.js/dist/tippy.css"
     color: transparent;
     background-clip: text;
   }
-  .tippy-box[data-theme~="gradient-accent"] > .tippy-content > a {
+  .tippy-box[data-theme~="gradient-accent"] > .tippy-content a {
     text-decoration: underline;
     text-decoration-color: #e6805f;
   }
-  .tippy-box[data-theme~="gradient-accent"] > .tippy-content > a:hover {
+  .tippy-box[data-theme~="gradient-accent"] > .tippy-content a:hover {
     background: linear-gradient(90deg, #e65f5f, #e6c75f);
     color: transparent;
     background-clip: text;
@@ -75,6 +75,7 @@ import "tippy.js/dist/tippy.css"
         content,
         allowHTML: true,
         interactive: true,
+        trigger: "click",
         theme: "gradient-accent",
       })
     })

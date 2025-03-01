@@ -22,6 +22,7 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
 
 // TODO References section
 // TODO Put styled HTML into components
+// TODO Three.js animation of greeting / name?
 ---
 
 <BaseLayout>
@@ -58,6 +59,9 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
         </svg>
         <span
           class="relative z-10 bg-linear-(--gradient-accent) bg-clip-text text-transparent"
+          style="text-decoration-line: none; cursor: default;"
+          data-tooltip=`<div class="flex flex-col justify-center items-center">Okay, you found me.<br /><div>Now let's <a class="cursor-pointer underline decoration-white transition duration-0 hover:bg-linear-(--gradient-accent) hover:bg-clip-text hover:text-transparent hover:duration-150" data-cal-link="laegas/chat" data-cal-namespace="chat" data-cal-config='{"layout":"month_view"}'>set up a meeting</a> <span class="text-white">😉</span></div><a href="https://www.youtube.com/watch?v=wyx6JDQCslE" target="_blank"><img class="rounded-lg mt-1 max-w-64 w-64" src="/src/assets/images/profile.jpg"
+          /></a></div>`
           >Krystof</span
         >
       </span>
@@ -496,13 +500,7 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
     </ProjectCard>
   </section>
 
-  <section class="my-10 mb-6">
-    <h2 id="general" class="mb-2 text-2xl font-semibold">
-      Other stuff about me
-    </h2>
-    <hr class="mb-6 border-zinc-600" />
-    <OtherAboutSection />
-  </section>
+  <OtherAboutSection />
 </BaseLayout>
 
 <script is:inline>
