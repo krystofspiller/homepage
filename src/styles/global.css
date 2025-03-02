@@ -2,6 +2,8 @@
 @import "tailwindcss";
 
 @theme {
+  --animate-amazing-move: amazing-move 8s linear infinite;
+  --animate-amazing-spin: amazing-spin 8s ease-in-out infinite;
   --animate-dash: dash 2s ease-in-out;
   --animate-glow: glow 1s ease-in-out infinite alternate;
   --animate-move-up-fade-in: move-up-fade-in 2.25s ease-out;
@@ -17,6 +19,36 @@
   --gradient-accent-transparent: 90deg, #e6c75fa0, #e65f5fa0;
 
   --font-sans: "Geist", sans-serif;
+
+  @keyframes amazing-move {
+    0%,
+    100% {
+      left: 0;
+      top: 0;
+    }
+    25% {
+      left: 100%;
+      top: 0;
+    }
+    50% {
+      left: 100%;
+      top: 100%;
+    }
+    75% {
+      left: 0;
+      top: 100%;
+    }
+  }
+
+  @keyframes amazing-spin {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(1800deg);
+    }
+  }
 
   @keyframes dash {
     0% {

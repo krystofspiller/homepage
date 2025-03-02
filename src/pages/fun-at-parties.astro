@@ -1,23 +1,23 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro"
-import { Image } from "astro:assets"
-import trollface from "@assets/images/trollface.svg"
+import Trollface from "@assets/icons/trollface.astro"
 import iamsuchanamazingdesigner from "@assets/videos/iamsuchanamazingdesigner.mp4"
-
-// TODO: Merge iamdesigner repo into this one, link to the actual page from here
-// TODO: Change troll face image to inverse color and transparent background - SVG
+import Link from "@components/Link.astro"
 ---
 
 <BaseLayout>
   <section class="my-10">
     <h2 class="mb-2 flex gap-2 text-2xl font-semibold">I'm fun at parties</h2>
-    <p class="mb-3 text-lg leading-8 text-zinc-400">
-      In free time I create troll <Image
-        class="inline-flex h-8 w-auto"
-        src={trollface}
-        alt="Troll face"
-      /> websites for my favorite project managers.
-    </p>
+    <div class="mb-3 flex items-center gap-2">
+      <Trollface
+        size="min-w-10 min-h-10 size-10 sm:min-w-16 sm:min-h-16 sm:size-16"
+      />
+      <p class="text-lg leading-8 text-zinc-400">
+        In free time I create <Link href="/iamsuchanamazingdesigner"
+          >troll websites</Link
+        > for my favorite project managers.
+      </p>
+    </div>
     <video controls loop autoplay muted>
       <source src={iamsuchanamazingdesigner} type="video/mp4" />
       Your browser does not support the video tag.

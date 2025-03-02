@@ -1,0 +1,98 @@
+---
+import "../styles/global.css"
+
+import AnimatedAward from "../components/AnimatedAward.astro"
+import AnimatedMaria from "../components/AnimatedMaria.astro"
+const title = "Iamsuchanamazingdesigner"
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="h-screen w-full overflow-hidden overscroll-none">
+    <div class="gradient absolute h-screen w-full"></div>
+    <div class="md:hidden">
+      <main class="absolute flex h-screen w-full items-center justify-center">
+        <p class="mb-4 text-center text-4xl font-extrabold text-gray-900">
+          Hold up, I'm not that <br />
+          <span
+            class="bg-gradient-to-r from-amber-400 to-orange-600 bg-clip-text text-8xl text-transparent italic"
+            >Amazing</span
+          ><br />
+          to make this work on mobile.<br />
+          See it on a bigger screen. <span
+            class="text-xs font-light text-white underline"
+            ><a
+              target="_blank"
+              href="https://www.youtube.com/watch?v=5xyLBbPbZ_I">Biatch</a
+            ></span
+          >
+        </p>
+      </main>
+    </div>
+    <div class="hidden h-screen w-full md:block">
+      <div
+        class="absolute top-0 flex h-screen w-full items-center justify-center"
+      >
+        <p class="mb-4 text-center text-4xl font-extrabold text-gray-900">
+          What can I say?<br />I'm just<br />
+          <span
+            class="bg-gradient-to-r from-amber-400 to-orange-600 bg-clip-text text-8xl text-transparent italic"
+            >Amazing</span
+          ><br />
+          <span class="bg-gradient text-xs italic"
+            >According to Meria 🍦 Engineer</span
+          >
+        </p>
+      </div>
+      <div
+        class="relative"
+        style="width: calc(100vw - 12rem); height: calc(100vh - 12rem)"
+      >
+        <AnimatedAward delay={-1} />
+        <AnimatedAward delay={-3} />
+        <AnimatedAward delay={-5} />
+        <AnimatedAward delay={-7} />
+        <AnimatedMaria delay={0} text="This" />
+        <AnimatedMaria delay={-2} text="PM" />
+        <AnimatedMaria delay={-4} text="Be" />
+        <AnimatedMaria delay={-6} text="Crazy" />
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  .gradient {
+    background: linear-gradient(
+      180deg,
+      #ff0000,
+      #ffe600,
+      #2bff00,
+      #00ffee,
+      #0048ff,
+      #9000ff,
+      #ff00f2,
+      #ff0000,
+      #ffe600
+    );
+    background-size: 100% 800%;
+    background-position: 0% 0%;
+    animation: gradient 3s linear infinite;
+    height: 100vh;
+  }
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 100% 100%;
+    }
+  }
+</style>

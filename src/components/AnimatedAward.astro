@@ -1,0 +1,30 @@
+---
+import { Image } from "astro:assets"
+import award from "@assets/images/award.jpg"
+
+const { delay } = Astro.props
+---
+
+<div
+  class="hover-animation-pause animate-amazing-move absolute h-[12rem] w-[12rem] transition-all duration-500 hover:w-[50vw] hover:-translate-x-[25vw]"
+  style={`animation-delay: ${delay}s;`}
+>
+  <div
+    class="hover-animation-pause animate-amazing-spin"
+    style={`animation-delay: ${delay}s;`}
+  >
+    <Image
+      class={`w-full invert hover:invert-0 max-w-none relative`}
+      width={2645}
+      height={1932}
+      src={award}
+      alt=""
+    />
+  </div>
+</div>
+
+<style>
+  .hover-animation-pause:hover {
+    animation-play-state: paused;
+  }
+</style>

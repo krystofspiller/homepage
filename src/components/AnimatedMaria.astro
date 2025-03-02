@@ -1,0 +1,31 @@
+---
+import { Image } from "astro:assets"
+import Star from "@components/Star.astro"
+import maria from "@assets/images/maria-loves-it.png"
+
+const { delay = 0, text } = Astro.props
+---
+
+<div
+  class="animate-amazing-move hover-animation-pause absolute h-[12rem] w-[12rem]"
+  style={`animation-delay: ${delay}s;`}
+>
+  <div class="absolute">
+    <Image
+      class={`w-full max-w-none relative`}
+      width={192}
+      height={192}
+      src={maria}
+      alt=""
+    />
+  </div>
+  <div class="h-[12rem] w-[12rem]">
+    <Star text={text} delay={delay} />
+  </div>
+</div>
+
+<style>
+  .hover-animation-pause:hover {
+    animation-play-state: paused;
+  }
+</style>
