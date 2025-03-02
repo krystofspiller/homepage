@@ -23,6 +23,13 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
 // TODO References section
 // TODO Put styled HTML into components
 // TODO Three.js animation of greeting / name?
+// TODO Update content with images
+// * billing revamp - Previously - app sending updates to Stripe API vs. Now - HubSpot and Stripe updating the app
+// * currency exchange - Previously - ECB logo with 30 currencies vs. Now ExchangeRates API logo with 180 currencies
+// * 404 link checker - Show example Slack message, star twinkle eyes meme emoji?
+// * modals - show screenshot of modal from public calculator
+// * data integrity checks - show example Slack message
+// * linter - make a screenshot / graphic of a rule warning to use a helper
 ---
 
 <BaseLayout>
@@ -225,7 +232,8 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
       with forms, the form being reset after a successful submit caused a
       flicker while the modal was fading out. I implemented a modal component
       and hook to make implementing consistent modals simpler, including support
-      for forms.
+      for forms, where all of the aforementioned concerns were handled by
+      default.
     </p>
 
     <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
