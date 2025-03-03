@@ -19,10 +19,16 @@ import Expo from "@assets/icons/expo.astro"
 import Appwrite from "@assets/icons/appwrite.astro"
 import Convex from "@assets/icons/convex.astro"
 import OtherAboutSection from "@components/OtherAboutSection.astro"
+import TypeValidationExample from "@components/content/TypeValidationExample.astro"
 
 // TODO References section
 // TODO Put styled HTML into components
 // TODO Three.js animation of greeting / name?
+// TODO implement link checker and add a note about it here
+// TODO Link to the HabitVille project when presentable
+// TODO Posts ideas:
+// * compiling iOS
+// * AI turtleneck
 // TODO Update content with images
 // * billing revamp - Previously - app sending updates to Stripe API vs. Now - HubSpot and Stripe updating the app
 // * currency exchange - Previously - ECB logo with 30 currencies vs. Now ExchangeRates API logo with 180 currencies
@@ -30,6 +36,10 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
 // * modals - show screenshot of modal from public calculator
 // * data integrity checks - show example Slack message
 // * linter - make a screenshot / graphic of a rule warning to use a helper
+// * commit message - screenshot
+// * app releases - example Slack message
+// * language tool - show on an example, "This is highlight by diferent colour."
+// * open API - generic screenshot?
 ---
 
 <BaseLayout>
@@ -46,7 +56,6 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
           width="576"
           height="193"
           viewBox="0 0 576 193"
-          version="1.1"
           class="absolute top-[-18px] left-0 z-0 block w-[250px]"
         >
           <defs>
@@ -67,7 +76,7 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
         <span
           class="relative z-10 bg-linear-(--gradient-accent) bg-clip-text text-transparent"
           style="text-decoration-line: none; cursor: default;"
-          data-tooltip=`<div class="flex flex-col justify-center items-center">Okay, you found me.<br /><div>Now let's <a class="cursor-pointer underline decoration-white transition duration-0 hover:bg-linear-(--gradient-accent) hover:bg-clip-text hover:text-transparent hover:duration-150" data-cal-link="laegas/chat" data-cal-namespace="chat" data-cal-config='{"layout":"month_view"}'>set up a meeting</a> <span class="text-white">😉</span></div><a href="https://www.youtube.com/watch?v=wyx6JDQCslE" target="_blank"><img class="rounded-lg mt-1 max-w-64 w-64" src="/src/assets/images/profile.jpg"
+          data-tooltip=`<div class="flex flex-col justify-center items-center">Okay, you found me.<br><div>Now let's <a class="cursor-pointer underline decoration-white transition duration-0 hover:bg-linear-(--gradient-accent) hover:bg-clip-text hover:text-transparent hover:duration-150" data-cal-link="laegas/chat" data-cal-namespace="chat" data-cal-config='{"layout":"month_view"}'>set up a meeting</a> <span class="text-white">😉</span></div><a href="https://www.youtube.com/watch?v=wyx6JDQCslE" target="_blank"><img class="rounded-lg mt-1 max-w-64 w-64" src="/src/assets/images/profile.jpg"
           /></a></div>`
           >Krystof</span
         >
@@ -75,7 +84,7 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
     </h1>
     <p class="text-2xl text-zinc-400">Fullstack software engineer</p>
   </div>
-  <section class="mb-20">
+  <div class="mb-20">
     <p class="mb-3 text-lg leading-8 text-zinc-400">
       I'm a software engineer with most experience in <strong
         class="font-medium text-zinc-100">fullstack web development</strong
@@ -96,7 +105,7 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
       >
       below or see <Link href="https://laegas.github.io/cv/cv.pdf">my CV</Link>.
     </p>
-  </section>
+  </div>
   <section class="my-10">
     <h2
       id="professional-contributions"
@@ -214,7 +223,6 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
       to an #automated-checks Slack channel. In this way, these issues became more
       visible and otherwise invalid links that would be in the app for many months
       were fixed within a week.
-      <!-- TODO: implement link checker and add a note about it here -->
     </p>
 
     <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
@@ -319,6 +327,7 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
       every request in production, it was only enabled in our QA environment
       that we used often enough to catch majority of these errors.
     </div>
+    <TypeValidationExample />
 
     <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
       Conventional commit message auto formatter
@@ -412,10 +421,9 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
       Grammar checker for translations
     </h4>
     <p class="mb-3 text-lg leading-8 text-zinc-400">
-      Using <span data-tooltip="Basically an open source Grammarly"
-        >LanguageTool</span
-      > I implemented a check in GitHub Actions that checked grammar including spellchecks.
-      This involved compiling the list of translations from a YML file into a human-readable
+      Using <Link href="https://languagetool.org/">LanguageTool</Link> I implemented
+      a check in GitHub Actions that checked grammar including spellchecks. This
+      involved compiling the list of translations from a YML file into a human-readable
       form which is what LanguageTool expects.
     </p>
 
@@ -475,8 +483,6 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
       Hobby project
     </h2>
     <hr class="mb-6 border-zinc-600" />
-    <!-- TODO: Link to the project, add Git -->
-    <!-- TODO: Link to posts when I actually write one - idea for first post, compiling iOS -->
     <ProjectCard
       projectTitle="HabitVille"
       projectDescription="Track habits and gamify them in a tycoon-game. Started with a web app, now working on an iOS mobile app."
@@ -509,55 +515,56 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
   </section>
 
   <OtherAboutSection />
-</BaseLayout>
 
-<script is:inline>
-  function isElementInViewport(element) {
-    const rect = element.getBoundingClientRect()
+  <script is:inline>
+    function isElementInViewport(element) {
+      const rect = element.getBoundingClientRect()
 
-    return (
-      rect.bottom >= 0 &&
-      rect.left >= 0 &&
-      rect.top <=
-        (window.innerHeight || document.documentElement.clientHeight) &&
-      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    )
-  }
+      return (
+        rect.bottom >= 0 &&
+        rect.left >= 0 &&
+        rect.top <=
+          (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <=
+          (window.innerWidth || document.documentElement.clientWidth)
+      )
+    }
 
-  function onVisibilityChange(element, callback) {
-    let previousIsVisible = false
-    return function () {
-      const isVisible = isElementInViewport(element)
-      if (isVisible != previousIsVisible) {
-        previousIsVisible = isVisible
-        callback(element)
+    function onVisibilityChange(element, callback) {
+      let previousIsVisible = false
+      return function () {
+        const isVisible = isElementInViewport(element)
+        if (isVisible != previousIsVisible) {
+          previousIsVisible = isVisible
+          callback(element)
+        }
       }
     }
-  }
 
-  const handler = onVisibilityChange(
-    document.querySelector("#animated-billing"),
-    function (element) {
-      const projectElement = element.children[0].children[0]
-      const warStoryElement = element.children[0].children[1]
+    const handler = onVisibilityChange(
+      document.querySelector("#animated-billing"),
+      function (element) {
+        const projectElement = element.children[0].children[0]
+        const warStoryElement = element.children[0].children[1]
 
-      if (projectElement.classList.contains("animate-move-up-fade-out")) {
-        projectElement.classList.remove("animate-move-up-fade-out")
-        warStoryElement.classList.remove("animate-move-up-fade-in")
-      } else {
-        projectElement.classList.add("animate-move-up-fade-out")
-        warStoryElement.classList.add("animate-move-up-fade-in")
-      }
-    },
-  )
+        if (projectElement.classList.contains("animate-move-up-fade-out")) {
+          projectElement.classList.remove("animate-move-up-fade-out")
+          warStoryElement.classList.remove("animate-move-up-fade-in")
+        } else {
+          projectElement.classList.add("animate-move-up-fade-out")
+          warStoryElement.classList.add("animate-move-up-fade-in")
+        }
+      },
+    )
 
-  if (window.addEventListener) {
-    addEventListener("load", handler, false)
-    addEventListener("scroll", handler, false)
-    addEventListener("resize", handler, false)
-  } else if (window.attachEvent) {
-    attachEvent("onload", handler)
-    attachEvent("onscroll", handler)
-    attachEvent("onresize", handler)
-  }
-</script>
+    if (window.addEventListener) {
+      addEventListener("load", handler, false)
+      addEventListener("scroll", handler, false)
+      addEventListener("resize", handler, false)
+    } else if (window.attachEvent) {
+      attachEvent("onload", handler)
+      attachEvent("onscroll", handler)
+      attachEvent("onresize", handler)
+    }
+  </script>
+</BaseLayout>
