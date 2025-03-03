@@ -55,6 +55,10 @@ import "tippy.js/dist/tippy.css"
     > .tippy-arrow::before {
     border-right-color: black;
   }
+  div[id^="tooltip-"] {
+    color: #e6805f;
+    display: none;
+  }
 </style>
 
 <script>
@@ -69,7 +73,14 @@ import "tippy.js/dist/tippy.css"
         t.setAttribute("data-title", content)
         t.removeAttribute("title")
       } else {
-        content = t.getAttribute("data-tooltip")!
+        const dataTooltip = t.getAttribute("data-tooltip")!
+        if (dataTooltip.startsWith("TooltipRef#")) {
+          const tooltipRef = dataTooltip.split("TooltipRef#")[1]
+          content =
+            document.querySelector(`#tooltip-${tooltipRef}`)?.innerHTML ?? ""
+        } else {
+          content = dataTooltip
+        }
       }
       tippy(t, {
         content,
