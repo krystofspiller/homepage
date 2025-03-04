@@ -1,8 +1,13 @@
 ---
+import Link from "@components/Link.astro"
 import BaseLayout from "@layouts/BaseLayout.astro"
 ---
 
-<BaseLayout> Redirecting... </BaseLayout>
+<BaseLayout
+  ><Link href="/#model-funding-rounds"
+    >Redirecting to model funding rounds demo...</Link
+  ></BaseLayout
+>
 
 <script>
   window.location.href = "/#model-funding-rounds"
