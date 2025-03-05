@@ -14,11 +14,10 @@ import Link from "./Link.astro"
 import Leetcode from "@assets/icons/leetcode.astro"
 
 let showDuolingo = true
-const duolingoUrl = "https://www.duolingo.com/2017-06-30/users/1102654541"
 
 async function getDuolingoStreak() {
   try {
-    const response = await fetch(duolingoUrl)
+    const response = await fetch("https://www.duolingo.com/2017-06-30/users/1102654541")
     if (!response.ok) {
       showDuolingo = false
     }
@@ -183,7 +182,7 @@ const knowtProgress = ((knowtCardCount / 150) * 100).toFixed(1)
       showDuolingo && (
         <div class="relative w-12">
           <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/4 text-sm text-black">
-            <span id="duolingo-streak">{duolingoStreak}</span>
+            {duolingoStreak}
           </div>
           <Duolingo size="size-12" />
         </div>
@@ -196,17 +195,3 @@ const knowtProgress = ((knowtCardCount / 150) * 100).toFixed(1)
     </div>
   </div>
 </section>
-
-<script is:inline define:vars={{ duolingoUrl }}>
-  function getDuolingoStreak() {
-    try {
-      const response = fetch(duolingoUrl).then((res) => {
-        res.json().then((json) => {
-          document.getElementById("duolingo-streak").innerText = json.streak
-        })
-      })
-    } catch (error) {}
-  }
-
-  getDuolingoStreak()
-</script>
