@@ -7,6 +7,7 @@ import Link from "@components/Link.astro"
 
 import capdeskLogo from "@assets/images/capdesk.svg"
 import cartaLogo from "@assets/images/carta.svg"
+import dataIntegrityChecker from "@assets/images/data-integrity-checker.png"
 import linkChecker from "@assets/images/link-checker.png"
 import modelFundingRounds from "@assets/videos/model-funding-rounds.mp4"
 import profile from "@assets/images/profile.jpg"
@@ -39,7 +40,6 @@ import CurrencyProviders from "@assets/images/currency-providers.astro"
 //   * scroll margin
 //   * compiling iOS
 // TODO Update content with images
-// * data integrity checks - show example Slack message
 // * linter - make a screenshot / graphic of a rule warning to use a helper
 // * commit message - screenshot
 // * app releases - example Slack message
@@ -257,7 +257,6 @@ import CurrencyProviders from "@assets/images/currency-providers.astro"
       visible and otherwise invalid links that would be in the app for many months
       were fixed within a week.
     </p>
-
     <Image
       class="w-full"
       src={linkChecker}
@@ -301,6 +300,11 @@ import CurrencyProviders from "@assets/images/currency-providers.astro"
     and domain specific identifiers which could cause subtle bugs in filtering and
     matching items.
   </p>
+  <Image
+    class="w-full"
+    src={dataIntegrityChecker}
+    alt="Example Slack message of data integrity checker"
+  />
 
   <h4 id="linter-rules" class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
     Linter rules
