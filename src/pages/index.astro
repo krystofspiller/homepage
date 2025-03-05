@@ -30,6 +30,7 @@ import CurrencyProviders from "@assets/images/currency-providers.astro"
 import LanguageToolExample from "@components/content/LanguageToolExample.astro"
 import OpenApiHelperExample from "@components/content/OpenApiHelperExample.astro"
 
+// Update Readme pic
 // * Enable SSR mode
 //   * implement dynamic /r/<anchor> redirect page
 //   * fix Duolingo and Knowt data fetching
@@ -183,8 +184,8 @@ import OpenApiHelperExample from "@components/content/OpenApiHelperExample.astro
     </video>
 
     <h4
-      id="animated-billing"
-      class="mt-6 mb-1 flex text-lg font-semibold text-zinc-100"
+      id="billing-revamp-project"
+      class="mt-6 mb-1 flex scroll-mt-15 text-lg font-semibold text-zinc-100"
     >
       Billing revamp&nbsp;<span class="relative"
         ><span class="absolute w-24 opacity-0">project</span><span
@@ -598,7 +599,7 @@ import OpenApiHelperExample from "@components/content/OpenApiHelperExample.astro
   }
 
   const handler = onVisibilityChange(
-    document.querySelector("#animated-billing"),
+    document.querySelector("#billing-revamp-project"),
     function (element) {
       const projectElement = element.children[0].children[0]
       const warStoryElement = element.children[0].children[1]
