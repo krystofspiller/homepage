@@ -7,9 +7,11 @@ import Link from "@components/Link.astro"
 
 import capdeskLogo from "@assets/images/capdesk.svg"
 import cartaLogo from "@assets/images/carta.svg"
+import commitMessage from "@assets/images/commit-message.png"
 import dataIntegrityChecker from "@assets/images/data-integrity-checker.png"
 import linkChecker from "@assets/images/link-checker.png"
 import modelFundingRounds from "@assets/videos/model-funding-rounds.mp4"
+import newAppRelease from "@assets/images/new-app-release.png"
 import profile from "@assets/images/profile.jpg"
 import systematicLogo from "@assets/images/systematic.svg"
 
@@ -25,6 +27,8 @@ import OtherAboutSection from "@components/OtherAboutSection.astro"
 import TypeValidationExample from "@components/content/TypeValidationExample.astro"
 import Billing from "@assets/images/billing.astro"
 import CurrencyProviders from "@assets/images/currency-providers.astro"
+import LanguageToolExample from "@components/content/LanguageToolExample.astro"
+import OpenAPIHelperExample from "@components/content/OpenAPIHelperExample.astro"
 
 // * Enable SSR mode
 //   * implement dynamic /r/<anchor> redirect page
@@ -39,12 +43,6 @@ import CurrencyProviders from "@assets/images/currency-providers.astro"
 // * TIL series
 //   * scroll margin
 //   * compiling iOS
-// TODO Update content with images
-// * linter - make a screenshot / graphic of a rule warning to use a helper
-// * commit message - screenshot
-// * app releases - example Slack message
-// * language tool - show on an example, "This is highlight by diferent colour."
-// * open API - generic screenshot?
 ---
 
 <BaseLayout>
@@ -112,10 +110,10 @@ import CurrencyProviders from "@assets/images/currency-providers.astro"
   </div>
   <div class="mb-20">
     <p class="mb-3 text-lg leading-8 text-zinc-400">
-      I'm a software engineer with most experience in <strong
+      I'm a software engineer with 6 years of experience in <strong
         class="font-medium text-zinc-100">fullstack web development</strong
-      >. I have a detail-oriented approach and always strive to find the
-      simplest solution.
+      >. I'm preferably targeting roles involving React, TypeScript and Go with
+      an opportunity to work in the US.
     </p>
     <p class="text-lg leading-8 text-zinc-400">
       Find out more about my <Link href="#professional-contributions"
@@ -341,15 +339,16 @@ import CurrencyProviders from "@assets/images/currency-providers.astro"
         fellow engineers to convert it to use the helper. The idea is that the warnings
         would be changed to errors once the conversion is complete so that all of
         the specifications would be written in this more concise and readable format.
+        <OpenAPIHelperExample />
       </li>
       <li>
         <strong class="font-bold"
           >Check strings looking like constants actually exist</strong
         > - in Ruby, we were sometimes forced to write a constant like a class name
-        as a string. The static type checker for Ruby called Sorbet we used obviously
-        didn't check strings for anything and such strings sometimes became obsolete
-        when the class was refactored or removed and could cause an issue. This linter
-        rule checked all strings that looked like such constants actually referred
+        as a string. The static type checker for Ruby, called Sorbet, we used obviously
+        didn't check strings and such strings sometimes became obsolete when the
+        class was refactored or removed and could cause an issue. This linter rule
+        checked that all strings that looked like such constants actually referred
         to an existing constant in the codebase.
       </li>
     </ol>
@@ -410,6 +409,18 @@ import CurrencyProviders from "@assets/images/currency-providers.astro"
     plain message according to the conventional commit specification. Small time
     safer but mostly one less thing to think about.
   </div>
+  <Image
+    class="w-full"
+    src={commitMessage}
+    alt="Commit message auto formatted"
+  />
+  <div class="mt-1 flex items-center justify-center text-sm text-zinc-400">
+    <p class="w-[75%]">
+      The commit message "example message" is autoformatted based on the branch
+      name "feat/JIRA-123-example" to a final message reading "feat(JIRA-123):
+      example message"
+    </p>
+  </div>
 
   <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
     Fun stuff from other CRUD-like features
@@ -461,6 +472,11 @@ import CurrencyProviders from "@assets/images/currency-providers.astro"
     Slack message (developers were encouraged to provide additional context, especially
     when it was related to a bug they fixed for someone from a support of other department).
   </p>
+  <Image
+    class="w-full"
+    src={newAppRelease}
+    alt="Example Slack message of new app release"
+  />
 
   <h4 class="mb-1 text-lg font-semibold text-zinc-100">
     Grammar checker for translations
@@ -471,6 +487,7 @@ import CurrencyProviders from "@assets/images/currency-providers.astro"
     compiling the list of translations from a YML file into a human-readable form
     which is what LanguageTool expects.
   </p>
+  <LanguageToolExample />
 
   <h4 class="mb-1 text-lg font-semibold text-zinc-100">Added OpenAPI</h4>
   <p class="mb-3 text-lg leading-8 text-zinc-400">
@@ -510,51 +527,51 @@ import CurrencyProviders from "@assets/images/currency-providers.astro"
   <p class="mb-3 text-lg leading-8 text-zinc-400">
     Gathered data that were previously compiled manually, automated minor tasks.
   </p>
+
+  <section class="my-10 mb-6">
+    <h2 id="skills" class="mb-2 scroll-mt-15 text-2xl font-semibold">Skills</h2>
+    <hr class="mb-6 border-zinc-600" />
+    <SkillsSection />
+  </section>
+
+  <section class="my-10 mb-6">
+    <h2 id="hobby-project" class="mb-2 scroll-mt-15 text-2xl font-semibold">
+      Hobby project
+    </h2>
+    <hr class="mb-6 border-zinc-600" />
+    <ProjectCard
+      projectTitle="HabitVille"
+      projectDescription="Track habits and gamify them in a tycoon-game. Started with a web app, now working on an iOS mobile app."
+      projectLink="https://github.com/krystofspiller/habitville"
+      githubLink="https://github.com/krystofspiller/habitville"
+    >
+      <span data-tooltip='<a href="https://nextjs.org" target="_blank">Next</a>'
+        ><Next /></span
+      >
+      <span data-tooltip='<a href="https://expo.dev" target="_blank">Expo</a>'
+        ><Expo /></span
+      >
+      <span
+        data-tooltip='<a href="https://react.dev" target="_blank">React</a> & <a href="https://reactnative.dev" target="_blank">React Native</a>'
+        ><React /></span
+      >
+      <span
+        data-tooltip='<a href="https://tailwindcss.com" target="_blank">Tailwind</a>'
+        ><Tailwind /></span
+      >
+      <span
+        data-tooltip='<a href="https://appwrite.io" target="_blank">Appwrite</a>'
+        ><Appwrite /></span
+      >
+      <span
+        data-tooltip='<a href="https://www.convex.dev" target="_blank">Convex</a>'
+        ><Convex /></span
+      >
+    </ProjectCard>
+  </section>
+
+  <OtherAboutSection />
 </BaseLayout>
-
-<section class="my-10 mb-6">
-  <h2 id="skills" class="mb-2 scroll-mt-15 text-2xl font-semibold">Skills</h2>
-  <hr class="mb-6 border-zinc-600" />
-  <SkillsSection />
-</section>
-
-<section class="my-10 mb-6">
-  <h2 id="hobby-project" class="mb-2 scroll-mt-15 text-2xl font-semibold">
-    Hobby project
-  </h2>
-  <hr class="mb-6 border-zinc-600" />
-  <ProjectCard
-    projectTitle="HabitVille"
-    projectDescription="Track habits and gamify them in a tycoon-game. Started with a web app, now working on an iOS mobile app."
-    projectLink="https://github.com/krystofspiller/habitville"
-    githubLink="https://github.com/krystofspiller/habitville"
-  >
-    <span data-tooltip='<a href="https://nextjs.org" target="_blank">Next</a>'
-      ><Next /></span
-    >
-    <span data-tooltip='<a href="https://expo.dev" target="_blank">Expo</a>'
-      ><Expo /></span
-    >
-    <span
-      data-tooltip='<a href="https://react.dev" target="_blank">React</a> & <a href="https://reactnative.dev" target="_blank">React Native</a>'
-      ><React /></span
-    >
-    <span
-      data-tooltip='<a href="https://tailwindcss.com" target="_blank">Tailwind</a>'
-      ><Tailwind /></span
-    >
-    <span
-      data-tooltip='<a href="https://appwrite.io" target="_blank">Appwrite</a>'
-      ><Appwrite /></span
-    >
-    <span
-      data-tooltip='<a href="https://www.convex.dev" target="_blank">Convex</a>'
-      ><Convex /></span
-    >
-  </ProjectCard>
-</section>
-
-<OtherAboutSection />
 
 <script is:inline>
   function isElementInViewport(element) {

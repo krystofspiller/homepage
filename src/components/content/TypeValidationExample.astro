@@ -3,29 +3,35 @@
 ---
 
 <div class="flex grid-cols-2 flex-col sm:grid">
-  <pre
-    class="text-zinc-400"
-    is:raw>
-Frontend type:
+  <div>
+    <p class="text-lg leading-8 text-zinc-400">Frontend type:</p>
+    <pre
+      class="text-zinc-100"
+      is:raw>
 <span class="text-[#679AD1]">type</span> <span class="text-[#69C6B1]">Example</span> = {
   id: <span class="text-[#679AD1]">number</span>
   kind: <span class="text-[#C5947C]">'good'</span> | <span class="text-[#C5947C]">'bad'</span>
 }</pre>
-  <pre
-    class="text-zinc-400"
-    is:raw>
-Server response:
+  </div>
+  <div>
+    <p class="text-lg leading-8 text-zinc-400">Server response:</p>
+    <pre
+      class="text-zinc-100"
+      is:raw>
 {
   id: <span class="text-[#C5947C]">'123'</span>
   kind: <span class="text-[#C5947C]">'neutral'</span>
   unknown: <span class="text-[#C5947C]">'smth'</span>
 }</pre>
+  </div>
 </div>
-<pre
-  class="text-zinc-400"
-  is:raw>
-Type validation output:
+<div>
+  <p class="text-lg leading-8 text-zinc-400">Type validation output:</p>
+  <pre
+    class="text-zinc-100"
+    is:raw>
 <span class="text-[#E8876D]">Property 'id' is not of type 'number'.
 Property 'kind' does not match allowed values.
 Unknown property 'unknown' found.</span>
 </pre>
+</div>
