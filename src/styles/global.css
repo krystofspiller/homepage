@@ -2,6 +2,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap");
 @import "tailwindcss";
 
+.effect-shine {
+  -webkit-mask-image: linear-gradient(
+    -75deg,
+    rgba(0, 0, 0, 0.65) 30%,
+    rgba(0, 0, 0, 0.9) 50%,
+    rgba(0, 0, 0, 0.65) 70%
+  );
+  -webkit-mask-size: 200%;
+  -webkit-mask-position: -50%;
+  animation: shine 2s 3;
+  animation-delay: 1.5s;
+}
+
 @theme {
   --animate-amazing-move: amazing-move 8s linear infinite;
   --animate-amazing-spin: amazing-spin 8s ease-in-out infinite;
@@ -12,6 +25,15 @@
   --animate-scroll-infinite: scroll 18s linear infinite;
   --animate-wave: wave 1.2s linear;
   --animate-wave-infinite: wave 1.2s linear infinite;
+
+  @keyframes shine {
+    0% {
+      -webkit-mask-position: 150%;
+    }
+    100% {
+      -webkit-mask-position: -50%;
+    }
+  }
 
   --color-orange: #e6805f;
   --color-orange-30: --alpha(var(--color-orange) / 30%);

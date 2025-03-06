@@ -29,9 +29,11 @@ import Billing from "@assets/images/billing.astro"
 import CurrencyProviders from "@assets/images/currency-providers.astro"
 import LanguageToolExample from "@components/content/LanguageToolExample.astro"
 import OpenApiHelperExample from "@components/content/OpenApiHelperExample.astro"
+import StringConstantsExistsExample from "@components/content/StringConstantsExistsExample.astro"
 
 // Update Readme pic
-// * Enable SSR mode
+// TODO: Section navigator - floating on side on desktop, at the bottom on mobile
+// TODO: * Enable SSR mode
 //   * implement dynamic /r/<anchor> redirect page
 //   * fix Duolingo and Knowt data fetching
 // TODO References section
@@ -111,10 +113,12 @@ import OpenApiHelperExample from "@components/content/OpenApiHelperExample.astro
   </div>
   <div class="mb-20">
     <p class="mb-3 text-lg leading-8 text-zinc-400">
-      I'm a software engineer with 6 years of experience in <strong
+      I'm a <span class="effect-shine text-lg leading-8 text-[#f0f0ff]"
+        >detail</span
+      >-oriented software engineer with 6 years of experience in <strong
         class="font-medium text-zinc-100">fullstack web development</strong
       >. I'm preferably targeting roles involving React, TypeScript and Go with
-      an opportunity to work in the US.
+      an opportunity to transfer to the US.
     </p>
     <p class="text-lg leading-8 text-zinc-400">
       Find out more about my <Link href="#professional-contributions"
@@ -268,7 +272,7 @@ import OpenApiHelperExample from "@components/content/OpenApiHelperExample.astro
     <p class="mb-3 text-lg leading-8 text-zinc-400">
       The way we were writing most of the modals was by directly using the
       design system components as opposed to a more complete modal
-      implementation. Every developer therefore had a lot of freedom when it
+      implementation. Every colleague therefore had a lot of freedom when it
       came to implementation of a modal. Properly implementing a modal so that
       it's consistent with design and behaves in the least obstructive way
       possible then becomes hard.
@@ -334,23 +338,32 @@ import OpenApiHelperExample from "@components/content/OpenApiHelperExample.astro
         cases that previously took anywhere from 1 to 10 lines could now be reduced
         to a single line of code making it more readable. Converting the whole OpenAPI
         specification to use this helper would a large effort for an individual and
-        there would still be the problem with other engineers not being aware of
-        this helper and writing new specifications without it. This linter rule therefore
-        produced warnings (and errors in some cases) to enforce its usage suggesting
-        fellow engineers to convert it to use the helper. The idea is that the warnings
-        would be changed to errors once the conversion is complete so that all of
-        the specifications would be written in this more concise and readable format.
+        there would still be the problem with my colleagues not being aware of this
+        helper and writing new specifications without it. This linter rule therefore
+        produced <span
+          class="underline decoration-amber-400 decoration-wavy decoration-2 underline-offset-4"
+          >warnings</span
+        > (and <span
+          class="underline decoration-red-400 decoration-2 underline-offset-4"
+          >errors</span
+        > in some cases) to enforce its usage suggesting fellow colleagues to convert
+        it to use the helper. The idea is that the warnings would be changed to <span
+          class="underline decoration-red-400 decoration-2 underline-offset-4"
+          >errors</span
+        > once the conversion is complete so that all of the specifications would
+        be written in this more concise and readable format.
         <OpenApiHelperExample />
       </li>
       <li>
         <strong class="font-bold"
           >Check strings looking like constants actually exist</strong
-        > - in Ruby, we were sometimes forced to write a constant like a class name
-        as a string. The static type checker for Ruby, called Sorbet, we used obviously
-        didn't check strings and such strings sometimes became obsolete when the
-        class was refactored or removed and could cause an issue. This linter rule
-        checked that all strings that looked like such constants actually referred
+        > - in Ruby, we were sometimes forced to write a constant, such as a class
+        name, as a string. The static type checker for Ruby, called Sorbet, we used
+        obviously didn't check strings and such strings sometimes became obsolete
+        when the class was refactored or removed and could cause an issue. This linter
+        rule checked that all strings that looked like such constants actually referred
         to an existing constant in the codebase.
+        <StringConstantsExistsExample />
       </li>
     </ol>
   </p>
@@ -423,28 +436,6 @@ import OpenApiHelperExample from "@components/content/OpenApiHelperExample.astro
     </p>
   </div>
 
-  <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
-    Fun stuff from other CRUD-like features
-  </h4>
-  <p class="mb-3 text-lg leading-8 text-zinc-400">
-    Majority of my time was spent on implementing otherwise more monotonous
-    CRUD-like features. Sometimes these also involved something interesting
-    like:
-    <ul class="my-3 ml-6 list-disc space-y-1 text-lg leading-8 text-zinc-400">
-      <li>
-        <Link href="https://json-schema.org/specification"
-          >JSON validation schemas</Link
-        > and <span
-          data-tooltip="In order to be able to work with for example a currency class instead of simply a string from the JSON you have to serialize it."
-          >serializer</span
-        > when storing <span
-          data-tooltip="It can actually be useful to store JSON in database in some cases, stop judging me."
-          >JSON data in database</span
-        >.
-      </li>
-    </ul>
-  </p>
-
   <hr class="my-6 border-zinc-600" />
 
   <div class="mb-4 flex flex-col items-center justify-center gap-1">
@@ -479,7 +470,7 @@ import OpenApiHelperExample from "@components/content/OpenApiHelperExample.astro
     alt="Example Slack message of new app release"
   />
 
-  <h4 class="mb-1 text-lg font-semibold text-zinc-100">
+  <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
     Grammar checker for translations
   </h4>
   <p class="mb-3 text-lg leading-8 text-zinc-400">
