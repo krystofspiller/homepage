@@ -154,9 +154,6 @@ import StringConstantsExistsExample from "@components/content/StringConstantsExi
       />
       <span class="text-sm text-zinc-400">2022-2025</span>
     </div>
-    <p class="mb-3 text-lg leading-8 text-zinc-400">
-      A few examples of some of my more unique contributions:
-    </p>
     <h4
       id="model-funding-rounds"
       class="mb-1 scroll-mt-15 text-lg font-semibold text-zinc-100"
@@ -237,11 +234,8 @@ import StringConstantsExistsExample from "@components/content/StringConstantsExi
       I used <Link href="https://exchangeratesapi.io/">Exchangerates API</Link> to
       get a more comprehensive list of the exchange rates. As we didn't call the
       API everytime we needed the exchange rate but instead stored it in a database
-      (we also needed historical exchange rates in some cases), there was a daily
-      <span
-        data-tooltip='Software engineer&apos;s way of saying "independent script or unit of code that can be invoked either manually or according to some time schedule"'
-        >job</span
-      > which added the new exchange rates in the database.
+      (we also needed historical exchange rates in some cases), new exchange rates
+      were automatically added to the database on a daily basis.
     </p>
     <CurrencyProviders />
 
@@ -347,11 +341,14 @@ import StringConstantsExistsExample from "@components/content/StringConstantsExi
           class="underline decoration-red-400 decoration-2 underline-offset-4"
           >errors</span
         > in some cases) to enforce its usage suggesting fellow colleagues to convert
-        it to use the helper. The idea is that the warnings would be changed to <span
+        it to use the helper. The idea is that the <span
+          class="underline decoration-amber-400 decoration-wavy decoration-2 underline-offset-4"
+          >warnings</span
+        > would be changed to <span
           class="underline decoration-red-400 decoration-2 underline-offset-4"
           >errors</span
-        > once the conversion is complete so that all of the specifications would
-        be written in this more concise and readable format.
+        > once the conversion is complete so that it would be written in this more
+        concise and readable format.
         <OpenApiHelperExample />
       </li>
       <li>
@@ -444,11 +441,6 @@ import StringConstantsExistsExample from "@components/content/StringConstantsExi
       >2020-2022<span class="text-xs"> (full-time from Feb 2022)</span></span
     >
   </div>
-  <p class="mb-3 text-lg leading-8 text-zinc-400">
-    I was working part-time due to my studies until February 2022 when I went
-    full-time, hence smaller amount of contributions in that time period:
-  </p>
-
   <h4 class="mb-1 text-lg font-semibold text-zinc-100">
     Announce app releases on Slack
   </h4>
