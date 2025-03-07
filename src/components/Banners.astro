@@ -6,15 +6,8 @@ import profile from "@assets/images/profile.jpg"
 ---
 
 <Banner
-  ><div>I'm looking to work on something new ✨</div><div
-    class="flex items-center gap-2"
-  >
-    <span
-      class="cursor-pointer underline decoration-white transition duration-0 hover:bg-linear-(--gradient-accent) hover:bg-clip-text hover:text-transparent hover:duration-150"
-      data-cal-link="krystofs/chat"
-      data-cal-namespace="chat"
-      data-cal-config='{"layout":"month_view"}'>Let's chat</span
-    ><span style="cursor: default;" data-tooltip="TooltipRef#krystof"
+  ><div class="mx-12 flex items-center gap-2 text-center text-sm sm:text-base">
+    <span style="cursor: default;" data-tooltip="TooltipRef#krystof"
       ><Image
         class="w-8 max-w-8 rounded-full"
         loading="eager"
@@ -22,28 +15,35 @@ import profile from "@assets/images/profile.jpg"
         alt="Profile image"
       /></span
     >
-  </div>
-  <div id="tooltip-krystof">
-    <div class="flex flex-col items-center justify-center">
-      You found me.<br /><div>
-        Now let's <a
-          href="javascript:void(0);"
-          class="cursor-pointer underline decoration-white transition duration-0 hover:bg-linear-(--gradient-accent) hover:bg-clip-text hover:text-transparent hover:duration-150"
-          data-cal-link="krystofs/chat"
-          data-cal-namespace="chat"
-          data-cal-config='{"layout":"month_view"}'>set up a meeting</a
-        >
-        <span class="text-white">😉</span>
-      </div><a
-        href="https://www.youtube.com/watch?v=wyx6JDQCslE"
-        target="_blank"
-        ><Image
-          class="mt-1 w-64 max-w-64 rounded-lg"
-          loading="eager"
-          src={profile}
-          alt="Profile image"
-        /></a
+    <div class="w-52 sm:w-full">
+      I'm looking to work on something new ✨
+      <span
+        class="cursor-pointer underline decoration-white transition duration-0 hover:bg-linear-(--gradient-accent) hover:bg-clip-text hover:text-transparent hover:duration-150"
+        data-cal-link="krystofs/chat"
+        data-cal-namespace="chat"
+        data-cal-config='{"layout":"month_view"}'>Let's chat</span
       >
     </div>
   </div>
 </Banner>
+<div id="tooltip-krystof">
+  <div class="flex flex-col items-center justify-center">
+    You found me.<br /><div>
+      Now let's <a
+        href="javascript:void(0);"
+        class="cursor-pointer underline decoration-white transition duration-0 hover:bg-linear-(--gradient-accent) hover:bg-clip-text hover:text-transparent hover:duration-150"
+        data-cal-link="krystofs/chat"
+        data-cal-namespace="chat"
+        data-cal-config='{"layout":"month_view"}'>set up a meeting</a
+      >
+      <span class="text-white">😉</span>
+    </div><a href="https://www.youtube.com/watch?v=wyx6JDQCslE" target="_blank"
+      ><Image
+        class="mt-1 w-64 max-w-64 rounded-lg"
+        loading="eager"
+        src={profile}
+        alt="Profile image"
+      /></a
+    >
+  </div>
+</div>
