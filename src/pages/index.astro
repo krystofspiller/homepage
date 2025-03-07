@@ -10,6 +10,7 @@ import cartaLogo from "@assets/images/carta.svg"
 import commitMessage from "@assets/images/commit-message.png"
 import dataIntegrityChecker from "@assets/images/data-integrity-checker.png"
 import linkChecker from "@assets/images/link-checker.png"
+import modal from "@assets/images/modal.png"
 import modelFundingRounds from "@assets/videos/model-funding-rounds.mp4"
 import newAppRelease from "@assets/images/new-app-release.png"
 import profile from "@assets/images/profile.jpg"
@@ -31,7 +32,8 @@ import LanguageToolExample from "@components/content/LanguageToolExample.astro"
 import OpenApiHelperExample from "@components/content/OpenApiHelperExample.astro"
 import StringConstantsExistsExample from "@components/content/StringConstantsExistsExample.astro"
 
-// Update Readme pic
+// TODO: Add analytics - PostHog?
+// TODO: "See details..." button for large paragraphs
 // TODO: Section navigator - floating on side on desktop, at the bottom on mobile
 // TODO: * Enable SSR mode
 //   * implement dynamic /r/<anchor> redirect page
@@ -81,32 +83,8 @@ import StringConstantsExistsExample from "@components/content/StringConstantsExi
         </svg>
         <span
           class="relative z-10 bg-linear-(--gradient-accent) bg-clip-text text-transparent"
-          style="text-decoration-line: none; cursor: default;"
-          data-tooltip="TooltipRef#krystof">Krystof</span
+          >Krystof</span
         >
-        <div id="tooltip-krystof">
-          <div class="flex flex-col items-center justify-center">
-            Okay, you found me.<br /><div>
-              Now let's <a
-                href="javascript:void(0);"
-                class="cursor-pointer underline decoration-white transition duration-0 hover:bg-linear-(--gradient-accent) hover:bg-clip-text hover:text-transparent hover:duration-150"
-                data-cal-link="krystofs/chat"
-                data-cal-namespace="chat"
-                data-cal-config='{"layout":"month_view"}'>set up a meeting</a
-              >
-              <span class="text-white">😉</span>
-            </div><a
-              href="https://www.youtube.com/watch?v=wyx6JDQCslE"
-              target="_blank"
-              ><Image
-                class="mt-1 w-64 max-w-64 rounded-lg"
-                loading="eager"
-                src={profile}
-                alt="Profile image"
-              /></a
-            >
-          </div>
-        </div>
       </span>
     </h1>
     <p class="text-2xl text-zinc-400">Fullstack software engineer</p>
@@ -115,10 +93,10 @@ import StringConstantsExistsExample from "@components/content/StringConstantsExi
     <p class="mb-3 text-lg leading-8 text-zinc-400">
       I'm a <span class="effect-shine text-lg leading-8 text-[#f0f0ff]"
         >detail</span
-      >-oriented software engineer with 6 years of experience in <strong
-        class="font-medium text-zinc-100">fullstack web development</strong
-      >. I'm preferably targeting roles involving React, TypeScript and Go with
-      an opportunity to transfer to the US.
+      >-oriented software engineer with <strong
+        class="font-medium text-zinc-100">6 years of experience</strong
+      > in fullstack web development. I'm preferably targeting roles involving React,
+      TypeScript and Go with an opportunity to transfer to the US.
     </p>
     <p class="text-lg leading-8 text-zinc-400">
       Find out more about my <Link href="#professional-contributions"
@@ -164,8 +142,9 @@ import StringConstantsExistsExample from "@components/content/StringConstantsExi
       >
     </h4>
     <p class="mb-3 text-lg leading-8 text-zinc-400">
-      I have created a public page with a calculator to model unpriced rounds.
-      The solution involved an <abbr
+      I have created a calculator to help founders model unpriced rounds which
+      led to more sales leads by leveraging gated content. The solution involved
+      an <abbr
         title='<a href="https://en.wikipedia.org/wiki/Request_for_Comments" target="_blank">Request For Comments</a>'
         >RFC</abbr
       >-like process to come up with the best solution as this was the first
@@ -282,328 +261,342 @@ import StringConstantsExistsExample from "@components/content/StringConstantsExi
       concerns were handled by default. These models can be seen in action in
       the <Link href="#model-funding-rounds">public calculator above</Link>.
     </p>
-  </section>
+    <Image class="w-full" src={modal} alt="Modal example" />
 
-  <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
-    Data integrity checks
-  </h4>
-  <p class="mb-3 text-lg leading-8 text-zinc-400">
-    My colleague implemented a framework for adding data integrity <span
-      data-tooltip="We had a policy for no check constraints in the database so while some of these checks could have been handled differently, this was still a better solution for majority of the checked cases due to the sheer complexity of the domain and the resultant data."
-      >checks</span
-    > to notify us of instances where invalid data got into the database and also
-    automatically fix them if an automatic fix is possible. I wrote checks dealing
-    with detecting and autofixing trailing whitespace in attributes like names, emails
-    and domain specific identifiers which could cause subtle bugs in filtering and
-    matching items.
-  </p>
-  <Image
-    class="w-full"
-    src={dataIntegrityChecker}
-    alt="Example Slack message of data integrity checker"
-  />
-
-  <h4 id="linter-rules" class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
-    Linter rules
-  </h4>
-  <p class="mb-3 text-lg leading-8 text-zinc-400">
-    <span
-      data-tooltip="A process and a tool for code analysis to flag programming errors, bugs, stylistics errors and suspicious constructs."
-      >Linting</span
-    > is fun, who doesn't like playing around with <abbr
-      title='Woah, two tooltips in one sentence, chill. Read more about <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree" target="_blank"><strong class="font-bold">A</strong>bstract <strong class="font-bold">S</strong>yntax <strong class="font-bold">T</strong>rees</a> for some light reading.'
-      >ASTs</abbr
-    > in their free time? I made linter rules for both frontend (ESLint) and backend
-    (RuboCop). Frontend one was about linting a stylistic error to follow our coding
-    conventions (i.e. no more pointing it out in code reviews). In the backend, I
-    made two linting rules which are a tad more complex:
-    <ol
-      class="my-3 ml-6 list-decimal space-y-1 text-lg leading-8 text-zinc-400"
-    >
-      <li>
-        <strong class="font-bold"
-          ><span
-            data-tooltip="Specification for a machine-readable interface definition language for describing web services."
-            >OpenAPI</span
-          > helper enforcement</strong
-        > - writing the OpenAPI specifications can be a bit cumbersome, there's a
-        lot of boilerplate that needs to be written making bigger types hundreds
-        of lines long. I wrote a helper to simplify this where majority of the use
-        cases that previously took anywhere from 1 to 10 lines could now be reduced
-        to a single line of code making it more readable. Converting the whole OpenAPI
-        specification to use this helper would a large effort for an individual and
-        there would still be the problem with my colleagues not being aware of this
-        helper and writing new specifications without it. This linter rule therefore
-        produced <span
-          class="underline decoration-amber-400 decoration-wavy decoration-2 underline-offset-4"
-          >warnings</span
-        > (and <span
-          class="underline decoration-red-400 decoration-2 underline-offset-4"
-          >errors</span
-        > in some cases) to enforce its usage suggesting fellow colleagues to convert
-        it to use the helper. The idea is that the <span
-          class="underline decoration-amber-400 decoration-wavy decoration-2 underline-offset-4"
-          >warnings</span
-        > would be changed to <span
-          class="underline decoration-red-400 decoration-2 underline-offset-4"
-          >errors</span
-        > once the conversion is complete so that it would be written in this more
-        concise and readable format.
-        <OpenApiHelperExample />
-      </li>
-      <li>
-        <strong class="font-bold"
-          >Check strings looking like constants actually exist</strong
-        > - in Ruby, we were sometimes forced to write a constant, such as a class
-        name, as a string. The static type checker for Ruby, called Sorbet, we used
-        obviously didn't check strings and such strings sometimes became obsolete
-        when the class was refactored or removed and could cause an issue. This linter
-        rule checked that all strings that looked like such constants actually referred
-        to an existing constant in the codebase.
-        <StringConstantsExistsExample />
-      </li>
-    </ol>
-  </p>
-
-  <h4
-    id="type-validation"
-    class="mt-6 mb-1 text-lg font-semibold text-zinc-100"
-  >
-    Frontend to backend type validation
-  </h4>
-  <div class="mb-3 text-lg leading-8 text-zinc-400">
-    The OpenAPI specification was used to generate TypeScript types in the
-    frontend. Since the OpenAPI specification was written by hand, there could
-    be and were discrepancies between what was described in the OpenAPI schema
-    and the actual shape of the response that the server returned. The idea of
-    this initiative was to validate that the types in the frontend, that were
-    generated from the OpenAPI specification manually defined in the backend,
-    matched the actual response from the server and in the case it didn't match,
-    report an error to Sentry which we used for frontend error tracking. As we
-    didn't want to impose the cost of validating the types on every request in
-    production, it was only enabled in our QA environment that we used often
-    enough to catch majority of these errors.
-  </div>
-  <TypeValidationExample />
-
-  <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
-    Conventional commit message auto formatter
-  </h4>
-  <div class="mb-3 text-lg leading-8 text-zinc-400">
-    During my tenure, we have evolved our requirements for commit and branch
-    names as follows:
-    <ol
-      class="my-3 ml-6 list-decimal space-y-1 text-lg leading-8 text-zinc-400"
-    >
-      <li>No expected format for branches or commits</li>
-      <li>
-        <Link href="https://www.conventionalcommits.org/en/v1.0.0/"
-          >Conventional commits</Link
-        > required for features
-      </li>
-      <li>
-        Standardized branch names and conventional commits required everything
-        recorded in Jira
-      </li>
-      <li>
-        Every code change needs to have a Jira associated and hence will have
-        standardized branch name and conventional commits
-      </li>
-    </ol>
-    During the various stages, we have enforced this name both in CI as well as in
-    Git commit hooks for faster feedback. At the last stage, where every change required
-    a conventional commit message and happened on a branch called something like
-    <span class="font-mono">feat/JIRA-123-optional-description</span> it became a
-    bit tedious to always include <span class="font-mono">feat(JIRA-123):</span>
-    in the commit message. I wrote a commit message Git hook that took the type of
-    the commit and scope (Jira ticket) from the branch name and formatted an otherwise
-    plain message according to the conventional commit specification. Small time
-    safer but mostly one less thing to think about.
-  </div>
-  <Image
-    class="w-full"
-    src={commitMessage}
-    alt="Commit message auto formatted"
-  />
-  <div class="mt-1 flex items-center justify-center text-sm text-zinc-400">
-    <p class="w-[75%]">
-      The commit message "example message" is autoformatted based on the branch
-      name "feat/JIRA-123-example" to a final message reading "feat(JIRA-123):
-      example message"
+    <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
+      Data integrity checks
+    </h4>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+      My colleague implemented a framework for adding data integrity <span
+        data-tooltip="We had a policy for no check constraints in the database so while some of these checks could have been handled differently, this was still a better solution for majority of the checked cases due to the sheer complexity of the domain and the resultant data."
+        >checks</span
+      > to notify us of instances where invalid data got into the database and also
+      automatically fix them if an automatic fix is possible. I wrote checks dealing
+      with detecting and autofixing trailing whitespace in attributes like names,
+      emails and domain specific identifiers which could cause subtle bugs in filtering
+      and matching items.
     </p>
-  </div>
+    <Image
+      class="w-full"
+      src={dataIntegrityChecker}
+      alt="Example Slack message of data integrity checker"
+    />
 
-  <hr class="my-6 border-zinc-600" />
+    <h4 id="linter-rules" class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
+      Linter rules
+    </h4>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+      <span
+        data-tooltip="A process and a tool for code analysis to flag programming errors, bugs, stylistics errors and suspicious constructs."
+        >Linting</span
+      > is fun, who doesn't like playing around with <abbr
+        title='Woah, two tooltips in one sentence, chill. Read more about <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree" target="_blank"><strong class="font-bold">A</strong>bstract <strong class="font-bold">S</strong>yntax <strong class="font-bold">T</strong>rees</a> for some light reading.'
+        >ASTs</abbr
+      > in their free time? I made linter rules for both frontend (ESLint) and backend
+      (RuboCop). Frontend one was about linting a stylistic error to follow our coding
+      conventions (i.e. no more pointing it out in code reviews). In the backend,
+      I made two linting rules which are a tad more complex:
+      <ol
+        class="my-3 ml-6 list-decimal space-y-1 text-lg leading-8 text-zinc-400"
+      >
+        <li>
+          <strong class="font-bold"
+            ><span
+              data-tooltip="Specification for a machine-readable interface definition language for describing web services."
+              >OpenAPI</span
+            > helper enforcement</strong
+          > - writing the OpenAPI specifications can be a bit cumbersome, there's
+          a lot of boilerplate that needs to be written making bigger types hundreds
+          of lines long. I wrote a helper to simplify this where majority of the
+          use cases that previously took anywhere from 1 to 10 lines could now be
+          reduced to a single line of code making it more readable. Converting the
+          whole OpenAPI specification to use this helper would a large effort for
+          an individual and there would still be the problem with my colleagues not
+          being aware of this helper and writing new specifications without it. This
+          linter rule therefore produced <span
+            class="underline decoration-amber-400 decoration-wavy decoration-2 underline-offset-4"
+            >warnings</span
+          > (and <span
+            class="underline decoration-red-400 decoration-2 underline-offset-4"
+            >errors</span
+          > in some cases) to enforce its usage suggesting fellow colleagues to convert
+          it to use the helper. The idea is that the <span
+            class="underline decoration-amber-400 decoration-wavy decoration-2 underline-offset-4"
+            >warnings</span
+          > would be changed to <span
+            class="underline decoration-red-400 decoration-2 underline-offset-4"
+            >errors</span
+          > once the conversion is complete so that it would be written in this more
+          concise and readable format.
+          <OpenApiHelperExample />
+        </li>
+        <li>
+          <strong class="font-bold"
+            >Check strings looking like constants actually exist</strong
+          > - in Ruby, we were sometimes forced to write a constant, such as a class
+          name, as a string. The static type checker for Ruby, called Sorbet, we
+          used obviously didn't check strings and such strings sometimes became obsolete
+          when the class was refactored or removed and could cause an issue. This
+          linter rule checked that all strings that looked like such constants actually
+          referred to an existing constant in the codebase.
+          <StringConstantsExistsExample />
+        </li>
+      </ol>
+    </p>
 
-  <div class="mb-4 flex flex-col items-center justify-center gap-1">
-    <Image class="h-8 w-auto" src={capdeskLogo} alt="Capdesk logo" />
-    <span class="text-sm text-zinc-400"
-      >2020-2022<span class="text-xs"> (full-time from Feb 2022)</span></span
+    <h4
+      id="type-validation"
+      class="mt-6 mb-1 text-lg font-semibold text-zinc-100"
     >
-  </div>
-  <h4 class="mb-1 text-lg font-semibold text-zinc-100">
-    Announce app releases on Slack
-  </h4>
-  <p class="mb-3 text-lg leading-8 text-zinc-400">
-    We used Heroku for hosting and deployed the latest Git <span
-      class="font-mono">main</span
-    > branch on every new change. We had a process in place where once a week one
-    of the engineering leads compiled a list of all the changes with their Jira ID
-    and a short description and posted this in a #release Slack channel. I implemented
-    a task that ran on every deployment to Heroku which compiled a list of Jiras
-    from the last deployment, got the Jira tasks descriptions, the author (developer)
-    of that change, found a related Slack account and tagged them in the automated
-    Slack message (developers were encouraged to provide additional context, especially
-    when it was related to a bug they fixed for someone from a support of other department).
-  </p>
-  <Image
-    class="w-full"
-    src={newAppRelease}
-    alt="Example Slack message of new app release"
-  />
+      Frontend to backend type validation
+    </h4>
+    <div class="mb-3 text-lg leading-8 text-zinc-400">
+      The OpenAPI specification was used to generate TypeScript types in the
+      frontend. Since the OpenAPI specification was written by hand, there could
+      be and were discrepancies between what was described in the OpenAPI schema
+      and the actual shape of the response that the server returned. The idea of
+      this initiative was to validate that the types in the frontend, that were
+      generated from the OpenAPI specification manually defined in the backend,
+      matched the actual response from the server and in the case it didn't
+      match, report an error to Sentry which we used for frontend error
+      tracking. As we didn't want to impose the cost of validating the types on
+      every request in production, it was only enabled in our QA environment
+      that we used often enough to catch majority of these errors.
+    </div>
+    <TypeValidationExample />
 
-  <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
-    Grammar checker for translations
-  </h4>
-  <p class="mb-3 text-lg leading-8 text-zinc-400">
-    Using <Link href="https://languagetool.org/">LanguageTool</Link> I implemented
-    a check in GitHub Actions that checked grammar including spellchecks. This involved
-    compiling the list of translations from a YML file into a human-readable form
-    which is what LanguageTool expects.
-  </p>
-  <LanguageToolExample />
+    <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
+      Conventional commit message auto formatter
+    </h4>
+    <div class="mb-3 text-lg leading-8 text-zinc-400">
+      During my tenure, we have evolved our requirements for commit and branch
+      names as follows:
+      <ol
+        class="my-3 ml-6 list-decimal space-y-1 text-lg leading-8 text-zinc-400"
+      >
+        <li>No expected format for branches or commits</li>
+        <li>
+          <Link href="https://www.conventionalcommits.org/en/v1.0.0/"
+            >Conventional commits</Link
+          > required for features
+        </li>
+        <li>
+          Standardized branch names and conventional commits required everything
+          recorded in Jira
+        </li>
+        <li>
+          Every code change needs to have a Jira associated and hence will have
+          standardized branch name and conventional commits
+        </li>
+      </ol>
+      During the various stages, we have enforced this name both in CI as well as
+      in Git commit hooks for faster feedback. At the last stage, where every change
+      required a conventional commit message and happened on a branch called something
+      like
+      <span class="font-mono">feat/JIRA-123-optional-description</span> it became
+      a bit tedious to always include <span class="font-mono"
+        >feat(JIRA-123):</span
+      >
+      in the commit message. I wrote a commit message Git hook that took the type
+      of the commit and scope (Jira ticket) from the branch name and formatted an
+      otherwise plain message according to the conventional commit specification.
+      Small time safer but mostly one less thing to think about.
+    </div>
+    <Image
+      class="w-full"
+      src={commitMessage}
+      alt="Commit message auto formatted"
+    />
+    <div class="mt-1 flex items-center justify-center text-sm text-zinc-400">
+      <p class="w-[75%]">
+        The commit message "example message" is autoformatted based on the
+        branch name "feat/JIRA-123-example" to a final message reading
+        "feat(JIRA-123): example message"
+      </p>
+    </div>
 
-  <h4 class="mb-1 text-lg font-semibold text-zinc-100">Added OpenAPI</h4>
-  <p class="mb-3 text-lg leading-8 text-zinc-400">
-    Found the tooling and implemented the helpers for adding OpenAPI 2.0 (later
-    upgraded to version 3.0) and implemented on a few regular cases as well as
-    some exceptional ones. This was used later by the team for generating
-    TypeScript types for frontend which facilitated development. It led to other
-    initiatives, such as my work on <Link href="#linter-rules">linters</Link> and
-    <Link href="#type-validation">frontend to backend type validation</Link> later
-    on to improve the workflow and get as much as possible from the coupling of backend
-    to frontend this afforded us.
-  </p>
+    <hr class="my-6 border-zinc-600" />
 
-  <hr class="my-6 border-zinc-600" />
+    <div class="mb-4 flex flex-col items-center justify-center gap-1">
+      <Image class="h-8 w-auto" src={capdeskLogo} alt="Capdesk logo" />
+      <span class="text-sm text-zinc-400"
+        >2020-2022<span class="text-xs"> (full-time from Feb 2022)</span></span
+      >
+    </div>
+    <h4 class="mb-1 text-lg font-semibold text-zinc-100">
+      Announce app releases on Slack
+    </h4>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+      We used Heroku for hosting and deployed the latest Git <span
+        class="font-mono">main</span
+      > branch on every new change. We had a process in place where once a week one
+      of the engineering leads compiled a list of all the changes with their Jira
+      ID and a short description and posted this in a #release Slack channel. I implemented
+      a task that ran on every deployment to Heroku which compiled a list of Jiras
+      from the last deployment, got the Jira tasks descriptions, the author (developer)
+      of that change, found a related Slack account and tagged them in the automated
+      Slack message (developers were encouraged to provide additional context, especially
+      when it was related to a bug they fixed for someone from a support of other
+      department).
+    </p>
+    <Image
+      class="w-full"
+      src={newAppRelease}
+      alt="Example Slack message of new app release"
+    />
 
-  <div class="mb-4 flex flex-col items-center justify-center gap-1">
-    <Image class="h-8 w-auto" src={systematicLogo} alt="Systematic logo" />
-    <span class="text-sm text-zinc-400"
-      >2019-2020<span class="text-xs"> (part-time)</span></span
-    >
-  </div>
-  <h4 class="mb-1 text-lg font-semibold text-zinc-100">
-    Dependency management revamp
-  </h4>
-  <p class="mb-3 text-lg leading-8 text-zinc-400">
-    The team had a strict policy for dependency management and actually
-    maintained their own repository of dependencies. This was initially done
-    through quite a large <Link
-      href="https://git-scm.com/book/en/v2/Git-Tools-Submodules"
-      >Git submodule</Link
-    >. I've made it so that the team was able to use our own repository of
-    dependencies as if they were using the original repository which simplified
-    the workflow to a large extent.
-  </p>
+    <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
+      Grammar checker for translations
+    </h4>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+      Using <Link href="https://languagetool.org/">LanguageTool</Link> I implemented
+      a check in GitHub Actions that checked grammar including spellchecks. This
+      involved compiling the list of translations from a YML file into a human-readable
+      form which is what LanguageTool expects.
+    </p>
+    <LanguageToolExample />
 
-  <h4 class="mb-1 text-lg font-semibold text-zinc-100">PowerShell scripting</h4>
-  <p class="mb-3 text-lg leading-8 text-zinc-400">
-    Gathered data that were previously compiled manually, automated minor tasks.
-  </p>
+    <h4 class="mb-1 text-lg font-semibold text-zinc-100">Added OpenAPI</h4>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+      Found the tooling and implemented the helpers for adding OpenAPI 2.0
+      (later upgraded to version 3.0) and implemented on a few regular cases as
+      well as some exceptional ones. This was used later by the team for
+      generating TypeScript types for frontend which facilitated development. It
+      led to other initiatives, such as my work on <Link href="#linter-rules"
+        >linters</Link
+      > and
+      <Link href="#type-validation">frontend to backend type validation</Link> later
+      on to improve the workflow and get as much as possible from the coupling of
+      backend to frontend this afforded us.
+    </p>
 
-  <section class="my-10 mb-6">
-    <h2 id="skills" class="mb-2 scroll-mt-15 text-2xl font-semibold">Skills</h2>
-    <hr class="mb-6 border-zinc-600" />
-    <SkillsSection />
+    <hr class="my-6 border-zinc-600" />
+
+    <div class="mb-4 flex flex-col items-center justify-center gap-1">
+      <Image class="h-8 w-auto" src={systematicLogo} alt="Systematic logo" />
+      <span class="text-sm text-zinc-400"
+        >2019-2020<span class="text-xs"> (part-time)</span></span
+      >
+    </div>
+    <h4 class="mb-1 text-lg font-semibold text-zinc-100">
+      Dependency management revamp
+    </h4>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+      The team had a strict policy for dependency management and actually
+      maintained their own repository of dependencies. This was initially done
+      through quite a large <Link
+        href="https://git-scm.com/book/en/v2/Git-Tools-Submodules"
+        >Git submodule</Link
+      >. I've made it so that the team was able to use our own repository of
+      dependencies as if they were using the original repository which
+      simplified the workflow to a large extent.
+    </p>
+
+    <h4 class="mb-1 text-lg font-semibold text-zinc-100">
+      PowerShell scripting
+    </h4>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+      Gathered data that were previously compiled manually, automated minor
+      tasks.
+    </p>
+
+    <section class="my-10 mb-6">
+      <h2 id="skills" class="mb-2 scroll-mt-15 text-2xl font-semibold">
+        Skills
+      </h2>
+      <hr class="mb-6 border-zinc-600" />
+      <SkillsSection />
+    </section>
+
+    <section class="my-10 mb-6">
+      <h2 id="hobby-project" class="mb-2 scroll-mt-15 text-2xl font-semibold">
+        Hobby project
+      </h2>
+      <hr class="mb-6 border-zinc-600" />
+      <ProjectCard
+        projectTitle="HabitVille"
+        projectDescription="Track habits and gamify them in a tycoon-game. Started with a web app, now working on an iOS mobile app."
+        projectLink="https://github.com/krystofspiller/habitville"
+        githubLink="https://github.com/krystofspiller/habitville"
+      >
+        <span
+          data-tooltip='<a href="https://nextjs.org" target="_blank">Next</a>'
+          ><Next /></span
+        >
+        <span data-tooltip='<a href="https://expo.dev" target="_blank">Expo</a>'
+          ><Expo /></span
+        >
+        <span
+          data-tooltip='<a href="https://react.dev" target="_blank">React</a> & <a href="https://reactnative.dev" target="_blank">React Native</a>'
+          ><React /></span
+        >
+        <span
+          data-tooltip='<a href="https://tailwindcss.com" target="_blank">Tailwind</a>'
+          ><Tailwind /></span
+        >
+        <span
+          data-tooltip='<a href="https://appwrite.io" target="_blank">Appwrite</a>'
+          ><Appwrite /></span
+        >
+        <span
+          data-tooltip='<a href="https://www.convex.dev" target="_blank">Convex</a>'
+          ><Convex /></span
+        >
+      </ProjectCard>
+    </section>
+
+    <OtherAboutSection />
   </section>
 
-  <section class="my-10 mb-6">
-    <h2 id="hobby-project" class="mb-2 scroll-mt-15 text-2xl font-semibold">
-      Hobby project
-    </h2>
-    <hr class="mb-6 border-zinc-600" />
-    <ProjectCard
-      projectTitle="HabitVille"
-      projectDescription="Track habits and gamify them in a tycoon-game. Started with a web app, now working on an iOS mobile app."
-      projectLink="https://github.com/krystofspiller/habitville"
-      githubLink="https://github.com/krystofspiller/habitville"
-    >
-      <span data-tooltip='<a href="https://nextjs.org" target="_blank">Next</a>'
-        ><Next /></span
-      >
-      <span data-tooltip='<a href="https://expo.dev" target="_blank">Expo</a>'
-        ><Expo /></span
-      >
-      <span
-        data-tooltip='<a href="https://react.dev" target="_blank">React</a> & <a href="https://reactnative.dev" target="_blank">React Native</a>'
-        ><React /></span
-      >
-      <span
-        data-tooltip='<a href="https://tailwindcss.com" target="_blank">Tailwind</a>'
-        ><Tailwind /></span
-      >
-      <span
-        data-tooltip='<a href="https://appwrite.io" target="_blank">Appwrite</a>'
-        ><Appwrite /></span
-      >
-      <span
-        data-tooltip='<a href="https://www.convex.dev" target="_blank">Convex</a>'
-        ><Convex /></span
-      >
-    </ProjectCard>
-  </section>
+  <script is:inline>
+    function isElementInViewport(element) {
+      const rect = element.getBoundingClientRect()
 
-  <OtherAboutSection />
-</BaseLayout>
+      return (
+        rect.bottom >= 0 &&
+        rect.left >= 0 &&
+        rect.top <=
+          (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <=
+          (window.innerWidth || document.documentElement.clientWidth)
+      )
+    }
 
-<script is:inline>
-  function isElementInViewport(element) {
-    const rect = element.getBoundingClientRect()
-
-    return (
-      rect.bottom >= 0 &&
-      rect.left >= 0 &&
-      rect.top <=
-        (window.innerHeight || document.documentElement.clientHeight) &&
-      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    )
-  }
-
-  function onVisibilityChange(element, callback) {
-    let previousIsVisible = false
-    return function () {
-      const isVisible = isElementInViewport(element)
-      if (isVisible != previousIsVisible) {
-        previousIsVisible = isVisible
-        callback(element)
+    function onVisibilityChange(element, callback) {
+      let previousIsVisible = false
+      return function () {
+        const isVisible = isElementInViewport(element)
+        if (isVisible != previousIsVisible) {
+          previousIsVisible = isVisible
+          callback(element)
+        }
       }
     }
-  }
 
-  const handler = onVisibilityChange(
-    document.querySelector("#billing-revamp-project"),
-    function (element) {
-      const projectElement = element.children[0].children[0]
-      const warStoryElement = element.children[0].children[1]
+    const handler = onVisibilityChange(
+      document.querySelector("#billing-revamp-project"),
+      function (element) {
+        const projectElement = element.children[0].children[0]
+        const warStoryElement = element.children[0].children[1]
 
-      if (projectElement.classList.contains("animate-move-up-fade-out")) {
-        projectElement.classList.remove("animate-move-up-fade-out")
-        warStoryElement.classList.remove("animate-move-up-fade-in")
-      } else {
-        projectElement.classList.add("animate-move-up-fade-out")
-        warStoryElement.classList.add("animate-move-up-fade-in")
-      }
-    },
-  )
+        if (projectElement.classList.contains("animate-move-up-fade-out")) {
+          projectElement.classList.remove("animate-move-up-fade-out")
+          warStoryElement.classList.remove("animate-move-up-fade-in")
+        } else {
+          projectElement.classList.add("animate-move-up-fade-out")
+          warStoryElement.classList.add("animate-move-up-fade-in")
+        }
+      },
+    )
 
-  if (window.addEventListener) {
-    addEventListener("load", handler, false)
-    addEventListener("scroll", handler, false)
-    addEventListener("resize", handler, false)
-  } else if (window.attachEvent) {
-    attachEvent("onload", handler)
-    attachEvent("onscroll", handler)
-    attachEvent("onresize", handler)
-  }
-</script>
+    if (window.addEventListener) {
+      addEventListener("load", handler, false)
+      addEventListener("scroll", handler, false)
+      addEventListener("resize", handler, false)
+    } else if (window.attachEvent) {
+      attachEvent("onload", handler)
+      attachEvent("onscroll", handler)
+      attachEvent("onresize", handler)
+    }
+  </script>
+</BaseLayout>

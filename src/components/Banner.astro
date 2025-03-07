@@ -8,7 +8,9 @@ import Close from "@assets/icons/close.astro"
   <div
     class="fixed z-10000 flex h-12 w-[100dvw] items-center justify-center bg-linear-(--gradient-accent-transparent)"
   >
-    <div class="mx-12 inline text-center text-sm sm:text-base"><slot /></div>
+    <div class="mx-12 flex items-center text-center text-sm sm:text-base">
+      <slot />
+    </div>
     <div class="absolute right-0 flex h-12 w-12 items-center justify-center">
       <span id="close"><Close /></span>
     </div>
