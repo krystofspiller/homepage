@@ -9,11 +9,12 @@ import capdeskLogo from "@assets/images/capdesk.svg"
 import cartaLogo from "@assets/images/carta.svg"
 import commitMessage from "@assets/images/commit-message.png"
 import dataIntegrityChecker from "@assets/images/data-integrity-checker.png"
+import fundraising from "@assets/images/fundraising.png"
 import linkChecker from "@assets/images/link-checker.png"
 import modal from "@assets/images/modal.png"
 import modelFundingRounds from "@assets/videos/model-funding-rounds.mp4"
 import newAppRelease from "@assets/images/new-app-release.png"
-import profile from "@assets/images/profile.jpg"
+import openapi from "@assets/images/openapi.png"
 import systematicLogo from "@assets/images/systematic.svg"
 
 import ProjectCard from "@components/ProjectCard.astro"
@@ -31,9 +32,10 @@ import CurrencyProviders from "@assets/images/currency-providers.astro"
 import LanguageToolExample from "@components/content/LanguageToolExample.astro"
 import OpenApiHelperExample from "@components/content/OpenApiHelperExample.astro"
 import StringConstantsExistsExample from "@components/content/StringConstantsExistsExample.astro"
+import Workflows from "@assets/images/workflows.astro"
 
+// TODO: "See details..." button for large paragraphs, update content with achievement statement first and hide further details under "See details..."
 // TODO: Add analytics - PostHog?
-// TODO: "See details..." button for large paragraphs
 // TODO: Section navigator - floating on side on desktop, at the bottom on mobile
 // TODO: * Enable SSR mode
 //   * implement dynamic /r/<anchor> redirect page
@@ -46,7 +48,6 @@ import StringConstantsExistsExample from "@components/content/StringConstantsExi
 // TODO Posts ideas
 // * AI turtleneck
 // * TIL series
-//   * scroll margin
 //   * compiling iOS
 ---
 
@@ -191,6 +192,43 @@ import StringConstantsExistsExample from "@components/content/StringConstantsExi
       would be multiple packages with certain pre-enabled features.
     </p>
     <Billing />
+
+    <h4
+      id="model-funding-rounds"
+      class="mb-1 scroll-mt-15 text-lg font-semibold text-zinc-100"
+    >
+      Fundraising for early-stage startups
+    </h4>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+      This project helps early-stage startups in fundraising and offering them
+      inexpensive assistance on tax relief to ensure their success. Services
+      included are round modelling calculator, creating and filing advance
+      assurance, SEIS & EIS, and templates for ASAs & SAFEs. Major challenge in
+      this project was a hard deadline that was agreed on few months in advance
+      and that had to be met which in the end was achieved without quality
+      compromises.
+    </p>
+    <Image
+      class="mb-3 w-full"
+      src={fundraising}
+      alt="Fundraising for early-stage startups"
+    />
+
+    <h4
+      id="model-funding-rounds"
+      class="mb-1 scroll-mt-15 text-lg font-semibold text-zinc-100"
+    >
+      In-app workflows for add-on services
+    </h4>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+      These workflows increased number of requests for an additional paid
+      services from ~5 to 20+ a month increasing revenue in this area by 300%.
+      These workflows included a backoffice part, where our colleagues
+      fulfilling the request were able to manage and update progress on these
+      requests, and the end customer part where customers were able to request
+      this service.
+    </p>
+    <Workflows />
 
     <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
       Currency exchange rate provider
@@ -456,6 +494,23 @@ import StringConstantsExistsExample from "@components/content/StringConstantsExi
     </p>
     <LanguageToolExample />
 
+    <!-- // * Enabled proactive identification and resolution of frontend issues by setting up Sentry for error tracking. -->
+
+    <h4 class="mb-1 text-lg font-semibold text-zinc-100">
+      Added Sentry for error tracking
+    </h4>
+    <p class="mb-3 text-lg leading-8 text-zinc-400">
+      Enabled proactive identification and resolution of frontend issues by
+      setting up Sentry for error tracking.
+    </p>
+    <div class="relative mb-3 h-0 pt-6 pb-[56.25%]">
+      <iframe
+        class="absolute top-0 left-0 h-full w-full"
+        src="https://player.vimeo.com/video/885736465?autoplay=1&dnt=1&background=1"
+        width="640"
+        height="360"></iframe>
+    </div>
+
     <h4 class="mb-1 text-lg font-semibold text-zinc-100">Added OpenAPI</h4>
     <p class="mb-3 text-lg leading-8 text-zinc-400">
       Found the tooling and implemented the helpers for adding OpenAPI 2.0
@@ -469,6 +524,11 @@ import StringConstantsExistsExample from "@components/content/StringConstantsExi
       on to improve the workflow and get as much as possible from the coupling of
       backend to frontend this afforded us.
     </p>
+    <Image
+      class="w-full"
+      src={openapi}
+      alt="OpenAPI example for user actions and schema"
+    />
 
     <hr class="my-6 border-zinc-600" />
 
@@ -492,12 +552,18 @@ import StringConstantsExistsExample from "@components/content/StringConstantsExi
       simplified the workflow to a large extent.
     </p>
 
-    <h4 class="mb-1 text-lg font-semibold text-zinc-100">
-      PowerShell scripting
-    </h4>
+    <h4 class="mb-1 text-lg font-semibold text-zinc-100">Other</h4>
     <p class="mb-3 text-lg leading-8 text-zinc-400">
-      Gathered data that were previously compiled manually, automated minor
-      tasks.
+      <ol class="my-3 ml-6 list-disc space-y-1 text-lg leading-8 text-zinc-400">
+        <li>
+          Gathered data that were previously compiled manually, automated minor
+          tasks.
+        </li>
+        <li>
+          Maintained high software quality by participating in acceptance
+          testing.
+        </li>
+      </ol>
     </p>
 
     <section class="my-10 mb-6">
