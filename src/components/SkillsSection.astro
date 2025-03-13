@@ -53,6 +53,10 @@ import Carousel from "./Carousel.astro"
 import Expo from "@assets/icons/expo.astro"
 import Next from "@assets/icons/next.astro"
 import Python from "@assets/icons/python.astro"
+import Jest from "@assets/icons/jest.astro"
+import Swagger from "@assets/icons/swagger.astro"
+import Travis from "@assets/icons/travis.astro"
+import OpenApi from "@assets/icons/openapi.astro"
 ---
 
 <section class="my-6">
@@ -84,6 +88,12 @@ import Python from "@assets/icons/python.astro"
     </IconContainer>
     <IconContainer name="Next.js">
       <Next size="size-9" />
+    </IconContainer>
+    <IconContainer name="Jest">
+      <Jest size="size-9" />
+    </IconContainer>
+    <IconContainer name="Swagger">
+      <Swagger size="size-9" />
     </IconContainer>
     <IconContainer name="Electron">
       <Electron size="size-9" />
@@ -125,15 +135,21 @@ import Python from "@assets/icons/python.astro"
     <IconContainer name="Node">
       <Node size="size-9" />
     </IconContainer>
+    <IconContainer name="OpenAPI">
+      <OpenApi size="size-9" />
+    </IconContainer>
     <IconContainer name="Express">
       <Express size="size-9" />
     </IconContainer>
   </div>
 
-  <h3 class="mt-6 mb-4 text-xl font-medium">Apps</h3>
+  <h3 class="mt-6 mb-4 text-xl font-medium">CI & Collaboration apps</h3>
   <div class="flex flex-wrap items-start justify-start gap-5 gap-y-4">
-    <IconContainer name="GitHub">
+    <IconContainer name="GitHub<br>(+ Actions)">
       <Github size="size-9" />
+    </IconContainer>
+    <IconContainer name="Travis CI">
+      <Travis size="size-9" />
     </IconContainer>
     <IconContainer name="Notion">
       <Notion size="size-9" />

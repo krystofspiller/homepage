@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro"
 import Trollface from "@assets/icons/trollface.astro"
-import iamsuchanamazingdesigner from "@assets/videos/iamsuchanamazingdesigner.mp4"
 import Link from "@components/Link.astro"
 ---
 
@@ -18,9 +17,13 @@ import Link from "@components/Link.astro"
         > for my favorite project managers.
       </p>
     </div>
-    <video controls loop autoplay muted>
-      <source src={iamsuchanamazingdesigner} type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+
+    <div class="relative mb-3 h-0 pt-6 pb-[80%]">
+      <iframe
+        class="absolute top-0 left-0 h-full w-full"
+        src="https://player.vimeo.com/video/1065496020?autoplay=1&dnt=1&background=1"
+        width="640"
+        height="360"></iframe>
+    </div>
   </section>
 </BaseLayout>
