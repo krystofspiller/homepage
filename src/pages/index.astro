@@ -32,8 +32,9 @@ import LanguageToolExample from "@components/content/LanguageToolExample.astro"
 import OpenApiHelperExample from "@components/content/OpenApiHelperExample.astro"
 import StringConstantsExistsExample from "@components/content/StringConstantsExistsExample.astro"
 import Workflows from "@assets/images/workflows.astro"
+import SeeMore from "@components/SeeMore.astro"
 
-// TODO: "See details..." button for large paragraphs, update content with achievement statement first and hide further details under "See details..."
+// TODO: Easter egg counter - two easter eggs so far, add a third, have a counter (in the banner?)
 // TODO: Add analytics - PostHog?
 // TODO: Section navigator - floating on side on desktop, at the bottom on mobile
 // TODO: * Enable SSR mode
@@ -41,7 +42,6 @@ import Workflows from "@assets/images/workflows.astro"
 //   * fix Duolingo and Knowt data fetching
 // TODO References section
 // TODO Put styled HTML into components
-// TODO Three.js animation of greeting / name?
 // TODO implement link checker and add a note about it
 // TODO Link to the HabitVille project when presentable
 // TODO Posts ideas
@@ -52,42 +52,67 @@ import Workflows from "@assets/images/workflows.astro"
 
 <BaseLayout>
   <div
-    class="flex flex-col items-center justify-center bg-radial from-(--color-orange-30) to-transparent to-70% pt-20 pb-20"
+    id="content"
+    class="flex w-full bg-radial from-(--color-orange-30) to-transparent to-70% [mask-image:linear-gradient(to_right,transparent_0,_black_50px,_black_calc(100%-50px),transparent_100%)]"
   >
-    <h1 class="block text-4xl font-light">
-      Hi <span
-        class="animate-wave hover:animate-wave-infinite inline-block origin-[75%_75%]"
-        >👋</span
-      > I'm
-      <span class="relative">
-        <svg
-          width="576"
-          height="193"
-          viewBox="0 0 576 193"
-          class="absolute top-[-18px] left-0 z-0 block w-[250px]"
-        >
-          <defs>
-            <linearGradient id="linear" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#e6c75f"></stop>
-              <stop offset="100%" stop-color="#e65f5f"></stop>
-            </linearGradient>
-          </defs>
+    <div
+      class="relative h-[324px] w-full [mask-image:linear-gradient(to_bottom,transparent_0,_black_50px,_black_calc(100%-50px),transparent_100%)]"
+    >
+      <canvas id="background-canvas" class="opacity-0 transition duration-2000"
+      ></canvas>
+      <div
+        class="absolute top-1/2 left-1/2 flex w-full -translate-x-1/2 -translate-y-3/4 flex-col items-center justify-center text-center"
+      >
+        <h1 class="block text-4xl font-light">
+          Hi <span
+            class="animate-wave hover:animate-wave-infinite inline-block origin-[75%_75%]"
+            >👋</span
+          > I'm
+          <span class="relative">
+            <svg
+              width="576"
+              height="193"
+              viewBox="0 0 576 193"
+              class="absolute top-[-18px] left-0 z-0 block w-[250px]"
+            >
+              <defs>
+                <linearGradient id="linear" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#e6c75f"></stop>
+                  <stop offset="100%" stop-color="#e65f5f"></stop>
+                </linearGradient>
+              </defs>
 
-          <path
-            fill="transparent"
-            stroke="url(#linear)"
-            stroke-width="4"
-            d="M2.75003 7.00006C26.75 1.99994 69.5 2 128.5 2C322.5 2.00024 324.75 12.0002 128.75 12.0002C-40.25 12.0002 -40.25 24 128.75 24C256.75 24 270.75 18 270.75 18"
-            class="animate-dash [stroke-dasharray:820] [stroke-dashoffset:0]"
-          ></path>
-        </svg>
-        <span
-          class="relative z-10 bg-linear-(--gradient-accent) bg-clip-text text-transparent"
-          >Krystof</span
-        >
-      </span>
-    </h1>
-    <p class="text-2xl text-zinc-400">Fullstack software engineer</p>
+              <path
+                fill="transparent"
+                stroke="url(#linear)"
+                stroke-width="4"
+                d="M2.75003 7.00006C26.75 1.99994 69.5 2 128.5 2C322.5 2.00024 324.75 12.0002 128.75 12.0002C-40.25 12.0002 -40.25 24 128.75 24C256.75 24 270.75 18 270.75 18"
+                class="animate-dash [stroke-dasharray:820] [stroke-dashoffset:0]"
+              ></path>
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="95.2 8.7 11 11"
+              class="absolute top-[7px] left-[76px] z-20 w-3"
+            >
+              <g class="sparkles">
+                <path
+                  style="animation-delay: 2s; transform-box: fill-box;"
+                  class="animate-sparkle origin-center transform-[scale(0)]"
+                  fill="white"
+                  d="M99.18160965 12.79394657s1.61168639-8.41658446 3.0442965 0c0 0 8.05843194 1.43261013 0 2.86522025 0 0-1.43261011 8.59566072-3.0442965 0-4.83505916-.89538133-4.47690663-1.79076265 0-2.86522025z"
+                ></path>
+              </g>
+            </svg>
+            <span
+              class="relative z-10 bg-linear-(--gradient-accent) bg-clip-text text-transparent"
+              >Krystof</span
+            >
+          </span>
+        </h1>
+        <p class="text-2xl text-zinc-400">Fullstack software engineer</p>
+      </div>
+    </div>
   </div>
   <div class="mb-20">
     <p class="mb-3 text-lg leading-8 text-zinc-400">
@@ -96,8 +121,12 @@ import Workflows from "@assets/images/workflows.astro"
       >-oriented software engineer with <strong
         class="font-medium text-zinc-100">6 years of experience</strong
       > in fullstack web development. I'm preferably targeting roles involving React,
-      TypeScript and Go with an opportunity to transfer to the US.
+      TypeScript and Go with an opportunity to transfer to the <span
+        class="cursor-pointer"
+        id="us">US</span
+      >.
     </p>
+    <div class="relative" id="us-eagle"></div>
     <p class="text-lg leading-8 text-zinc-400">
       Find out more about my <Link href="#professional-contributions"
         >professional contributions</Link
@@ -142,21 +171,22 @@ import Workflows from "@assets/images/workflows.astro"
       >
     </h4>
     <p class="mb-3 text-lg leading-8 text-zinc-400">
-      I have created a calculator to help founders model unpriced rounds which
-      led to more sales leads by leveraging gated content. The solution involved
-      an <abbr
-        title='<a href="https://en.wikipedia.org/wiki/Request_for_Comments" target="_blank">Request For Comments</a>'
-        >RFC</abbr
-      >-like process to come up with the best solution as this was the first
-      public page (i.e. not behind auth, obviously excluding a sign in/sign up
-      flow). At the time we were also in a rebranding transition where the
-      homepage was already transitioned and the idea was to use the new design
-      on all public facing pages so the calculator should also follow the new
-      design. It uses many primitive components and other more complex
-      components some of which I helped building. <Link
-        href="https://www.app.europe.carta.com/convertible_securities_calculator/?skip=true"
-        >Check it out for yourself!</Link
-      > See an example below:
+      I have driven increased product demand by developing a calculator that
+      helps founders model unpriced funding rounds.<SeeMore
+        >The solution involved an <abbr
+          title='<a href="https://en.wikipedia.org/wiki/Request_for_Comments" target="_blank">Request For Comments</a>'
+          >RFC</abbr
+        >-like process to come up with the best solution as this was the first
+        public page (i.e. not behind auth, obviously excluding a sign in/sign up
+        flow). At the time we were also in a rebranding transition where the
+        homepage was already transitioned and the idea was to use the new design
+        on all public facing pages so the calculator should also follow the new
+        design. It uses many primitive components and other more complex
+        components some of which I helped building. <Link
+          href="https://www.app.europe.carta.com/convertible_securities_calculator/?skip=true"
+          >Check it out for yourself!</Link
+        > See an example below:
+      </SeeMore>
     </p>
     <div class="relative mb-3 h-0 pt-6 pb-[85%]">
       <iframe
@@ -178,20 +208,25 @@ import Workflows from "@assets/images/workflows.astro"
       >
     </h4>
     <p class="mb-3 text-lg leading-8 text-zinc-400">
-      This was the longest running project I worked on and wrote around 90% of
-      it when it comes solely to the changes in the app codebase. First step was
-      a migration <span
-        data-tooltip='This was supposed to be relatively simple. But it&apos;s <a href="https://www.youtube.com/watch?v=Wdyndb17K58" target="_blank">Stripe</a> we&apos;re talking about <span class="text-white">🙂</span> I&apos;ve ran into most of the issues described in that video and many more during this project. Migrating from one instance to another is a hell that made me into the man I&apos;m today.'
-        >from one Stripe instance to another</span
-      >. The next step involved changing how the app is interacting with Stripe
-      where previously it was the app recording changes to customer
-      subscriptions using Stripe's API and now the idea was to make these
-      changes from the <Link href="https://docs.stripe.com/customer-management"
-        >self-service customer portal</Link
-      > and update the app data via webhook events from Stripe. It also involved
-      a change to the pricing packages where there was previously a single package
-      and additional customer features were enabled on an ad-hoc basis and now there
-      would be multiple packages with certain pre-enabled features.
+      I enabled better sales offering and streamlined customer billing
+      management by revamping billing in a Ruby on Rails app integration with
+      Stripe and HubSpot.<SeeMore>
+        This was the longest running project I worked on and wrote around 90% of
+        it when it comes solely to the changes in the app codebase. First step
+        was a migration <span
+          data-tooltip='This was supposed to be relatively simple. But it&apos;s <a href="https://www.youtube.com/watch?v=Wdyndb17K58" target="_blank">Stripe</a> we&apos;re talking about <span class="text-white">🙂</span> I&apos;ve ran into most of the issues described in that video and many more during this project. Migrating from one instance to another is a hell that made me into the man I&apos;m today.'
+          >from one Stripe instance to another</span
+        >. The next step involved changing how the app is interacting with
+        Stripe where previously it was the app recording changes to customer
+        subscriptions using Stripe's API and now the idea was to make these
+        changes from the <Link
+          href="https://docs.stripe.com/customer-management"
+          >self-service customer portal</Link
+        > and update the app data via webhook events from Stripe. It also involved
+        a change to the pricing packages where there was previously a single package
+        and additional customer features were enabled on an ad-hoc basis and now
+        there would be multiple packages with certain pre-enabled features.</SeeMore
+      >
     </p>
     <Billing />
 
@@ -203,12 +238,13 @@ import Workflows from "@assets/images/workflows.astro"
     </h4>
     <p class="mb-3 text-lg leading-8 text-zinc-400">
       This project helps early-stage startups in fundraising and offering them
-      inexpensive assistance on tax relief to ensure their success. Services
-      included are round modelling calculator, creating and filing advance
-      assurance, SEIS & EIS, and templates for ASAs & SAFEs. Major challenge in
-      this project was a hard deadline that was agreed on few months in advance
-      and that had to be met which in the end was achieved without quality
-      compromises.
+      inexpensive assistance on tax relief to ensure their success. <SeeMore
+        >Services included are round modelling calculator, creating and filing
+        advance assurance, SEIS & EIS, and templates for ASAs & SAFEs. Major
+        challenge in this project was a tight deadline that was agreed on few
+        months in advance and that had to be met which I achieved without
+        sacrificing quality.</SeeMore
+      >
     </p>
     <Image
       class="mb-3 w-full"
@@ -223,12 +259,14 @@ import Workflows from "@assets/images/workflows.astro"
       In-app workflows for add-on services
     </h4>
     <p class="mb-3 text-lg leading-8 text-zinc-400">
-      These workflows increased number of requests for an additional paid
-      services from ~5 to 20+ a month increasing revenue in this area by 300%.
-      These workflows included a backoffice part, where our colleagues
-      fulfilling the request were able to manage and update progress on these
-      requests, and the end customer part where customers were able to request
-      this service.
+      The in-app workflows I implemented increased number of requests for an
+      additional paid service from ~5 to 20+ a month increasing revenue in this
+      area by 300%.
+      <SeeMore
+        >These included a backoffice part, where our colleagues fulfilling the
+        request were able to manage and update progress on the requests, and the
+        end customer part, where customers were able to request these services.</SeeMore
+      >
     </p>
     <Workflows />
 
@@ -236,42 +274,47 @@ import Workflows from "@assets/images/workflows.astro"
       Currency exchange rate provider
     </h4>
     <p class="mb-3 text-lg leading-8 text-zinc-400">
-      While the app had a multi-currency support from the time I joined, the
-      currencies that were supported were those available from <Link
-        href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
-        >European Central Bank</Link
-      > which contains 30 currencies. Meanwhile, there are <Link
-        href="https://en.wikipedia.org/w/index.php?title=List_of_circulating_currencies&oldid=1275996218#:~:text=There%20are%20180%20currencies"
-        >180 currently circulating currencies recognized by UN</Link
-      > and some of those started to appear in the app and it became cumbersome to
-      deal with them <span
-        data-tooltip='The exchange rate for the missing currency had to be found and manually added to the database. As we had to do this via a manual task due to compliance (<span class="text-white">💀</span>), it was anything but fun. Not to mention this exchange rate became out-of-date soon and would result in incorrect conversions. So we had to bite the <a href="https://xkcd.com/1319" target="_blank">automation</a> bullet eventually.'
-        >manually</span
-      >.
-    </p>
-    <p class="mb-3 text-lg leading-8 text-zinc-400">
-      I used <Link href="https://exchangeratesapi.io/">Exchangerates API</Link> to
-      get a more comprehensive list of the exchange rates. As we didn't call the
-      API everytime we needed the exchange rate but instead stored it in a database
-      (we also needed historical exchange rates in some cases), new exchange rates
-      were automatically added to the database on a daily basis.
+      I provided affordable currency exchange rate solution for 200+ currencies.<SeeMore
+        >While the app had a multi-currency support from the time I joined, the
+        currencies that were supported were those available from <Link
+          href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
+          >European Central Bank</Link
+        > which contains 30 currencies. Meanwhile, there are <Link
+          href="https://en.wikipedia.org/w/index.php?title=List_of_circulating_currencies&oldid=1275996218#:~:text=There%20are%20180%20currencies"
+          >180 currently circulating currencies recognized by UN</Link
+        > and some of those started to appear in the app and it became cumbersome
+        to deal with them <span
+          data-tooltip='The exchange rate for the missing currency had to be found and manually added to the database. As we had to do this via a manual task due to compliance (<span class="text-white">💀</span>), it was anything but fun. Not to mention this exchange rate became out-of-date soon and would result in incorrect conversions. So we had to bite the <a href="https://xkcd.com/1319" target="_blank">automation</a> bullet eventually.'
+          >manually</span
+        >.<span class="mt-3 block">
+          I used <Link href="https://exchangeratesapi.io/"
+            >Exchangerates API</Link
+          > to get a more comprehensive list of the exchange rates. As we didn't
+          call the API everytime we needed the exchange rate but instead stored it
+          in a database (we also needed historical exchange rates in some cases),
+          new exchange rates were automatically added to the database on a daily
+          basis.</span
+        >
+      </SeeMore>
     </p>
     <CurrencyProviders />
 
     <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
-      Automated dead link checker
+      Automated invalid link checker
     </h4>
     <p class="mb-3 text-lg leading-8 text-zinc-400">
-      Managing links is hard. An external link can change and suddenly you're
-      linking to a non-existent page. At some point we encountered a few links
-      that were invalid and instead of just fixing those and moving on with our
-      life I wrote a script to <span
-        data-tooltip='I thought this would be a matter of simply <span class="font-mono">curl</span>ing the page with a parameter to return the HTTP response status code. How naive I was. I had to use <a class="font-mono" href="https://github.com/lwthiker/curl-impersonate" target="_blank">curl-impersonate</a> to mimic a browser making the request for it to go through on many pages. There was also the question of redirecting where for example Zendesk (Support Center) puts an ID as well as the name of the support article into the URL so when the name of the article was adjusted the link still worked but returned a redirect 3xx code. I made <span class="font-mono">curl-impersonate</span> return the redirect URL as well and included it in the result message.'
-        >check external links</span
-      > that I set up to run on GitHub Actions on a weekly basis and send a result
-      to an #automated-checks Slack channel. In this way, these issues became more
-      visible and otherwise invalid links that would be in the app for many months
-      were fixed within a week.
+      Addressed invalid links by automatically checking and reporting them.<SeeMore
+        >An external link can change and suddenly you're linking to a
+        non-existent page. At some point we encountered a few links that were
+        invalid and instead of just fixing those and moving on with our life I
+        wrote a script to <span
+          data-tooltip='I thought this would be a matter of simply <span class="font-mono">curl</span>ing the page with a parameter to return the HTTP response status code. How naive I was. I had to use <a class="font-mono" href="https://github.com/lwthiker/curl-impersonate" target="_blank">curl-impersonate</a> to mimic a browser making the request for it to go through on many pages. There was also the question of redirecting where for example Zendesk (Support Center) puts an ID as well as the name of the support article into the URL so when the name of the article was adjusted the link still worked but returned a redirect 3xx code. I made <span class="font-mono">curl-impersonate</span> return the redirect URL as well and included it in the result message.'
+          >check external links</span
+        > that I set up to run on GitHub Actions on a weekly basis and send a result
+        to an #automated-checks Slack channel. In this way, these issues became more
+        visible and otherwise invalid links that would be in the app for many months
+        were fixed within a week.</SeeMore
+      >
     </p>
     <Image
       class="w-full"
@@ -283,289 +326,345 @@ import Workflows from "@assets/images/workflows.astro"
       Simpler and consistent modals
     </h4>
     <p class="mb-3 text-lg leading-8 text-zinc-400">
-      The way we were writing most of the modals was by directly using the
-      design system components as opposed to a more complete modal
-      implementation. Every colleague therefore had a lot of freedom when it
-      came to implementation of a modal. Properly implementing a modal so that
-      it's consistent with design and behaves in the least obstructive way
-      possible then becomes hard.
-    </p><p class="mb-3 text-lg leading-8 text-zinc-400">
-      Our modals were incosistent with how disabled and loading states were
-      handled after clicking cancel and submit buttons, layout of those buttons
-      was sometimes different and when it came to modals with forms, the form
-      being reset after a successful submit caused a flicker while the modal was
-      fading out which was visually distracting.
-    </p><p class="mb-3 text-lg leading-8 text-zinc-400">
-      I implemented a modal component to make implementing consistent modals
-      simpler, including support for forms, where all of the aforementioned
-      concerns were handled by default. These models can be seen in action in
-      the <Link href="#model-funding-rounds">public calculator above</Link>.
-    </p>
-    <Image class="w-full" src={modal} alt="Modal example" />
-
-    <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
-      Data integrity checks
-    </h4>
-    <p class="mb-3 text-lg leading-8 text-zinc-400">
-      My colleague implemented a framework for adding data integrity <span
-        data-tooltip="We had a policy for no check constraints in the database so while some of these checks could have been handled differently, this was still a better solution for majority of the checked cases due to the sheer complexity of the domain and the resultant data."
-        >checks</span
-      > to notify us of instances where invalid data got into the database and also
-      automatically fix them if an automatic fix is possible. I wrote checks dealing
-      with detecting and autofixing trailing whitespace in attributes like names,
-      emails and domain specific identifiers which could cause subtle bugs in filtering
-      and matching items.
-    </p>
-    <Image
-      class="w-full"
-      src={dataIntegrityChecker}
-      alt="Example Slack message of data integrity checker"
-    />
-
-    <h4 id="linter-rules" class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
-      Linter rules
-    </h4>
-    <p class="mb-3 text-lg leading-8 text-zinc-400">
-      <span
-        data-tooltip="A process and a tool for code analysis to flag programming errors, bugs, stylistics errors and suspicious constructs."
-        >Linting</span
-      > is fun, who doesn't like playing around with <abbr
-        title='Woah, two tooltips in one sentence, chill. Read more about <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree" target="_blank"><strong class="font-bold">A</strong>bstract <strong class="font-bold">S</strong>yntax <strong class="font-bold">T</strong>rees</a> for some light reading.'
-        >ASTs</abbr
-      > in their free time? I made linter rules for both frontend (ESLint) and backend
-      (RuboCop). Frontend one was about linting a stylistic error to follow our coding
-      conventions (i.e. no more pointing it out in code reviews). In the backend,
-      I made two linting rules which are a tad more complex:
-      <ol
-        class="my-3 ml-6 list-decimal space-y-1 text-lg leading-8 text-zinc-400"
+      Improved both UX and DX by improving a modal component. <SeeMore
+        >The way we were writing most of the modals was by directly using the
+        design system components as opposed to a more complete modal
+        implementation. Every colleague therefore had a lot of freedom when it
+        came to implementation of a modal. Properly implementing a modal so that
+        it's consistent with design and behaves in the least obstructive way
+        possible then becomes hard.
+        <span class="mb-3 block">
+          Our modals were incosistent with how disabled and loading states were
+          handled after clicking cancel and submit buttons, layout of those
+          buttons was sometimes different and when it came to modals with forms,
+          the form being reset after a successful submit caused a flicker while
+          the modal was fading out which was visually distracting.
+        </span><span class="mb-3 block">
+          I implemented a modal component to make implementing consistent modals
+          simpler, including support for forms, where all of the aforementioned
+          concerns were handled by default. These models can be seen in action
+          in the <Link href="#model-funding-rounds"
+            >public calculator above</Link
+          >.
+        </span></SeeMore
       >
-        <li>
-          <strong class="font-bold"
-            ><span
-              data-tooltip="Specification for a machine-readable interface definition language for describing web services."
-              >OpenAPI</span
-            > helper enforcement</strong
-          > - writing the OpenAPI specifications can be a bit cumbersome, there's
-          a lot of boilerplate that needs to be written making bigger types hundreds
-          of lines long. I wrote a helper to simplify this where majority of the
-          use cases that previously took anywhere from 1 to 10 lines could now be
-          reduced to a single line of code making it more readable. Converting the
-          whole OpenAPI specification to use this helper would a large effort for
-          an individual and there would still be the problem with my colleagues not
-          being aware of this helper and writing new specifications without it. This
-          linter rule therefore produced <span
-            class="underline decoration-amber-400 decoration-wavy decoration-2 underline-offset-4"
-            >warnings</span
-          > (and <span
-            class="underline decoration-red-400 decoration-2 underline-offset-4"
-            >errors</span
-          > in some cases) to enforce its usage suggesting fellow colleagues to convert
-          it to use the helper. The idea is that the <span
-            class="underline decoration-amber-400 decoration-wavy decoration-2 underline-offset-4"
-            >warnings</span
-          > would be changed to <span
-            class="underline decoration-red-400 decoration-2 underline-offset-4"
-            >errors</span
-          > once the conversion is complete so that it would be written in this more
-          concise and readable format.
-          <OpenApiHelperExample />
-        </li>
-        <li>
-          <strong class="font-bold"
-            >Check strings looking like constants actually exist</strong
-          > - in Ruby, we were sometimes forced to write a constant, such as a class
-          name, as a string. The static type checker for Ruby, called Sorbet, we
-          used obviously didn't check strings and such strings sometimes became obsolete
-          when the class was refactored or removed and could cause an issue. This
-          linter rule checked that all strings that looked like such constants actually
-          referred to an existing constant in the codebase.
-          <StringConstantsExistsExample />
-        </li>
-      </ol>
-    </p>
+      <Image class="w-full" src={modal} alt="Modal example" />
 
-    <h4
-      id="type-validation"
-      class="mt-6 mb-1 text-lg font-semibold text-zinc-100"
-    >
-      Frontend to backend type validation
-    </h4>
-    <div class="mb-3 text-lg leading-8 text-zinc-400">
-      The OpenAPI specification was used to generate TypeScript types in the
-      frontend. Since the OpenAPI specification was written by hand, there could
-      be and were discrepancies between what was described in the OpenAPI schema
-      and the actual shape of the response that the server returned. The idea of
-      this initiative was to validate that the types in the frontend, that were
-      generated from the OpenAPI specification manually defined in the backend,
-      matched the actual response from the server and in the case it didn't
-      match, report an error to Sentry which we used for frontend error
-      tracking. As we didn't want to impose the cost of validating the types on
-      every request in production, it was only enabled in our QA environment
-      that we used often enough to catch majority of these errors.
-    </div>
-    <TypeValidationExample />
-
-    <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
-      Conventional commit message auto formatter
-    </h4>
-    <div class="mb-3 text-lg leading-8 text-zinc-400">
-      During my tenure, we have evolved our requirements for commit and branch
-      names as follows:
-      <ol
-        class="my-3 ml-6 list-decimal space-y-1 text-lg leading-8 text-zinc-400"
-      >
-        <li>No expected format for branches or commits</li>
-        <li>
-          <Link href="https://www.conventionalcommits.org/en/v1.0.0/"
-            >Conventional commits</Link
-          > required for features
-        </li>
-        <li>
-          Standardized branch names and conventional commits required everything
-          recorded in Jira
-        </li>
-        <li>
-          Every code change needs to have a Jira associated and hence will have
-          standardized branch name and conventional commits
-        </li>
-      </ol>
-      During the various stages, we have enforced this name both in CI as well as
-      in Git commit hooks for faster feedback. At the last stage, where every change
-      required a conventional commit message and happened on a branch called something
-      like
-      <span class="font-mono">feat/JIRA-123-optional-description</span> it became
-      a bit tedious to always include <span class="font-mono"
-        >feat(JIRA-123):</span
-      >
-      in the commit message. I wrote a commit message Git hook that took the type
-      of the commit and scope (Jira ticket) from the branch name and formatted an
-      otherwise plain message according to the conventional commit specification.
-      Small time safer but mostly one less thing to think about.
-    </div>
-    <Image
-      class="w-full"
-      src={commitMessage}
-      alt="Commit message auto formatted"
-    />
-    <div class="mt-1 flex items-center justify-center text-sm text-zinc-400">
-      <p class="w-[75%]">
-        The commit message "example message" is autoformatted based on the
-        branch name "feat/JIRA-123-example" to a final message reading
-        "feat(JIRA-123): example message"
+      <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
+        Data integrity checks
+      </h4>
+      <p class="mb-3 text-lg leading-8 text-zinc-400">
+        Maintained product quality by implementing data integrity checks.<SeeMore
+        >
+          My colleague implemented a framework for adding data integrity <span
+            data-tooltip="We had a policy for no check constraints in the database so while some of these checks could have been handled differently, this was still a better solution for majority of the checked cases due to the sheer complexity of the domain and the resultant data."
+            >checks</span
+          > to notify us of instances where invalid data got into the database and
+          also automatically fix them if an automatic fix is possible. I wrote checks
+          dealing with detecting and autofixing trailing whitespace in attributes
+          like names, emails and domain specific identifiers which could cause subtle
+          bugs in filtering and matching items.</SeeMore
+        >
       </p>
-    </div>
+      <Image
+        class="w-full"
+        src={dataIntegrityChecker}
+        alt="Example Slack message of data integrity checker"
+      />
 
-    <hr class="my-6 border-zinc-600" />
-
-    <div class="mb-4 flex flex-col items-center justify-center gap-1">
-      <Image class="h-8 w-auto" src={capdeskLogo} alt="Capdesk logo" />
-      <span class="text-sm text-zinc-400"
-        >2020-2022<span class="text-xs"> (full-time from Feb 2022)</span></span
+      <h4
+        id="linter-rules"
+        class="mt-6 mb-1 text-lg font-semibold text-zinc-100"
       >
-    </div>
-    <h4 class="mb-1 text-lg font-semibold text-zinc-100">
-      Announce app releases on Slack
-    </h4>
-    <p class="mb-3 text-lg leading-8 text-zinc-400">
-      We used Heroku for hosting and deployed the latest Git <span
-        class="font-mono">main</span
-      > branch on every new change. We had a process in place where once a week one
-      of the engineering leads compiled a list of all the changes with their Jira
-      ID and a short description and posted this in a #release Slack channel. I implemented
-      a task that ran on every deployment to Heroku which compiled a list of Jiras
-      from the last deployment, got the Jira tasks descriptions, the author (developer)
-      of that change, found a related Slack account and tagged them in the automated
-      Slack message (developers were encouraged to provide additional context, especially
-      when it was related to a bug they fixed for someone from a support of other
-      department).
-    </p>
-    <Image
-      class="w-full"
-      src={newAppRelease}
-      alt="Example Slack message of new app release"
-    />
+        Linter rules
+      </h4>
+      <SeeMore>
+        <div>
+          <div>
+            Maintained coding conventions and simplified codebase using <span
+              data-tooltip="A process and a tool for code analysis to flag programming errors, bugs, stylistics errors and suspicious constructs."
+              >linting</span
+            > rules as well as prevented subtle bugs.
+          </div>
+          <div>
+            <div class="mb-3 flex flex-col gap-3">
+              <OpenApiHelperExample />
+              <StringConstantsExistsExample />
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="mb-3 text-lg leading-8 text-zinc-400">
+            Maintained coding conventions and simplified codebase using <span
+              data-tooltip="A process and a tool for code analysis to flag programming errors, bugs, stylistics errors and suspicious constructs."
+              >linting</span
+            > rules as well as prevented subtle bugs. This involved playing around
+            with
+            <abbr
+              title='Read more about <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree" target="_blank"><strong class="font-bold">A</strong>bstract <strong class="font-bold">S</strong>yntax <strong class="font-bold">T</strong>rees</a> for some light nighttime reading.'
+              >ASTs</abbr
+            >. I made linter rules for both frontend (ESLint) and backend
+            (RuboCop). Frontend one was about linting a stylistic error to
+            follow our coding conventions (i.e. no more pointing it out in code
+            reviews). In the backend, I made two linting rules which are a tad
+            more complex:
+          </p>
+          <ol
+            class="my-3 ml-6 list-decimal space-y-1 text-lg leading-8 text-zinc-400"
+          >
+            <li>
+              <strong class="font-bold"
+                ><span
+                  data-tooltip="Specification for a machine-readable interface definition language for describing web services."
+                  >OpenAPI</span
+                > helper enforcement</strong
+              > - writing the OpenAPI specifications can be a bit cumbersome, there's
+              a lot of boilerplate that needs to be written making bigger types hundreds
+              of lines long. I wrote a helper to simplify this where majority of
+              the use cases that previously took anywhere from 1 to 10 lines could
+              now be reduced to a single line of code making it more readable. Converting
+              the whole OpenAPI specification to use this helper would a large effort
+              for an individual and there would still be the problem with my colleagues
+              not being aware of this helper and writing new specifications without
+              it. This linter rule therefore produced <span
+                class="underline decoration-amber-400 decoration-wavy decoration-2 underline-offset-4"
+                >warnings</span
+              > (and <span
+                class="underline decoration-red-400 decoration-2 underline-offset-4"
+                >errors</span
+              > in some cases) to enforce its usage suggesting fellow colleagues
+              to convert it to use the helper. The idea is that the <span
+                class="underline decoration-amber-400 decoration-wavy decoration-2 underline-offset-4"
+                >warnings</span
+              > would be changed to <span
+                class="underline decoration-red-400 decoration-2 underline-offset-4"
+                >errors</span
+              > once the conversion is complete so that it would be written in this
+              more concise and readable format.
+              <OpenApiHelperExample />
+            </li>
+            <li>
+              <strong class="font-bold"
+                >Check strings looking like constants actually exist</strong
+              > - in Ruby, we were sometimes forced to write a constant, such as
+              a class name, as a string. The static type checker for Ruby, called
+              Sorbet, we used obviously didn't check strings and such strings sometimes
+              became obsolete when the class was refactored or removed and could
+              cause an issue. This linter rule checked that all strings that looked
+              like such constants actually referred to an existing constant in the
+              codebase.
+              <StringConstantsExistsExample />
+            </li>
+          </ol>
+        </div>
+      </SeeMore>
 
-    <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
-      Grammar checker for translations
-    </h4>
-    <p class="mb-3 text-lg leading-8 text-zinc-400">
-      Using <Link href="https://languagetool.org/">LanguageTool</Link> I implemented
-      a check in GitHub Actions that checked grammar including spellchecks. This
-      involved compiling the list of translations from a YML file into a human-readable
-      form which is what LanguageTool expects.
-    </p>
-    <LanguageToolExample />
-
-    <!-- // * Enabled proactive identification and resolution of frontend issues by setting up Sentry for error tracking. -->
-
-    <h4 class="mb-1 text-lg font-semibold text-zinc-100">
-      Added Sentry for error tracking
-    </h4>
-    <p class="mb-3 text-lg leading-8 text-zinc-400">
-      Enabled proactive identification and resolution of frontend issues by
-      setting up Sentry for error tracking.
-    </p>
-    <div class="relative mb-3 h-0 pt-6 pb-[56.25%]">
-      <iframe
-        class="absolute top-0 left-0 h-full w-full"
-        src="https://player.vimeo.com/video/885736465?autoplay=1&dnt=1&background=1"
-        width="640"
-        height="360"></iframe>
-    </div>
-
-    <h4 class="mb-1 text-lg font-semibold text-zinc-100">Added OpenAPI</h4>
-    <p class="mb-3 text-lg leading-8 text-zinc-400">
-      Found the tooling and implemented the helpers for adding OpenAPI 2.0
-      (later upgraded to version 3.0) and implemented on a few regular cases as
-      well as some exceptional ones. This was used later by the team for
-      generating TypeScript types for frontend which facilitated development. It
-      led to other initiatives, such as my work on <Link href="#linter-rules"
-        >linters</Link
-      > and
-      <Link href="#type-validation">frontend to backend type validation</Link> later
-      on to improve the workflow and get as much as possible from the coupling of
-      backend to frontend this afforded us.
-    </p>
-    <Image
-      class="w-full"
-      src={openapi}
-      alt="OpenAPI example for user actions and schema"
-    />
-
-    <hr class="my-6 border-zinc-600" />
-
-    <div class="mb-4 flex flex-col items-center justify-center gap-1">
-      <Image class="h-8 w-auto" src={systematicLogo} alt="Systematic logo" />
-      <span class="text-sm text-zinc-400"
-        >2019-2020<span class="text-xs"> (part-time)</span></span
+      <h4
+        id="type-validation"
+        class="mt-6 mb-1 text-lg font-semibold text-zinc-100"
       >
-    </div>
-    <h4 class="mb-1 text-lg font-semibold text-zinc-100">
-      Dependency management revamp
-    </h4>
-    <p class="mb-3 text-lg leading-8 text-zinc-400">
-      The team had a strict policy for dependency management and actually
-      maintained their own repository of dependencies. This was initially done
-      through quite a large <Link
-        href="https://git-scm.com/book/en/v2/Git-Tools-Submodules"
-        >Git submodule</Link
-      >. I've made it so that the team was able to use our own repository of
-      dependencies as if they were using the original repository which
-      simplified the workflow to a large extent.
-    </p>
+        Frontend to backend type validation
+      </h4>
+      <div class="mb-3 text-lg leading-8 text-zinc-400">
+        Increased developer's confidence and prevented minor bugs by ensuring
+        frontend matches backend.<SeeMore>
+          The OpenAPI specification was used to generate TypeScript types in the
+          frontend. Since the OpenAPI specification was written by hand, there
+          could be and were discrepancies between what was described in the
+          OpenAPI schema and the actual shape of the response that the server
+          returned. The idea of this initiative was to validate that the types
+          in the frontend, that were generated from the OpenAPI specification
+          manually defined in the backend, matched the actual response from the
+          server and in the case it didn't match, report an error to Sentry
+          which we used for frontend error tracking. As we didn't want to impose
+          the cost of validating the types on every request in production, it
+          was only enabled in our QA environment that we used often enough to
+          catch majority of these errors.
+        </SeeMore>
+      </div>
+      <TypeValidationExample />
 
-    <h4 class="mb-1 text-lg font-semibold text-zinc-100">Other</h4>
-    <p class="mb-3 text-lg leading-8 text-zinc-400">
-      <ol class="my-3 ml-6 list-disc space-y-1 text-lg leading-8 text-zinc-400">
-        <li>
-          Gathered data that were previously compiled manually, automated minor
-          tasks.
-        </li>
-        <li>
-          Maintained high software quality by participating in acceptance
-          testing.
-        </li>
-      </ol>
+      <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
+        Conventional commit message auto formatter
+      </h4>
+      <div class="mb-3 text-lg leading-8 text-zinc-400">
+        Streamlined minor process by automatically formatting commit messages
+        according to conventional message format. <SeeMore
+          >During my tenure, we have evolved our requirements for commit and
+          branch names as follows:
+          <ol
+            class="my-3 ml-6 list-decimal space-y-1 text-lg leading-8 text-zinc-400"
+          >
+            <li>No expected format for branches or commits</li>
+            <li>
+              <Link href="https://www.conventionalcommits.org/en/v1.0.0/"
+                >Conventional commits</Link
+              > required for features
+            </li>
+            <li>
+              Standardized branch names and conventional commits required
+              everything recorded in Jira
+            </li>
+            <li>
+              Every code change needs to have a Jira associated and hence will
+              have standardized branch name and conventional commits
+            </li>
+          </ol>
+          During the various stages, we have enforced this name both in CI as well
+          as in Git commit hooks for faster feedback. At the last stage, where every
+          change required a conventional commit message and happened on a branch
+          called something like
+          <span class="font-mono">feat/JIRA-123-optional-description</span> it became
+          a bit tedious to always include <span class="font-mono"
+            >feat(JIRA-123):</span
+          >
+          in the commit message. I wrote a commit message Git hook that took the
+          type of the commit and scope (Jira ticket) from the branch name and formatted
+          an otherwise plain message according to the conventional commit specification.
+          Small time safer but mostly one less thing to think about.
+        </SeeMore>
+      </div>
+      <Image
+        class="w-full"
+        src={commitMessage}
+        alt="Commit message auto formatted"
+      />
+      <div class="mt-1 flex items-center justify-center text-sm text-zinc-400">
+        <p class="w-[75%]">
+          The commit message "example message" is autoformatted based on the
+          branch name "feat/JIRA-123-example" to a final message reading
+          "feat(JIRA-123): example message"
+        </p>
+      </div>
+
+      <hr class="my-6 border-zinc-600" />
+
+      <div class="mb-4 flex flex-col items-center justify-center gap-1">
+        <Image class="h-8 w-auto" src={capdeskLogo} alt="Capdesk logo" />
+        <span class="text-sm text-zinc-400"
+          >2020-2022<span class="text-xs">
+            (full-time from Feb 2022)</span
+          ></span
+        >
+      </div>
+      <h4 class="mb-1 text-lg font-semibold text-zinc-100">
+        Announce app releases on Slack
+      </h4>
+      <p class="mb-3 text-lg leading-8 text-zinc-400">
+        Freed up engineering lead time by automating app release announcements
+        in Slack.<SeeMore
+          >We used Heroku for hosting and deployed the latest Git <span
+            class="font-mono">main</span
+          > branch on every new change. We had a process in place where once a week
+          one of the engineering leads compiled a list of all the changes with their
+          Jira ID and a short description and posted this in a #release Slack channel.
+          I implemented a task that ran on every deployment to Heroku which compiled
+          a list of Jiras from the last deployment, got the Jira tasks descriptions,
+          the author (developer) of that change, found a related Slack account and
+          tagged them in the automated Slack message (developers were encouraged
+          to provide additional context, especially when it was related to a bug
+          they fixed for someone from a support of other department).</SeeMore
+        >
+      </p>
+      <Image
+        class="w-full"
+        src={newAppRelease}
+        alt="Example Slack message of new app release"
+      />
+
+      <h4 class="mt-6 mb-1 text-lg font-semibold text-zinc-100">
+        Grammar checker for translations
+      </h4>
+      <p class="mb-3 text-lg leading-8 text-zinc-400">
+        Improved copy quality through automated grammar and spellchecking.<SeeMore
+          >Using <Link href="https://languagetool.org/">LanguageTool</Link> I implemented
+          a check in GitHub Actions that checked grammar including spellchecks. This
+          involved compiling the list of translations from a YML file into a human-readable
+          form which is what LanguageTool expects.</SeeMore
+        >
+      </p>
+      <LanguageToolExample />
+
+      <h4 class="mb-1 text-lg font-semibold text-zinc-100">
+        Added Sentry for error tracking
+      </h4>
+      <p class="mb-3 text-lg leading-8 text-zinc-400">
+        Enabled proactive identification and resolution of frontend issues by
+        setting up Sentry for error tracking.
+      </p>
+      <div class="relative mb-3 h-0 pt-6 pb-[56.25%]">
+        <iframe
+          class="absolute top-0 left-0 h-full w-full"
+          src="https://player.vimeo.com/video/885736465?autoplay=1&dnt=1&background=1"
+          width="640"
+          height="360"></iframe>
+      </div>
+
+      <h4 class="mb-1 text-lg font-semibold text-zinc-100">Added OpenAPI</h4>
+      <p class="mb-3 text-lg leading-8 text-zinc-400">
+        Laid the foundation for future enhancements such as automated TypeScript
+        type generation by adding OpenAPI.<SeeMore
+          >Found the tooling and implemented the helpers for adding OpenAPI 2.0
+          (later upgraded to version 3.0) and implemented it on a few regular
+          cases as well as some exceptional ones. This was used later by the
+          team for generating TypeScript types for frontend which increased our
+          efficiency. It led to other initiatives, such as my work on <Link
+            href="#linter-rules">linters</Link
+          > and
+          <Link href="#type-validation"
+            >frontend to backend type validation</Link
+          >
+          later on to improve our workflow and get as much as possible from the coupling
+          of backend to frontend this afforded us.</SeeMore
+        >
+      </p>
+      <Image
+        class="w-full"
+        src={openapi}
+        alt="OpenAPI example for user actions and schema"
+      />
+
+      <hr class="my-6 border-zinc-600" />
+
+      <div class="mb-4 flex flex-col items-center justify-center gap-1">
+        <Image class="h-8 w-auto" src={systematicLogo} alt="Systematic logo" />
+        <span class="text-sm text-zinc-400"
+          >2019-2020<span class="text-xs"> (part-time)</span></span
+        >
+      </div>
+      <h4 class="mb-1 text-lg font-semibold text-zinc-100">
+        Dependency management revamp
+      </h4>
+      <p class="mb-3 text-lg leading-8 text-zinc-400">
+        Accelerated developer velocity for hospital task system app for nurses
+        and orderlies by streamlining dependency management and build system.<SeeMore
+        >
+          The team had a strict policy for dependency management and actually
+          maintained their own repository of dependencies. This was initially
+          done through quite a large <Link
+            href="https://git-scm.com/book/en/v2/Git-Tools-Submodules"
+            >Git submodule</Link
+          >. I've made it so that the team was able to use our own repository of
+          dependencies as if they were using the original repository which
+          simplified the workflow to a large extent.</SeeMore
+        >
+      </p>
+
+      <h4 class="mb-1 text-lg font-semibold text-zinc-100">Other</h4>
+      <p class="mb-3 text-lg leading-8 text-zinc-400">
+        <ol
+          class="my-3 ml-6 list-disc space-y-1 text-lg leading-8 text-zinc-400"
+        >
+          <li>
+            Gathered data that were previously compiled manually, automated
+            minor tasks.
+          </li>
+          <li>
+            Maintained high software quality by participating in acceptance
+            testing.
+          </li>
+        </ol>
+      </p>
     </p>
 
     <section class="my-10 mb-6">
@@ -666,5 +765,169 @@ import Workflows from "@assets/images/workflows.astro"
       attachEvent("onscroll", handler)
       attachEvent("onresize", handler)
     }
+  </script>
+
+  <script>
+    import { gsap } from "gsap"
+
+    const c = document.querySelector("#background-canvas") as HTMLCanvasElement
+    const ctx = c.getContext("2d") as CanvasRenderingContext2D
+
+    const width = parseInt(
+      getComputedStyle(document.querySelector("#content") as Element).width,
+    )
+
+    let cw = (c.width = width)
+    let ch = (c.height = 324)
+    let radius = Math.max(cw, ch)
+    let factor = width / 576
+    let usStyle = false
+    let tl: gsap.core.Timeline | null = null
+    const particles = Array(99)
+
+    let firstDraw = true
+    function onFirstDraw() {
+      if (!firstDraw) return
+
+      firstDraw = false
+
+      c.classList.remove("opacity-0")
+    }
+
+    function animateBackground() {
+      const imgs = usStyle
+        ? ["cowboy.png", "eagle.png", "usa.png"]
+        : [
+            "astro.svg",
+            "csharp.svg",
+            "css.svg",
+            "docker.svg",
+            "figma.svg",
+            "github.svg",
+            "go.svg",
+            "miro.svg",
+            "next.svg",
+            "notion.svg",
+            "postgresql.svg",
+            "python.svg",
+            "react.svg",
+            "ruby.svg",
+            "slack.svg",
+            "stripe.png",
+            "tableplus.png",
+            "tailwind.svg",
+            "typescript.svg",
+            "vite.svg",
+          ]
+
+      for (let i = 0; i < particles.length; i++) {
+        particles[i] = {
+          x: 0,
+          y: 0,
+          scale: 0,
+          rotate: 0,
+          alpha: 0,
+          img: new Image(),
+        }
+        particles[i].img.src =
+          `${window.location.href}/icons/${imgs[i % imgs.length]}`
+      }
+
+      tl = gsap
+        .timeline({ onUpdate: draw })
+        .fromTo(
+          particles,
+          {
+            x: (i) => {
+              const angle = (i / particles.length) * Math.PI * 2 - Math.PI / 2
+              return Math.cos(angle * 10) * radius
+            },
+            y: (i) => {
+              const angle = (i / particles.length) * Math.PI * 2 - Math.PI / 2
+              return Math.sin(angle * 10) * radius
+            },
+            scale: 1,
+            rotate: 0,
+            alpha: 1.5,
+          },
+          {
+            duration: 30,
+            x: 0,
+            y: 0,
+            scale: 0,
+            alpha: -0.2,
+            rotate: 3,
+            stagger: { each: -0.3, repeat: -1 },
+          },
+          0,
+        )
+        .seek(99)
+    }
+
+    animateBackground()
+
+    function draw() {
+      onFirstDraw()
+
+      particles.sort((a, b) => a.scale - b.scale) // sort by scale to set z-indexing
+      ctx.clearRect(0, 0, cw, ch)
+      particles.forEach((p) => {
+        ctx.translate(cw / 2, ch / 2)
+        ctx.rotate(p.rotate - 2)
+        const resizeFactor = 100 / Math.max(p.img.height, p.img.width)
+        ctx.globalAlpha = Math.max(0, p.alpha * factor)
+        ctx.drawImage(
+          p.img,
+          p.x,
+          p.y,
+          p.img.width * p.scale * factor * resizeFactor,
+          p.img.height * p.scale * factor * resizeFactor,
+        )
+        ctx.resetTransform()
+      })
+    }
+
+    const us = document.querySelector("#us")
+    us?.addEventListener("click", (e) => {
+      us.innerHTML = "🇺🇸"
+      const usEagle = document.querySelector("#us-eagle")
+      if (!usEagle) return
+
+      const bodyWidth = parseInt(getComputedStyle(document.body).width)
+
+      usEagle.innerHTML = `
+      <div
+        class="bg-red-500 animate-move-offset absolute h-0 w-0 left-[calc(50%-100px)] -top-[50px] scale-100 opacity-0"
+        style='offset-path: path("M${bodyWidth / 2 + 150},0 Q0,100 -${bodyWidth / 2 + 150},0");'
+      >
+        <div class="rotate-180 text-8xl">🦅</div>
+      </div>
+    `
+
+      if (!usStyle) {
+        c.classList.add("opacity-0")
+        setTimeout(() => {
+          usStyle = true
+          animateBackground()
+          firstDraw = true
+        }, 2000)
+      }
+    })
+
+    window.addEventListener("resize", () => {
+      const width = parseInt(
+        getComputedStyle(document.querySelector("#content") as Element).width,
+      )
+      cw = c.width = width
+      radius = Math.max(cw, ch)
+      factor = width / 576
+      tl?.invalidate()
+    })
+
+    c.addEventListener("pointerup", () => {
+      gsap.to(tl, {
+        timeScale: tl?.isActive() ? 0 : 1,
+      })
+    })
   </script>
 </BaseLayout>

@@ -11,7 +11,7 @@
   );
   -webkit-mask-size: 200%;
   -webkit-mask-position: -50%;
-  animation: shine 2s 3;
+  animation: shine 2s infinite;
   animation-delay: 1.5s;
 }
 
@@ -20,9 +20,11 @@
   --animate-amazing-spin: amazing-spin 8s ease-in-out infinite;
   --animate-dash: dash 2s ease-in-out;
   --animate-glow: glow 1s ease-in-out infinite alternate;
+  --animate-move-offset: move-offset 3s ease-in-out;
   --animate-move-up-fade-in: move-up-fade-in 2.25s ease-out;
   --animate-move-up-fade-out: move-up-fade-out 1.5s ease-in;
   --animate-scroll-infinite: scroll 18s linear infinite;
+  --animate-sparkle: sparkle 0.7s ease-in-out;
   --animate-wave: wave 1.2s linear;
   --animate-wave-infinite: wave 1.2s linear infinite;
 
@@ -105,6 +107,21 @@
     }
   }
 
+  @keyframes move-offset {
+    0% {
+      offset-distance: 0%;
+      opacity: 1;
+    }
+    99% {
+      offset-distance: 100%;
+      opacity: 1;
+    }
+    100% {
+      offset-distance: 100%;
+      opacity: 0;
+    }
+  }
+
   @keyframes move-up-fade-in {
     0%,
     33% {
@@ -134,6 +151,18 @@
     }
     100% {
       transform: translateX(-100%);
+    }
+  }
+
+  @keyframes sparkle {
+    0% {
+      transform: scale(0) rotate(0deg);
+    }
+    75% {
+      transform: scale(1) rotate(45deg);
+    }
+    100% {
+      transform: scale(0) rotate(90deg);
     }
   }
 

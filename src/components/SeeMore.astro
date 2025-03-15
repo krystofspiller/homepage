@@ -1,0 +1,39 @@
+---
+import { parseHTML } from "linkedom"
+
+const { className = "mb-3 text-lg leading-8 text-zinc-400" } = Astro.props
+const html = await Astro.slots.render("default")
+const { document } = parseHTML(html)
+const children = document.children
+
+let useSlot = true
+if (children.length === 2) {
+  useSlot = false
+}
+---
+
+<span class={className} x-data="{ expanded: false }">
+  {
+    !useSlot && children[0].children[0] && (
+      <span x-show="!expanded" set:html={children[0].children[0].innerHTML} />
+    )
+  }
+  <span
+    x-show="!expanded"
+    class="cursor-pointer underline"
+    @click="expanded = ! expanded">See more...</span
+  >
+  {
+    !useSlot && children[0].children[1] && (
+      <span x-show="!expanded" set:html={children[0].children[1].innerHTML} />
+    )
+  }
+  {!useSlot && children[1] && <span x-show="expanded" set:html={children[1]} />}
+  {
+    useSlot && (
+      <span x-show="expanded">
+        <slot />
+      </span>
+    )
+  }
+</span>
