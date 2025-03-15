@@ -126,7 +126,7 @@ import SeeMore from "@components/SeeMore.astro"
         id="us">US</span
       >.
     </p>
-    <div class="relative" id="us-eagle"></div>
+    <div class="animate-move-offset relative" id="us-eagle"></div>
     <p class="text-lg leading-8 text-zinc-400">
       Find out more about my <Link href="#professional-contributions"
         >professional contributions</Link
@@ -378,7 +378,7 @@ import SeeMore from "@components/SeeMore.astro"
       >
         Linter rules
       </h4>
-      <SeeMore>
+      <SeeMore useSlot={false}>
         <div>
           <div>
             Maintained coding conventions and simplified codebase using <span
@@ -897,7 +897,7 @@ import SeeMore from "@components/SeeMore.astro"
 
       usEagle.innerHTML = `
       <div
-        class="bg-red-500 animate-move-offset absolute h-0 w-0 left-[calc(50%-100px)] -top-[50px] scale-100 opacity-0"
+        class="animate-move-offset absolute h-0 w-0 left-[calc(50%-100px)] -top-[50px] scale-100 opacity-0"
         style='offset-path: path("M${bodyWidth / 2 + 150},0 Q0,100 -${bodyWidth / 2 + 150},0");'
       >
         <div class="rotate-180 text-8xl">🦅</div>
