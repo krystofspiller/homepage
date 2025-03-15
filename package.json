@@ -28,6 +28,6 @@
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "vitest": "^3.0.7",
-    "wrangler": "^3.109.0"
+    "wrangler": "^4.0.0"
   }
 }
