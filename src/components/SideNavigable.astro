@@ -1,0 +1,79 @@
+---
+import { parseHTML } from "linkedom"
+import Link from "./Link.astro"
+
+const html = await Astro.slots.render("default")
+const { document } = parseHTML(html)
+
+type Toc = Array<{ level: number; name: string; id: string | null }>
+
+const toc: Toc = []
+let minLevel = Number.MAX_SAFE_INTEGER
+function getHeadings(content: Document | HTMLElement | null, toc: Toc) {
+  const children = content?.children ?? []
+  for (const c of children) {
+    const child = c as HTMLElement
+    if (["H1", "H2", "H3"].includes(child.tagName)) {
+      const level = parseInt(child.tagName.split("H")[1])
+      minLevel = Math.min(minLevel, level)
+      toc.push({
+        level,
+        name: child.getAttribute("data-toc") ?? child.innerText?.trim(),
+        id: child.getAttribute("id"),
+      })
+    }
+    getHeadings(child, toc)
+  }
+}
+getHeadings(document, toc)
+---
+
+<div>
+  <ul
+    class="sticky top-16 ml-[576px] hidden h-0 min-w-56 px-4 text-xs leading-6 text-zinc-400 lg:block"
+  >
+    {
+      toc.map((val) => (
+        <li data-id={val.id} style={`margin-left: ${val.level - minLevel}rem`}>
+          <Link className="!no-underline" href={`#${val.id}`}>
+            {val.name}
+          </Link>
+        </li>
+      ))
+    }
+  </ul>
+  <slot />
+</div>
+
+<script define:vars={{ toc }}>
+  const intersecting = new Set()
+  function handleIntersect(entries) {
+    entries.map((entry) => {
+      const targetId = entry.target.getAttribute("id")
+      if (entry.isIntersecting) {
+        intersecting.add(targetId)
+      } else {
+        intersecting.delete(targetId)
+        document
+          .querySelector(`li[data-id=${targetId}]`)
+          .classList.remove("text-white")
+      }
+    })
+
+    let top = [Number.MAX_SAFE_INTEGER, null]
+    intersecting.forEach((targetId) => {
+      const li = document.querySelector(`li[data-id=${targetId}]`)
+      const positionFromTop = li.getBoundingClientRect().top
+      if (positionFromTop < top[0]) {
+        top = [positionFromTop, li]
+      }
+      li.classList.remove("text-white")
+    })
+
+    top[1]?.classList.add("text-white")
+  }
+  const observer = new IntersectionObserver(handleIntersect, { threshold: 1 })
+  for (const row of toc) {
+    observer.observe(document.getElementById(row.id))
+  }
+</script>
