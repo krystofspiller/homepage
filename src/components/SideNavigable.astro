@@ -29,19 +29,24 @@ getHeadings(document, toc)
 ---
 
 <div>
-  <ul
-    class="sticky top-16 ml-[576px] hidden h-0 min-w-56 px-4 text-xs leading-6 text-zinc-400 lg:block"
+  <div
+    class="sticky top-16 ml-[576px] hidden h-0 min-w-56 text-xs leading-6 text-zinc-400 lg:block"
   >
-    {
-      toc.map((val) => (
-        <li data-id={val.id} style={`margin-left: ${val.level - minLevel}rem`}>
-          <Link className="!no-underline" href={`#${val.id}`}>
-            {val.name}
-          </Link>
-        </li>
-      ))
-    }
-  </ul>
+    <ul class="h-[calc(100vh-4rem)] overflow-scroll p-4 pt-0">
+      {
+        toc.map((val) => (
+          <li
+            data-id={val.id}
+            style={`margin-left: ${val.level - minLevel}rem`}
+          >
+            <Link className="!no-underline" href={`#${val.id}`}>
+              {val.name}
+            </Link>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
   <slot />
 </div>
 

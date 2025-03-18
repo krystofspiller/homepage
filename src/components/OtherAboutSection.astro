@@ -12,6 +12,7 @@ import Docker from "@assets/icons/docker.astro"
 import Dtu from "@assets/icons/dtu.astro"
 import Link from "./Link.astro"
 import Leetcode from "@assets/icons/leetcode.astro"
+import Piano from "@assets/icons/piano.astro"
 
 let showDuolingo = true
 
@@ -57,14 +58,35 @@ async function getKnowtCardCount() {
   }
 }
 
-const [duolingoStreak, knowtCardCount = 0] = await Promise.all([
+let showYouTube = true
+async function getLatestYouTubeVideo() {
+  try {
+    const youtubeVideosUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId=UUCT25Oy0rRta8bLYBxxBazw&key=${import.meta.env.YOUTUBE_API_KEY}`
+    const response = await fetch(youtubeVideosUrl)
+    if (!response.ok) {
+      showYouTube = false
+    }
+
+    const json = await response.json()
+    return json.items.reduce((acc: any, val: any) => {
+      const date = Date.parse(val.contentDetails.videoPublishedAt)
+      if (date > acc[1]) {
+        acc = [val.contentDetails.videoId, date]
+      }
+      return acc
+    }, ['id', 0])[0]
+  } catch (error) {
+    showYouTube = false
+  }
+}
+
+const [duolingoStreak, knowtCardCount = 0, youTubeVideoId] = await Promise.all([
   getDuolingoStreak(),
   getKnowtCardCount(),
+  getLatestYouTubeVideo()
 ])
 
 const knowtProgress = ((knowtCardCount / 150) * 100).toFixed(1)
-
-// TODO: Certificates, Piano, Music
 ---
 
 <section class="my-10 mb-6">
@@ -194,4 +216,21 @@ const knowtProgress = ((knowtCardCount / 150) * 100).toFixed(1)
       </div>
     </div>
   </div>
+
+  <div class="mt-2 flex items-center gap-2">
+    <div class="bg-white rounded w-12">
+      <Piano size="size-12" />
+    </div>
+    <div class="w-full">
+      <div class="text-lg text-zinc-400">
+        I play a bit of piano.
+      </div>
+    </div>
+  </div>
+
+  {showYouTube &&
+    <div class="mt-2 flex relative h-0 pb-[56.25%]">
+      <iframe class="absolute top-0 left-0 w-full h-full" src={`https://www.youtube.com/embed/${youTubeVideoId}`} title="Latest piano video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  }
 </section>
