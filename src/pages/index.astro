@@ -10,6 +10,7 @@ import capdeskLogo from "@assets/images/capdesk.svg"
 import cartaLogo from "@assets/images/carta.svg"
 import commitMessage from "@assets/images/commit-message.png"
 import dataIntegrityChecker from "@assets/images/data-integrity-checker.png"
+import eagle from "@assets/audio/eagle.mp3"
 import fundraising from "@assets/images/fundraising.png"
 import linkChecker from "@assets/images/link-checker.png"
 import modal from "@assets/images/modal.png"
@@ -129,13 +130,11 @@ import SeeMore from "@components/SeeMore.astro"
       >.
     </p>
     <div class="relative" id="us-eagle">
-      <div
-        class="animate-move-offset absolute -top-[50px] left-[calc(50%-100px)] hidden h-0 w-0 scale-100 rotate-180 text-8xl opacity-0"
-      >
-      </div>
+      <audio class="hidden" controls src={eagle}></audio>
+      <div></div>
     </div>
     <p class="text-lg leading-8 text-zinc-400">
-      Find out more about my <Link href="#professional-contributions"
+      Read about my <Link href="#professional-contributions"
         >professional contributions</Link
       ><span>, <Link href="#skills">skills</Link>, </span><Link
         href="#hobby-project">hobby project</Link
@@ -938,14 +937,18 @@ import SeeMore from "@components/SeeMore.astro"
     }
 
     const us = document.querySelector("#us")
-    us?.addEventListener("click", (e) => {
+    us?.addEventListener("click", () => {
       us.innerHTML = "🇺🇸"
       const usEagle = document.querySelector("#us-eagle")
       if (!usEagle) return
 
       const bodyWidth = parseInt(getComputedStyle(document.body).width)
 
-      usEagle.innerHTML = `
+      setTimeout(() => {
+        ;(usEagle.children[0] as HTMLAudioElement).play()
+      }, 200)
+
+      usEagle.children[1].innerHTML = `
       <div
         class="animate-move-offset absolute h-0 w-0 left-[calc(50%-100px)] -top-[50px] scale-100 opacity-0"
         style='offset-path: path("M${bodyWidth / 2 + 150},0 Q0,100 -${bodyWidth / 2 + 150},0");'

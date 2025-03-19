@@ -3,7 +3,8 @@ import { JSDOM } from "jsdom"
 import { Image } from "astro:assets"
 
 import Knowt from "@assets/images/knowt.png"
-import GrindIsReal from "@assets/images/grind-is-real.svg"
+import PureGrinding from "@assets/images/pure-grinding.png"
+import CatEars from "@assets/icons/cat_ears.astro"
 import Duolingo from "@assets/icons/duolingo.astro"
 import Via from "@assets/icons/via.astro"
 import Electron from "@assets/icons/electron.astro"
@@ -13,6 +14,9 @@ import Dtu from "@assets/icons/dtu.astro"
 import Link from "./Link.astro"
 import Leetcode from "@assets/icons/leetcode.astro"
 import Piano from "@assets/icons/piano.astro"
+
+import oiia from "@assets/images/oiia.gif"
+import oiiamp3 from "@assets/audio/oiia.mp3"
 
 let showDuolingo = true
 
@@ -92,7 +96,16 @@ const knowtProgress = ((knowtCardCount / 150) * 100).toFixed(1)
 <section class="my-10 mb-6">
   <hr class="mb-6 border-zinc-600" />
 
-  <h3 id="general" class="mb-2 scroll-mt-15 text-xl font-semibold text-zinc-100">Education</h3>
+  <h2
+    id="general"
+    class="mb-2 scroll-mt-15 text-xl font-semibold text-zinc-100"
+  >
+    Edu<span
+      id="cat-ears"
+      class="relative cursor-pointer hover:text-[#75FB4C] hover:[&_path]:fill-[#75FB4C] hover:[&_path]:stroke-[#75FB4C]"
+      ><CatEars className="absolute -top-[3px] left-0 w-8" />cat</span
+    >ion
+  </h2>
   <div class="mb-3 flex items-center gap-2">
     <div><Dtu size="h-auto w-10 sm:w-8" /></div>
     <div class="flex grow flex-col">
@@ -154,7 +167,8 @@ const knowtProgress = ((knowtCardCount / 150) * 100).toFixed(1)
   </div>
 
   <hr class="my-6 border-zinc-600" />
-  <Image class="w-auto h-6 [*_path]:fill-zinc-400" src={GrindIsReal} alt="Grind is real" />
+  <h2 id="pure-grinding" class="scroll-mt-15 hidden">Pure grinding</h2>
+  <a href="https://www.youtube.com/watch?v=hzdIoghbFzg" target="_blank"><Image class="w-auto h-6 [*_path]:fill-zinc-400" src={PureGrinding} alt="Pure grinding" /></a>
 
   <div class="mt-3 flex items-center gap-2">
     <div class="w-12">
@@ -233,4 +247,32 @@ const knowtProgress = ((knowtCardCount / 150) * 100).toFixed(1)
       <iframe class="absolute top-0 left-0 w-full h-full" src={`https://www.youtube.com/embed/${youTubeVideoId}`} title="Latest piano video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
   }
+
+  <div
+  id="cat-overlay"
+  class="fixed top-0 left-0 z-50 hidden h-[100vh] w-[100vw] items-center justify-center bg-neutral-950/70 transition-all delay-150 duration-500"
+    >
+    <Image src={oiia} class="h-auto w-auto" alt="OIIA" />
+    <audio class="hidden" controls src={oiiamp3}></audio>
+  </div>
 </section>
+
+<script is:inline>
+  const catEars = document.getElementById("cat-ears")
+
+  catEars?.addEventListener("click", () => {
+    const catOverlay = document.getElementById("cat-overlay")
+    if (!catOverlay) return
+
+    const catOverlayAudio = catOverlay.children[1]
+    catOverlayAudio.play()
+
+    catOverlay.classList.add("flex")
+    catOverlay.classList.remove("hidden")
+
+    window.setTimeout(function () {
+      catOverlay.classList.add("hidden")
+      catOverlay.classList.remove("flex")
+    }, 2500)
+  })
+</script>
