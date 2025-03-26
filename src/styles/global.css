@@ -37,7 +37,7 @@
     }
   }
 
-  --color-orange: #e6805f;
+  --color-orange: #e27c0d;
   --color-orange-30: --alpha(var(--color-orange) / 30%);
 
   --gradient-accent: 90deg, #e6c75f, #e65f5f;

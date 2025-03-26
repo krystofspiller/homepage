@@ -65,7 +65,7 @@ async function getKnowtCardCount() {
 let showYouTube = true
 async function getLatestYouTubeVideo() {
   try {
-    const youtubeVideosUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId=UUCT25Oy0rRta8bLYBxxBazw&key=${import.meta.env.YOUTUBE_API_KEY}`
+    const youtubeVideosUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId=PL7-fKc8SwbfOk3eZyIk_sbKjR7YMO6lfW&key=${import.meta.env.YOUTUBE_API_KEY}` 
     const response = await fetch(youtubeVideosUrl)
     if (!response.ok) {
       showYouTube = false

@@ -50,7 +50,7 @@ getHeadings(document, toc)
   <slot />
 </div>
 
-<script define:vars={{ toc }}>
+<script is:inline data-astro-rerun define:vars={{ toc }}>
   const intersecting = new Set()
   function handleIntersect(entries) {
     entries.map((entry) => {
@@ -61,7 +61,7 @@ getHeadings(document, toc)
         intersecting.delete(targetId)
         document
           .querySelector(`li[data-id=${targetId}]`)
-          .classList.remove("text-white")
+          ?.classList.remove("text-white")
       }
     })
 
@@ -72,7 +72,7 @@ getHeadings(document, toc)
       if (positionFromTop < top[0]) {
         top = [positionFromTop, li]
       }
-      li.classList.remove("text-white")
+      li?.classList.remove("text-white")
     })
 
     top[1]?.classList.add("text-white")

@@ -36,7 +36,6 @@ import StringConstantsExistsExample from "@components/content/StringConstantsExi
 import Workflows from "@assets/images/workflows.astro"
 import SeeMore from "@components/SeeMore.astro"
 
-// TODO: GSAP ScrollTrigger top-content parallax animation? https://gsap.com/docs/v3/Plugins/ScrollTrigger/?page=1
 // TODO: Easter egg counter - two easter eggs so far, add a third, have a counter (in the banner?)
 // TODO: Add analytics - PostHog?
 // TODO: Section navigator - at the bottom on mobile
@@ -53,66 +52,79 @@ import SeeMore from "@components/SeeMore.astro"
 ---
 
 <BaseLayout>
-  <div
-    id="top-content"
-    class="flex w-full bg-radial from-(--color-orange-30) to-transparent to-70% [mask-image:linear-gradient(to_right,transparent_0,_black_50px,_black_calc(100%-50px),transparent_100%)]"
-  >
+  <div class="relative">
     <div
-      class="relative h-[324px] w-full [mask-image:linear-gradient(to_bottom,transparent_0,_black_50px,_black_calc(100%-50px),transparent_100%)]"
+      id="leftHalfMoon"
+      class="absolute -left-[200px] hidden h-[320px] w-[180px] rotate-2 rounded-tl-[160px] rounded-tr-[20px] rounded-br-[20px] rounded-bl-[160px] shadow-[0px_0px_32px_0px_var(--color-orange)]"
     >
-      <canvas id="background-canvas" class="opacity-0 transition duration-2000"
-      ></canvas>
+    </div>
+    <div
+      id="rightHalfMoon"
+      class="absolute left-[calc(100%+20px)] hidden h-[320px] w-[180px] -rotate-2 rounded-tl-[20px] rounded-tr-[160px] rounded-br-[160px] rounded-bl-[20px] shadow-[0px_0px_32px_0px_var(--color-orange)]"
+    >
+    </div>
+    <div
+      id="top-content"
+      class="flex w-full bg-radial from-(--color-orange-30) to-transparent to-70% [mask-image:linear-gradient(to_right,transparent_0,_black_50px,_black_calc(100%-50px),transparent_100%)]"
+    >
       <div
-        class="absolute top-1/2 left-1/2 flex w-full -translate-x-1/2 -translate-y-3/4 flex-col items-center justify-center text-center"
+        class="relative h-[324px] w-full [mask-image:linear-gradient(to_bottom,transparent_0,_black_50px,_black_calc(100%-50px),transparent_100%)]"
       >
-        <h1 class="block text-4xl font-light">
-          Hi <span
-            class="animate-wave hover:animate-wave-infinite inline-block origin-[75%_75%]"
-            >👋</span
-          > I'm
-          <span class="relative">
-            <svg
-              width="280"
-              height="28"
-              viewBox="0 0 280 28"
-              class="absolute top-[28px] left-0 z-0 block w-full"
-            >
-              <defs>
-                <linearGradient id="linear" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#e6c75f"></stop>
-                  <stop offset="100%" stop-color="#e65f5f"></stop>
-                </linearGradient>
-              </defs>
+        <canvas
+          id="background-canvas"
+          class="opacity-0 transition duration-2000"></canvas>
+        <div
+          class="absolute top-1/2 left-1/2 flex w-full -translate-x-1/2 -translate-y-3/4 flex-col items-center justify-center text-center"
+        >
+          <h1 class="block text-4xl font-light">
+            Hi <span
+              class="animate-wave hover:animate-wave-infinite inline-block origin-[75%_75%]"
+              >👋</span
+            > I'm
+            <span class="relative">
+              <svg
+                width="280"
+                height="28"
+                viewBox="0 0 280 28"
+                class="absolute top-[28px] left-0 z-0 block w-full"
+              >
+                <defs>
+                  <linearGradient id="linear" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#e6c75f"></stop>
+                    <stop offset="100%" stop-color="#e65f5f"></stop>
+                  </linearGradient>
+                </defs>
 
-              <path
-                fill="transparent"
-                stroke="url(#linear)"
-                stroke-width="4"
-                d="M2.75003 7.00006C26.75 1.99994 69.5 2 128.5 2C322.5 2.00024 324.75 12.0002 128.75 12.0002C-40.25 12.0002 -40.25 24 128.75 24C256.75 24 270.75 18 270.75 18"
-                class="animate-dash [stroke-dasharray:820] [stroke-dashoffset:0]"
-              ></path>
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="95.2 8.7 11 11"
-              class="absolute top-[7px] left-[76px] z-20 w-3"
-            >
-              <g class="sparkles">
                 <path
-                  style="animation-delay: 2s; transform-box: fill-box;"
-                  class="animate-sparkle origin-center transform-[scale(0)]"
-                  fill="white"
-                  d="M99.18160965 12.79394657s1.61168639-8.41658446 3.0442965 0c0 0 8.05843194 1.43261013 0 2.86522025 0 0-1.43261011 8.59566072-3.0442965 0-4.83505916-.89538133-4.47690663-1.79076265 0-2.86522025z"
+                  fill="transparent"
+                  stroke="url(#linear)"
+                  stroke-width="4"
+                  d="M2.75003 7.00006C26.75 1.99994 69.5 2 128.5 2C322.5 2.00024 324.75 12.0002 128.75 12.0002C-40.25 12.0002 -40.25 24 128.75 24C256.75 24 270.75 18 270.75 18"
+                  class="animate-dash [stroke-dasharray:820] [stroke-dashoffset:0]"
                 ></path>
-              </g>
-            </svg>
-            <span
-              class="relative z-10 bg-linear-(--gradient-accent) bg-clip-text text-transparent"
-              >Krystof</span
-            >
-          </span>
-        </h1>
-        <p class="text-2xl text-zinc-400">Fullstack software engineer</p>
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="95.2 8.7 11 11"
+                class="absolute top-[7px] left-[76px] z-20 w-3"
+              >
+                <g class="sparkles">
+                  <path
+                    style="animation-delay: 2s; transform-box: fill-box;"
+                    class="animate-sparkle origin-center transform-[scale(0)]"
+                    fill="white"
+                    d="M99.18160965 12.79394657s1.61168639-8.41658446 3.0442965 0c0 0 8.05843194 1.43261013 0 2.86522025 0 0-1.43261011 8.59566072-3.0442965 0-4.83505916-.89538133-4.47690663-1.79076265 0-2.86522025z"
+                  ></path>
+                </g>
+              </svg>
+              <span
+                class="relative z-10 bg-linear-(--gradient-accent) bg-clip-text text-transparent"
+                >Krystof</span
+              >
+            </span>
+          </h1>
+          <p class="text-2xl text-zinc-400">Fullstack software engineer</p>
+        </div>
       </div>
     </div>
   </div>
@@ -132,7 +144,7 @@ import SeeMore from "@components/SeeMore.astro"
     <div class="relative" id="us-eagle">
       <audio class="hidden" controls src={eagle}></audio>
       <div
-        class="animate-move-offset absolute -top-[50px] left-[calc(50%-100px)] h-0 w-0 scale-100 opacity-0"
+        class="animate-move-offset absolute -top-[50px] left-[calc(50%-100px)] h-0 w-0 scale-100 rotate-180 text-8xl opacity-0"
       >
       </div>
     </div>
@@ -798,6 +810,10 @@ import SeeMore from "@components/SeeMore.astro"
         const projectElement = element.children[0].children[0]
         const warStoryElement = element.children[0].children[1]
 
+        if (!projectElement || !warStoryElement) {
+          return
+        }
+
         if (projectElement.classList.contains("animate-move-up-fade-out")) {
           projectElement.classList.remove("animate-move-up-fade-out")
           warStoryElement.classList.remove("animate-move-up-fade-in")
@@ -821,170 +837,237 @@ import SeeMore from "@components/SeeMore.astro"
 
   <script>
     import { gsap } from "gsap"
+    import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-    const c = document.querySelector("#background-canvas") as HTMLCanvasElement
-    const ctx = c.getContext("2d") as CanvasRenderingContext2D
+    function init() {
+      if (window.location.pathname !== "/") return
 
-    const width = parseInt(
-      getComputedStyle(document.querySelector("#top-content") as Element).width,
-    )
-
-    let cw = (c.width = width)
-    let ch = (c.height = 324)
-    let radius = Math.max(cw, ch)
-    let factor = width / 576
-    let usStyle = false
-    let tl: gsap.core.Timeline | null = null
-    const particles = Array(99)
-
-    let firstDraw = true
-    function onFirstDraw() {
-      if (!firstDraw) return
-
-      firstDraw = false
-
-      c.classList.remove("opacity-0")
-    }
-
-    function animateBackground() {
-      const imgs = usStyle
-        ? ["cowboy.png", "eagle.png", "usa.png"]
-        : [
-            "astro.svg",
-            "csharp.svg",
-            "css.svg",
-            "docker.svg",
-            "figma.svg",
-            "github.svg",
-            "go.svg",
-            "miro.svg",
-            "next.svg",
-            "notion.svg",
-            "postgresql.svg",
-            "python.svg",
-            "react.svg",
-            "ruby.svg",
-            "slack.svg",
-            "stripe.png",
-            "tableplus.png",
-            "tailwind.svg",
-            "typescript.svg",
-            "vite.svg",
-          ]
-
-      for (let i = 0; i < particles.length; i++) {
-        particles[i] = {
-          x: 0,
-          y: 0,
-          scale: 0,
-          rotate: 0,
-          alpha: 0,
-          img: new Image(),
-        }
-        particles[i].img.src =
-          `${window.location.origin}/icons/${imgs[i % imgs.length]}`
-      }
-
-      tl = gsap
-        .timeline({ onUpdate: draw })
-        .fromTo(
-          particles,
-          {
-            x: (i) => {
-              const angle = (i / particles.length) * Math.PI * 2 - Math.PI / 2
-              return Math.cos(angle * 10) * radius
-            },
-            y: (i) => {
-              const angle = (i / particles.length) * Math.PI * 2 - Math.PI / 2
-              return Math.sin(angle * 10) * radius
-            },
-            scale: 1,
-            rotate: 0,
-            alpha: 1.5,
-          },
-          {
-            duration: 30,
-            x: 0,
-            y: 0,
-            scale: 0,
-            alpha: -0.2,
-            rotate: 3,
-            stagger: { each: -0.3, repeat: -1 },
-          },
-          0,
-        )
-        .seek(99)
-    }
-
-    animateBackground()
-
-    function draw() {
-      onFirstDraw()
-
-      particles.sort((a, b) => a.scale - b.scale) // sort by scale to set z-indexing
-      ctx.clearRect(0, 0, cw, ch)
-      particles.forEach((p) => {
-        ctx.translate(cw / 2, ch / 2)
-        ctx.rotate(p.rotate - 2)
-        const resizeFactor = 100 / Math.max(p.img.height, p.img.width)
-        ctx.globalAlpha = Math.max(0, p.alpha * factor)
-        ctx.drawImage(
-          p.img,
-          p.x,
-          p.y,
-          p.img.width * p.scale * factor * resizeFactor,
-          p.img.height * p.scale * factor * resizeFactor,
-        )
-        ctx.resetTransform()
-      })
-    }
-
-    const us = document.querySelector("#us")
-    us?.addEventListener("click", () => {
-      us.innerHTML = "🇺🇸"
-      const usEagle = document.querySelector("#us-eagle")
-      if (!usEagle) return
+      gsap.registerPlugin(ScrollTrigger)
 
       const bodyWidth = parseInt(getComputedStyle(document.body).width)
 
-      setTimeout(() => {
-        ;(usEagle.children[0] as HTMLAudioElement).play()
-      }, 200)
+      if (bodyWidth >= 1024) {
+        ;[
+          ["#leftHalfMoon", 1],
+          ["#rightHalfMoon", -1],
+        ].forEach(([t, f]) => {
+          const trigger = t as string
+          const factor = f as number
 
-      usEagle.children[1].outerHTML = `
-      <div
-        class="animate-move-offset absolute h-0 w-0 left-[calc(50%-100px)] -top-[50px] scale-100 opacity-0"
-        style='offset-path: path("M${bodyWidth / 2 + 150},0 Q0,100 -${bodyWidth / 2 + 150},0");'
-      >
-        <div class="rotate-180 text-8xl">🦅</div>
-      </div>
-    `
-
-      if (!usStyle) {
-        c.classList.add("opacity-0")
-        setTimeout(() => {
-          usStyle = true
-          animateBackground()
-          firstDraw = true
-        }, 2000)
+          gsap
+            .timeline({
+              onComplete: () => {
+                gsap
+                  .timeline({
+                    scrollTrigger: {
+                      trigger,
+                      start: "top 118px",
+                      end: "+=500",
+                      scrub: true,
+                    },
+                  })
+                  .from(trigger, {
+                    x: 0,
+                    y: 0,
+                    rotation: 2 * factor,
+                    ease: "none",
+                    duration: 0,
+                  })
+                  .to(trigger, {
+                    x: -150 * factor,
+                    y: 100,
+                    rotation: -15 * factor,
+                    ease: "none",
+                  })
+              },
+            })
+            .from(trigger, {
+              x: -300 * factor,
+              y: -150,
+              rotation: 45 * factor,
+              ease: "power1.out",
+              duration: 2,
+              scale: 0.1,
+              display: "block",
+            })
+            .to(trigger, {
+              display: "block",
+              duration: 0,
+            })
+        })
       }
-    })
 
-    window.addEventListener("resize", () => {
       const width = parseInt(
         getComputedStyle(document.querySelector("#top-content") as Element)
           .width,
       )
-      cw = c.width = width
-      radius = Math.max(cw, ch)
-      factor = width / 576
-      tl?.invalidate()
-    })
 
-    c.addEventListener("pointerup", () => {
-      gsap.to(tl, {
-        timeScale: tl?.isActive() ? 0 : 1,
+      const c = document.querySelector(
+        "#background-canvas",
+      ) as HTMLCanvasElement
+      const ctx = c.getContext("2d") as CanvasRenderingContext2D
+
+      let cw = (c.width = width)
+      let ch = (c.height = 324)
+      let radius = Math.max(cw, ch)
+      let factor = width / 576
+      let usStyle = false
+      let tl: gsap.core.Timeline | null = null
+      const particles = Array(99)
+
+      let firstDraw = true
+      function onFirstDraw() {
+        if (!firstDraw) return
+
+        firstDraw = false
+
+        c.classList.remove("opacity-0")
+      }
+
+      function animateBackground() {
+        const imgs = usStyle
+          ? ["cowboy.png", "eagle.png", "usa.png"]
+          : [
+              "astro.svg",
+              "csharp.svg",
+              "css.svg",
+              "docker.svg",
+              "figma.svg",
+              "github.svg",
+              "go.svg",
+              "miro.svg",
+              "next.svg",
+              "notion.svg",
+              "postgresql.svg",
+              "python.svg",
+              "react.svg",
+              "ruby.svg",
+              "slack.svg",
+              "stripe.png",
+              "tableplus.png",
+              "tailwind.svg",
+              "typescript.svg",
+              "vite.svg",
+            ]
+
+        for (let i = 0; i < particles.length; i++) {
+          particles[i] = {
+            x: 0,
+            y: 0,
+            scale: 0,
+            rotate: 0,
+            alpha: 0,
+            img: new Image(),
+          }
+          particles[i].img.src =
+            `${window.location.origin}/icons/${imgs[i % imgs.length]}`
+        }
+
+        tl = gsap
+          .timeline({ onUpdate: draw })
+          .fromTo(
+            particles,
+            {
+              x: (i) => {
+                const angle = (i / particles.length) * Math.PI * 2 - Math.PI / 2
+                return Math.cos(angle * 10) * radius
+              },
+              y: (i) => {
+                const angle = (i / particles.length) * Math.PI * 2 - Math.PI / 2
+                return Math.sin(angle * 10) * radius
+              },
+              scale: 1,
+              rotate: 0,
+              alpha: 1.5,
+            },
+            {
+              duration: 30,
+              x: 0,
+              y: 0,
+              scale: 0,
+              alpha: -0.2,
+              rotate: 3,
+              stagger: { each: -0.3, repeat: -1 },
+            },
+            0,
+          )
+          .seek(99)
+      }
+
+      animateBackground()
+
+      function draw() {
+        onFirstDraw()
+
+        particles.sort((a, b) => a.scale - b.scale) // sort by scale to set z-indexing
+        ctx.clearRect(0, 0, cw, ch)
+        particles.forEach((p) => {
+          ctx.translate(cw / 2, ch / 2)
+          ctx.rotate(p.rotate - 2)
+          const resizeFactor = 100 / Math.max(p.img.height, p.img.width)
+          ctx.globalAlpha = Math.max(0, p.alpha * factor)
+          ctx.drawImage(
+            p.img,
+            p.x,
+            p.y,
+            p.img.width * p.scale * factor * resizeFactor,
+            p.img.height * p.scale * factor * resizeFactor,
+          )
+          ctx.resetTransform()
+        })
+      }
+
+      const us = document.querySelector("#us")
+      us?.addEventListener("click", () => {
+        us.innerHTML = "🇺🇸"
+        const usEagle = document.querySelector("#us-eagle")
+        if (!usEagle) return
+
+        const bodyWidth = parseInt(getComputedStyle(document.body).width)
+
+        setTimeout(() => {
+          ;(usEagle.children[0] as HTMLAudioElement).play()
+        }, 200)
+
+        usEagle.children[1].outerHTML = `
+          <div
+            class="animate-move-offset absolute h-0 w-0 left-[calc(50%-100px)] -top-[50px] scale-100 opacity-0"
+            style='offset-path: path("M${bodyWidth / 2 + 150},0 Q0,100 -${bodyWidth / 2 + 150},0");'
+          >
+            <div class="rotate-180 text-8xl">🦅</div>
+          </div>
+        `
+
+        if (!usStyle) {
+          c.classList.add("opacity-0")
+          setTimeout(() => {
+            usStyle = true
+            animateBackground()
+            firstDraw = true
+          }, 2000)
+        }
       })
+
+      window.addEventListener("resize", () => {
+        const width = parseInt(
+          getComputedStyle(document.querySelector("#top-content") as Element)
+            .width,
+        )
+        cw = c.width = width
+        radius = Math.max(cw, ch)
+        factor = width / 576
+        tl?.invalidate()
+      })
+
+      c.addEventListener("pointerup", () => {
+        gsap.to(tl, {
+          timeScale: tl?.isActive() ? 0 : 1,
+        })
+      })
+    }
+
+    document.addEventListener("astro:page-load", () => {
+      init()
     })
   </script>
 </BaseLayout>
