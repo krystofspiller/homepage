@@ -75,6 +75,12 @@ import easterEggOIIA from "@assets/images/easter-egg-oiia.png"
 
 <script>
   import { easterEggCounter } from "@utils/store"
+  import confetti from "canvas-confetti"
+  import butterup from "butteruptoasts"
+
+  butterup.options.toastLife = 5000
+
+  let confettiFired = false
 
   easterEggCounter.subscribe((value) => {
     for (const id of value) {
@@ -82,6 +88,37 @@ import easterEggOIIA from "@assets/images/easter-egg-oiia.png"
       if (img) {
         img.classList.remove("hidden")
       }
+    }
+
+    if (value.length === 3 && !confettiFired) {
+      confettiFired = true
+
+      butterup.toast({
+        title: "🎉 Hooray!",
+        message: "You found all easter eggs!",
+        location: "top-right",
+        type: "success",
+        theme: "butterupcustom",
+        dismissable: true,
+        duration: 1000,
+        toastLife: 1000,
+      })
+
+      confetti({
+        particleCount: 100,
+        angle: 60,
+        spread: 60,
+        startVelocity: 60,
+        origin: { y: 0.7, x: 0 },
+      })
+
+      confetti({
+        particleCount: 100,
+        angle: 120,
+        spread: 60,
+        startVelocity: 60,
+        origin: { y: 0.7, x: 1 },
+      })
     }
   })
 </script>

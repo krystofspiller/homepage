@@ -1,6 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap");
+@import "butteruptoasts/src/butterup.css";
 @import "tailwindcss";
+
+.butteruptoast.butterupcustom {
+  background: black;
+  color: oklch(96.7% 0.001 286.375);
+  border: 2px solid #e27c0d;
+}
+
+.butteruptoast.butterupcustom.success {
+  background: black;
+  color: oklch(96.7% 0.001 286.375);
+  border: 2px solid oklch(72.3% 0.219 149.579);
+}
 
 .effect-shine {
   -webkit-mask-image: linear-gradient(

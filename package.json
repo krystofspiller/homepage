@@ -16,6 +16,7 @@
     "@types/alpinejs": "^3.13.11",
     "alpinejs": "^3.14.9",
     "astro": "^5.7.1",
+    "butteruptoasts": "^2.0.1",
     "canvas-confetti": "^1.9.3",
     "gsap": "^3.12.7",
     "jsdom": "^26.0.0",
