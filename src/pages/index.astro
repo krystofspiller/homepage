@@ -17,6 +17,7 @@ import modal from "@assets/images/modal.png"
 import newAppRelease from "@assets/images/new-app-release.png"
 import openapi from "@assets/images/openapi.png"
 import systematicLogo from "@assets/images/systematic.svg"
+import trampoline from "@assets/audio/trampoline.mp3"
 
 import ProjectCard from "@components/ProjectCard.astro"
 import React from "@assets/icons/react.astro"
@@ -129,7 +130,7 @@ import SeeMore from "@components/SeeMore.astro"
       >-oriented software engineer with <strong
         class="font-medium text-zinc-100">6 years of experience</strong
       > in fullstack web development. I'm preferably targeting roles involving React,
-      TypeScript and Go with an opportunity to transfer to the <span
+      TypeScript, Ruby or Go with an opportunity to transfer to the <span
         class="cursor-pointer"
         id="us">US</span
       >.
@@ -605,10 +606,13 @@ import SeeMore from "@components/SeeMore.astro"
           >
         </p>
         <Image
-          class="w-full"
+          id="trampoline"
+          class="w-full cursor-pointer"
           src={newAppRelease}
           alt="Example Slack message of new app release"
         />
+        <audio id="trampoline-audio" class="hidden" controls src={trampoline}
+        ></audio>
 
         <h3
           id="grammar-checker"
@@ -831,9 +835,110 @@ import SeeMore from "@components/SeeMore.astro"
   <script>
     import { gsap } from "gsap"
     import { ScrollTrigger } from "gsap/ScrollTrigger"
+    import confetti from "canvas-confetti"
+    import { easterEggCounter, EasterEggs } from "@utils/store"
 
-    function init() {
+    async function init() {
       if (window.location.pathname !== "/") return
+
+      const trampolineTl = gsap
+        .timeline({ paused: true })
+        .from("#trampoline", {
+          scale: 1,
+          duration: 0,
+        })
+        .to("#trampoline", {
+          scale: 0.5,
+          duration: 0.15,
+          ease: "power2.out",
+        })
+        .to("#trampoline", {
+          scale: 1,
+          duration: 1.5,
+          ease: "elastic.out(1, 0.3)",
+        })
+
+      async function shapeFromImage(imageData: {
+        src: string
+        scalar?: number
+      }) {
+        const { src, scalar = 1 } = imageData
+        const scale = 1 / scalar
+
+        const img = new Image()
+        img.src = src
+
+        await new Promise((res) => img.addEventListener("load", res))
+
+        const size = 10 * scalar
+
+        const sWidth = img.naturalWidth
+        const sHeight = img.naturalHeight
+
+        const width = size
+        const height = (size * sHeight) / sWidth
+
+        const canvas = new OffscreenCanvas(width, height)
+        const ctx = canvas.getContext("2d")
+        ctx?.drawImage(img, 0, 0, sWidth, sHeight, 0, 0, width, height)
+
+        return {
+          type: "bitmap",
+          bitmap: canvas.transferToImageBitmap(),
+          matrix: [
+            scale,
+            0,
+            0,
+            scale,
+            (-width * scale) / 2,
+            (-height * scale) / 2,
+          ],
+        }
+      }
+
+      const tramp1 = await shapeFromImage({
+        src: "/icons/trampoline1.png",
+        scalar: 10,
+      })
+      const tramp2 = await shapeFromImage({
+        src: "/icons/trampoline2.png",
+        scalar: 10,
+      })
+      const trampoline = document.querySelector("#trampoline")
+      trampoline?.addEventListener("click", () => {
+        easterEggCounter.set(
+          Array.from(
+            new Set(easterEggCounter.get()).add(EasterEggs.TRAMPOLINE),
+          ),
+        )
+
+        const trampolineAudio = document.querySelector(
+          "#trampoline-audio",
+        ) as HTMLAudioElement | null
+        if (trampolineAudio?.paused) {
+          trampolineAudio.play()
+        } else if (trampolineAudio) {
+          trampolineAudio.currentTime = 0
+        }
+
+        trampolineTl.restart()
+        trampolineTl.play()
+
+        const rect = trampoline.getBoundingClientRect()
+        const y = (rect.top + rect.height / 2) / window.innerHeight
+
+        confetti({
+          particleCount: 10,
+          spread: 150,
+          startVelocity: 20,
+          origin: { y },
+          scalar: 10,
+          decay: 0.92,
+          shapes: [tramp1, tramp2],
+          flat: true,
+          ticks: 50,
+        })
+      })
 
       gsap.registerPlugin(ScrollTrigger)
 
@@ -1010,9 +1115,20 @@ import SeeMore from "@components/SeeMore.astro"
         })
       }
 
+      const catEars = document.getElementById("cat-ears")
+
+      catEars?.addEventListener("click", () => {
+        easterEggCounter.set(
+          Array.from(new Set(easterEggCounter.get()).add(EasterEggs.OIIA)),
+        )
+      })
+
       const us = document.querySelector("#us")
       us?.addEventListener("click", () => {
         us.innerHTML = "🇺🇸"
+        easterEggCounter.set(
+          Array.from(new Set(easterEggCounter.get()).add(EasterEggs.US)),
+        )
         const usEagle = document.querySelector("#us-eagle")
         if (!usEagle) return
 

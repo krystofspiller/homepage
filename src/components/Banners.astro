@@ -3,10 +3,15 @@ import { Image } from "astro:assets"
 
 import Banner from "./Banner.astro"
 import profile from "@assets/images/profile.jpg"
+import easterEggUS from "@assets/images/easter-egg-us.png"
+import easterEggTrampoline from "@assets/images/easter-egg-trampoline.png"
+import easterEggOIIA from "@assets/images/easter-egg-oiia.png"
 ---
 
 <Banner
-  ><div class="mx-12 flex items-center gap-2 text-center text-sm sm:text-base">
+  ><div
+    class="mr-12 ml-4 flex items-center gap-2 text-center text-sm sm:mx-12 sm:text-base"
+  >
     <span style="cursor: default;" data-tooltip="TooltipRef#krystof"
       ><Image
         class="w-8 max-w-8 rounded-full"
@@ -23,6 +28,26 @@ import profile from "@assets/images/profile.jpg"
         data-cal-namespace="chat"
         data-cal-config='{"layout":"month_view"}'>Let's chat</span
       >
+    </div>
+    <div class="flex shrink-0 gap-1">
+      <Image
+        id="easterEgg-1"
+        class="hidden h-10 w-auto"
+        src={easterEggUS}
+        alt="Easter egg #1"
+      />
+      <Image
+        id="easterEgg-2"
+        class="hidden h-10 w-auto"
+        src={easterEggTrampoline}
+        alt="Easter egg #2"
+      />
+      <Image
+        id="easterEgg-3"
+        class="hidden h-10 w-auto"
+        src={easterEggOIIA}
+        alt="Easter egg #3"
+      />
     </div>
   </div>
 </Banner>
@@ -47,3 +72,16 @@ import profile from "@assets/images/profile.jpg"
     >
   </div>
 </div>
+
+<script>
+  import { easterEggCounter } from "@utils/store"
+
+  easterEggCounter.subscribe((value) => {
+    for (const id of value) {
+      const img = document.getElementById(`easterEgg-${id}`)
+      if (img) {
+        img.classList.remove("hidden")
+      }
+    }
+  })
+</script>
