@@ -1,0 +1,28 @@
+---
+interface Props {
+  from: number
+  to?: number
+  note?: string
+}
+
+const { from, to, note } = Astro.props
+
+function getRange(from: number, to?: number) {
+  const currentYear = new Date().getFullYear()
+  if (to && from > to) {
+    to = undefined
+  }
+
+  if (!to && from !== currentYear) {
+    to = currentYear
+  }
+
+  if (!to) return `${from}-Now`
+
+  return `${from}-${to}`
+}
+---
+
+<span class="text-sm text-zinc-400"
+  >{getRange(from, to)}{note && <span class="text-xs"> ({note})</span>}</span
+>

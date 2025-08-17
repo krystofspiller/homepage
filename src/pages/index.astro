@@ -16,17 +16,11 @@ import linkChecker from "@assets/images/link-checker.png"
 import modal from "@assets/images/modal.png"
 import newAppRelease from "@assets/images/new-app-release.png"
 import openapi from "@assets/images/openapi.png"
+import portchainLogo from "@assets/images/portchain.svg"
 import systematicLogo from "@assets/images/systematic.svg"
 import trampoline from "@assets/audio/trampoline.mp3"
 
-import ProjectCard from "@components/ProjectCard.astro"
-import React from "@assets/icons/react.astro"
-import Tailwind from "@assets/icons/tailwind.astro"
 import FunAtParties from "@assets/images/fun-at-parties.astro"
-import Next from "@assets/icons/next.astro"
-import Expo from "@assets/icons/expo.astro"
-import Appwrite from "@assets/icons/appwrite.astro"
-import Convex from "@assets/icons/convex.astro"
 import OtherAboutSection from "@components/OtherAboutSection.astro"
 import TypeValidationExample from "@components/content/TypeValidationExample.astro"
 import Billing from "@assets/images/billing.astro"
@@ -36,13 +30,15 @@ import OpenApiHelperExample from "@components/content/OpenApiHelperExample.astro
 import StringConstantsExistsExample from "@components/content/StringConstantsExistsExample.astro"
 import Workflows from "@assets/images/workflows.astro"
 import SeeMore from "@components/SeeMore.astro"
+import YearRange from "@components/YearRange.astro"
 
-// TODO: Easter egg counter - two easter eggs so far, add a third, have a counter (in the banner?)
-// TODO: Add analytics
+const yearsOfExperience = Math.abs(
+  new Date(Date.now() - new Date(2020, 1, 1).getTime()).getFullYear() - 1970,
+)
+
 // TODO: Section navigator - at the bottom on mobile
 // TODO Put styled HTML into components
 // TODO implement link checker and add a note about it
-// TODO Link to the HabitVille project when presentable
 ---
 
 <BaseLayout>
@@ -128,12 +124,11 @@ import SeeMore from "@components/SeeMore.astro"
       I'm a <span class="effect-shine text-lg leading-8 text-[#f0f0ff]"
         >detail</span
       >-oriented software engineer with <strong
-        class="font-medium text-zinc-100">6 years of experience</strong
-      > in fullstack web development. I'm preferably targeting roles involving React,
-      TypeScript, Ruby or Go with an opportunity to transfer to the <span
-        class="cursor-pointer"
-        id="us">US</span
-      >.
+        class="font-medium text-zinc-100"
+        >{yearsOfExperience} years of experience</strong
+      > in fullstack web development. I'm targeting roles involving TypeScript, React,
+      Ruby and Go with an opportunity to transfer to
+      <span class="cursor-pointer" id="us">North America</span>.
     </p>
     <div class="relative" id="us-eagle">
       <audio class="hidden" controls src={eagle}></audio>
@@ -145,9 +140,8 @@ import SeeMore from "@components/SeeMore.astro"
     <p class="text-lg leading-8 text-zinc-400">
       Read about my <Link href="#professional-contributions"
         >professional contributions</Link
-      ><span>, <Link href="#skills">skills</Link>, </span><Link
-        href="#hobby-project">hobby project</Link
-      > and <span class="relative"
+      ><span>, <Link href="#skills">skills</Link>, </span> and <span
+        class="relative"
         ><Link href="#general">more</Link><Link href="/fun-at-parties"
           ><FunAtParties
             className="absolute top-[18px] -left-[10px] hover:[&_path]:fill-[url(#linear)]"
@@ -161,22 +155,81 @@ import SeeMore from "@components/SeeMore.astro"
   </div>
   <SideNavigable>
     <section class="mb-10">
-      <h2
+      <h1
         id="professional-contributions"
         class="mb-2 scroll-mt-15 text-2xl font-semibold text-zinc-100"
       >
         Professional contributions
-      </h2>
+      </h1>
       <hr class="mb-6 border-zinc-600" />
-      <div class="mb-4 flex flex-col items-center justify-center gap-1">
+      <h2
+        id="portchain"
+        data-toc="Portchain"
+        class="mb-4 flex flex-col items-center justify-center gap-1"
+      >
+        <Image
+          class="h-5 w-auto"
+          loading="eager"
+          src={portchainLogo}
+          alt="Portchain logo"
+        />
+        <YearRange from={2025} />
+      </h2>
+      <h3
+        id="terminal-integrations"
+        data-toc="Terminal integrations"
+        class="mb-1 scroll-mt-15 text-lg font-semibold text-zinc-100"
+      >
+        <span
+          data-tooltip="In shipping, vessels transport containers between ports. A terminal is a place where containers are loaded and unloaded from the vessel."
+          >Terminal</span
+        > integrations
+      </h3>
+      <p class="mb-3 text-lg leading-8 text-zinc-400">
+        I've integrated Portchain's data platform with terminals from Central
+        America and Southern Europe using REST APIs. <SeeMore
+          >These integrations periodically check for updates from terminals,
+          match their schedules with Portchain's data and synchronize between
+          the two.</SeeMore
+        >
+      </p>
+      <h4 class="mb-1 text-lg font-semibold text-zinc-100">Other</h4>
+      <p class="mb-3 text-lg leading-8 text-zinc-400">
+        <ol
+          class="my-3 ml-6 list-disc space-y-1 text-lg leading-8 text-zinc-400"
+        >
+          <li>
+            Implemented MVP features as part of a bet which got us a new major
+            customer.
+          </li>
+          <li>
+            Played a role in migration from Heroku to Google Cloud Platform to
+            decrease infrastructure costs.
+          </li>
+          <li>
+            Maintained a deployer application used to simplify deployments to
+            various environments on Google Cloud Platform.
+          </li>
+          <li>
+            Modernized the codebase by introducing Dependabot and updating
+            dependencies.
+          </li>
+        </ol>
+      </p>
+      <hr class="mb-6 border-zinc-600" />
+      <h2
+        id="carta"
+        data-toc="Carta"
+        class="mb-4 flex flex-col items-center justify-center gap-1"
+      >
         <Image
           class="h-8 w-auto"
           loading="eager"
           src={cartaLogo}
           alt="Carta logo"
         />
-        <span class="text-sm text-zinc-400">2022-2025</span>
-      </div>
+        <YearRange from={2022} to={2025} />
+      </h2>
       <h3
         id="model-funding-rounds"
         class="mb-1 scroll-mt-15 text-lg font-semibold text-zinc-100"
@@ -325,6 +378,7 @@ import SeeMore from "@components/SeeMore.astro"
 
       <h3
         id="link-checker"
+        data-toc="Invalid link checker"
         class="mt-6 mb-1 scroll-mt-15 text-lg font-semibold text-zinc-100"
       >
         Automated invalid link checker
@@ -353,7 +407,7 @@ import SeeMore from "@components/SeeMore.astro"
         id="modals"
         class="mt-6 mb-1 scroll-mt-15 text-lg font-semibold text-zinc-100"
       >
-        Simpler and consistent modals
+        Improved modal component
       </h3>
       <p class="mb-3 text-lg leading-8 text-zinc-400">
         Improved both UX and DX by improving a modal component. <SeeMore
@@ -574,14 +628,14 @@ import SeeMore from "@components/SeeMore.astro"
 
         <hr class="my-6 border-zinc-600" />
 
-        <div class="mb-4 flex flex-col items-center justify-center gap-1">
+        <h2
+          id="capdesk"
+          data-toc="Capdesk"
+          class="mb-4 flex flex-col items-center justify-center gap-1"
+        >
           <Image class="h-8 w-auto" src={capdeskLogo} alt="Capdesk logo" />
-          <span class="text-sm text-zinc-400"
-            >2020-2022<span class="text-xs">
-              (full-time from Feb 2022)</span
-            ></span
-          >
-        </div>
+          <YearRange from={2020} to={2022} note="full-time from Feb 2022" />
+        </h2>
         <h3
           id="slack-app-releases"
           data-toc="App releases on Slack"
@@ -678,16 +732,18 @@ import SeeMore from "@components/SeeMore.astro"
 
         <hr class="my-6 border-zinc-600" />
 
-        <div class="mb-4 flex flex-col items-center justify-center gap-1">
+        <h2
+          id="systematic"
+          data-toc="Systematic"
+          class="mb-4 flex flex-col items-center justify-center gap-1"
+        >
           <Image
-            class="h-8 w-auto"
+            class="h-6 w-auto"
             src={systematicLogo}
             alt="Systematic logo"
           />
-          <span class="text-sm text-zinc-400"
-            >2019-2020<span class="text-xs"> (part-time)</span></span
-          >
-        </div>
+          <YearRange from={2019} to={2020} note="part-time" />
+        </h2>
         <h3
           id="dependency-management"
           class="mb-1 scroll-mt-15 text-lg font-semibold text-zinc-100"
@@ -727,49 +783,11 @@ import SeeMore from "@components/SeeMore.astro"
       </p>
 
       <section class="my-10 mb-6">
-        <h2 id="skills" class="mb-2 scroll-mt-15 text-2xl font-semibold">
+        <h1 id="skills" class="mb-2 scroll-mt-15 text-2xl font-semibold">
           Skills
-        </h2>
+        </h1>
         <hr class="mb-6 border-zinc-600" />
         <SkillsSection />
-      </section>
-
-      <section class="my-10 mb-6">
-        <h2 id="hobby-project" class="mb-2 scroll-mt-15 text-2xl font-semibold">
-          Hobby project
-        </h2>
-        <hr class="mb-6 border-zinc-600" />
-        <ProjectCard
-          projectTitle="HabitVille"
-          projectDescription="Track habits and gamify them in a tycoon-game. Started with a web app, now working on an iOS mobile app."
-          projectLink="https://github.com/krystofspiller/habitville"
-          githubLink="https://github.com/krystofspiller/habitville"
-        >
-          <span
-            data-tooltip='<a href="https://nextjs.org" target="_blank">Next</a>'
-            ><Next /></span
-          >
-          <span
-            data-tooltip='<a href="https://expo.dev" target="_blank">Expo</a>'
-            ><Expo /></span
-          >
-          <span
-            data-tooltip='<a href="https://react.dev" target="_blank">React</a> & <a href="https://reactnative.dev" target="_blank">React Native</a>'
-            ><React /></span
-          >
-          <span
-            data-tooltip='<a href="https://tailwindcss.com" target="_blank">Tailwind</a>'
-            ><Tailwind /></span
-          >
-          <span
-            data-tooltip='<a href="https://appwrite.io" target="_blank">Appwrite</a>'
-            ><Appwrite /></span
-          >
-          <span
-            data-tooltip='<a href="https://www.convex.dev" target="_blank">Convex</a>'
-            ><Convex /></span
-          >
-        </ProjectCard>
       </section>
 
       <OtherAboutSection />

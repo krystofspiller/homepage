@@ -11,6 +11,8 @@ import Banners from "@components/Banners.astro"
 const title = Astro.props.title
   ? `${Astro.props.title} | Krystof Spiller`
   : "Krystof Spiller"
+
+const lookingForJob = false
 // TODO: Refactor to use TS - get rid of exclamation points
 // TODO: Set up ESLint
 ---
@@ -31,60 +33,16 @@ const title = Astro.props.title
     />
     <ClientRouter />
     <Tooltip />
-    <script is:inline>
-      ;(function (C, A, L) {
-        let p = function (a, ar) {
-          a.q.push(ar)
-        }
-        let d = C.document
-        C.Cal =
-          C.Cal ||
-          function () {
-            let cal = C.Cal
-            let ar = arguments
-            if (!cal.loaded) {
-              cal.ns = {}
-              cal.q = cal.q || []
-              d.head.appendChild(d.createElement("script")).src = A
-              cal.loaded = true
-            }
-            if (ar[0] === L) {
-              const api = function () {
-                p(api, arguments)
-              }
-              const namespace = ar[1]
-              api.q = api.q || []
-              if (typeof namespace === "string") {
-                cal.ns[namespace] = cal.ns[namespace] || api
-                p(cal.ns[namespace], ar)
-                p(cal, ["initNamespace", namespace])
-              } else p(cal, ar)
-              return
-            }
-            p(cal, ar)
-          }
-      })(window, "https://app.cal.com/embed/embed.js", "init")
-      Cal("init", "chat", { origin: "https://cal.com" })
-
-      Cal.ns.chat("ui", {
-        cssVarsPerTheme: {
-          light: { "cal-brand": "#0a0a0a" },
-          dark: { "cal-brand": "#e6805f" },
-        },
-        hideEventTypeDetails: false,
-        layout: "month_view",
-      })
-    </script>
   </head>
   <body
     class="selection:bg-orange h-full min-h-[100vh] bg-neutral-950 font-sans text-white selection:text-white"
   >
-    <Banners />
+    {lookingForJob ? <Banners /> : <Header lookingForJob={lookingForJob} />}
     <div
-      class="mx-auto flex h-full min-h-[calc(100vh-48px)] max-w-screen-sm flex-col justify-between p-6 pb-0 selection:bg-gray-600 selection:text-white sm:p-8 sm:pb-0"
+      class="mx-auto flex h-full min-h-[calc(100vh-48px)] max-w-screen-sm flex-col justify-between px-6 pt-14 pb-0 selection:bg-gray-600 selection:text-white sm:px-8"
     >
       <div>
-        <Header />
+        {lookingForJob && <Header lookingForJob={lookingForJob} />}
         <slot />
       </div>
       <Footer />

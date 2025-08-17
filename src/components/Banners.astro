@@ -3,9 +3,7 @@ import { Image } from "astro:assets"
 
 import Banner from "./Banner.astro"
 import profile from "@assets/images/profile.jpg"
-import easterEggUS from "@assets/images/easter-egg-us.png"
-import easterEggTrampoline from "@assets/images/easter-egg-trampoline.png"
-import easterEggOIIA from "@assets/images/easter-egg-oiia.png"
+import EasterEggs from "./EasterEggs.astro"
 ---
 
 <Banner
@@ -20,105 +18,9 @@ import easterEggOIIA from "@assets/images/easter-egg-oiia.png"
         alt="Profile"
       /></span
     >
-    <div class="w-52 sm:w-full">
+    <div class="max-w-52 sm:w-full sm:max-w-full">
       I'm looking to work on something new ✨
-      <span
-        class="cursor-pointer underline decoration-white transition duration-0 hover:bg-linear-(--gradient-accent) hover:bg-clip-text hover:text-transparent hover:duration-150"
-        data-cal-link="krystofs/chat"
-        data-cal-namespace="chat"
-        data-cal-config='{"layout":"month_view"}'>Let's chat</span
-      >
     </div>
-    <div class="flex shrink-0 gap-1">
-      <Image
-        id="easterEgg-1"
-        class="hidden h-10 w-auto"
-        src={easterEggUS}
-        alt="Easter egg #1"
-      />
-      <Image
-        id="easterEgg-2"
-        class="hidden h-10 w-auto"
-        src={easterEggTrampoline}
-        alt="Easter egg #2"
-      />
-      <Image
-        id="easterEgg-3"
-        class="hidden h-10 w-auto"
-        src={easterEggOIIA}
-        alt="Easter egg #3"
-      />
-    </div>
+    <EasterEggs />
   </div>
 </Banner>
-<div id="tooltip-krystof">
-  <div class="flex flex-col items-center justify-center">
-    You found me.<br /><div>
-      Now let's <a
-        href="javascript:void(0);"
-        class="cursor-pointer underline decoration-white transition duration-0 hover:bg-linear-(--gradient-accent) hover:bg-clip-text hover:text-transparent hover:duration-150"
-        data-cal-link="krystofs/chat"
-        data-cal-namespace="chat"
-        data-cal-config='{"layout":"month_view"}'>set up a meeting</a
-      >
-      <span class="text-white">😉</span>
-    </div><a href="https://www.youtube.com/watch?v=wyx6JDQCslE" target="_blank"
-      ><Image
-        class="mt-1 w-64 max-w-64 rounded-lg"
-        loading="eager"
-        src={profile}
-        alt="Profile image"
-      /></a
-    >
-  </div>
-</div>
-
-<script>
-  import { easterEggCounter } from "@utils/store"
-  import confetti from "canvas-confetti"
-  import butterup from "butteruptoasts"
-
-  butterup.options.toastLife = 5000
-
-  let confettiFired = false
-
-  easterEggCounter.subscribe((value) => {
-    for (const id of value) {
-      const img = document.getElementById(`easterEgg-${id}`)
-      if (img) {
-        img.classList.remove("hidden")
-      }
-    }
-
-    if (value.length === 3 && !confettiFired) {
-      confettiFired = true
-
-      butterup.toast({
-        title: "🎉 Hooray!",
-        message: "You found all easter eggs!",
-        location: "top-right",
-        type: "success",
-        theme: "butterupcustom",
-        dismissable: true,
-        duration: 1000,
-        toastLife: 1000,
-      })
-
-      confetti({
-        particleCount: 100,
-        angle: 60,
-        spread: 60,
-        startVelocity: 60,
-        origin: { y: 0.7, x: 0 },
-      })
-
-      confetti({
-        particleCount: 100,
-        angle: 120,
-        spread: 60,
-        startVelocity: 60,
-        origin: { y: 0.7, x: 1 },
-      })
-    }
-  })
-</script>

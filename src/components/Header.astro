@@ -1,30 +1,26 @@
 ---
+import { Image } from "astro:assets"
+
 import Github from "@assets/icons/github.astro"
 import Email from "@assets/icons/email.astro"
 import ContainerHover from "@components/ContainerHover.astro"
 import Linkedin from "@assets/icons/linkedin.astro"
-import Cal from "@assets/icons/cal.astro"
+import EasterEggs from "./EasterEggs.astro"
+
+import profile from "@assets/images/profile.jpg"
 
 const currentPath = Astro.url.pathname
 ---
 
-<header>
-  <nav class="flex w-full items-center justify-between">
+<header
+  class="fixed z-100 flex h-14 w-full items-center justify-center bg-neutral-950 p-2"
+>
+  <nav class="flex w-full max-w-screen-sm items-center justify-center gap-2">
     <div class="flex items-center gap-1">
       {currentPath !== "/" && <ContainerHover href="/">Home</ContainerHover>}
     </div>
-    <div
-      id="cal-hidden"
-      class="hidden"
-      data-cal-link="krystofs/chat"
-      data-cal-namespace="chat"
-      data-cal-config='{"layout":"month_view"}'
-    >
-    </div>
+    <EasterEggs />
     <div class="flex items-center gap-3">
-      <ContainerHover id="cal-container">
-        <Cal />
-      </ContainerHover>
       <ContainerHover href="https://www.linkedin.com/in/krystof-spiller">
         <Linkedin />
       </ContainerHover>
@@ -35,16 +31,30 @@ const currentPath = Astro.url.pathname
         <Github />
       </ContainerHover>
     </div>
+    <span
+      style="cursor: default;"
+      class="ml-2"
+      data-tooltip="TooltipRef#krystof"
+      ><Image
+        class="w-8 max-w-8 rounded-full"
+        loading="eager"
+        src={profile}
+        alt="Profile"
+      /></span
+    >
+    <div id="tooltip-krystof">
+      <div class="flex items-center justify-center">
+        You found me&nbsp;<span class="text-white">🕵️</span>
+      </div><a
+        href="https://www.youtube.com/watch?v=wyx6JDQCslE"
+        target="_blank"
+        ><Image
+          class="mt-1 w-64 max-w-64 rounded-lg"
+          loading="eager"
+          src={profile}
+          alt="Profile image"
+        /></a
+      >
+    </div>
   </nav>
 </header>
-
-<script>
-  // Clicking container with SVG icon didn't show Cal.com when clicking on the icon directly, therefore this workaround
-  const calContainer = document.querySelector("#cal-container")
-  const calHidden = document.querySelector("#cal-hidden") as HTMLElement
-
-  calContainer?.addEventListener("click", (e) => {
-    e.preventDefault()
-    calHidden?.click()
-  })
-</script>
