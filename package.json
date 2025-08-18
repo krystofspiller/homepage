@@ -15,7 +15,7 @@
     "@tailwindcss/vite": "^4.0.6",
     "@types/alpinejs": "^3.13.11",
     "alpinejs": "^3.14.9",
-    "astro": "^5.7.1",
+    "astro": "^5.13.2",
     "butteruptoasts": "^2.0.1",
     "canvas-confetti": "^1.9.3",
     "gsap": "^3.13.0",
