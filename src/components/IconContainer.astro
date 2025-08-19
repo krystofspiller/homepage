@@ -1,8 +1,9 @@
 ---
-const { name } = Astro.props
+const { name, tooltip } = Astro.props
 ---
 
 <div
+  data-tooltip={tooltip}
   class="flex w-fit flex-col items-center justify-center transition-all hover:[&_.img]:scale-120"
 >
   <div

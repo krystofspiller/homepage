@@ -29,6 +29,8 @@ import ESLint from "@assets/icons/eslint.astro"
 import DBngin from "@assets/images/dbngin.png"
 import TablePlus from "@assets/images/tableplus.png"
 import Typst from "@assets/images/typst.png"
+import ReactTestingLibrary from "@assets/images/react-testing-library.png"
+import Cursor from "@assets/images/cursor.png"
 import Stripe from "@assets/images/stripe.png"
 import RubyOnRails from "@assets/icons/ruby_on_rails.astro"
 import Ruby from "@assets/icons/ruby.astro"
@@ -58,8 +60,18 @@ import Swagger from "@assets/icons/swagger.astro"
 import Travis from "@assets/icons/travis.astro"
 import OpenApi from "@assets/icons/openapi.astro"
 import Vercel from "@assets/icons/vercel.astro"
+import Biome from "@assets/icons/biome.astro"
+import ReactRouter from "@assets/icons/react_router.astro"
+import GoogleCloud from "@assets/icons/google_cloud.astro"
+import Terraform from "@assets/icons/terraform.astro"
+import Teamcity from "@assets/icons/teamcity.astro"
+import Graphql from "@assets/icons/graphql.astro"
 
-// Add Biome, React Router, GCP, Terraform, Cursor, React Testing Library?, TeamCity, REST, GraphQL, Jira, DBeaver, Brave, Zappy, OpenAI, ChatGPT, Copilot, Mantine
+// Prompts:
+// I'd like to split the following tech skills into maximum of six groups. These include programming languages, specific frameworks, testing libraries, runtimes, package managers, linters and formatters, CI tools, databases, infrastructure platforms and technologies, monitoring platforms, APIs, developer tools like IDEs and collaboration tools. How would you split them - what would the categories be called and which technology would go under which category?
+// React, React Native, Javascript, Typescript, HTML, CSS, Tailwind, Astro, Expo, Next.js, React Router, Jest, RTL (React Testing Library), Swagger, Electron, Eleventy, Typst, Rails, Ruby, Go, C#, Python, Java, PostgreSQL, MySQL, Node, OpenAPI, Express, GraphQL, GitHub + Github Actions, Travis CI, TeamCity, Notion, Figma, Miro, Stripe API, HubSpot API, Slack API, Heroku, Google Cloud, Terraform, Sentry, Datadog, Vercel, Cloudflare Pages, Netlify, Appwrite, Convex, Git, Docker, Cursor, VSCode, IntelliJ, RubyMine, iTerm, Fish terminal emulator, DBngin, TablePlus, Vite, Bun, npm, pnpm, Yarn, Prettier, ESLint, Biome, Jira, DBeaver, Brave, Zappy, OpenAI, ChatGPT, Copilot, Mantine, Dependabot
+
+// Add Jira, DBeaver, Brave, Zappy, OpenAI, ChatGPT, Copilot, Mantine, Dependabot, pnpm, ChatGPT, Gemini, Fish terminal emulator
 ---
 
 <section class="my-6">
@@ -67,8 +79,8 @@ import Vercel from "@assets/icons/vercel.astro"
     Frontend
   </h2>
   <div class="flex flex-wrap items-start justify-start gap-x-4 gap-y-4">
-    <IconContainer name="React<br>(+ Native)">
-      <React size="size-9" />
+    <IconContainer name="React<br>+ Native">
+      <React size=" size-9" />
     </IconContainer>
     <IconContainer name="Javascript">
       <Javascript size="size-9" />
@@ -94,8 +106,18 @@ import Vercel from "@assets/icons/vercel.astro"
     <IconContainer name="Next.js">
       <Next size="size-9" />
     </IconContainer>
+    <IconContainer name="React Router">
+      <ReactRouter size="size-9" />
+    </IconContainer>
     <IconContainer name="Jest">
       <Jest size="size-9" />
+    </IconContainer>
+    <IconContainer name="RTL" tooltip="React Testing Library">
+      <Image
+        class="h-9 w-auto"
+        src={ReactTestingLibrary}
+        alt="React Testing Library logo"
+      />
     </IconContainer>
     <IconContainer name="Swagger">
       <Swagger size="size-9" />
@@ -148,17 +170,23 @@ import Vercel from "@assets/icons/vercel.astro"
     <IconContainer name="Express">
       <Express size="size-9" />
     </IconContainer>
+    <IconContainer name="GraphQL">
+      <Graphql size="size-9" />
+    </IconContainer>
   </div>
 
   <h2 id="ci-skills" class="mt-6 mb-4 scroll-mt-15 text-xl font-medium">
     CI & Collaboration apps
   </h2>
   <div class="flex flex-wrap items-start justify-start gap-5 gap-y-4">
-    <IconContainer name="GitHub<br>(+ Actions)">
+    <IconContainer name="GitHub<br>+ Actions">
       <Github size="size-9" />
     </IconContainer>
     <IconContainer name="Travis CI">
       <Travis size="size-9" />
+    </IconContainer>
+    <IconContainer name="TeamCity">
+      <Teamcity size="size-9" />
     </IconContainer>
     <IconContainer name="Notion">
       <Notion size="size-9" />
@@ -193,6 +221,12 @@ import Vercel from "@assets/icons/vercel.astro"
     <IconContainer name="Heroku">
       <Heroku size="size-9" />
     </IconContainer>
+    <IconContainer name="Google<br>Cloud">
+      <GoogleCloud size="size-9" />
+    </IconContainer>
+    <IconContainer name="Terraform">
+      <Terraform size="size-9" />
+    </IconContainer>
     <IconContainer name="Sentry">
       <Sentry size="size-9" />
     </IconContainer>
@@ -225,6 +259,9 @@ import Vercel from "@assets/icons/vercel.astro"
     </IconContainer>
     <IconContainer name="Docker">
       <Docker size="size-9" />
+    </IconContainer>
+    <IconContainer name="Cursor">
+      <Image class="h-9 w-auto" src={Cursor} alt="Cursor logo" />
     </IconContainer>
     <IconContainer name="VSCode">
       <Vscode size="size-9" />
@@ -261,6 +298,9 @@ import Vercel from "@assets/icons/vercel.astro"
     </IconContainer>
     <IconContainer name="ESLint">
       <ESLint size="size-9" />
+    </IconContainer>
+    <IconContainer name="Biome">
+      <Biome size="size-9" />
     </IconContainer>
   </div>
 
