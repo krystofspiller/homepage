@@ -26,10 +26,9 @@ import Miro from "@assets/icons/miro.astro"
 import Notion from "@assets/icons/notion.astro"
 import Prettier from "@assets/icons/prettier.astro"
 import ESLint from "@assets/icons/eslint.astro"
-import DBngin from "@assets/images/dbngin.png"
-import TablePlus from "@assets/images/tableplus.png"
 import Typst from "@assets/images/typst.png"
 import ReactTestingLibrary from "@assets/images/react-testing-library.png"
+import Copilot from "@assets/images/copilot.png"
 import Cursor from "@assets/images/cursor.png"
 import Stripe from "@assets/images/stripe.png"
 import RubyOnRails from "@assets/icons/ruby_on_rails.astro"
@@ -66,12 +65,17 @@ import GoogleCloud from "@assets/icons/google_cloud.astro"
 import Terraform from "@assets/icons/terraform.astro"
 import Teamcity from "@assets/icons/teamcity.astro"
 import Graphql from "@assets/icons/graphql.astro"
+import Dbeaver from "@assets/icons/dbeaver.astro"
+import Brave from "@assets/icons/brave.astro"
+import Chatgpt from "@assets/icons/chatgpt.astro"
+import Claude from "@assets/icons/claude.astro"
+import Gemini from "@assets/icons/gemini.astro"
+import Dependabot from "@assets/icons/dependabot.astro"
+import Pnpm from "@assets/icons/pnpm.astro"
 
 // Prompts:
 // I'd like to split the following tech skills into maximum of six groups. These include programming languages, specific frameworks, testing libraries, runtimes, package managers, linters and formatters, CI tools, databases, infrastructure platforms and technologies, monitoring platforms, APIs, developer tools like IDEs and collaboration tools. How would you split them - what would the categories be called and which technology would go under which category?
-// React, React Native, Javascript, Typescript, HTML, CSS, Tailwind, Astro, Expo, Next.js, React Router, Jest, RTL (React Testing Library), Swagger, Electron, Eleventy, Typst, Rails, Ruby, Go, C#, Python, Java, PostgreSQL, MySQL, Node, OpenAPI, Express, GraphQL, GitHub + Github Actions, Travis CI, TeamCity, Notion, Figma, Miro, Stripe API, HubSpot API, Slack API, Heroku, Google Cloud, Terraform, Sentry, Datadog, Vercel, Cloudflare Pages, Netlify, Appwrite, Convex, Git, Docker, Cursor, VSCode, IntelliJ, RubyMine, iTerm, Fish terminal emulator, DBngin, TablePlus, Vite, Bun, npm, pnpm, Yarn, Prettier, ESLint, Biome, Jira, DBeaver, Brave, Zappy, OpenAI, ChatGPT, Copilot, Mantine, Dependabot
-
-// Add Jira, DBeaver, Brave, Zappy, OpenAI, ChatGPT, Copilot, Mantine, Dependabot, pnpm, ChatGPT, Gemini, Fish terminal emulator
+// React, React Native, Javascript, Typescript, HTML, CSS, Tailwind, Astro, Expo, Next.js, React Router, Jest, RTL (React Testing Library), Swagger, Electron, Eleventy, Typst, Rails, Ruby, Go, C#, Python, Java, PostgreSQL, MySQL, Node, OpenAPI, Express, GraphQL, GitHub + Github Actions, Dependabot, Travis CI, TeamCity, Copilot, ChatGPT, Gemini, Claude, Notion, Figma, Miro, Stripe API, HubSpot API, Slack API, Heroku, Google Cloud, Terraform, Sentry, Datadog, Vercel, Cloudflare Pages, Netlify, Appwrite, Convex, Git, Docker, Cursor, VSCode, IntelliJ, RubyMine, iTerm, DBeaver, Brave, Vite, Bun, pnpm, npm, Yarn, Prettier, ESLint, Biome
 ---
 
 <section class="my-6">
@@ -182,11 +186,26 @@ import Graphql from "@assets/icons/graphql.astro"
     <IconContainer name="GitHub<br>+ Actions">
       <Github size="size-9" />
     </IconContainer>
+    <IconContainer name="Dependabot">
+      <Dependabot size="size-9" />
+    </IconContainer>
     <IconContainer name="Travis CI">
       <Travis size="size-9" />
     </IconContainer>
     <IconContainer name="TeamCity">
       <Teamcity size="size-9" />
+    </IconContainer>
+    <IconContainer name="Copilot">
+      <Image class="h-9 w-auto" src={Copilot} alt="Copilot logo" />
+    </IconContainer>
+    <IconContainer name="ChatGPT">
+      <Chatgpt size="size-9" />
+    </IconContainer>
+    <IconContainer name="Gemini">
+      <Gemini size="size-9" />
+    </IconContainer>
+    <IconContainer name="Claude">
+      <Claude size="size-9" />
     </IconContainer>
     <IconContainer name="Notion">
       <Notion size="size-9" />
@@ -275,17 +294,20 @@ import Graphql from "@assets/icons/graphql.astro"
     <IconContainer name="iTerm">
       <ITerm size="size-9" />
     </IconContainer>
-    <IconContainer name="DBngin">
-      <Image class="h-9 w-auto" src={DBngin} alt="DBngin logo" />
+    <IconContainer name="DBeaver">
+      <Dbeaver size="size-9" />
     </IconContainer>
-    <IconContainer name="TablePlus">
-      <Image class="h-9 w-auto" src={TablePlus} alt="TablePlus logo" />
+    <IconContainer name="Brave">
+      <Brave size="size-9" />
     </IconContainer>
     <IconContainer name="Vite">
       <Vite size="size-9" />
     </IconContainer>
     <IconContainer name="Bun">
       <Bun size="size-9" />
+    </IconContainer>
+    <IconContainer name="pnpm">
+      <Pnpm size="size-9" />
     </IconContainer>
     <IconContainer name="npm">
       <Npm size="size-9" />
