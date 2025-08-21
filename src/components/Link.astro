@@ -13,9 +13,10 @@ const calculatedTarget =
   // using `text-decoration-line` and the color needs to be set dynamically from parent element
   const anchors = document.querySelectorAll("a")
   anchors.forEach((anchor) => {
-    anchor.style.textDecorationColor = getComputedStyle(anchor.parentElement!)[
-      "color"
-    ]
+    const parentElement = anchor.parentElement
+    if (!parentElement) return
+
+    anchor.style.textDecorationColor = getComputedStyle(parentElement)["color"]
   })
 </script>
 

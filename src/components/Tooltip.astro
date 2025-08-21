@@ -73,7 +73,9 @@ import "tippy.js/dist/tippy.css"
         t.setAttribute("data-title", content)
         t.removeAttribute("title")
       } else {
-        const dataTooltip = t.getAttribute("data-tooltip")!
+        const dataTooltip = t.getAttribute("data-tooltip")
+        if (!dataTooltip) return
+
         if (dataTooltip.startsWith("TooltipRef#")) {
           const tooltipRef = dataTooltip.split("TooltipRef#")[1]
           content =

@@ -13,8 +13,6 @@ const title = Astro.props.title
   : "Krystof Spiller"
 
 const lookingForJob = false
-// TODO: Refactor to use TS - get rid of exclamation points
-// TODO: Set up ESLint
 ---
 
 <!doctype html>
@@ -62,7 +60,10 @@ const lookingForJob = false
       anchor.addEventListener("click", function (e) {
         e.preventDefault()
 
-        document.querySelector(anchor.getAttribute("href")!)!.scrollIntoView({
+        const href = anchor.getAttribute("href")
+        if (!href) return
+
+        document.querySelector(href)?.scrollIntoView({
           behavior: "smooth",
         })
       })
