@@ -28,7 +28,7 @@ async function getDuolingoStreak() {
 
     const json = await response.json()
     return json.streak
-  } catch (error) {
+  } catch {
     showDuolingo = false
   }
 }
@@ -53,7 +53,7 @@ async function getLatestYouTubeVideo() {
       },
       ["id", 0],
     )[0]
-  } catch (error) {
+  } catch {
     showYouTube = false
   }
 }

@@ -851,10 +851,10 @@ const yearsOfExperience = Math.abs(
   </script>
 
   <script>
+    import { easterEggCounter, EasterEggs } from "@utils/store"
+    import confetti from "canvas-confetti"
     import { gsap } from "gsap"
     import { ScrollTrigger } from "gsap/ScrollTrigger"
-    import confetti from "canvas-confetti"
-    import { easterEggCounter, EasterEggs } from "@utils/store"
 
     async function init() {
       if (window.location.pathname !== "/") return
@@ -1024,7 +1024,7 @@ const yearsOfExperience = Math.abs(
       const ctx = c.getContext("2d") as CanvasRenderingContext2D
 
       let cw = (c.width = width)
-      let ch = (c.height = 324)
+      const ch = (c.height = 324)
       let radius = Math.max(cw, ch)
       let factor = width / 576
       let usStyle = false

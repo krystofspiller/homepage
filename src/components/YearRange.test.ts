@@ -1,7 +1,8 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container"
-import { describe, expect, test } from "vitest"
-import YearRange from "./YearRange.astro"
 import { JSDOM } from "jsdom"
+import { describe, expect, test } from "vitest"
+
+import YearRange from "./YearRange.astro"
 
 const currentYear = new Date().getFullYear()
 

@@ -1,5 +1,6 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container"
 import { describe, expect, test } from "vitest"
+
 import Link from "./Link.astro"
 
 describe("Link", () => {

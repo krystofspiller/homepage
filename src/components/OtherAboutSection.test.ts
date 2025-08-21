@@ -1,5 +1,5 @@
-import { describe, expect, test } from "vitest"
 import { JSDOM } from "jsdom"
+import { describe, expect, test } from "vitest"
 
 describe("OtherAboutSection", () => {
   test("can find count of cards from Knowt", async () => {
