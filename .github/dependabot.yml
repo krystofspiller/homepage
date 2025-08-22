@@ -6,7 +6,13 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "saturday"
+      time: "03:00"
+      timezone: "Europe/Copenhagen"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "saturday"
+      time: "03:00"
+      timezone: "Europe/Copenhagen"
