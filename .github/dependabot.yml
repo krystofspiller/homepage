@@ -4,6 +4,7 @@ version: 2
 updates:
   - package-ecosystem: "bun"
     directory: "/"
+    open-pull-requests-limit: 15
     schedule:
       interval: "weekly"
       day: "saturday"
@@ -11,6 +12,7 @@ updates:
       timezone: "Europe/Copenhagen"
   - package-ecosystem: "github-actions"
     directory: "/"
+    open-pull-requests-limit: 5
     schedule:
       interval: "weekly"
       day: "saturday"
