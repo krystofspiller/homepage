@@ -79,7 +79,13 @@ const yearsOfExperience = Math.abs(
                 class="absolute top-[28px] left-0 z-0 block w-full"
               >
                 <defs>
-                  <linearGradient id="linear" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <linearGradient
+                    id="path-linear"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="0%"
+                  >
                     <stop offset="0%" stop-color="#e6c75f"></stop>
                     <stop offset="100%" stop-color="#e65f5f"></stop>
                   </linearGradient>
@@ -87,7 +93,7 @@ const yearsOfExperience = Math.abs(
 
                 <path
                   fill="transparent"
-                  stroke="url(#linear)"
+                  stroke="url(#path-linear)"
                   stroke-width="4"
                   d="M2.75003 7.00006C26.75 1.99994 69.5 2 128.5 2C322.5 2.00024 324.75 12.0002 128.75 12.0002C-40.25 12.0002 -40.25 24 128.75 24C256.75 24 270.75 18 270.75 18"
                   class="animate-dash [stroke-dasharray:820] [stroke-dashoffset:0]"
@@ -144,7 +150,7 @@ const yearsOfExperience = Math.abs(
         class="relative"
         ><Link href="#general">more</Link><Link href="/fun-at-parties"
           ><FunAtParties
-            className="absolute top-[18px] -left-[10px] hover:[&_path]:fill-[url(#linear)]"
+            className="absolute top-[18px] -left-[10px] hover:[&_path]:fill-[url(#fun-at-parties-linear)]"
           /></Link
         ></span
       >
