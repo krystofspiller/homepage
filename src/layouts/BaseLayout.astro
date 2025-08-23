@@ -37,7 +37,7 @@ const lookingForJob = false
   >
     {lookingForJob ? <Banners /> : <Header lookingForJob={lookingForJob} />}
     <div
-      class="mx-auto flex h-full min-h-[calc(100vh-48px)] max-w-screen-sm flex-col justify-between px-6 pt-14 pb-0 selection:bg-gray-600 selection:text-white sm:px-8"
+      class="mx-auto flex h-full min-h-[calc(100vh-48px)] max-w-screen-sm flex-col justify-between px-6 pt-14 pb-14 selection:bg-gray-600 selection:text-white sm:px-8 lg:pb-0"
     >
       <div>
         {lookingForJob && <Header lookingForJob={lookingForJob} />}

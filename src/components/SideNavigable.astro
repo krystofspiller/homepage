@@ -47,16 +47,44 @@ getHeadings(document, toc)
       }
     </ul>
   </div>
+  <div
+    class="fixed bottom-0 left-0 z-100 flex h-14 w-full items-center justify-center bg-neutral-950 p-2 text-zinc-400 lg:hidden"
+  >
+    <select
+      class="rounded-lg border border-neutral-800 p-2.5 pr-10 text-zinc-400 outline-none focus:border-blue-500 focus:ring-blue-500"
+      id="mobile-toc-select"
+    >
+      {
+        toc.map((val) => (
+          <option value={val.id}>
+            {"\u00A0\u00A0".repeat(val.level - minLevel)}
+            {val.name}
+          </option>
+        ))
+      }
+    </select>
+  </div>
   <slot />
 </div>
 
 <script is:inline data-astro-rerun define:vars={{ toc }}>
-  const intersecting = new Set()
+  const mobileSelect = document.getElementById("mobile-toc-select")
+  mobileSelect?.addEventListener("change", (e) => {
+    const selectedId = e.target.value
+    if (!selectedId) {
+      return
+    }
+
+    const element = document.getElementById(selectedId)
+    element?.scrollIntoView({ behavior: "smooth" })
+  })
+
+  const intersecting = new Map()
   function handleIntersect(entries) {
-    entries.map((entry) => {
+    entries.forEach((entry) => {
       const targetId = entry.target.getAttribute("id")
       if (entry.isIntersecting) {
-        intersecting.add(targetId)
+        intersecting.set(targetId, entry)
       } else {
         intersecting.delete(targetId)
         document
@@ -65,17 +93,20 @@ getHeadings(document, toc)
       }
     })
 
-    let top = [Number.MAX_SAFE_INTEGER, null]
-    intersecting.forEach((targetId) => {
+    let top = [Number.MAX_SAFE_INTEGER, null, null]
+    intersecting.forEach((entry, targetId) => {
       const li = document.querySelector(`li[data-id=${targetId}]`)
-      const positionFromTop = li.getBoundingClientRect().top
+      const positionFromTop = entry.target.getBoundingClientRect().top
       if (positionFromTop < top[0]) {
-        top = [positionFromTop, li]
+        top = [positionFromTop, li, targetId]
       }
       li?.classList.remove("text-white")
     })
 
     top[1]?.classList.add("text-white")
+    if (top[2] && mobileSelect) {
+      mobileSelect.value = top[2]
+    }
   }
   const observer = new IntersectionObserver(handleIntersect, { threshold: 1 })
   for (const row of toc) {

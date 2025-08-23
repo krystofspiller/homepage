@@ -36,7 +36,6 @@ const yearsOfExperience = Math.abs(
   new Date(Date.now() - new Date(2020, 1, 1).getTime()).getFullYear() - 1970,
 )
 
-// TODO: Section navigator - at the bottom on mobile
 // TODO: Put styled HTML into components
 // TODO: Implement link checker and add a note about it
 ---
@@ -165,7 +164,7 @@ const yearsOfExperience = Math.abs(
       <h2
         id="portchain"
         data-toc="Portchain"
-        class="mb-4 flex flex-col items-center justify-center gap-1"
+        class="mb-4 flex scroll-mt-15 flex-col items-center justify-center gap-1"
       >
         <Image
           class="h-5 w-auto"
@@ -220,7 +219,7 @@ const yearsOfExperience = Math.abs(
       <h2
         id="carta"
         data-toc="Carta"
-        class="mb-4 flex flex-col items-center justify-center gap-1"
+        class="mb-4 flex scroll-mt-15 flex-col items-center justify-center gap-1"
       >
         <Image class="h-8 w-auto" src={cartaLogo} alt="Carta logo" />
         <YearRange from={2022} to={2025} />
@@ -628,7 +627,7 @@ const yearsOfExperience = Math.abs(
         <h2
           id="capdesk"
           data-toc="Capdesk"
-          class="mb-4 flex flex-col items-center justify-center gap-1"
+          class="mb-4 flex scroll-mt-15 flex-col items-center justify-center gap-1"
         >
           <Image class="h-8 w-auto" src={capdeskLogo} alt="Capdesk logo" />
           <YearRange from={2020} to={2022} note="full-time from Feb 2022" />
@@ -734,7 +733,7 @@ const yearsOfExperience = Math.abs(
         <h2
           id="systematic"
           data-toc="Systematic"
-          class="mb-4 flex flex-col items-center justify-center gap-1"
+          class="mb-4 flex scroll-mt-15 flex-col items-center justify-center gap-1"
         >
           <Image
             class="h-6 w-auto"
