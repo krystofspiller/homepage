@@ -222,12 +222,7 @@ const yearsOfExperience = Math.abs(
         data-toc="Carta"
         class="mb-4 flex flex-col items-center justify-center gap-1"
       >
-        <Image
-          class="h-8 w-auto"
-          loading="eager"
-          src={cartaLogo}
-          alt="Carta logo"
-        />
+        <Image class="h-8 w-auto" src={cartaLogo} alt="Carta logo" />
         <YearRange from={2022} to={2025} />
       </h2>
       <h3
@@ -259,7 +254,9 @@ const yearsOfExperience = Math.abs(
       </p>
       <div class="relative mb-3 h-0 pt-6 pb-[85%]">
         <iframe
+          title="Funding rounds calculator demo"
           class="absolute top-0 left-0 h-full w-full"
+          loading="lazy"
           src="https://player.vimeo.com/video/1065493306?autoplay=1&dnt=1&background=1"
           width="640"
           height="360"></iframe>
@@ -696,7 +693,9 @@ const yearsOfExperience = Math.abs(
         </p>
         <div class="relative mb-3 h-0 pt-6 pb-[56.25%]">
           <iframe
+            title="Sentry error tracking demo"
             class="absolute top-0 left-0 h-full w-full"
+            loading="lazy"
             src="https://player.vimeo.com/video/885736465?autoplay=1&dnt=1&background=1"
             width="640"
             height="360"></iframe>
