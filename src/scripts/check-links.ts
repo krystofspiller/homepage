@@ -3,6 +3,8 @@ import { execSync } from "child_process"
 import { readdir, readFile } from "fs/promises"
 import { join, relative } from "path"
 
+const isCi = process.argv[2] === "ci"
+
 function setup() {
   console.log("Setup - pull curl-impersonate chrome")
   const output = execSync("docker pull lwthiker/curl-impersonate:0.6-chrome", {
@@ -13,10 +15,9 @@ function setup() {
 
 function checkLink(link: string) {
   const output = execSync(
-    `docker run --platform linux/amd64 --rm lwthiker/curl-impersonate:0.6-chrome curl_chrome116 --silent --output /dev/null -v -w "%{http_code};%{redirect_url}" ${link}`,
+    `docker run --platform linux/amd64 --rm lwthiker/curl-impersonate:0.6-chrome curl_chrome116 --silent --output /dev/null -w "%{http_code};%{redirect_url}" ${link}`,
     { encoding: "utf-8" },
   )
-  console.log("Check link output:\n", output)
   const [httpCode, redirectUrl] = output.split(";")
   return { httpCode, redirectUrl }
 }
@@ -184,9 +185,7 @@ async function main() {
 
       extractedLinks.forEach((link) => {
         if (links.has(link)) {
-          console.log(
-            `  🗑️🔗 Link ${link} in ${file.path} is a duplicate and ignored`,
-          )
+          console.log(`  🗑️🔗 Ignored a duplicate link ${link} in ${file.path}`)
         } else {
           console.log(`  ✅🔗 Added link ${link} in ${file.path}`)
           links.add(link)
@@ -200,27 +199,44 @@ async function main() {
     const expectedFails = [
       "https://www.linkedin.com/in/krystof-spiller",
       "https://www.linkedin.com/in/maria-muhandes",
-    ]
+    ].concat(
+      isCi
+        ? [
+            "https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap",
+            "https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap",
+            "https://open.spotify.com/embed/playlist/1i1czz9lUslWTzFr5cHomk?utm_source=generator&theme=0",
+            "https://player.vimeo.com/video/1065493306?autoplay=1&dnt=1&background=1",
+            "https://en.wikipedia.org/w/index.php?title=List_of_circulating_currencies&oldid=1275996218#:~:text=There%20are%20180%20currencies",
+            "https://player.vimeo.com/video/885736465?autoplay=1&dnt=1&background=1",
+            "https://player.vimeo.com/video/1065496020?autoplay=1&dnt=1&background=1",
+          ]
+        : [],
+    )
     links.forEach((link) => {
       const { httpCode, redirectUrl } = checkLink(link)
-      if (httpCode !== "200" && !expectedFails.includes(link)) {
+      if (httpCode !== "200") {
         console.log(`  ❌ ${link} ${httpCode} ${redirectUrl}`)
         fails.push({ link, httpCode, redirectUrl })
       } else {
-        console.log(
-          `  ✅ ${link}${expectedFails.includes(link) ? ` ${httpCode} (expected fail)` : ""}`,
-        )
+        console.log(`  ✅ ${link}`)
       }
     })
 
-    if (fails.length === 0) {
-      console.log(`\n✅ No issues found. Total links checked: ${links.size}`)
+    if (
+      expectedFails.length === fails.length &&
+      fails
+        .map((fail) => fail.link)
+        .every((link) => expectedFails.includes(link))
+    ) {
+      console.log(
+        `\n✅ Found ${expectedFails.length} expected fails. Total links checked: ${links.size}. `,
+      )
       process.exit(0)
     } else {
       console.log(`\n❌ Found ${fails.length} failed links:`)
       fails.forEach((fail, index) => {
         console.log(
-          `  ${index + 1}. ${fail.link} ${fail.httpCode} ${fail.redirectUrl}`,
+          `  ${index + 1}. ${expectedFails.includes(fail.link) ? "" : "(UNEXPECTED)"} ${fail.link} ${fail.httpCode} ${fail.redirectUrl}`,
         )
       })
       process.exit(1)
