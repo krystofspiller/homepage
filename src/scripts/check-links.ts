@@ -16,6 +16,7 @@ function checkLink(link: string) {
     `docker run --platform linux/amd64 --rm lwthiker/curl-impersonate:0.6-chrome curl_chrome116 --silent --output /dev/null -w "%{http_code};%{redirect_url}" ${link}`,
     { encoding: "utf-8" },
   )
+  console.log("Check link output:\n", output)
   const [httpCode, redirectUrl] = output.split(";")
   return { httpCode, redirectUrl }
 }
@@ -206,7 +207,9 @@ async function main() {
         console.log(`  ❌ ${link} ${httpCode} ${redirectUrl}`)
         fails.push({ link, httpCode, redirectUrl })
       } else {
-        console.log(`  ✅ ${link}`)
+        console.log(
+          `  ✅ ${link}${expectedFails.includes(link) && ` ${httpCode} (expected fail)`}`,
+        )
       }
     })
 
