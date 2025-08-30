@@ -10,7 +10,8 @@
     "test": "vitest",
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.astro",
-    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx,.astro --fix"
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx,.astro --fix",
+    "check-links": "bun src/scripts/check-links.ts"
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.6",
