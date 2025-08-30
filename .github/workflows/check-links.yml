@@ -1,36 +1,21 @@
-name: Deploy
+name: Check links
 on:
   schedule:
-    - cron: "0 5 * * SAT"
-  push:
-    branches:
-      - main
+    - cron: "0 4 * * SAT"
 jobs:
-  deploy:
+  check-links:
     runs-on: ubuntu-latest
-    name: Deploy
-    env:
-      YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+    name: Check links
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v5
       - uses: oven-sh/setup-bun@v2
       - name: Install dependencies
         run: bun install
-      - name: Lint
-        run: bun run lint
-      - name: Build
-        run: bun run build
-      - name: Test
-        run: bun run test
-      - name: Deploy
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=homepage
+      - name: Check links
+        run: bun run check-links -- ci
   notify-on-failure:
-    needs: deploy
+    needs: check-links
     if: failure()
     runs-on: ubuntu-latest
     steps:
@@ -40,11 +25,11 @@ jobs:
             --form-string "token=${{ secrets.PUSHOVER_TOKEN }}" \
             --form-string "user=${{ secrets.PUSHOVER_USER }}" \
             --form-string "title=Homepage" \
-            --form-string "message=❌ Deployment failed" \
+            --form-string "message=❌ Check links failed" \
             --form-string "url=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
             https://api.pushover.net/1/messages.json
   notify-on-success:
-    needs: deploy
+    needs: check-links
     if: success()
     runs-on: ubuntu-latest
     steps:
@@ -54,6 +39,6 @@ jobs:
             --form-string "token=${{ secrets.PUSHOVER_TOKEN }}" \
             --form-string "user=${{ secrets.PUSHOVER_USER }}" \
             --form-string "title=Homepage" \
-            --form-string "message=✅ Deployment successful" \
+            --form-string "message=✅ Check links successful" \
             --form-string "url=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
             https://api.pushover.net/1/messages.json
