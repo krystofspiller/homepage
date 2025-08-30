@@ -74,7 +74,7 @@ import Dependabot from "@assets/icons/dependabot.astro"
 import Pnpm from "@assets/icons/pnpm.astro"
 
 // Prompts:
-// I'd like to split the following tech skills into maximum of six groups. These include programming languages, specific frameworks, testing libraries, runtimes, package managers, linters and formatters, CI tools, databases, infrastructure platforms and technologies, monitoring platforms, APIs, developer tools like IDEs and collaboration tools. How would you split them - what would the categories be called and which technology would go under which category?
+// I'd like to split the following tech skills into a maximum of five groups. The group names should be a maximum of three words. Figure out the areas these skills fall into and then split them into the groups. Use all of the skills in the list:
 // React, React Native, Javascript, Typescript, HTML, CSS, Tailwind, Astro, Expo, Next.js, React Router, Jest, RTL (React Testing Library), Swagger, Electron, Eleventy, Typst, Rails, Ruby, Go, C#, Python, Java, PostgreSQL, MySQL, Node, OpenAPI, Express, GraphQL, GitHub + Github Actions, Dependabot, Travis CI, TeamCity, Copilot, ChatGPT, Gemini, Claude, Notion, Figma, Miro, Stripe API, HubSpot API, Slack API, Heroku, Google Cloud, Terraform, Sentry, Datadog, Vercel, Cloudflare Pages, Netlify, Appwrite, Convex, Git, Docker, Cursor, VSCode, IntelliJ, RubyMine, iTerm, DBeaver, Brave, Vite, Bun, pnpm, npm, Yarn, Prettier, ESLint, Biome
 ---
 
@@ -112,6 +112,15 @@ import Pnpm from "@assets/icons/pnpm.astro"
     </IconContainer>
     <IconContainer name="React Router">
       <ReactRouter size="size-9" />
+    </IconContainer>
+    <IconContainer name="pnpm">
+      <Pnpm size="size-9" />
+    </IconContainer>
+    <IconContainer name="npm">
+      <Npm size="size-9" />
+    </IconContainer>
+    <IconContainer name="Yarn">
+      <Yarn size="size-9" />
     </IconContainer>
     <IconContainer name="Jest">
       <Jest size="size-9" />
@@ -168,6 +177,9 @@ import Pnpm from "@assets/icons/pnpm.astro"
     <IconContainer name="Node">
       <Node size="size-9" />
     </IconContainer>
+    <IconContainer name="Bun">
+      <Bun size="size-9" />
+    </IconContainer>
     <IconContainer name="OpenAPI">
       <OpenApi size="size-9" />
     </IconContainer>
@@ -179,10 +191,19 @@ import Pnpm from "@assets/icons/pnpm.astro"
     </IconContainer>
   </div>
 
-  <h2 id="ci-skills" class="mt-6 mb-4 scroll-mt-15 text-xl font-medium">
-    CI & Collaboration apps
+  <h2 id="devops-skills" class="mt-6 mb-4 scroll-mt-15 text-xl font-medium">
+    DevOps
   </h2>
   <div class="flex flex-wrap items-start justify-start gap-5 gap-y-4">
+    <IconContainer name="Heroku">
+      <Heroku size="size-9" />
+    </IconContainer>
+    <IconContainer name="Google<br>Cloud">
+      <GoogleCloud size="size-9" />
+    </IconContainer>
+    <IconContainer name="Terraform">
+      <Terraform size="size-9" />
+    </IconContainer>
     <IconContainer name="GitHub<br>+ Actions">
       <Github size="size-9" />
     </IconContainer>
@@ -195,6 +216,36 @@ import Pnpm from "@assets/icons/pnpm.astro"
     <IconContainer name="TeamCity">
       <Teamcity size="size-9" />
     </IconContainer>
+    <IconContainer name="Vercel">
+      <Vercel size="size-9" />
+    </IconContainer>
+    <IconContainer name="Cloudflare<br>Pages">
+      <CloudflarePages size="size-9" />
+    </IconContainer>
+    <IconContainer name="Netlify">
+      <Netlify size="size-9" />
+    </IconContainer>
+    <IconContainer name="Appwrite">
+      <Appwrite size="size-9" />
+    </IconContainer>
+    <IconContainer name="Convex">
+      <Convex size="size-9" />
+    </IconContainer>
+    <IconContainer name="Sentry">
+      <Sentry size="size-9" />
+    </IconContainer>
+    <IconContainer name="Datadog">
+      <Datadog size="size-9" />
+    </IconContainer>
+  </div>
+
+  <h2
+    id="ai-productivity-skills"
+    class="mt-6 mb-4 scroll-mt-15 text-xl font-medium"
+  >
+    AI & Productivity
+  </h2>
+  <div class="flex flex-wrap items-start justify-start gap-5 gap-y-4">
     <IconContainer name="Copilot">
       <Image class="h-9 w-auto" src={Copilot} alt="Copilot logo" />
     </IconContainer>
@@ -216,56 +267,14 @@ import Pnpm from "@assets/icons/pnpm.astro"
     <IconContainer name="Miro">
       <Miro size="size-9" />
     </IconContainer>
-  </div>
-
-  <h2 id="api-skills" class="mt-6 mb-4 scroll-mt-15 text-xl font-medium">
-    APIs
-  </h2>
-  <div class="flex flex-wrap items-start justify-start gap-5 gap-y-4">
-    <IconContainer name="Stripe">
+    <IconContainer name="Stripe API">
       <Image class="h-9 w-auto" src={Stripe} alt="Stripe logo" />
     </IconContainer>
-    <IconContainer name="HubSpot">
+    <IconContainer name="HubSpot API">
       <Hubspot size="size-9" />
     </IconContainer>
-    <IconContainer name="Slack">
+    <IconContainer name="Slack API">
       <Slack size="size-9" />
-    </IconContainer>
-  </div>
-
-  <h2 id="infra-skills" class="mt-6 mb-4 scroll-mt-15 text-xl font-medium">
-    Infra & Monitoring
-  </h2>
-  <div class="flex flex-wrap items-start justify-start gap-5 gap-y-4">
-    <IconContainer name="Heroku">
-      <Heroku size="size-9" />
-    </IconContainer>
-    <IconContainer name="Google<br>Cloud">
-      <GoogleCloud size="size-9" />
-    </IconContainer>
-    <IconContainer name="Terraform">
-      <Terraform size="size-9" />
-    </IconContainer>
-    <IconContainer name="Sentry">
-      <Sentry size="size-9" />
-    </IconContainer>
-    <IconContainer name="Datadog">
-      <Datadog size="size-9" />
-    </IconContainer>
-    <IconContainer name="Vercel">
-      <Vercel size="size-9" />
-    </IconContainer>
-    <IconContainer name="Cloudflare<br>Pages">
-      <CloudflarePages size="size-9" />
-    </IconContainer>
-    <IconContainer name="Netlify">
-      <Netlify size="size-9" />
-    </IconContainer>
-    <IconContainer name="Appwrite">
-      <Appwrite size="size-9" />
-    </IconContainer>
-    <IconContainer name="Convex">
-      <Convex size="size-9" />
     </IconContainer>
   </div>
 
@@ -302,18 +311,6 @@ import Pnpm from "@assets/icons/pnpm.astro"
     </IconContainer>
     <IconContainer name="Vite">
       <Vite size="size-9" />
-    </IconContainer>
-    <IconContainer name="Bun">
-      <Bun size="size-9" />
-    </IconContainer>
-    <IconContainer name="pnpm">
-      <Pnpm size="size-9" />
-    </IconContainer>
-    <IconContainer name="npm">
-      <Npm size="size-9" />
-    </IconContainer>
-    <IconContainer name="Yarn">
-      <Yarn size="size-9" />
     </IconContainer>
     <IconContainer name="Prettier">
       <Prettier size="size-9" />

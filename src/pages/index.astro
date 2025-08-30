@@ -37,8 +37,6 @@ const yearsOfExperience = Math.abs(
 )
 
 // TODO: Put styled HTML into components
-// TODO: Update Portchain content section
-// TODO: Reorder skills sections icons
 ---
 
 <BaseLayout>
@@ -388,16 +386,23 @@ const yearsOfExperience = Math.abs(
       </h3>
       <p class="mb-3 text-lg leading-8 text-zinc-400">
         Addressed invalid links by automatically checking and reporting them.<SeeMore
-          >An external link can change and suddenly you're linking to a
-          non-existent page. At some point we encountered a few links that were
-          invalid and instead of just fixing those and moving on with our life I
-          wrote a script to <span
-            data-tooltip='I thought this would be a matter of simply <span class="font-mono">curl</span>ing the page with a parameter to return the HTTP response status code. How naive I was. I had to use <a class="font-mono" href="https://github.com/lwthiker/curl-impersonate" target="_blank">curl-impersonate</a> to mimic a browser making the request for it to go through on many pages. There was also the question of redirecting where for example Zendesk (Support Center) puts an ID as well as the name of the support article into the URL so when the name of the article was adjusted the link still worked but returned a redirect 3xx code. I made <span class="font-mono">curl-impersonate</span> return the redirect URL as well and included it in the result message.'
-            >check external links</span
-          > that I set up to run on GitHub Actions on a weekly basis and send a result
-          to an #automated-checks Slack channel. In this way, these issues became
-          more visible and otherwise invalid links that would be in the app for many
-          months were fixed within a week.</SeeMore
+          ><span class="mb-3 block"
+            >An external link can change and suddenly you're linking to a
+            non-existent page. At some point we encountered a few links that
+            were invalid and instead of just fixing those and moving on with our
+            life I wrote a script to <span
+              data-tooltip='I thought this would be a matter of simply <span class="font-mono">curl</span>ing the page with a parameter to return the HTTP response status code. How naive I was. I had to use <a class="font-mono" href="https://github.com/lwthiker/curl-impersonate" target="_blank">curl-impersonate</a> to mimic a browser making the request for it to go through on many pages. There was also the question of redirecting where for example Zendesk (Support Center) puts an ID as well as the name of the support article into the URL so when the name of the article was adjusted the link still worked but returned a redirect 3xx code. I made <span class="font-mono">curl-impersonate</span> return the redirect URL as well and included it in the result message.'
+              >check external links</span
+            > that I set up to run on GitHub Actions on a weekly basis and send a
+            result to an #automated-checks Slack channel. In this way, these issues
+            became more visible and otherwise invalid links that would be in the
+            app for many months were fixed within a week.</span
+          ><span class="mb-3 block"
+            >This check has been <Link
+              href="https://github.com/krystofspiller/homepage/blob/main/src/scripts/check-links.ts"
+              >implemented for this blog as well</Link
+            >.</span
+          ></SeeMore
         >
       </p>
       <Image
@@ -414,12 +419,14 @@ const yearsOfExperience = Math.abs(
       </h3>
       <p class="mb-3 text-lg leading-8 text-zinc-400">
         Improved both UX and DX by improving a modal component. <SeeMore
-          >The way we were writing most of the modals was by directly using the
-          design system components as opposed to a more complete modal
-          implementation. Every colleague therefore had a lot of freedom when it
-          came to implementation of a modal. Properly implementing a modal so
-          that it's consistent with design and behaves in the least obstructive
-          way possible then becomes hard.
+          ><span class="mb-3 block"
+            >The way we were writing most of the modals was by directly using
+            the design system components as opposed to a more complete modal
+            implementation. Every colleague therefore had a lot of freedom when
+            it came to implementation of a modal. Properly implementing a modal
+            so that it's consistent with design and behaves in the least
+            obstructive way possible then becomes hard.</span
+          >
           <span class="mb-3 block">
             Our modals were incosistent with how disabled and loading states
             were handled after clicking cancel and submit buttons, layout of
