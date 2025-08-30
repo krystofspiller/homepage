@@ -88,7 +88,8 @@ function extractLinks(text: string): string[] {
   return matches
     .map((url) => url.replace(/[.,;?)\]>"'`]+$/, ""))
     .filter((url, index, arr) => arr.indexOf(url) === index) // Remove duplicates
-    .filter((url) => !url.match(/\${.+}/))
+    .filter((url) => !url.match(/\${.+}/)) // Remove URLs with variable interpolation
+    .filter((url) => !url.includes("www.w3.org")) // Remove URLs from W3C
 }
 
 async function readAllFiles(
