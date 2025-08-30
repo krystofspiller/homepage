@@ -13,7 +13,7 @@ function setup() {
 
 function checkLink(link: string) {
   const output = execSync(
-    `docker run --platform linux/amd64 --rm lwthiker/curl-impersonate:0.6-chrome curl_chrome116 --silent --output /dev/null -w "%{http_code};%{redirect_url}" ${link}`,
+    `docker run --platform linux/amd64 --rm lwthiker/curl-impersonate:0.6-chrome curl_chrome116 --silent --output /dev/null -v -w "%{http_code};%{redirect_url}" ${link}`,
     { encoding: "utf-8" },
   )
   console.log("Check link output:\n", output)
@@ -208,7 +208,7 @@ async function main() {
         fails.push({ link, httpCode, redirectUrl })
       } else {
         console.log(
-          `  ✅ ${link}${expectedFails.includes(link) && ` ${httpCode} (expected fail)`}`,
+          `  ✅ ${link}${expectedFails.includes(link) ? ` ${httpCode} (expected fail)` : ""}`,
         )
       }
     })
