@@ -45,7 +45,7 @@ export default [
           jsx: true,
         },
         project: "./tsconfig.json",
-        tsconfigRootDir: ".",
+        tsconfigRootDir: process.cwd(),
       },
     },
     plugins: {
