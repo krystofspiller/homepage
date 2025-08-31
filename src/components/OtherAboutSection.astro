@@ -14,6 +14,7 @@ import Piano from "@assets/icons/piano.astro"
 
 import oiia from "@assets/images/oiia.gif"
 import oiiamp3 from "@assets/audio/oiia.mp3"
+import Heading from "./Heading.astro"
 
 let showDuolingo = true
 
@@ -65,19 +66,13 @@ const [duolingoStreak, youTubeVideoId] = await Promise.all([
 ---
 
 <section class="my-10 mb-6">
-  <hr class="mb-6 border-zinc-600" />
-
-  <h1
-    id="general"
-    data-toc="Education"
-    class="mb-2 scroll-mt-15 text-xl font-semibold text-zinc-100"
-  >
+  <Heading id="general" data-toc="Education" data-as="h1">
     Edu<span
       id="cat-ears"
       class="relative cursor-pointer hover:text-[#75FB4C] hover:[&_path]:fill-[#75FB4C] hover:[&_path]:stroke-[#75FB4C]"
-      ><CatEars className="absolute -top-[3px] left-0 w-8" />cat</span
+      ><CatEars className="absolute -top-[5px] left-0 w-9" />cat</span
     >ion
-  </h1>
+  </Heading>
   <div class="mb-3 flex items-center gap-2">
     <div><Dtu size="h-auto w-10 sm:w-8" /></div>
     <div class="flex grow flex-col">
@@ -124,7 +119,7 @@ const [duolingoStreak, youTubeVideoId] = await Promise.all([
       </div>
     </div>
   </div>
-  <div class="flex items-center justify-between">
+  <div class="mb-6 flex items-center justify-between">
     <div class="text-base leading-8 text-zinc-400">
       <Link
         href="https://krystofspiller.github.io/cv/assets/Bachelor%20project.pdf"
@@ -149,16 +144,15 @@ const [duolingoStreak, youTubeVideoId] = await Promise.all([
     </div>
   </div>
 
-  <hr class="my-6 border-zinc-600" />
-  <h1 data-toc="Pure grinding" id="pure-grinding" class="scroll-mt-15">
+  <Heading data-as="h1" data-toc="Pure grinding" id="pure-grinding">
     <a href="https://www.youtube.com/watch?v=hzdIoghbFzg" target="_blank"
       ><Image
-        class="h-6 w-auto [*_path]:fill-zinc-400"
+        class="mb-2 h-6 w-auto [*_path]:fill-zinc-400"
         src={PureGrinding}
         alt="Pure grinding"
       /></a
     >
-  </h1>
+  </Heading>
 
   <div class="mt-2 flex items-center gap-2">
     {

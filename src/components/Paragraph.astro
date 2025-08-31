@@ -1,0 +1,12 @@
+---
+interface Props {
+  ["data-as"]?: "p" | "div" | "span"
+  [key: string]: any
+}
+
+const { ["data-as"]: Element = "p", ...rest } = Astro.props as Props
+---
+
+<Element class="mb-3 text-lg leading-8 text-zinc-400" {...rest}
+  ><slot /></Element
+>

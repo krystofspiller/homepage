@@ -72,274 +72,254 @@ import Claude from "@assets/icons/claude.astro"
 import Gemini from "@assets/icons/gemini.astro"
 import Dependabot from "@assets/icons/dependabot.astro"
 import Pnpm from "@assets/icons/pnpm.astro"
+import Heading from "./Heading.astro"
+import SkillIcons from "./SkillIcons.astro"
 
 // Prompts:
 // I'd like to split the following tech skills into a maximum of five groups. The group names should be a maximum of three words. Figure out the areas these skills fall into and then split them into the groups. Use all of the skills in the list:
 // React, React Native, Javascript, Typescript, HTML, CSS, Tailwind, Astro, Expo, Next.js, React Router, Jest, RTL (React Testing Library), Swagger, Electron, Eleventy, Typst, Rails, Ruby, Go, C#, Python, Java, PostgreSQL, MySQL, Node, OpenAPI, Express, GraphQL, GitHub + Github Actions, Dependabot, Travis CI, TeamCity, Copilot, ChatGPT, Gemini, Claude, Notion, Figma, Miro, Stripe API, HubSpot API, Slack API, Heroku, Google Cloud, Terraform, Sentry, Datadog, Vercel, Cloudflare Pages, Netlify, Appwrite, Convex, Git, Docker, Cursor, VSCode, IntelliJ, RubyMine, iTerm, DBeaver, Brave, Vite, Bun, pnpm, npm, Yarn, Prettier, ESLint, Biome
 ---
 
-<section class="my-6">
-  <h2 id="frontend-skills" class="siz mb-4 scroll-mt-15 text-xl font-medium">
-    Frontend
-  </h2>
-  <div class="flex flex-wrap items-start justify-start gap-x-4 gap-y-4">
-    <IconContainer name="React<br>+ Native">
-      <React size=" size-9" />
-    </IconContainer>
-    <IconContainer name="Javascript">
-      <Javascript size="size-9" />
-    </IconContainer>
-    <IconContainer name="Typescript">
-      <Typescript size="size-9" />
-    </IconContainer>
-    <IconContainer name="HTML">
-      <Html size="size-9" />
-    </IconContainer>
-    <IconContainer name="CSS">
-      <Css size="size-9" />
-    </IconContainer>
-    <IconContainer name="Tailwind">
-      <Tailwind size="size-9" />
-    </IconContainer>
-    <IconContainer name="Astro">
-      <AstroIcon size="size-9" />
-    </IconContainer>
-    <IconContainer name="Expo">
-      <Expo size="size-9" />
-    </IconContainer>
-    <IconContainer name="Next.js">
-      <Next size="size-9" />
-    </IconContainer>
-    <IconContainer name="React Router">
-      <ReactRouter size="size-9" />
-    </IconContainer>
-    <IconContainer name="pnpm">
-      <Pnpm size="size-9" />
-    </IconContainer>
-    <IconContainer name="npm">
-      <Npm size="size-9" />
-    </IconContainer>
-    <IconContainer name="Yarn">
-      <Yarn size="size-9" />
-    </IconContainer>
-    <IconContainer name="Jest">
-      <Jest size="size-9" />
-    </IconContainer>
-    <IconContainer name="RTL" tooltip="React Testing Library">
-      <Image
-        class="h-9 w-auto"
-        src={ReactTestingLibrary}
-        alt="React Testing Library logo"
-      />
-    </IconContainer>
-    <IconContainer name="Swagger">
-      <Swagger size="size-9" />
-    </IconContainer>
-    <IconContainer name="Electron">
-      <Electron size="size-9" />
-    </IconContainer>
-    <IconContainer name="Eleventy">
-      <Eleventy size="size-9" />
-    </IconContainer>
-    <IconContainer name="Typst">
-      <Image class="h-9 w-auto" src={Typst} alt="Typst logo" />
-    </IconContainer>
-  </div>
+<SkillIcons id="frontend-skills" heading="Frontend">
+  <IconContainer name="React<br>+ Native">
+    <React size="size-9" />
+  </IconContainer>
+  <IconContainer name="Javascript">
+    <Javascript size="size-9" />
+  </IconContainer>
+  <IconContainer name="Typescript">
+    <Typescript size="size-9" />
+  </IconContainer>
+  <IconContainer name="HTML">
+    <Html size="size-9" />
+  </IconContainer>
+  <IconContainer name="CSS">
+    <Css size="size-9" />
+  </IconContainer>
+  <IconContainer name="Tailwind">
+    <Tailwind size="size-9" />
+  </IconContainer>
+  <IconContainer name="Astro">
+    <AstroIcon size="size-9" />
+  </IconContainer>
+  <IconContainer name="Expo">
+    <Expo size="size-9" />
+  </IconContainer>
+  <IconContainer name="Next.js">
+    <Next size="size-9" />
+  </IconContainer>
+  <IconContainer name="React Router">
+    <ReactRouter size="size-9" />
+  </IconContainer>
+  <IconContainer name="pnpm">
+    <Pnpm size="size-9" />
+  </IconContainer>
+  <IconContainer name="npm">
+    <Npm size="size-9" />
+  </IconContainer>
+  <IconContainer name="Yarn">
+    <Yarn size="size-9" />
+  </IconContainer>
+  <IconContainer name="Jest">
+    <Jest size="size-9" />
+  </IconContainer>
+  <IconContainer name="RTL" tooltip="React Testing Library">
+    <Image
+      class="h-9 w-auto"
+      src={ReactTestingLibrary}
+      alt="React Testing Library logo"
+    />
+  </IconContainer>
+  <IconContainer name="Swagger">
+    <Swagger size="size-9" />
+  </IconContainer>
+  <IconContainer name="Electron">
+    <Electron size="size-9" />
+  </IconContainer>
+  <IconContainer name="Eleventy">
+    <Eleventy size="size-9" />
+  </IconContainer>
+  <IconContainer name="Typst">
+    <Image class="h-9 w-auto" src={Typst} alt="Typst logo" />
+  </IconContainer>
+</SkillIcons>
 
-  <h2 id="backend-skills" class="mt-6 mb-4 scroll-mt-15 text-xl font-medium">
-    Backend
-  </h2>
-  <div class="flex flex-wrap items-start justify-start gap-5 gap-y-4">
-    <IconContainer name="Rails">
-      <RubyOnRails size="size-9" />
-    </IconContainer>
-    <IconContainer name="Ruby">
-      <Ruby size="size-9" />
-    </IconContainer>
-    <IconContainer name="Go">
-      <Go size="size-9" />
-    </IconContainer>
-    <IconContainer name="C#">
-      <Csharp size="size-9" />
-    </IconContainer>
-    <IconContainer name="Python">
-      <Python size="size-9" />
-    </IconContainer>
-    <IconContainer name="Java">
-      <Java size="size-9" />
-    </IconContainer>
-    <IconContainer name="PostgreSQL">
-      <Postgresql size="size-9" />
-    </IconContainer>
-    <IconContainer name="MySQL">
-      <Mysql size="size-9" />
-    </IconContainer>
-    <IconContainer name="Node">
-      <Node size="size-9" />
-    </IconContainer>
-    <IconContainer name="Bun">
-      <Bun size="size-9" />
-    </IconContainer>
-    <IconContainer name="OpenAPI">
-      <OpenApi size="size-9" />
-    </IconContainer>
-    <IconContainer name="Express">
-      <Express size="size-9" />
-    </IconContainer>
-    <IconContainer name="GraphQL">
-      <Graphql size="size-9" />
-    </IconContainer>
-  </div>
+<SkillIcons id="backend-skills" heading="Backend">
+  <IconContainer name="Rails">
+    <RubyOnRails size="size-9" />
+  </IconContainer>
+  <IconContainer name="Ruby">
+    <Ruby size="size-9" />
+  </IconContainer>
+  <IconContainer name="Go">
+    <Go size="size-9" />
+  </IconContainer>
+  <IconContainer name="C#">
+    <Csharp size="size-9" />
+  </IconContainer>
+  <IconContainer name="Python">
+    <Python size="size-9" />
+  </IconContainer>
+  <IconContainer name="Java">
+    <Java size="size-9" />
+  </IconContainer>
+  <IconContainer name="PostgreSQL">
+    <Postgresql size="size-9" />
+  </IconContainer>
+  <IconContainer name="MySQL">
+    <Mysql size="size-9" />
+  </IconContainer>
+  <IconContainer name="Node">
+    <Node size="size-9" />
+  </IconContainer>
+  <IconContainer name="Bun">
+    <Bun size="size-9" />
+  </IconContainer>
+  <IconContainer name="OpenAPI">
+    <OpenApi size="size-9" />
+  </IconContainer>
+  <IconContainer name="Express">
+    <Express size="size-9" />
+  </IconContainer>
+  <IconContainer name="GraphQL">
+    <Graphql size="size-9" />
+  </IconContainer>
+</SkillIcons>
 
-  <h2 id="devops-skills" class="mt-6 mb-4 scroll-mt-15 text-xl font-medium">
-    DevOps
-  </h2>
-  <div class="flex flex-wrap items-start justify-start gap-5 gap-y-4">
-    <IconContainer name="Heroku">
-      <Heroku size="size-9" />
-    </IconContainer>
-    <IconContainer name="Google<br>Cloud">
-      <GoogleCloud size="size-9" />
-    </IconContainer>
-    <IconContainer name="Terraform">
-      <Terraform size="size-9" />
-    </IconContainer>
-    <IconContainer name="GitHub<br>+ Actions">
-      <Github size="size-9" />
-    </IconContainer>
-    <IconContainer name="Dependabot">
-      <Dependabot size="size-9" />
-    </IconContainer>
-    <IconContainer name="Travis CI">
-      <Travis size="size-9" />
-    </IconContainer>
-    <IconContainer name="TeamCity">
-      <Teamcity size="size-9" />
-    </IconContainer>
-    <IconContainer name="Vercel">
-      <Vercel size="size-9" />
-    </IconContainer>
-    <IconContainer name="Cloudflare<br>Pages">
-      <CloudflarePages size="size-9" />
-    </IconContainer>
-    <IconContainer name="Netlify">
-      <Netlify size="size-9" />
-    </IconContainer>
-    <IconContainer name="Appwrite">
-      <Appwrite size="size-9" />
-    </IconContainer>
-    <IconContainer name="Convex">
-      <Convex size="size-9" />
-    </IconContainer>
-    <IconContainer name="Sentry">
-      <Sentry size="size-9" />
-    </IconContainer>
-    <IconContainer name="Datadog">
-      <Datadog size="size-9" />
-    </IconContainer>
-  </div>
+<SkillIcons id="devops-skills" heading="DevOps">
+  <IconContainer name="Heroku">
+    <Heroku size="size-9" />
+  </IconContainer>
+  <IconContainer name="Google<br>Cloud">
+    <GoogleCloud size="size-9" />
+  </IconContainer>
+  <IconContainer name="Terraform">
+    <Terraform size="size-9" />
+  </IconContainer>
+  <IconContainer name="GitHub<br>+ Actions">
+    <Github size="size-9" />
+  </IconContainer>
+  <IconContainer name="Dependabot">
+    <Dependabot size="size-9" />
+  </IconContainer>
+  <IconContainer name="Travis CI">
+    <Travis size="size-9" />
+  </IconContainer>
+  <IconContainer name="TeamCity">
+    <Teamcity size="size-9" />
+  </IconContainer>
+  <IconContainer name="Vercel">
+    <Vercel size="size-9" />
+  </IconContainer>
+  <IconContainer name="Cloudflare<br>Pages">
+    <CloudflarePages size="size-9" />
+  </IconContainer>
+  <IconContainer name="Netlify">
+    <Netlify size="size-9" />
+  </IconContainer>
+  <IconContainer name="Appwrite">
+    <Appwrite size="size-9" />
+  </IconContainer>
+  <IconContainer name="Convex">
+    <Convex size="size-9" />
+  </IconContainer>
+  <IconContainer name="Sentry">
+    <Sentry size="size-9" />
+  </IconContainer>
+  <IconContainer name="Datadog">
+    <Datadog size="size-9" />
+  </IconContainer>
+</SkillIcons>
 
-  <h2
-    id="ai-productivity-skills"
-    class="mt-6 mb-4 scroll-mt-15 text-xl font-medium"
-  >
-    AI & Productivity
-  </h2>
-  <div class="flex flex-wrap items-start justify-start gap-5 gap-y-4">
-    <IconContainer name="Copilot">
-      <Image class="h-9 w-auto" src={Copilot} alt="Copilot logo" />
-    </IconContainer>
-    <IconContainer name="ChatGPT">
-      <Chatgpt size="size-9" />
-    </IconContainer>
-    <IconContainer name="Gemini">
-      <Gemini size="size-9" />
-    </IconContainer>
-    <IconContainer name="Claude">
-      <Claude size="size-9" />
-    </IconContainer>
-    <IconContainer name="Notion">
-      <Notion size="size-9" />
-    </IconContainer>
-    <IconContainer name="Figma">
-      <Figma size="size-9" />
-    </IconContainer>
-    <IconContainer name="Miro">
-      <Miro size="size-9" />
-    </IconContainer>
-    <IconContainer name="Stripe API">
-      <Image class="h-9 w-auto" src={Stripe} alt="Stripe logo" />
-    </IconContainer>
-    <IconContainer name="HubSpot API">
-      <Hubspot size="size-9" />
-    </IconContainer>
-    <IconContainer name="Slack API">
-      <Slack size="size-9" />
-    </IconContainer>
-  </div>
+<SkillIcons id="ai-productivity-skills" heading="AI & Productivity">
+  <IconContainer name="Copilot">
+    <Image class="h-9 w-auto" src={Copilot} alt="Copilot logo" />
+  </IconContainer>
+  <IconContainer name="ChatGPT">
+    <Chatgpt size="size-9" />
+  </IconContainer>
+  <IconContainer name="Gemini">
+    <Gemini size="size-9" />
+  </IconContainer>
+  <IconContainer name="Claude">
+    <Claude size="size-9" />
+  </IconContainer>
+  <IconContainer name="Notion">
+    <Notion size="size-9" />
+  </IconContainer>
+  <IconContainer name="Figma">
+    <Figma size="size-9" />
+  </IconContainer>
+  <IconContainer name="Miro">
+    <Miro size="size-9" />
+  </IconContainer>
+  <IconContainer name="Stripe API">
+    <Image class="h-9 w-auto" src={Stripe} alt="Stripe logo" />
+  </IconContainer>
+  <IconContainer name="HubSpot API">
+    <Hubspot size="size-9" />
+  </IconContainer>
+  <IconContainer name="Slack API">
+    <Slack size="size-9" />
+  </IconContainer>
+</SkillIcons>
 
-  <h2 id="tools-skills" class="mt-6 mb-4 scroll-mt-15 text-xl font-medium">
-    Development tools
-  </h2>
-  <div class="flex flex-wrap items-start justify-start gap-5 gap-y-4">
-    <IconContainer name="Git">
-      <Git size="size-9" />
-    </IconContainer>
-    <IconContainer name="Docker">
-      <Docker size="size-9" />
-    </IconContainer>
-    <IconContainer name="Cursor">
-      <Image class="h-9 w-auto" src={Cursor} alt="Cursor logo" />
-    </IconContainer>
-    <IconContainer name="VSCode">
-      <Vscode size="size-9" />
-    </IconContainer>
-    <IconContainer name="IntelliJ">
-      <Intellij size="size-9" />
-    </IconContainer>
-    <IconContainer name="RubyMine">
-      <Rubymine size="size-9" />
-    </IconContainer>
-    <IconContainer name="iTerm">
-      <ITerm size="size-9" />
-    </IconContainer>
-    <IconContainer name="DBeaver">
-      <Dbeaver size="size-9" />
-    </IconContainer>
-    <IconContainer name="Brave">
-      <Brave size="size-9" />
-    </IconContainer>
-    <IconContainer name="Vite">
-      <Vite size="size-9" />
-    </IconContainer>
-    <IconContainer name="Prettier">
-      <Prettier size="size-9" />
-    </IconContainer>
-    <IconContainer name="ESLint">
-      <ESLint size="size-9" />
-    </IconContainer>
-    <IconContainer name="Biome">
-      <Biome size="size-9" />
-    </IconContainer>
-  </div>
+<SkillIcons id="tools-skills" heading="Development tools">
+  <IconContainer name="Git">
+    <Git size="size-9" />
+  </IconContainer>
+  <IconContainer name="Docker">
+    <Docker size="size-9" />
+  </IconContainer>
+  <IconContainer name="Cursor">
+    <Image class="h-9 w-auto" src={Cursor} alt="Cursor logo" />
+  </IconContainer>
+  <IconContainer name="VSCode">
+    <Vscode size="size-9" />
+  </IconContainer>
+  <IconContainer name="IntelliJ">
+    <Intellij size="size-9" />
+  </IconContainer>
+  <IconContainer name="RubyMine">
+    <Rubymine size="size-9" />
+  </IconContainer>
+  <IconContainer name="iTerm">
+    <ITerm size="size-9" />
+  </IconContainer>
+  <IconContainer name="DBeaver">
+    <Dbeaver size="size-9" />
+  </IconContainer>
+  <IconContainer name="Brave">
+    <Brave size="size-9" />
+  </IconContainer>
+  <IconContainer name="Vite">
+    <Vite size="size-9" />
+  </IconContainer>
+  <IconContainer name="Prettier">
+    <Prettier size="size-9" />
+  </IconContainer>
+  <IconContainer name="ESLint">
+    <ESLint size="size-9" />
+  </IconContainer>
+  <IconContainer name="Biome">
+    <Biome size="size-9" />
+  </IconContainer>
+</SkillIcons>
 
-  <h2 id="meetings-skills" class="mt-6 mb-4 scroll-mt-15 text-xl font-medium">
-    Meetings & Processes
-  </h2>
-  <Carousel>
-    <li>Stakeholder demos</li>
-    <li>Code reviews</li>
-    <li>1:1s</li>
-    <li>Hiring engineers</li>
-    <li>Technical design meetings</li>
-    <li>Performance reviews</li>
-    <li>Pair programming</li>
-    <li>Ideation sessions</li>
-    <li>RFC-like proposals</li>
-    <li>Retrospectives</li>
-    <li>Daily standup</li>
-    <li>Office hours</li>
-    <li>Grooming sessions</li>
-    <li>Colleague mentoring</li>
-  </Carousel>
-</section>
+<Heading data-as="h2" id="meetings-skills">Meetings & Processes</Heading>
+<Carousel>
+  <li>Stakeholder demos</li>
+  <li>Code reviews</li>
+  <li>1:1s</li>
+  <li>Hiring engineers</li>
+  <li>Technical design meetings</li>
+  <li>Performance reviews</li>
+  <li>Pair programming</li>
+  <li>Ideation sessions</li>
+  <li>RFC-like proposals</li>
+  <li>Retrospectives</li>
+  <li>Daily standup</li>
+  <li>Office hours</li>
+  <li>Grooming sessions</li>
+  <li>Colleague mentoring</li>
+</Carousel>

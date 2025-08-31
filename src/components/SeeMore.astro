@@ -1,8 +1,8 @@
 ---
-const { className = "mb-3 text-lg leading-8 text-zinc-400" } = Astro.props
+import Paragraph from "./Paragraph.astro"
 ---
 
-<span class={className} x-data="{ expanded: false }">
+<Paragraph data-as="span" x-data="{ expanded: false }">
   <span x-show="!expanded"><slot name="before-see-more" /></span>
   <span
     x-show="!expanded"
@@ -11,4 +11,4 @@ const { className = "mb-3 text-lg leading-8 text-zinc-400" } = Astro.props
   >
   <span x-show="!expanded"><slot name="after-see-more" /></span>
   <span x-show="expanded"><slot /></span>
-</span>
+</Paragraph>

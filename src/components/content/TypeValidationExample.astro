@@ -1,8 +1,8 @@
 ---
-
+const { margin = "m-0" } = Astro.props
 ---
 
-<div class="flex grid-cols-2 flex-col sm:grid">
+<div class={`flex grid-cols-2 flex-col sm:grid ${margin}`}>
   <div>
     <p class="text-lg leading-8 text-zinc-400">Frontend type:</p>
     <pre

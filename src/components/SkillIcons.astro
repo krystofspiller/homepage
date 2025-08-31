@@ -1,0 +1,15 @@
+---
+import Heading from "./Heading.astro"
+
+interface Props {
+  id: string
+  heading: string
+}
+
+const { id, heading } = Astro.props as Props
+---
+
+<Heading data-as="h2" id={id}>{heading}</Heading>
+<div class="mt-4 mb-6 flex flex-wrap items-start justify-start gap-5 gap-y-4">
+  <slot />
+</div>

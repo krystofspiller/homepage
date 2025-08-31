@@ -52,7 +52,7 @@ async function getGitignorePatterns(projectRoot: string): Promise<string[]> {
       })
       .concat(additionalPatterns)
       .filter((pattern, index, arr) => arr.indexOf(pattern) === index) // Remove duplicates
-  } catch (error) {
+  } catch {
     console.warn("Could not read .gitignore file, using default patterns")
     return additionalPatterns.concat([
       ".wrangler",
@@ -133,7 +133,7 @@ async function readAllFiles(
             content,
             isDirectory: false,
           })
-        } catch (error) {
+        } catch {
           // Skip files that can't be read (like binary files)
           console.warn(`Could not read file: ${relativePath}`)
         }

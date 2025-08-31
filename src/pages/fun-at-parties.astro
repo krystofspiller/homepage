@@ -2,11 +2,12 @@
 import BaseLayout from "@layouts/BaseLayout.astro"
 import Trollface from "@assets/icons/trollface.astro"
 import Link from "@components/Link.astro"
+import Heading from "@components/Heading.astro"
 ---
 
 <BaseLayout>
   <section class="my-10">
-    <h2 class="mb-2 flex gap-2 text-2xl font-semibold">I'm fun at parties</h2>
+    <Heading data-as="h1">I'm fun at parties</Heading>
     <div class="mb-3 flex items-center gap-2">
       <Trollface
         size="min-w-10 min-h-10 size-10 sm:min-w-16 sm:min-h-16 sm:size-16"

@@ -17,7 +17,7 @@ const astroLanguageOptions: Linter.LanguageOptions = {
 }
 
 const astroLanguageRules: Linter.RulesRecord = {
-  "no-unused-vars": "off",
+  "no-unused-vars": "error",
   "no-console": "warn",
   "no-debugger": "error",
   "prefer-const": "error",

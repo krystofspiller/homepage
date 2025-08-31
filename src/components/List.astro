@@ -1,0 +1,11 @@
+---
+interface Props {
+  type?: "disc" | "decimal"
+}
+
+const { type = "disc" } = Astro.props as Props
+---
+
+<ol class={`my-3 ml-6 list-${type} space-y-1 text-lg leading-8 text-zinc-400`}>
+  <slot />
+</ol>

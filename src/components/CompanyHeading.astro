@@ -1,0 +1,30 @@
+---
+import { Image, type LocalImageProps } from "astro:assets"
+import YearRange, { type YearRangeProps } from "@components/YearRange.astro"
+
+type Props = YearRangeProps &
+  LocalImageProps & {
+    id: string
+    imgHeight: string
+    ["data-toc"]?: string
+  }
+
+const {
+  id,
+  ["data-toc"]: dataToc,
+  from,
+  to,
+  note,
+  imgHeight,
+  ...imgProps
+} = Astro.props as Props
+---
+
+<h2
+  class="mb-4 flex scroll-mt-15 flex-col items-center justify-center gap-1"
+  id={id}
+  data-toc={dataToc}
+>
+  <Image class={`${imgHeight} w-auto mb-0.5`} {...imgProps} />
+  <YearRange from={from} to={to} note={note} />
+</h2>

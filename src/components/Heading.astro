@@ -1,0 +1,21 @@
+---
+import Divider from "./Divider.astro"
+
+interface Props {
+  ["data-as"]?: "h1" | "h2" | "h3" | "h4"
+  [key: string]: any
+}
+
+const { ["data-as"]: Element = "h3", ...rest } = Astro.props as Props
+const classMap = {
+  h1: "text-2xl",
+  h2: "text-xl",
+  h3: "text-lg",
+  h4: "text-lg",
+}
+---
+
+<Element
+  class={`mb-1 scroll-mt-15 font-semibold text-zinc-100 ${classMap[Element]}`}
+  {...rest}><slot />{Element === "h1" && <Divider />}</Element
+>
