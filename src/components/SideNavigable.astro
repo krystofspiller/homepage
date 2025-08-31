@@ -67,6 +67,11 @@ getHeadings(document, toc)
   <slot />
 </div>
 
+<script>
+  import { usesSideNavigable } from "@utils/store"
+  usesSideNavigable.set(true)
+</script>
+
 <script is:inline data-astro-rerun define:vars={{ toc }}>
   const mobileSelect = document.getElementById("mobile-toc-select")
   mobileSelect?.addEventListener("change", (e) => {

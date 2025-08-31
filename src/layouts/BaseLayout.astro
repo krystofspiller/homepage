@@ -37,7 +37,8 @@ const lookingForJob = false
   >
     {lookingForJob ? <Banners /> : <Header lookingForJob={lookingForJob} />}
     <div
-      class="mx-auto flex h-full min-h-[calc(100vh-48px)] max-w-screen-sm flex-col justify-between px-6 pt-14 pb-14 selection:bg-gray-600 selection:text-white sm:px-8 lg:pb-0"
+      id="main-content"
+      class="mx-auto flex h-full min-h-[100vh] max-w-screen-sm flex-col justify-between px-6 pt-14 pb-14 selection:bg-gray-600 selection:text-white sm:px-8 lg:pb-0"
     >
       <div>
         {lookingForJob && <Header lookingForJob={lookingForJob} />}
@@ -55,6 +56,8 @@ const lookingForJob = false
 </html>
 
 <script>
+  import { usesSideNavigable } from "@utils/store"
+
   document.addEventListener("astro:page-load", () => {
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener("click", function (e) {
@@ -87,6 +90,11 @@ const lookingForJob = false
     loading.classList.add("hidden")
     loading.classList.remove("flex")
     loading.classList.remove("opacity-100")
+  })
+
+  usesSideNavigable.subscribe((value) => {
+    document.getElementById("main-content")?.classList.toggle("pb-14", value)
+    document.getElementById("main-content")?.classList.toggle("pb-0", !value)
   })
 </script>
 

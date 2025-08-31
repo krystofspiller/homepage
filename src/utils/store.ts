@@ -7,5 +7,6 @@ enum EasterEggs {
 }
 
 export const easterEggCounter = atom<Array<EasterEggs>>([])
+export const usesSideNavigable = atom<boolean>(false)
 
 export { EasterEggs }
