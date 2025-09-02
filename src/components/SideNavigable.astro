@@ -34,9 +34,10 @@ getHeadings(document, toc)
   >
     <ul class="h-[calc(100vh-4rem)] overflow-scroll p-4 pt-0">
       {
-        toc.map((val) => (
+        toc.map((val, index) => (
           <li
             data-id={val.id}
+            class={index === 0 ? "text-white" : ""}
             style={`margin-left: ${val.level - minLevel}rem`}
           >
             <Link className="!no-underline" href={`#${val.id}`}>
@@ -51,7 +52,7 @@ getHeadings(document, toc)
     class="fixed bottom-0 left-0 z-100 flex h-14 w-full items-center justify-center bg-neutral-950 p-2 text-zinc-400 lg:hidden"
   >
     <select
-      class="rounded-lg border border-neutral-800 p-2.5 pr-10 text-zinc-400 outline-none focus:border-blue-500 focus:ring-blue-500"
+      class="rounded-lg border border-transparent p-2.5 pr-10 text-zinc-400 outline-none focus:border-blue-500 focus:ring-blue-500"
       id="mobile-toc-select"
     >
       {
@@ -84,55 +85,26 @@ getHeadings(document, toc)
     element?.scrollIntoView({ behavior: "smooth" })
   })
 
-  const intersecting = new Map()
-  let closestTarget = null
   function handleIntersect(entries) {
-    closestTarget?.classList.remove("text-white")
-    entries.forEach((entry) => {
-      const targetId = entry.target.getAttribute("id")
-      if (entry.isIntersecting) {
-        intersecting.set(targetId, entry.target)
-      } else {
-        intersecting.delete(targetId)
-        document
-          .querySelector(`li[data-id=${targetId}]`)
-          ?.classList.remove("text-white")
-      }
-    })
+    let largestNegativeDiff = Number.MIN_SAFE_INTEGER
+    let closestId = toc[0].id
+    for (const row of toc) {
+      document
+        .querySelector(`li[data-id=${row.id}]`)
+        ?.classList.remove("text-white")
+      const top = document.getElementById(row.id)?.getBoundingClientRect().top
+      if (top > 0) continue
 
-    if (intersecting.size === 0) {
-      let largestNegativeDiff = Number.MIN_SAFE_INTEGER
-      let closestId = null
-      for (const row of toc) {
-        const top = document.getElementById(row.id)?.getBoundingClientRect().top
-        if (top > 0) continue
-
-        if (top > largestNegativeDiff) {
-          largestNegativeDiff = top
-          closestId = row.id
-        }
-      }
-
-      closestTarget = document.querySelector(`li[data-id=${closestId}]`)
-      closestTarget?.classList.add("text-white")
-      if (mobileSelect) {
-        mobileSelect.value = closestId
+      if (top > largestNegativeDiff) {
+        largestNegativeDiff = top
+        closestId = row.id
       }
     }
 
-    let top = [Number.MAX_SAFE_INTEGER, null, null]
-    intersecting.forEach((target, targetId) => {
-      const li = document.querySelector(`li[data-id=${targetId}]`)
-      const positionFromTop = target.getBoundingClientRect().top
-      if (positionFromTop < top[0]) {
-        top = [positionFromTop, li, targetId]
-      }
-      li?.classList.remove("text-white")
-    })
-
-    top[1]?.classList.add("text-white")
-    if (top[2] && mobileSelect) {
-      mobileSelect.value = top[2]
+    closestTarget = document.querySelector(`li[data-id=${closestId}]`)
+    closestTarget?.classList.add("text-white")
+    if (mobileSelect) {
+      mobileSelect.value = closestId
     }
   }
   const observer = new IntersectionObserver(handleIntersect, { threshold: 1 })
