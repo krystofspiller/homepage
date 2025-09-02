@@ -35,12 +35,16 @@ import Heading from "@components/Heading.astro"
 import CompanyHeading from "@components/CompanyHeading.astro"
 import Divider from "@components/Divider.astro"
 import List from "@components/List.astro"
+import UnderlinedText from "@components/UnderlinedText.astro"
 
 const yearsOfExperience = Math.abs(
   new Date(Date.now() - new Date(2020, 1, 1).getTime()).getFullYear() - 1970,
 )
 
-// TODO: Put styled HTML into components
+// TODO: Refactor navigation to use the new logic only
+// TODO: Figure out blog setup - Astro DB?
+// TODO: Playwright + take screenshot of homepage an automate updating Readme screenshot
+// TODO: Setup StoryBook - split components into design system and components
 ---
 
 <BaseLayout>
@@ -462,19 +466,14 @@ const yearsOfExperience = Math.abs(
           whole OpenAPI specification to use this helper would a large effort for
           an individual and there would still be the problem with my colleagues not
           being aware of this helper and writing new specifications without it. This
-          linter rule therefore produced <span
-            class="underline decoration-amber-400 decoration-wavy decoration-2 underline-offset-4"
-            >warnings</span
-          > (and <span
-            class="underline decoration-red-400 decoration-2 underline-offset-4"
-            >errors</span
-          > in some cases) to enforce its usage suggesting fellow colleagues to convert
-          it to use the helper. The idea is that the <span
-            class="underline decoration-amber-400 decoration-wavy decoration-2 underline-offset-4"
-            >warnings</span
-          > would be changed to <span
-            class="underline decoration-red-400 decoration-2 underline-offset-4"
-            >errors</span
+          linter rule therefore produced <UnderlinedText type="warning"
+            >warnings</UnderlinedText
+          > (and <UnderlinedText type="error">errors</UnderlinedText> in some cases)
+          to enforce its usage suggesting fellow colleagues to convert it to use
+          the helper. The idea was that the <UnderlinedText
+            >warnings</UnderlinedText
+          > would be changed to <UnderlinedText type="error"
+            >errors</UnderlinedText
           > once the conversion is complete so that it would be written in this more
           concise and readable format.
           <OpenApiHelperExample />

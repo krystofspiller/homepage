@@ -1,0 +1,15 @@
+---
+interface Props {
+  type?: "warning" | "error"
+}
+
+const { type = "warning" } = Astro.props as Props
+const classMap = {
+  warning: "decoration-amber-400 decoration-wavy",
+  error: "decoration-red-400",
+}
+---
+
+<span class={`underline decoration-2 underline-offset-4 ${classMap[type]}`}
+  ><slot /></span
+>
