@@ -7,14 +7,23 @@ updates:
     open-pull-requests-limit: 15
     schedule:
       interval: "weekly"
-      day: "saturday"
-      time: "03:00"
+      day: "friday"
+      time: "17:00"
       timezone: "Europe/Copenhagen"
+    groups:
+      tailwind:
+        patterns:
+          - "tailwindcss"
+          - "@tailwindcss/vite"
+      typescript-eslint:
+        patterns:
+          - "@typescript-eslint/eslint-plugin"
+          - "@typescript-eslint/parser"
   - package-ecosystem: "github-actions"
     directory: "/"
     open-pull-requests-limit: 5
     schedule:
       interval: "weekly"
-      day: "saturday"
-      time: "03:00"
+      day: "friday"
+      time: "17:00"
       timezone: "Europe/Copenhagen"

@@ -48,12 +48,19 @@ jobs:
     if: success()
     runs-on: ubuntu-latest
     steps:
+      - name: Get Dependabot PR count
+        id: dependabot-prs
+        run: |
+          PR_COUNT=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/pulls?state=open&per_page=100" \
+            | jq '[.[] | select(.user.login == "dependabot[bot]")] | length')
+          echo "count=$PR_COUNT" >> $GITHUB_OUTPUT
       - name: Send push notification
         run: |
           curl -s \
             --form-string "token=${{ secrets.PUSHOVER_TOKEN }}" \
             --form-string "user=${{ secrets.PUSHOVER_USER }}" \
-            --form-string "title=Homepage" \
-            --form-string "message=✅ Deployment successful" \
+            --form-string "title=✅ Deployed homepage" \
+            --form-string "message=${{ steps.dependabot-prs.outputs.count }} Dependabot PRs open" \
             --form-string "url=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
             https://api.pushover.net/1/messages.json
