@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.6",
-    "@tailwindcss/vite": "^4.1.12",
+    "@tailwindcss/vite": "^4.1.13",
     "alpinejs": "^3.14.9",
     "astro": "^5.13.5",
     "butteruptoasts": "^2.0.1",
