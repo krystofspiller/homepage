@@ -66,6 +66,10 @@ const lookingForJob = false
         const href = anchor.getAttribute("href")
         if (!href) return
 
+        const currentUrl = new URL(window.location.href)
+        currentUrl.hash = href
+        window.history.pushState(null, "", currentUrl.toString())
+
         document.querySelector(href)?.scrollIntoView({
           behavior: "smooth",
         })
