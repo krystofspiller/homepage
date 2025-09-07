@@ -1,0 +1,27 @@
+---
+import ArticleCard from "@components/ArticleCard.astro"
+import BaseLayout from "@layouts/BaseLayout.astro"
+import { posts } from "src/data/common"
+
+const sortedPosts = posts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+)
+---
+
+<BaseLayout>
+  <div class="mt-4 space-y-4">
+    {
+      sortedPosts.map((post) => (
+        <ArticleCard
+          title={post.data.title}
+          subtitle={post.data.pubDate.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          })}
+          slug={post.id}
+        />
+      ))
+    }
+  </div>
+</BaseLayout>

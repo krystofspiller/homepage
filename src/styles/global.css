@@ -50,10 +50,12 @@
     }
   }
 
+  --color-yellow: #e6c75f;
   --color-orange: #e27c0d;
   --color-orange-30: --alpha(var(--color-orange) / 30%);
+  --color-red: #e65f5f;
 
-  --gradient-accent: 90deg, #e6c75f, #e65f5f;
+  --gradient-accent: 90deg, var(--color-yellow), var(--color-red);
   --gradient-accent-transparent: 90deg, #e6c75fa0, #e65f5fa0;
 
   --font-sans: "Geist", sans-serif;

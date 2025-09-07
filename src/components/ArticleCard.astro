@@ -1,0 +1,54 @@
+---
+import Link from "./Link.astro"
+import Paragraph from "./Paragraph.astro"
+
+type Props = {
+  title: string
+  subtitle: string
+  slug: string
+}
+
+const { title, subtitle, slug } = Astro.props as Props
+---
+
+<a href={`/blog/${slug}`}>
+  <div
+    class="group gradient w-full cursor-pointer rounded-xl p-4 transition-all duration-1000 hover:shadow-[0_0_5px_0px_var(--color-neutral-700)]/50 hover:inset-shadow-[0_0_15px_-10px_var(--color-orange)]/50"
+  >
+    <div>
+      <Link as="span" className="text-2xl no-underline" href={`/blog/${slug}`}
+        >{title}</Link
+      >
+      <Paragraph className="mb-0 text-sm">{subtitle}</Paragraph>
+    </div>
+  </div>
+</a>
+
+<style>
+  @property --c1 {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #e6c75f20;
+  }
+  @property --c2 {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #e65f5f20;
+  }
+
+  .gradient {
+    transition:
+      --c1 0.2s,
+      --c2 0.2s;
+    background: linear-gradient(
+      168deg,
+      var(--c1),
+      color-mix(in oklab, var(--color-neutral-950) 80%, transparent),
+      var(--c2)
+    );
+  }
+  .gradient:hover {
+    --c1: #e6c75f30;
+    --c2: #e65f5f30;
+  }
+</style>

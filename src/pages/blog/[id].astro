@@ -1,0 +1,35 @@
+---
+import SideNavigable from "@components/SideNavigable.astro"
+import BaseLayout from "@layouts/BaseLayout.astro"
+import Paragraph from "@components/Paragraph.astro"
+import { render } from "astro:content"
+import { posts } from "src/data/common"
+
+export async function getStaticPaths() {
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }))
+}
+
+const { post } = Astro.props
+const { Content } = await render(post)
+---
+
+<BaseLayout>
+  <h1 class={`text-zinc-100 text-3xl`}>
+    {post.data.title}
+  </h1>
+  <Paragraph className="text-sm"
+    >{
+      post.data.pubDate.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      })
+    }</Paragraph
+  >
+  <SideNavigable>
+    <Content />
+  </SideNavigable>
+</BaseLayout>
