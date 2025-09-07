@@ -13,8 +13,12 @@ function getHeadings(content: Document | HTMLElement | null, toc: Toc) {
   const children = content?.children ?? []
   for (const c of children) {
     const child = c as HTMLElement
-    if (["H1", "H2", "H3"].includes(child.tagName)) {
-      const level = parseInt(child.tagName.split("H")[1])
+    if (["H2", "H3", "H4"].includes(child.tagName)) {
+      const help = child.tagName.split("H")
+      if (help.length !== 2) {
+        continue
+      }
+      const level = parseInt(child.tagName.split("H")[1]!)
       minLevel = Math.min(minLevel, level)
       toc.push({
         level,
@@ -37,7 +41,7 @@ getHeadings(document, toc)
         toc.map((val, index) => (
           <li
             data-id={val.id}
-            class={index === 0 ? "text-white" : ""}
+            class={`transition-colors duration-300 ${index === 0 ? "text-white" : ""}`}
             style={`margin-left: ${val.level - minLevel}rem`}
           >
             <Link className="!no-underline" href={`#${val.id}`}>
@@ -85,30 +89,46 @@ getHeadings(document, toc)
     element?.scrollIntoView({ behavior: "smooth" })
   })
 
-  function handleIntersect(entries) {
-    let largestNegativeDiff = Number.MIN_SAFE_INTEGER
-    let closestId = toc[0].id
-    for (const row of toc) {
-      document
-        .querySelector(`li[data-id=${row.id}]`)
-        ?.classList.remove("text-white")
-      const top = document.getElementById(row.id)?.getBoundingClientRect().top
-      if (top > 0) continue
+  // Register scroll events for all toc elements
+  const tocElements = []
+  for (const row of toc) {
+    const element = document.getElementById(row.id)
+    if (element) {
+      tocElements.push({ element, id: row.id })
+    }
+  }
 
-      if (top > largestNegativeDiff) {
-        largestNegativeDiff = top
-        closestId = row.id
+  // Function to update active navigation item based on scroll position
+  function updateActiveNavItem() {
+    const scrollMarginOffset = 64
+    const scrollPosition = window.scrollY + scrollMarginOffset
+
+    let activeId = toc[0].id
+    for (const { element, id } of tocElements) {
+      const rectTop = element.getBoundingClientRect().top
+
+      if (rectTop + window.scrollY <= scrollPosition) {
+        activeId = id
       }
     }
 
-    closestTarget = document.querySelector(`li[data-id=${closestId}]`)
-    closestTarget?.classList.add("text-white")
-    if (mobileSelect) {
-      mobileSelect.value = closestId
+    // Update navigation items
+    const navItems = document.querySelectorAll("[data-id]")
+    navItems.forEach((item) => {
+      const isActive = item.getAttribute("data-id") === activeId
+      item.classList.toggle("text-white", isActive)
+      item.classList.toggle("text-zinc-400", !isActive)
+    })
+
+    // Update mobile select
+    if (activeId && mobileSelect) {
+      mobileSelect.value = activeId
     }
   }
-  const observer = new IntersectionObserver(handleIntersect, { threshold: 1 })
-  for (const row of toc) {
-    observer.observe(document.getElementById(row.id))
-  }
+
+  // Add scroll event listener
+  window.addEventListener("scroll", updateActiveNavItem)
+
+  // Initial call to set the correct active item on page load
+  updateActiveNavItem()
 </script>
