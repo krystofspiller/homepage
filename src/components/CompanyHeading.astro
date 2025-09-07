@@ -20,11 +20,11 @@ const {
 } = Astro.props as Props
 ---
 
-<h2
+<h3
   class="mb-4 flex scroll-mt-15 flex-col items-center justify-center gap-1"
   id={id}
   data-toc={dataToc}
 >
   <Image class={`${imgHeight} w-auto mb-0.5`} {...imgProps} />
   <YearRange from={from} to={to} note={note} />
-</h2>
+</h3>

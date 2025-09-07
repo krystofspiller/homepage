@@ -165,7 +165,7 @@ const yearsOfExperience = Math.abs(
     </p>
   </div>
   <SideNavigable>
-    <Heading data-as="h1" id="professional-contributions">
+    <Heading data-as="h2" id="professional-contributions">
       Professional contributions
     </Heading>
     <CompanyHeading
@@ -177,7 +177,7 @@ const yearsOfExperience = Math.abs(
       alt="Portchain logo"
       from={2025}
     />
-    <Heading id="terminal-integrations">
+    <Heading data-as="h4" id="terminal-integrations">
       <span
         data-tooltip="In shipping, vessels transport containers between ports. A terminal is a place where containers are loaded and unloaded from the vessel."
         >Terminal</span
@@ -190,7 +190,7 @@ const yearsOfExperience = Math.abs(
         their schedules with Portchain's data and synchronize between the two.</SeeMore
       >
     </Paragraph>
-    <Heading data-as="h4">Other</Heading>
+    <Heading data-as="h5">Other</Heading>
     <Paragraph>
       <List>
         <li>
@@ -221,7 +221,7 @@ const yearsOfExperience = Math.abs(
       from={2022}
       to={2025}
     />
-    <Heading id="model-funding-rounds">
+    <Heading data-as="h4" id="model-funding-rounds">
       <Link
         href="https://www.app.europe.carta.com/convertible_securities_calculator/?skip=true"
         >Funding rounds calculator</Link
@@ -255,7 +255,11 @@ const yearsOfExperience = Math.abs(
         height="360"></iframe>
     </div>
 
-    <Heading id="billing-revamp-project" data-toc="Billing revamp project">
+    <Heading
+      data-as="h4"
+      id="billing-revamp-project"
+      data-toc="Billing revamp project"
+    >
       Billing revamp&nbsp;<span class="relative"
         ><span class="absolute w-24 opacity-0">project</span><span
           class="absolute w-24"
@@ -286,7 +290,7 @@ const yearsOfExperience = Math.abs(
     </Paragraph>
     <Billing />
 
-    <Heading id="fundraising" data-toc="Early-stage fundraising">
+    <Heading data-as="h4" id="fundraising" data-toc="Early-stage fundraising">
       Fundraising for early-stage startups
     </Heading>
     <Paragraph>
@@ -305,7 +309,7 @@ const yearsOfExperience = Math.abs(
       alt="Early-stage startups fundraising"
     />
 
-    <Heading id="in-app-workflows">In-app workflows</Heading>
+    <Heading data-as="h4" id="in-app-workflows">In-app workflows</Heading>
     <Paragraph>
       The in-app workflows I implemented increased number of requests for an
       additional paid service from ~5 to 20+ a month increasing revenue in this
@@ -318,7 +322,11 @@ const yearsOfExperience = Math.abs(
     </Paragraph>
     <Workflows margin="mb-6" />
 
-    <Heading id="currency-provider" data-toc="Exchange rate provider">
+    <Heading
+      data-as="h4"
+      id="currency-provider"
+      data-toc="Exchange rate provider"
+    >
       Currency exchange rate provider
     </Heading>
     <Paragraph>
@@ -347,7 +355,7 @@ const yearsOfExperience = Math.abs(
     </Paragraph>
     <CurrencyProviders margin="mb-6" />
 
-    <Heading id="link-checker" data-toc="Invalid link checker">
+    <Heading data-as="h4" id="link-checker" data-toc="Invalid link checker">
       Automated invalid link checker
     </Heading>
     <Paragraph>
@@ -377,7 +385,7 @@ const yearsOfExperience = Math.abs(
       alt="Example Slack message of link checker"
     />
 
-    <Heading id="modals">Improved modal component</Heading>
+    <Heading data-as="h4" id="modals">Improved modal component</Heading>
     <Paragraph>
       Improved both UX and DX by improving a modal component. <SeeMore
         ><span class="mb-3 block"
@@ -406,7 +414,9 @@ const yearsOfExperience = Math.abs(
     </Paragraph>
     <Image class="mb-6 w-full" src={modal} alt="Modal example" />
 
-    <Heading id="data-integrity-checks">Data integrity checks</Heading>
+    <Heading data-as="h4" id="data-integrity-checks"
+      >Data integrity checks</Heading
+    >
     <Paragraph>
       Maintained product quality by implementing data integrity checks.<SeeMore>
         My colleague implemented a framework for adding data integrity <span
@@ -425,7 +435,7 @@ const yearsOfExperience = Math.abs(
       alt="Example Slack message of data integrity checker"
     />
 
-    <Heading id="linter-rules">Linter rules</Heading>
+    <Heading data-as="h4" id="linter-rules">Linter rules</Heading>
     <SeeMore>
       <span slot="before-see-more">
         Maintained coding conventions and simplified codebase using <span
@@ -491,7 +501,7 @@ const yearsOfExperience = Math.abs(
       </List>
     </SeeMore>
 
-    <Heading id="type-validation" data-toc="Type validation">
+    <Heading data-as="h4" id="type-validation" data-toc="Type validation">
       Frontend to backend type validation
     </Heading>
     <Paragraph>
@@ -513,7 +523,11 @@ const yearsOfExperience = Math.abs(
     </Paragraph>
     <TypeValidationExample margin="mb-6" />
 
-    <Heading id="commit-message-formatter" data-toc="Commit message formatter">
+    <Heading
+      data-as="h4"
+      id="commit-message-formatter"
+      data-toc="Commit message formatter"
+    >
       Conventional commit message auto formatter
     </Heading>
     <Paragraph data-as="div">
@@ -579,7 +593,11 @@ const yearsOfExperience = Math.abs(
       to={2022}
       note="full-time from Feb 2022"
     />
-    <Heading id="slack-app-releases" data-toc="App releases on Slack">
+    <Heading
+      data-as="h4"
+      id="slack-app-releases"
+      data-toc="App releases on Slack"
+    >
       Announce app releases on Slack
     </Heading>
     <Paragraph>
@@ -607,7 +625,7 @@ const yearsOfExperience = Math.abs(
     <audio id="trampoline-audio" class="hidden" controls src={trampoline}
     ></audio>
 
-    <Heading id="grammar-checker">Grammar checker</Heading>
+    <Heading data-as="h4" id="grammar-checker">Grammar checker</Heading>
     <Paragraph>
       Improved copy quality through automated grammar and spellchecking.<SeeMore
         >Using <Link href="https://languagetool.org/">LanguageTool</Link> I implemented
@@ -618,7 +636,7 @@ const yearsOfExperience = Math.abs(
     </Paragraph>
     <LanguageToolExample />
 
-    <Heading id="sentry">Sentry (error tracking)</Heading>
+    <Heading data-as="h4" id="sentry">Sentry (error tracking)</Heading>
     <Paragraph>
       Enabled proactive identification and resolution of frontend issues by
       setting up Sentry for error tracking.
@@ -633,7 +651,7 @@ const yearsOfExperience = Math.abs(
         height="360"></iframe>
     </div>
 
-    <Heading id="openapi">OpenAPI</Heading>
+    <Heading data-as="h4" id="openapi">OpenAPI</Heading>
     <Paragraph>
       Laid the foundation for future enhancements such as automated TypeScript
       type generation by adding OpenAPI.<SeeMore
@@ -668,7 +686,9 @@ const yearsOfExperience = Math.abs(
       to={2020}
       note="part-time"
     />
-    <Heading id="dependency-management">Dependency management</Heading>
+    <Heading data-as="h4" id="dependency-management"
+      >Dependency management</Heading
+    >
     <Paragraph>
       Accelerated developer velocity for hospital task system app for nurses and
       orderlies by streamlining dependency management and build system.<SeeMore>
@@ -683,7 +703,7 @@ const yearsOfExperience = Math.abs(
       >
     </Paragraph>
 
-    <Heading data-as="h4">Other</Heading>
+    <Heading data-as="h5">Other</Heading>
     <Paragraph>
       <List>
         <li>
@@ -699,7 +719,7 @@ const yearsOfExperience = Math.abs(
 
     <div class="mt-10"></div>
 
-    <Heading data-as="h1" id="skills">Skills</Heading>
+    <Heading data-as="h2" id="skills">Skills</Heading>
     <SkillsSection />
 
     <OtherAboutSection />
