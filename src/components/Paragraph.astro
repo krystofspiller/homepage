@@ -1,12 +1,16 @@
 ---
+import { twMerge } from "tailwind-merge"
+
 interface Props {
+  className?: string
   ["data-as"]?: "p" | "div" | "span"
-  [key: string]: any
+  ["x-data"]?: string
 }
 
-const { ["data-as"]: Element = "p", ...rest } = Astro.props as Props
+const { ["data-as"]: Element = "p", className, ...rest } = Astro.props as Props
 ---
 
-<Element class="mb-3 text-lg leading-8 text-zinc-400" {...rest}
-  ><slot /></Element
+<Element
+  class={twMerge("mb-3 text-lg leading-8 text-zinc-400", className)}
+  {...rest}><slot /></Element
 >

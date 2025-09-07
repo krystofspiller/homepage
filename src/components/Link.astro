@@ -1,5 +1,13 @@
 ---
-const { href, target, className = "", excludeIcon = false } = Astro.props
+import { twMerge } from "tailwind-merge"
+
+const {
+  as: Element = "a",
+  href,
+  target,
+  className = "",
+  excludeIcon = false,
+} = Astro.props
 
 const calculatedTarget =
   target ??
@@ -42,9 +50,12 @@ const calculatedTarget =
   }
 </style>
 
-<a
+<Element
   data-include-icon={!excludeIcon}
-  class=`underline transition duration-0 hover:bg-linear-(--gradient-accent) hover:bg-clip-text hover:text-transparent hover:duration-150 ${className}`
+  class={twMerge(
+    "underline transition duration-0 hover:bg-linear-(--gradient-accent) hover:bg-clip-text hover:text-transparent hover:duration-150 group-hover:bg-linear-(--gradient-accent) group-hover:bg-clip-text group-hover:text-transparent group-hover:duration-150",
+    className,
+  )}
   target={calculatedTarget}
-  href={href}><slot /></a
+  href={href}><slot /></Element
 >
