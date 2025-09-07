@@ -1,5 +1,5 @@
 {
-  "name": "my-portfolio-2025",
+  "name": "homepage",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.6",
+    "@astrojs/mdx": "^4.3.4",
     "@tailwindcss/vite": "^4.1.13",
     "alpinejs": "^3.15.0",
     "astro": "^5.13.5",
@@ -26,6 +27,7 @@
     "jiti": "^2.5.1",
     "jsdom": "^26.1.0",
     "nanostores": "^1.0.1",
+    "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.13",
     "tippy.js": "^6.3.7"
   },
