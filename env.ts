@@ -7,7 +7,10 @@ config()
 
 export const env = createEnv({
   server: {
-    PROD: z.coerce.boolean(),
+    PROD: z
+      .string()
+      .transform((val) => val === "true")
+      .pipe(z.boolean()),
     YOUTUBE_API_KEY: z.string().min(39).max(39),
   },
 
