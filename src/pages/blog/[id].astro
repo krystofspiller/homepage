@@ -4,10 +4,8 @@ import BaseLayout from "@layouts/BaseLayout.astro"
 import Paragraph from "@components/Paragraph.astro"
 import { render } from "astro:content"
 import { posts } from "src/data/common"
-import { env } from "env"
 
 export async function getStaticPaths() {
-  console.log("getStaticPaths env.PROD", env.PROD)
   return posts.map((post) => ({
     params: { id: post.id },
     props: { post },
