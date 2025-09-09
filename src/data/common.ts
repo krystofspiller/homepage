@@ -1,5 +1,7 @@
 import { getCollection } from "astro:content"
 
+import { env } from "../../env"
+
 export const posts = await getCollection("blog", ({ data }) => {
-  return import.meta.env.PROD ? data.draft !== true : true
+  return env.PROD ? !data.draft : true
 })

@@ -15,6 +15,7 @@ import Piano from "@assets/icons/piano.astro"
 import oiia from "@assets/images/oiia.gif"
 import oiiamp3 from "@assets/audio/oiia.mp3"
 import Heading from "./Heading.astro"
+import { env } from "env"
 
 let showDuolingo = true
 
@@ -37,7 +38,7 @@ async function getDuolingoStreak() {
 let showYouTube = true
 async function getLatestYouTubeVideo() {
   try {
-    const youtubeVideosUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId=PL7-fKc8SwbfOk3eZyIk_sbKjR7YMO6lfW&key=${import.meta.env.YOUTUBE_API_KEY}`
+    const youtubeVideosUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId=PL7-fKc8SwbfOk3eZyIk_sbKjR7YMO6lfW&key=${env.YOUTUBE_API_KEY}`
     const response = await fetch(youtubeVideosUrl)
     if (!response.ok) {
       showYouTube = false
