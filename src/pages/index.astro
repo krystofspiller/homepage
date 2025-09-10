@@ -586,7 +586,6 @@ const yearsOfExperience = Math.abs(
       id="capdesk"
       data-toc="Capdesk"
       imgHeight="h-8"
-      loading="eager"
       src={capdeskLogo}
       alt="Capdesk logo"
       from={2020}
@@ -679,7 +678,6 @@ const yearsOfExperience = Math.abs(
       id="systematic"
       data-toc="Systematic"
       imgHeight="h-6"
-      loading="eager"
       src={systematicLogo}
       alt="Systematic logo"
       from={2019}
@@ -1070,7 +1068,7 @@ const yearsOfExperience = Math.abs(
         Array.from(new Set(easterEggCounter.get()).add(EasterEggs.US)),
       )
       const usEagle = document.querySelector("#us-eagle")
-      if (!usEagle) return
+      if (!usEagle || usEagle.children.length < 2) return
 
       const bodyWidth = parseInt(getComputedStyle(document.body).width)
 
@@ -1078,7 +1076,7 @@ const yearsOfExperience = Math.abs(
         ;(usEagle.children[0] as HTMLAudioElement).play()
       }, 200)
 
-      usEagle.children[1].outerHTML = `
+      usEagle.children[1]!.outerHTML = `
           <div
             class="animate-move-offset absolute h-0 w-0 left-[calc(50%-100px)] -top-[50px] scale-100 opacity-0"
             style='offset-path: path("M${bodyWidth / 2 + 150},0 Q0,100 -${bodyWidth / 2 + 150},0");'

@@ -13,6 +13,10 @@ const title = Astro.props.title
   : "Krystof Spiller"
 
 const lookingForJob = false
+
+const yearsOfExperience = Math.abs(
+  new Date(Date.now() - new Date(2020, 1, 1).getTime()).getFullYear() - 1970,
+)
 ---
 
 <!doctype html>
@@ -23,11 +27,15 @@ const lookingForJob = false
       name="viewport"
       content="width=device-width, initial-scale=1, minimum-scale=1"
     />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="frame-src 'self' https://www.youtube.com https://open.spotify.com https://player.vimeo.com;"
+    />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <meta
       name="description"
-      content="Krystof Spiller is a detail-oriented software engineer with 6 years of experience."
+      content={`Krystof Spiller is a detail-oriented software engineer with ${yearsOfExperience} years of experience.`}
     />
     <ClientRouter />
     <Tooltip />
