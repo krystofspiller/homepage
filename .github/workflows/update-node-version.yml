@@ -15,11 +15,13 @@ jobs:
       - uses: actions/checkout@v5
       - uses: oven-sh/setup-bun@v2
       - name: Get current Node.js version from .nvmrc
+        id: current-version
         run: |
           CURRENT_VERSION=$(cat .nvmrc)
           echo "current=$CURRENT_VERSION" >> $GITHUB_OUTPUT
 
       - name: Get latest LTS Node.js version
+        id: latest-version
         run: |
           LATEST_LTS=$(curl -s https://nodejs.org/dist/index.json | jq -r '.[] | select(.lts != false) | .version' | head -1 | sed 's/v//')
           echo "latest=$LATEST_LTS" >> $GITHUB_OUTPUT
