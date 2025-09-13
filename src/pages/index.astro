@@ -781,6 +781,7 @@ const yearsOfExperience = Math.abs(
 
 <script>
   import { easterEggCounter, EasterEggs } from "@utils/store"
+  import { HEADER_HEIGHT } from "@utils/tokens"
   import confetti from "canvas-confetti"
   import { gsap } from "gsap"
   import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -901,7 +902,7 @@ const yearsOfExperience = Math.abs(
                 .timeline({
                   scrollTrigger: {
                     trigger,
-                    start: "top 118px",
+                    start: `top ${HEADER_HEIGHT.pxNumber - 3}px`,
                     end: "+=500",
                     scrub: true,
                   },

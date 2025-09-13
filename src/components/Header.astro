@@ -6,6 +6,7 @@ import Email from "@assets/icons/email.astro"
 import ContainerHover from "@components/ContainerHover.astro"
 import Linkedin from "@assets/icons/linkedin.astro"
 import EasterEggs from "./EasterEggs.astro"
+import { HEADER_HEIGHT } from "@utils/tokens"
 
 import profile from "@assets/images/profile.jpg"
 
@@ -13,7 +14,7 @@ const currentPath = Astro.url.pathname
 ---
 
 <header
-  class="fixed z-100 flex h-14 w-full items-center justify-center bg-neutral-950 p-2"
+  class={`fixed z-100 flex ${HEADER_HEIGHT.tailwindClass} w-full items-center justify-center bg-neutral-950 p-2`}
 >
   <nav class="flex w-full max-w-screen-sm items-center justify-center gap-2">
     <div class="flex items-center gap-1">
