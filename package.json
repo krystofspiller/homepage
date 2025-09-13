@@ -30,7 +30,7 @@
     "tippy.js": "^6.3.7"
   },
   "engines": {
-    "node": ">=24.8.0"
+    "node": ">=22.0.0"
   },
   "devDependencies": {
     "@t3-oss/env-core": "^0.13.8",
