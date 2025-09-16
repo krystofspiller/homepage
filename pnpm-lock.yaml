@@ -47,6 +47,9 @@ importers:
       tippy.js:
         specifier: ^6.3.7
         version: 6.3.7
+      zod:
+        specifier: ^4.1.8
+        version: 4.1.8
     devDependencies:
       '@t3-oss/env-core':
         specifier: ^0.13.8
@@ -108,9 +111,6 @@ importers:
       wrangler:
         specifier: ^4.36.0
         version: 4.37.1
-      zod:
-        specifier: ^4.1.8
-        version: 4.1.8
 
 packages:
 
