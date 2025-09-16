@@ -2,6 +2,7 @@ name: Deploy
 on:
   schedule:
     - cron: "0 5 * * SAT"
+  workflow_dispatch:
   push:
     branches:
       - main

@@ -2,6 +2,7 @@ name: Check links
 on:
   schedule:
     - cron: "0 4 * * SAT"
+  workflow_dispatch:
 jobs:
   check-links:
     runs-on: ubuntu-latest
