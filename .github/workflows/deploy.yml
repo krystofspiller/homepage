@@ -14,6 +14,7 @@ jobs:
     name: Deploy
     env:
       PROD: ${{ vars.PROD }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
     timeout-minutes: 15
     steps:
