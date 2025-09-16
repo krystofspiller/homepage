@@ -2,6 +2,9 @@
   "name": "homepage",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -13,7 +16,7 @@
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx,.astro --fix",
     "scripts:check-links": "pnpm tsx src/scripts/check-links.ts",
     "clean": "rm -rf dist .astro .wrangler",
-    "clean:all": "pnpm run clean && rm node_modules"
+    "clean:all": "pnpm run clean && rm -rf node_modules"
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.9",
@@ -28,10 +31,8 @@
     "sharp": "^0.34.3",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.13",
-    "tippy.js": "^6.3.7"
-  },
-  "engines": {
-    "node": ">=22.0.0"
+    "tippy.js": "^6.3.7",
+    "zod": "^4.1.8"
   },
   "devDependencies": {
     "@t3-oss/env-core": "^0.13.8",
@@ -53,7 +54,6 @@
     "prettier-plugin-tailwindcss": "^0.6.14",
     "tsx": "^4.19.2",
     "vitest": "^3.2.4",
-    "wrangler": "^4.36.0",
-    "zod": "^4.1.8"
+    "wrangler": "^4.36.0"
   }
 }

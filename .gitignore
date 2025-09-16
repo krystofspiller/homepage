@@ -11,5 +11,8 @@ dist
 # macOS
 .DS_Store
 
+# generated files
+src/data/blog-versions
+
 # env variables
 .env
