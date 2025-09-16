@@ -11,7 +11,7 @@ export const env = createEnv({
       .string()
       .transform((val) => val === "true")
       .pipe(z.boolean()),
-    GITHUB_TOKEN: z.string().startsWith("ghp_").min(40).max(40),
+    GITHUB_TOKEN: z.string(),
     YOUTUBE_API_KEY: z.string().min(39).max(39),
   },
 
