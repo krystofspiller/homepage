@@ -21,6 +21,7 @@ const blogVersion = z.object({
 })
 
 type GitHubCommit = z.infer<typeof githubCommit>
+export type GithubFileContent = z.infer<typeof githubFileContent>
 type BlogVersion = z.infer<typeof blogVersion>
 
 const GITHUB_API_BASE = "https://api.github.com"

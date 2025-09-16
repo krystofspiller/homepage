@@ -3,7 +3,7 @@ import { config } from "dotenv"
 import { z } from "zod"
 
 // Load .env file
-config()
+config({ quiet: true })
 
 export const env = createEnv({
   server: {

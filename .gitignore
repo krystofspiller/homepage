@@ -16,3 +16,4 @@ src/data/blog-versions
 
 # env variables
 .env
+.env.test
