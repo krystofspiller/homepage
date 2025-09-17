@@ -2,8 +2,9 @@ import { createEnv } from "@t3-oss/env-core"
 import { config } from "dotenv"
 import { z } from "zod"
 
-const isTest = process.env.NODE_ENV === "test"
-const isCi = process.env.NODE_ENV === "ci"
+const isTest = process.env.ENV === "test"
+const isCi = process.env.ENV === "ci"
+const isDev = process.env.ENV === "development"
 const isLoose = isTest || isCi
 
 // Load .env file
@@ -19,7 +20,19 @@ export const env = createEnv({
     ]),
     GITHUB_TOKEN: isLoose
       ? z.string().default("test-key")
-      : z.string().startsWith("ghp_").min(40).max(40),
+      : isDev
+        ? z
+            .string()
+            .regex(
+              /^ghp_[a-zA-Z0-9]{36}$/,
+              "GitHub Personal Access Token must start with 'ghp_' and be 40 characters long",
+            )
+        : z
+            .string()
+            .regex(
+              /^[a-zA-Z0-9_-]+$/,
+              "JWT token must contain only letters, numbers, underscores and hyphens",
+            ), // JWT token
     YOUTUBE_API_KEY: isLoose
       ? z.string().default("test-key")
       : z.string().min(39).max(39),
