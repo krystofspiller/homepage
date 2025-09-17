@@ -3,9 +3,7 @@ import { config } from "dotenv"
 import { z } from "zod"
 
 const isTest = process.env.ENV === "test"
-const isCi = process.env.ENV === "ci"
 const isDev = process.env.ENV === "development"
-const isLoose = isTest || isCi
 
 // Load .env file
 config({ quiet: true })
@@ -14,11 +12,10 @@ export const env = createEnv({
   server: {
     ENV: z.union([
       z.literal("test"),
-      z.literal("ci"),
       z.literal("development"),
       z.literal("production"),
     ]),
-    GITHUB_TOKEN: isLoose
+    GITHUB_TOKEN: isTest
       ? z.string().default("test-key")
       : isDev
         ? z
@@ -33,7 +30,7 @@ export const env = createEnv({
               /^[a-zA-Z0-9_-]+$/,
               "JWT token must contain only letters, numbers, underscores and hyphens",
             ), // JWT token
-    YOUTUBE_API_KEY: isLoose
+    YOUTUBE_API_KEY: isTest
       ? z.string().default("test-key")
       : z.string().min(39).max(39),
   },
