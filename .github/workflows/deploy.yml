@@ -9,11 +9,9 @@ on:
 jobs:
   deploy:
     if: ${{ github.ref == 'refs/heads/main' }}
-    environment: production
     runs-on: ubuntu-latest
     name: Deploy
     env:
-      PROD: ${{ vars.PROD }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
     timeout-minutes: 15
@@ -32,8 +30,14 @@ jobs:
         run: pnpm run lint
       - name: Build
         run: pnpm run build
+        env:
+          ENV: production
+
       - name: Test
         run: pnpm run test
+        env:
+          ENV: test
+
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
