@@ -3,6 +3,8 @@ import { config } from "dotenv"
 import { z } from "zod"
 
 const isTest = process.env.NODE_ENV === "test"
+const isCi = process.env.NODE_ENV === "ci"
+const isLoose = isTest || isCi
 
 // Load .env file
 config({ quiet: true })
@@ -11,13 +13,14 @@ export const env = createEnv({
   server: {
     ENV: z.union([
       z.literal("test"),
+      z.literal("ci"),
       z.literal("development"),
       z.literal("production"),
     ]),
-    GITHUB_TOKEN: isTest
+    GITHUB_TOKEN: isLoose
       ? z.string().default("test-key")
       : z.string().startsWith("ghp_").min(40).max(40),
-    YOUTUBE_API_KEY: isTest
+    YOUTUBE_API_KEY: isLoose
       ? z.string().default("test-key")
       : z.string().min(39).max(39),
   },
