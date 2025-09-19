@@ -2,7 +2,7 @@ import { createEnv } from "@t3-oss/env-core"
 import { config } from "dotenv"
 import { z } from "zod"
 
-const isTest = process.env.ENV === "test"
+const isTest = process.env.ENV === "test" || process.env.ENV === "ci"
 const isDev = process.env.ENV === "development"
 
 // Load .env file
@@ -12,6 +12,7 @@ export const env = createEnv({
   server: {
     ENV: z.union([
       z.literal("test"),
+      z.literal("ci"),
       z.literal("development"),
       z.literal("production"),
     ]),
