@@ -1,5 +1,9 @@
 /// <reference types="vitest" />
 import { getViteConfig } from "astro/config"
-// import { configDefaults } from "vitest/config"
+import { configDefaults } from "vitest/config"
 
-export default getViteConfig({})
+export default getViteConfig({
+  test: {
+    exclude: [...configDefaults.exclude, "src/tests/**.spec.ts"],
+  },
+})
