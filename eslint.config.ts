@@ -26,7 +26,12 @@ const astroLanguageRules: Linter.RulesRecord = {
 
 export default [
   {
-    ignores: ["dist/**", ".astro/**"],
+    ignores: [
+      "dist/**",
+      ".astro/**",
+      "playwright-report/**",
+      "test-results/**",
+    ],
   },
   js.configs.recommended,
   ...eslintPluginAstro.configs.recommended,

@@ -16,7 +16,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.astro",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx,.astro --fix",
     "scripts:check-links": "pnpm tsx src/scripts/check-links.ts",
-    "clean": "rm -rf dist .astro .wrangler",
+    "clean": "rm -rf dist .astro .wrangler playwright-report test-results",
     "clean:all": "pnpm run clean && rm -rf node_modules"
   },
   "dependencies": {
