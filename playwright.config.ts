@@ -10,16 +10,13 @@ const isCi = env.ENV === "ci"
  */
 export default defineConfig({
   testDir: "./src/tests",
-  /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!isCi,
-  /* Retry on CI only */
   retries: isCi ? 2 : 0,
-  /* Opt out of parallel tests on CI. */
-  workers: isCi ? 1 : 1,
+  workers: 3,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: "html",
+  reporter: isCi ? "github" : "list",
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
