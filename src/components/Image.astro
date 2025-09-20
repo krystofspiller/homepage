@@ -1,0 +1,16 @@
+---
+import { Picture } from "astro:assets"
+
+const { src, alt, ...rest } = Astro.props
+
+// Check if the source is a GIF file - if so, don't convert to AVIF
+const isGif =
+  typeof src === "string" ? src.endsWith(".gif") : src.src?.endsWith(".gif")
+---
+
+<Picture
+  src={src}
+  alt={alt}
+  formats={isGif ? ["webp"] : ["avif", "webp"]}
+  {...rest}
+/>

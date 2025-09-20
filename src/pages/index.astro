@@ -3,7 +3,7 @@ import BaseLayout from "@layouts/BaseLayout.astro"
 import SkillsSection from "@components/SkillsSection.astro"
 import SideNavigable from "@components/SideNavigable.astro"
 
-import { Image } from "astro:assets"
+import Image from "@components/Image.astro"
 import Link from "@components/Link.astro"
 
 import capdeskLogo from "@assets/images/capdesk.svg"
@@ -41,8 +41,8 @@ const yearsOfExperience = Math.abs(
   new Date(Date.now() - new Date(2020, 1, 1).getTime()).getFullYear() - 1970,
 )
 
+// TODO: Type-safe environment variables can be refactored https://docs.astro.build/en/reference/configuration-reference/#env
 // TODO: Go through Lighthouse audit and fix issues
-// TODO: Minimize trampoline.png, convert to WebP or AVIF
 // TODO: GitHub actions - split tests from deploy and make deploy depend on tests passing
 // TODO: Setup StoryBook - split components into design system and components
 ---
