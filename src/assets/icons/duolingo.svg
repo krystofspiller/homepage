@@ -1,9 +1,4 @@
----
-const { size = "w-6 h-6" } = Astro.props
----
-
 <svg
-  class={size}
   xmlns="http://www.w3.org/2000/svg"
   width="284.000000pt"
   height="284.000000pt"

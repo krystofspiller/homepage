@@ -11,24 +11,24 @@ import ReactTestingLibrary from "@assets/images/react-testing-library.png"
 import Stripe from "@assets/images/stripe.png"
 import Typst from "@assets/images/typst.png"
 
-import Appwrite from "@assets/icons/appwrite.astro"
-import AstroIcon from "@assets/icons/astro.astro"
-import Biome from "@assets/icons/biome.astro"
-import Brave from "@assets/icons/brave.astro"
-import Bun from "@assets/icons/bun.astro"
-import Chatgpt from "@assets/icons/chatgpt.astro"
-import Claude from "@assets/icons/claude.astro"
-import CloudflarePages from "@assets/icons/cloudflare_pages.astro"
-import Convex from "@assets/icons/convex.astro"
-import Csharp from "@assets/icons/csharp.astro"
-import Css from "@assets/icons/css.astro"
+import Appwrite from "@assets/icons/appwrite.svg"
+import AstroIcon from "@assets/icons/astro.svg"
+import Biome from "@assets/icons/biome.svg"
+import Brave from "@assets/icons/brave.svg"
+import Bun from "@assets/icons/bun.svg"
+import Chatgpt from "@assets/icons/chatgpt.svg"
+import Claude from "@assets/icons/claude.svg"
+import CloudflarePages from "@assets/icons/cloudflare_pages.svg"
+import Convex from "@assets/icons/convex.svg"
+import Csharp from "@assets/icons/csharp.svg"
+import Css from "@assets/icons/css.svg"
 import Cypress from "@assets/icons/cypress.svg"
-import Datadog from "@assets/icons/datadog.astro"
-import Dbeaver from "@assets/icons/dbeaver.astro"
-import Dependabot from "@assets/icons/dependabot.astro"
-import Docker from "@assets/icons/docker.astro"
-import Electron from "@assets/icons/electron.astro"
-import Eleventy from "@assets/icons/eleventy.astro"
+import Datadog from "@assets/icons/datadog.svg"
+import Dbeaver from "@assets/icons/dbeaver.svg"
+import Dependabot from "@assets/icons/dependabot.svg"
+import Docker from "@assets/icons/docker.svg"
+import Electron from "@assets/icons/electron.svg"
+import Eleventy from "@assets/icons/eleventy.svg"
 import ESLint from "@assets/icons/eslint.astro"
 import Expo from "@assets/icons/expo.astro"
 import Express from "@assets/icons/express.astro"
@@ -97,13 +97,13 @@ import Yarn from "@assets/icons/yarn.astro"
     <Html size="size-9" />
   </IconContainer>
   <IconContainer name="CSS">
-    <Css size="size-9" />
+    <Image class="h-9 w-auto" src={Css} alt="CSS logo" />
   </IconContainer>
   <IconContainer name="Tailwind">
     <Tailwind size="size-9" />
   </IconContainer>
   <IconContainer name="Astro">
-    <AstroIcon size="size-9" />
+    <Image class="h-9 w-auto" src={AstroIcon} alt="Astro logo" />
   </IconContainer>
   <IconContainer name="Expo">
     <Expo size="size-9" />
@@ -143,10 +143,10 @@ import Yarn from "@assets/icons/yarn.astro"
     <Swagger size="size-9" />
   </IconContainer>
   <IconContainer name="Electron">
-    <Electron size="size-9" />
+    <Image class="h-9 w-auto" src={Electron} alt="Electron logo" />
   </IconContainer>
   <IconContainer name="Eleventy">
-    <Eleventy size="size-9" />
+    <Image class="h-9 w-auto" src={Eleventy} alt="Eleventy logo" />
   </IconContainer>
   <IconContainer name="Typst">
     <Image class="h-9 w-auto" src={Typst} alt="Typst logo" />
@@ -164,7 +164,7 @@ import Yarn from "@assets/icons/yarn.astro"
     <Go size="size-9" />
   </IconContainer>
   <IconContainer name="C#">
-    <Csharp size="size-9" />
+    <Image class="h-9 w-auto" src={Csharp} alt="C# logo" />
   </IconContainer>
   <IconContainer name="Python">
     <Python size="size-9" />
@@ -182,7 +182,7 @@ import Yarn from "@assets/icons/yarn.astro"
     <Node size="size-9" />
   </IconContainer>
   <IconContainer name="Bun">
-    <Bun size="size-9" />
+    <Image class="h-9 w-auto" src={Bun} alt="Bun logo" />
   </IconContainer>
   <IconContainer name="OpenAPI">
     <OpenApi size="size-9" />
@@ -209,7 +209,7 @@ import Yarn from "@assets/icons/yarn.astro"
     <Github size="size-9" />
   </IconContainer>
   <IconContainer name="Dependabot">
-    <Dependabot size="size-9" />
+    <Image class="h-9 w-auto" src={Dependabot} alt="Dependabot logo" />
   </IconContainer>
   <IconContainer name="Travis CI">
     <Travis size="size-9" />
@@ -221,22 +221,26 @@ import Yarn from "@assets/icons/yarn.astro"
     <Vercel size="size-9" />
   </IconContainer>
   <IconContainer name="Cloudflare<br>Pages">
-    <CloudflarePages size="size-9" />
+    <Image
+      class="h-9 w-auto"
+      src={CloudflarePages}
+      alt="Cloudflare Pages logo"
+    />
   </IconContainer>
   <IconContainer name="Netlify">
     <Netlify size="size-9" />
   </IconContainer>
   <IconContainer name="Appwrite">
-    <Appwrite size="size-9" />
+    <Image class="h-9 w-auto" src={Appwrite} alt="Appwrite logo" />
   </IconContainer>
   <IconContainer name="Convex">
-    <Convex size="size-9" />
+    <Image class="h-9 w-auto" src={Convex} alt="Convex logo" />
   </IconContainer>
   <IconContainer name="Sentry">
     <Sentry size="size-9" />
   </IconContainer>
   <IconContainer name="Datadog">
-    <Datadog size="size-9" />
+    <Image class="h-9 w-auto" src={Datadog} alt="Datadog logo" />
   </IconContainer>
 </SkillIcons>
 
@@ -245,13 +249,13 @@ import Yarn from "@assets/icons/yarn.astro"
     <Image class="h-9 w-auto" src={Copilot} alt="Copilot logo" />
   </IconContainer>
   <IconContainer name="ChatGPT">
-    <Chatgpt size="size-9" />
+    <Image class="h-9 w-auto" src={Chatgpt} alt="ChatGPT logo" />
   </IconContainer>
   <IconContainer name="Gemini">
     <Gemini size="size-9" />
   </IconContainer>
   <IconContainer name="Claude">
-    <Claude size="size-9" />
+    <Image class="h-9 w-auto" src={Claude} alt="Claude logo" />
   </IconContainer>
   <IconContainer name="Notion">
     <Notion size="size-9" />
@@ -278,7 +282,7 @@ import Yarn from "@assets/icons/yarn.astro"
     <Git size="size-9" />
   </IconContainer>
   <IconContainer name="Docker">
-    <Docker size="size-9" />
+    <Image class="h-9 w-auto" src={Docker} alt="Docker logo" />
   </IconContainer>
   <IconContainer name="Cursor">
     <Image class="h-9 w-auto" src={Cursor} alt="Cursor logo" />
@@ -296,10 +300,10 @@ import Yarn from "@assets/icons/yarn.astro"
     <ITerm size="size-9" />
   </IconContainer>
   <IconContainer name="DBeaver">
-    <Dbeaver size="size-9" />
+    <Image class="h-9 w-auto" src={Dbeaver} alt="DBeaver logo" />
   </IconContainer>
   <IconContainer name="Brave">
-    <Brave size="size-9" />
+    <Image class="h-9 w-auto" src={Brave} alt="Brave logo" />
   </IconContainer>
   <IconContainer name="Vite">
     <Vite size="size-9" />
@@ -311,7 +315,7 @@ import Yarn from "@assets/icons/yarn.astro"
     <ESLint size="size-9" />
   </IconContainer>
   <IconContainer name="Biome">
-    <Biome size="size-9" />
+    <Image class="h-9 w-auto" src={Biome} alt="Biome logo" />
   </IconContainer>
 </SkillIcons>
 

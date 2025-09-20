@@ -3,12 +3,12 @@ import Image from "@components/Image.astro"
 
 import PureGrinding from "@assets/images/pure-grinding.png"
 import CatEars from "@assets/icons/cat_ears.astro"
-import Duolingo from "@assets/icons/duolingo.astro"
+import Duolingo from "@assets/icons/duolingo.svg"
 import Via from "@assets/icons/via.astro"
-import Electron from "@assets/icons/electron.astro"
+import Electron from "@assets/icons/electron.svg"
 import React from "@assets/icons/react.astro"
-import Docker from "@assets/icons/docker.astro"
-import Dtu from "@assets/icons/dtu.astro"
+import Docker from "@assets/icons/docker.svg"
+import Dtu from "@assets/icons/dtu.svg"
 import Link from "./Link.astro"
 import Piano from "@assets/icons/piano.astro"
 
@@ -75,7 +75,7 @@ const [duolingoStreak, youTubeVideoId] = await Promise.all([
     >ion
   </Heading>
   <div class="mb-3 flex items-center gap-2">
-    <div><Dtu size="h-auto w-10 sm:w-8" /></div>
+    <div><Image class="h-10 w-auto" src={Dtu} alt="Dtu logo" /></div>
     <div class="flex grow flex-col">
       <div
         class="flex flex-col items-start justify-start sm:flex-row sm:items-center sm:justify-between"
@@ -133,7 +133,7 @@ const [duolingoStreak, youTubeVideoId] = await Promise.all([
     <div class="flex w-fit items-center gap-3 p-2">
       <button
         data-tooltip='<a href="https://www.electronjs.org" target="_blank">Electron</a>'
-        ><Electron /></button
+        ><Image class="h-6 w-auto" src={Electron} alt="Electron logo" /></button
       >
       <button
         data-tooltip='<a href="https://react.dev" target="_blank">React</a>'
@@ -141,7 +141,7 @@ const [duolingoStreak, youTubeVideoId] = await Promise.all([
       >
       <button
         data-tooltip='<a href="https://www.docker.com" target="_blank">Docker</a>'
-        ><Docker /></button
+        ><Image class="h-6 w-auto" src={Docker} alt="Docker logo" /></button
       >
     </div>
   </div>
@@ -163,7 +163,7 @@ const [duolingoStreak, youTubeVideoId] = await Promise.all([
           <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/4 text-sm text-black">
             {duolingoStreak}
           </div>
-          <Duolingo size="size-12" />
+          <Image class="h-12 w-auto" src={Duolingo} alt="Duolingo logo" />
         </div>
       )
     }

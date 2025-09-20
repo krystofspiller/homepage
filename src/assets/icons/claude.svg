@@ -1,9 +1,4 @@
----
-const { size = "w-6 h-6" } = Astro.props
----
-
 <svg
-  class={size}
   viewBox="0 0 148.2 148.2"
   width="148.2"
   height="148.2"

@@ -1,11 +1,14 @@
 ---
-import { Picture } from "astro:assets"
+import { Picture, type LocalImageProps } from "astro:assets"
+
+type Props = LocalImageProps & {
+  alt: string
+}
 
 const { src, alt, ...rest } = Astro.props
 
 // Check if the source is a GIF file - if so, don't convert to AVIF
-const isGif =
-  typeof src === "string" ? src.endsWith(".gif") : src.src?.endsWith(".gif")
+const isGif = src.format === "gif"
 ---
 
 <Picture
