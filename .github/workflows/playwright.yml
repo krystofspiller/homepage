@@ -11,7 +11,7 @@ jobs:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     env:
-      ENV: test
+      ENV: ci
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v5
