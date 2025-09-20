@@ -70,8 +70,6 @@ const versions = await getBlogPostVersions(postId)
     versionSelect.addEventListener("change", async (event) => {
       const selectedSha = event.target.value
 
-      console.log("selectedSha", selectedSha)
-
       // redirect to the new version
       window.location.href = `/blog/${postId}-${selectedSha}`
     })

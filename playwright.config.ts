@@ -4,7 +4,6 @@ import { defineConfig, devices } from "@playwright/test"
 import { env } from "./env"
 
 const isCi = env.ENV === "ci"
-console.log("DEBUG isCi", isCi)
 
 /**
  * See https://playwright.dev/docs/test-configuration.
