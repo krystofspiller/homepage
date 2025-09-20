@@ -5,9 +5,11 @@ import Paragraph from "./Paragraph.astro"
 <Paragraph data-as="span" x-data="{ expanded: false }">
   <span x-show="!expanded"><slot name="before-see-more" /></span>
   <span
+    tabindex="0"
     x-show="!expanded"
     class="cursor-pointer underline"
-    @click="expanded = ! expanded">See more...</span
+    @click="expanded = !expanded"
+    @keydown.enter="expanded = !expanded">See more...</span
   >
   <span x-show="!expanded"><slot name="after-see-more" /></span>
   <span x-show="expanded"><slot /></span>

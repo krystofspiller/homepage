@@ -1,8 +1,10 @@
 ---
 const { name, tooltip } = Astro.props
+
+const Element = tooltip ? "button" : "div"
 ---
 
-<div
+<Element
   data-tooltip={tooltip}
   class="flex w-fit flex-col items-center justify-center transition-all hover:[&_.img]:scale-120"
 >
@@ -15,4 +17,4 @@ const { name, tooltip } = Astro.props
     class="mt-1 text-center font-sans text-sm text-zinc-400"
     set:html={name}
   />
-</div>
+</Element>

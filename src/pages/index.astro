@@ -1,10 +1,26 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro"
-import SkillsSection from "@components/SkillsSection.astro"
-import SideNavigable from "@components/SideNavigable.astro"
-
+import Billing from "@assets/images/billing.astro"
+import CompanyHeading from "@components/CompanyHeading.astro"
+import CurrencyProviders from "@assets/images/currency-providers.astro"
+import Divider from "@components/Divider.astro"
+import FunAtParties from "@assets/images/fun-at-parties.astro"
+import Heading from "@components/Heading.astro"
 import Image from "@components/Image.astro"
+import LanguageToolExample from "@components/content/LanguageToolExample.astro"
 import Link from "@components/Link.astro"
+import List from "@components/List.astro"
+import OpenApiHelperExample from "@components/content/OpenApiHelperExample.astro"
+import OtherAboutSection from "@components/OtherAboutSection.astro"
+import Paragraph from "@components/Paragraph.astro"
+import SeeMore from "@components/SeeMore.astro"
+import SideNavigable from "@components/SideNavigable.astro"
+import SkillsSection from "@components/SkillsSection.astro"
+import StringConstantsExistsExample from "@components/content/StringConstantsExistsExample.astro"
+import TooltipInline from "@components/TooltipInline.astro"
+import TypeValidationExample from "@components/content/TypeValidationExample.astro"
+import UnderlinedText from "@components/UnderlinedText.astro"
+import Workflows from "@assets/images/workflows.astro"
 
 import capdeskLogo from "@assets/images/capdesk.svg"
 import cartaLogo from "@assets/images/carta.svg"
@@ -19,23 +35,6 @@ import openapi from "@assets/images/openapi.png"
 import portchainLogo from "@assets/images/portchain.svg"
 import systematicLogo from "@assets/images/systematic.svg"
 import trampoline from "@assets/audio/trampoline.mp3"
-
-import FunAtParties from "@assets/images/fun-at-parties.astro"
-import OtherAboutSection from "@components/OtherAboutSection.astro"
-import TypeValidationExample from "@components/content/TypeValidationExample.astro"
-import Billing from "@assets/images/billing.astro"
-import CurrencyProviders from "@assets/images/currency-providers.astro"
-import LanguageToolExample from "@components/content/LanguageToolExample.astro"
-import OpenApiHelperExample from "@components/content/OpenApiHelperExample.astro"
-import StringConstantsExistsExample from "@components/content/StringConstantsExistsExample.astro"
-import Workflows from "@assets/images/workflows.astro"
-import SeeMore from "@components/SeeMore.astro"
-import Paragraph from "@components/Paragraph.astro"
-import Heading from "@components/Heading.astro"
-import CompanyHeading from "@components/CompanyHeading.astro"
-import Divider from "@components/Divider.astro"
-import List from "@components/List.astro"
-import UnderlinedText from "@components/UnderlinedText.astro"
 
 const yearsOfExperience = Math.abs(
   new Date(Date.now() - new Date(2020, 1, 1).getTime()).getFullYear() - 1970,
@@ -178,9 +177,9 @@ const yearsOfExperience = Math.abs(
       from={2025}
     />
     <Heading data-as="h4" id="terminal-integrations">
-      <span
-        data-tooltip="In shipping, vessels transport containers between ports. A terminal is a place where containers are loaded and unloaded from the vessel."
-        >Terminal</span
+      <TooltipInline
+        tooltip="In shipping, vessels transport containers between ports. A terminal is a place where containers are loaded and unloaded from the vessel."
+        >Terminal</TooltipInline
       > integrations
     </Heading>
     <Paragraph>
@@ -273,9 +272,9 @@ const yearsOfExperience = Math.abs(
       Stripe and HubSpot.<SeeMore>
         This was the longest running project I worked on and wrote around 90% of
         it when it comes solely to the changes in the app codebase. First step
-        was a migration <span
-          data-tooltip='This was supposed to be relatively simple. But it&apos;s <a href="https://www.youtube.com/watch?v=Wdyndb17K58" target="_blank">Stripe</a> we&apos;re talking about <span class="text-white">🙂</span> I&apos;ve ran into most of the issues described in that video and many more during this project. Migrating from one instance to another is a hell that made me into the man I&apos;m today.'
-          >from one Stripe instance to another</span
+        was a migration <TooltipInline
+          tooltip='This was supposed to be relatively simple. But it&apos;s <a href="https://www.youtube.com/watch?v=Wdyndb17K58" target="_blank">Stripe</a> we&apos;re talking about <span class="text-white">🙂</span> I&apos;ve ran into most of the issues described in that video and many more during this project. Migrating from one instance to another is a hell that made me into the man I&apos;m today.'
+          >from one Stripe instance to another</TooltipInline
         >. The next step involved changing how the app is interacting with
         Stripe where previously it was the app recording changes to customer
         subscriptions using Stripe's API and now the idea was to make these
@@ -339,9 +338,9 @@ const yearsOfExperience = Math.abs(
           href="https://en.wikipedia.org/w/index.php?title=List_of_circulating_currencies&oldid=1275996218#:~:text=There%20are%20180%20currencies"
           >180 currently circulating currencies recognized by UN</Link
         > and some of those started to appear in the app and it became cumbersome
-        to deal with them <span
-          data-tooltip='The exchange rate for the missing currency had to be found and manually added to the database. As we had to do this via a manual task due to compliance (<span class="text-white">💀</span>), it was anything but fun. Not to mention this exchange rate became out-of-date soon and would result in incorrect conversions. So we had to bite the <a href="https://xkcd.com/1319/" target="_blank">automation</a> bullet eventually.'
-          >manually</span
+        to deal with them <TooltipInline
+          tooltip='The exchange rate for the missing currency had to be found and manually added to the database. As we had to do this via a manual task due to compliance (<span class="text-white">💀</span>), it was anything but fun. Not to mention this exchange rate became out-of-date soon and would result in incorrect conversions. So we had to bite the <a href="https://xkcd.com/1319/" target="_blank">automation</a> bullet eventually.'
+          >manually</TooltipInline
         >.<span class="mt-3 block">
           I used <Link href="https://exchangeratesapi.io/"
             >Exchangerates API</Link
@@ -364,9 +363,9 @@ const yearsOfExperience = Math.abs(
           >An external link can change and suddenly you're linking to a
           non-existent page. At some point we encountered a few links that were
           invalid and instead of just fixing those and moving on with our life I
-          wrote a script to <span
-            data-tooltip='I thought this would be a matter of simply <span class="font-mono">curl</span>ing the page with a parameter to return the HTTP response status code. How naive I was. I had to use <a class="font-mono" href="https://github.com/lwthiker/curl-impersonate" target="_blank">curl-impersonate</a> to mimic a browser making the request for it to go through on many pages. There was also the question of redirecting where for example Zendesk (Support Center) puts an ID as well as the name of the support article into the URL so when the name of the article was adjusted the link still worked but returned a redirect 3xx code. I made <span class="font-mono">curl-impersonate</span> return the redirect URL as well and included it in the result message.'
-            >check external links</span
+          wrote a script to <TooltipInline
+            tooltip='I thought this would be a matter of simply <span class="font-mono">curl</span>ing the page with a parameter to return the HTTP response status code. How naive I was. I had to use <a class="font-mono" href="https://github.com/lwthiker/curl-impersonate" target="_blank">curl-impersonate</a> to mimic a browser making the request for it to go through on many pages. There was also the question of redirecting where for example Zendesk (Support Center) puts an ID as well as the name of the support article into the URL so when the name of the article was adjusted the link still worked but returned a redirect 3xx code. I made <span class="font-mono">curl-impersonate</span> return the redirect URL as well and included it in the result message.'
+            >check external links</TooltipInline
           > that I set up to run on GitHub Actions on a weekly basis and send a result
           to an #automated-checks Slack channel. In this way, these issues became
           more visible and otherwise invalid links that would be in the app for many
@@ -419,9 +418,9 @@ const yearsOfExperience = Math.abs(
     >
     <Paragraph>
       Maintained product quality by implementing data integrity checks.<SeeMore>
-        My colleague implemented a framework for adding data integrity <span
-          data-tooltip="We had a policy for no check constraints in the database so while some of these checks could have been handled differently, this was still a better solution for majority of the checked cases due to the sheer complexity of the domain and the resultant data."
-          >checks</span
+        My colleague implemented a framework for adding data integrity <TooltipInline
+          tooltip="We had a policy for no check constraints in the database so while some of these checks could have been handled differently, this was still a better solution for majority of the checked cases due to the sheer complexity of the domain and the resultant data."
+          >checks</TooltipInline
         > to notify us of instances where invalid data got into the database and
         also automatically fix them if an automatic fix is possible. I wrote checks
         dealing with detecting and autofixing trailing whitespace in attributes like
@@ -438,9 +437,9 @@ const yearsOfExperience = Math.abs(
     <Heading data-as="h4" id="linter-rules">Linter rules</Heading>
     <SeeMore>
       <span slot="before-see-more">
-        Maintained coding conventions and simplified codebase using <span
-          data-tooltip="A process and a tool for code analysis to flag programming errors, bugs, stylistics errors and suspicious constructs."
-          >linting</span
+        Maintained coding conventions and simplified codebase using <TooltipInline
+          tooltip="A process and a tool for code analysis to flag programming errors, bugs, stylistics errors and suspicious constructs."
+          >linting</TooltipInline
         > rules as well as prevented subtle bugs.
       </span>
       <div slot="after-see-more" class="mb-6 flex flex-col gap-3">
@@ -448,9 +447,9 @@ const yearsOfExperience = Math.abs(
         <StringConstantsExistsExample />
       </div>
       <Paragraph>
-        Maintained coding conventions and simplified codebase using <span
-          data-tooltip="A process and a tool for code analysis to flag programming errors, bugs, stylistics errors and suspicious constructs."
-          >linting</span
+        Maintained coding conventions and simplified codebase using <TooltipInline
+          tooltip="A process and a tool for code analysis to flag programming errors, bugs, stylistics errors and suspicious constructs."
+          >linting</TooltipInline
         > rules as well as prevented subtle bugs. This involved playing around with
         <abbr
           title='Read more about <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree" target="_blank"><strong class="font-bold">A</strong>bstract <strong class="font-bold">S</strong>yntax <strong class="font-bold">T</strong>rees</a> for some light nighttime reading.'
@@ -463,9 +462,9 @@ const yearsOfExperience = Math.abs(
       <List type="decimal">
         <li>
           <strong class="font-bold"
-            ><span
-              data-tooltip="Specification for a machine-readable interface definition language for describing web services."
-              >OpenAPI</span
+            ><TooltipInline
+              tooltip="Specification for a machine-readable interface definition language for describing web services."
+              >OpenAPI</TooltipInline
             > helper enforcement</strong
           > - writing the OpenAPI specifications can be a bit cumbersome, there's
           a lot of boilerplate that needs to be written making bigger types hundreds

@@ -2,7 +2,7 @@
 import Image from "@components/Image.astro"
 
 import Banner from "./Banner.astro"
-import profile from "@assets/images/profile.jpg"
+import profile from "@assets/images/profile.avif"
 import EasterEggs from "./EasterEggs.astro"
 ---
 
@@ -10,13 +10,13 @@ import EasterEggs from "./EasterEggs.astro"
   ><div
     class="mr-8 ml-2 flex items-center gap-2 text-center text-sm sm:mx-12 sm:text-base"
   >
-    <span style="cursor: default;" data-tooltip="TooltipRef#krystof"
+    <button style="cursor: default;" data-tooltip="TooltipRef#krystof"
       ><Image
         class="w-8 max-w-8 rounded-full"
         loading="eager"
         src={profile}
         alt="Profile"
-      /></span
+      /></button
     >
     <div class="max-w-52 sm:w-full sm:max-w-full">
       I'm looking to work on something new ✨

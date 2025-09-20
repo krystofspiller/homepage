@@ -8,7 +8,7 @@ import Linkedin from "@assets/icons/linkedin.astro"
 import EasterEggs from "./EasterEggs.astro"
 import { HEADER_HEIGHT } from "@utils/tokens"
 
-import profile from "@assets/images/profile.jpg"
+import profile from "@assets/images/profile.avif"
 
 const currentPath = Astro.url.pathname
 ---
@@ -32,16 +32,18 @@ const currentPath = Astro.url.pathname
         <Github />
       </ContainerHover>
     </div>
-    <span
+    <button
       style="cursor: default;"
       class="ml-2"
       data-tooltip="TooltipRef#krystof"
       ><Image
         class="w-6 max-w-6 rounded-full"
         loading="eager"
+        width={96}
+        height={96}
         src={profile}
         alt="Profile"
-      /></span
+      /></button
     >
     <div id="tooltip-krystof">
       <div class="flex items-center justify-center">
