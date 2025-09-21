@@ -6,7 +6,7 @@ import CatEars from "@assets/icons/cat_ears.astro"
 import Duolingo from "@assets/icons/duolingo.svg"
 import Via from "@assets/icons/via.astro"
 import Electron from "@assets/icons/electron.svg"
-import React from "@assets/icons/react.astro"
+import React from "@assets/icons/react.svg"
 import Docker from "@assets/icons/docker.svg"
 import Dtu from "@assets/icons/dtu.svg"
 import Link from "./Link.astro"
@@ -137,7 +137,7 @@ const [duolingoStreak, youTubeVideoId] = await Promise.all([
       >
       <button
         data-tooltip='<a href="https://react.dev" target="_blank">React</a>'
-        ><React /></button
+        ><Image class="h-6 w-auto" src={React} alt="React logo" /></button
       >
       <button
         data-tooltip='<a href="https://www.docker.com" target="_blank">Docker</a>'
