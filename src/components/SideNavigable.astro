@@ -33,49 +33,49 @@ getHeadings(document, toc)
 ---
 
 <div>
-  <div
-    class="sticky top-16 ml-[576px] hidden h-0 min-w-56 text-xs leading-6 text-zinc-400 lg:block"
-  >
-    <ul class="h-[calc(100vh-4rem)] overflow-scroll p-4 pt-0">
-      {
-        toc.map((val, index) => (
-          <li
-            data-id={val.id}
-            class={`transition-colors duration-300 ${index === 0 ? "text-white" : ""}`}
-            style={`margin-left: ${val.level - minLevel}rem`}
+  {
+    toc.length > 0 && (
+      <>
+        <div class="sticky top-16 ml-[576px] hidden h-0 min-w-56 text-xs leading-6 text-zinc-400 lg:block">
+          <ul class="h-[calc(100vh-4rem)] overflow-scroll p-4 pt-0">
+            {toc.map((val, index) => (
+              <li
+                data-id={val.id}
+                class={`transition-colors duration-300 ${index === 0 ? "text-white" : ""}`}
+                style={`margin-left: ${val.level - minLevel}rem`}
+              >
+                <Link className="!no-underline" href={`#${val.id}`}>
+                  {val.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="fixed bottom-0 left-0 z-100 flex h-14 w-full items-center justify-center bg-neutral-950 p-2 text-zinc-400 lg:hidden">
+          <select
+            class="rounded-lg border border-transparent p-2.5 pr-10 text-zinc-400 outline-none focus:border-blue-500 focus:ring-blue-500"
+            id="mobile-toc-select"
+            aria-label="Section"
           >
-            <Link className="!no-underline" href={`#${val.id}`}>
-              {val.name}
-            </Link>
-          </li>
-        ))
-      }
-    </ul>
-  </div>
-  <div
-    class="fixed bottom-0 left-0 z-100 flex h-14 w-full items-center justify-center bg-neutral-950 p-2 text-zinc-400 lg:hidden"
-  >
-    <select
-      class="rounded-lg border border-transparent p-2.5 pr-10 text-zinc-400 outline-none focus:border-blue-500 focus:ring-blue-500"
-      id="mobile-toc-select"
-      aria-label="Section"
-    >
-      {
-        toc.map((val) => (
-          <option value={val.id}>
-            {"\u00A0\u00A0".repeat(val.level - minLevel)}
-            {val.name}
-          </option>
-        ))
-      }
-    </select>
-  </div>
+            {toc.map((val) => (
+              <option value={val.id}>
+                {"\u00A0\u00A0".repeat(val.level - minLevel)}
+                {val.name}
+              </option>
+            ))}
+          </select>
+        </div>
+      </>
+    )
+  }
   <slot />
 </div>
 
 <script>
   import { usesSideNavigable } from "@utils/store"
-  usesSideNavigable.set(true)
+
+  const mobileTocSelect = document.getElementById("mobile-toc-select")
+  usesSideNavigable.set(!!mobileTocSelect)
 </script>
 
 <script is:inline data-astro-rerun define:vars={{ toc }}>
@@ -101,6 +101,10 @@ getHeadings(document, toc)
 
   // Function to update active navigation item based on scroll position
   function updateActiveNavItem() {
+    if (toc.length === 0) {
+      return
+    }
+
     const scrollMarginOffset = 64
     const scrollPosition = window.scrollY + scrollMarginOffset
 
