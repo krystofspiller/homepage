@@ -11,7 +11,7 @@ type Props = {
 const { title, subtitle, slug } = Astro.props as Props
 ---
 
-<a href={`/blog/${slug}`}>
+<a class="flex" href={`/blog/${slug}`}>
   <div
     class="group gradient w-full cursor-pointer rounded-xl p-4 transition-all duration-1000 hover:shadow-[0_0_5px_0px_var(--color-neutral-700)]/50 hover:inset-shadow-[0_0_15px_-10px_var(--color-orange)]/50"
   >

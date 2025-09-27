@@ -6,10 +6,8 @@
     "node": ">=22.0.0"
   },
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro",
+    "dev": "pnpm run scripts:generate-blog-versions && astro dev",
+    "build": "pnpm run scripts:generate-blog-versions && astro build",
     "test": "vitest",
     "test:playwright": "playwright test",
     "test:playwright:ui": "playwright test --ui",
@@ -17,7 +15,8 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.astro",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx,.astro --fix",
     "scripts:check-links": "pnpm tsx src/scripts/check-links.ts",
-    "clean": "rm -rf dist .astro .cache .wrangler playwright-report test-results",
+    "scripts:generate-blog-versions": "pnpm tsx src/scripts/generate-blog-versions.ts",
+    "clean": "rm -rf dist .astro .cache .wrangler playwright-report test-results src/data/blog-versions",
     "clean:all": "pnpm run clean && rm -rf node_modules"
   },
   "dependencies": {

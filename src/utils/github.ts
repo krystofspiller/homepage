@@ -2,7 +2,7 @@ import { createHash } from "node:crypto"
 import { promises as fs } from "node:fs"
 import { join } from "node:path"
 
-import { z } from "astro:content"
+import { z } from "zod"
 import { env } from "env"
 
 // Cache interface for GitHub API responses
