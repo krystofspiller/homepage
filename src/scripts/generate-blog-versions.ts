@@ -1,9 +1,7 @@
 /* eslint-disable no-console */
 import fs from "fs"
-import {
-  getBlogPostVersionContent,
-  getBlogPostVersions,
-} from "../utils/github.js"
+
+import { getBlogPostVersionContent, getBlogPostVersions } from "@utils/github"
 
 async function generateBlogVersions() {
   const fileNames = fs.readdirSync("./src/data/blog")
