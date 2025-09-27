@@ -12,6 +12,7 @@
     "test:playwright": "playwright test",
     "test:playwright:ui": "playwright test --ui",
     "format": "prettier --write .",
+    "format:ci": "prettier --check .",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.astro",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx,.astro --fix",
     "scripts:check-links": "pnpm tsx src/scripts/check-links.ts",
