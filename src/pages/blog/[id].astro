@@ -1,10 +1,6 @@
 ---
-import SideNavigable from "@components/SideNavigable.astro"
-import BaseLayout from "@layouts/BaseLayout.astro"
-import Paragraph from "@components/Paragraph.astro"
-import { render } from "astro:content"
+import BlogPostLayout from "@components/BlogPostLayout.astro"
 import { posts, postsVersions } from "src/data/common"
-import { getBlogPostVersions } from "@utils/github"
 
 export async function getStaticPaths() {
   const basePosts = posts.map((post) => {
@@ -25,54 +21,6 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props
-const { Content } = await render(post)
-
-const postId = post.id.split("-")[0] ?? post.id
-const sha = post.id.split("-")[1] ?? null
-const versions = await getBlogPostVersions(postId)
 ---
 
-<BaseLayout>
-  <h1 class={`text-zinc-100 text-3xl`}>
-    {post.data.title}
-  </h1>
-  <div class="mb-4">
-    <Paragraph className="text-sm" data-as="span">Version: </Paragraph>
-    <select
-      aria-label="Article version"
-      id="version-select"
-      class="rounded-lg bg-neutral-800 p-1 text-sm text-zinc-400 transition-colors outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
-    >
-      {
-        versions.map((version, index) => (
-          <option
-            value={version.sha}
-            selected={sha ? version.sha === sha : index === 0}
-          >
-            {new Date(version.date).toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-            })}
-          </option>
-        ))
-      }
-    </select>
-  </div>
-  <SideNavigable>
-    <Content />
-  </SideNavigable>
-</BaseLayout>
-
-<script define:vars={{ postId }}>
-  const versionSelect = document.getElementById("version-select")
-
-  if (versionSelect) {
-    versionSelect.addEventListener("change", async (event) => {
-      const selectedSha = event.target.value
-
-      // redirect to the new version
-      window.location.href = `/blog/${postId}-${selectedSha}`
-    })
-  }
-</script>
+<BlogPostLayout post={post} includeVersions />

@@ -9,3 +9,5 @@ export const posts = await getCollection("blog", ({ data }) => {
 export const postsVersions = await getCollection("blogVersions", ({ data }) => {
   return env.ENV === "production" ? !data.draft : true
 })
+
+export const postsIncludingDrafts = await getCollection("blog")
