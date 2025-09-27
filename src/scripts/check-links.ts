@@ -30,7 +30,14 @@ interface FileInfo {
 
 // Function to read and parse .gitignore file
 async function getGitignorePatterns(projectRoot: string): Promise<string[]> {
-  const additionalPatterns = [".git*", ".vscode*", "*.gif", "*.png", "*.jpg"]
+  const additionalPatterns = [
+    ".git*",
+    ".vscode*",
+    "*.gif",
+    "*.png",
+    "*.avif",
+    "*.jpg",
+  ]
   try {
     const gitignorePath = join(projectRoot, ".gitignore")
     const content = await readFile(gitignorePath, "utf-8")
@@ -89,7 +96,8 @@ function extractLinks(text: string): string[] {
     .map((url) => url.replace(/[.,;?)\]>"'`]+$/, ""))
     .filter((url, index, arr) => arr.indexOf(url) === index) // Remove duplicates
     .filter((url) => !url.match(/\${.+}/)) // Remove URLs with variable interpolation
-    .filter((url) => !url.includes("www.w3.org")) // Remove URLs from W3C
+    .filter((url) => !url.includes("www.w3.org")) // Remove W3C URLs
+    .filter((url) => !url.includes("localhost")) // Remove localhost URLs
 }
 
 async function readAllFiles(
@@ -196,10 +204,15 @@ async function main() {
 
     console.log(`\nChecking ${links.size} found links:`)
 
-    const fails: { link: string; httpCode: string; redirectUrl: string }[] = []
+    const fails: {
+      link: string
+      httpCode: string | undefined
+      redirectUrl: string | undefined
+    }[] = []
     const expectedFails = [
-      "https://www.linkedin.com/in/krystof-spiller",
-      "https://www.linkedin.com/in/maria-muhandes",
+      ["999", "https://www.linkedin.com/in/krystof-spiller"],
+      ["999", "https://www.linkedin.com/in/maria-muhandes"],
+      ["302", "https://player.vimeo.com"],
     ].concat(
       isCi
         ? [
@@ -225,9 +238,12 @@ async function main() {
 
     if (
       expectedFails.length === fails.length &&
-      fails
-        .map((fail) => fail.link)
-        .every((link) => expectedFails.includes(link))
+      fails.every((fail) =>
+        expectedFails.some(
+          (expected) =>
+            expected[0] === fail.httpCode && expected[1] === fail.link,
+        ),
+      )
     ) {
       console.log(
         `\n✅ Found ${expectedFails.length} expected fails. Total links checked: ${links.size}. `,
@@ -236,8 +252,12 @@ async function main() {
     } else {
       console.log(`\n❌ Found ${fails.length} failed links:`)
       fails.forEach((fail, index) => {
+        const isExpected = expectedFails.some(
+          (expected) =>
+            expected[0] === fail.httpCode && expected[1] === fail.link,
+        )
         console.log(
-          `  ${index + 1}. ${expectedFails.includes(fail.link) ? "" : "(UNEXPECTED)"} ${fail.link} ${fail.httpCode} ${fail.redirectUrl}`,
+          `  ${index + 1}. ${isExpected ? "" : "(UNEXPECTED)"} ${fail.link} ${fail.httpCode} ${fail.redirectUrl}`,
         )
       })
       process.exit(1)
