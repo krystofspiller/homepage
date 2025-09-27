@@ -22,3 +22,6 @@ src/data/blog-versions
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Cache directories
+.cache/

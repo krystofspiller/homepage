@@ -1,5 +1,91 @@
+import { createHash } from "node:crypto"
+import { promises as fs } from "node:fs"
+import { join } from "node:path"
+
 import { z } from "astro:content"
 import { env } from "env"
+
+// Cache interface for GitHub API responses
+interface CacheEntry<T> {
+  data: T
+  timestamp: number
+  ttl: number
+}
+
+// File-based cache for GitHub API responses
+class GitHubCache {
+  private cacheDir: string
+  private defaultTTL = 5 * 60 * 1000 // 5 minutes in milliseconds
+
+  constructor() {
+    this.cacheDir = join(process.cwd(), ".cache", "github")
+    this.ensureCacheDir()
+  }
+
+  private async ensureCacheDir(): Promise<void> {
+    try {
+      await fs.mkdir(this.cacheDir, { recursive: true })
+    } catch {
+      // Cache directory creation failed, will be handled gracefully
+    }
+  }
+
+  private getCacheFilePath(key: string): string {
+    // Create a safe filename from the key using hash
+    const hash = createHash("md5").update(key).digest("hex")
+    return join(this.cacheDir, `${hash}.json`)
+  }
+
+  async set<T>(
+    key: string,
+    data: T,
+    ttl: number = this.defaultTTL,
+  ): Promise<void> {
+    try {
+      await this.ensureCacheDir()
+      const entry: CacheEntry<T> = {
+        data,
+        timestamp: Date.now(),
+        ttl,
+      }
+      const filePath = this.getCacheFilePath(key)
+      await fs.writeFile(filePath, JSON.stringify(entry), "utf8")
+    } catch {
+      // Cache write failed, will be handled gracefully
+    }
+  }
+
+  async get<T>(key: string): Promise<T | null> {
+    try {
+      const filePath = this.getCacheFilePath(key)
+      const content = await fs.readFile(filePath, "utf8")
+      const entry: CacheEntry<T> = JSON.parse(content)
+
+      const now = Date.now()
+      if (now - entry.timestamp > entry.ttl) {
+        // Entry expired, delete the file
+        await this.delete(key)
+        return null
+      }
+
+      return entry.data
+    } catch {
+      // File doesn't exist or other error, return null
+      return null
+    }
+  }
+
+  async delete(key: string): Promise<void> {
+    try {
+      const filePath = this.getCacheFilePath(key)
+      await fs.unlink(filePath)
+    } catch {
+      // File doesn't exist or other error, ignore
+    }
+  }
+}
+
+const githubCache = new GitHubCache()
 
 const githubCommit = z.object({
   sha: z.string(),
@@ -39,6 +125,12 @@ const headers = {
 export async function getFileCommitHistory(
   filePath: string,
 ): Promise<GitHubCommit[]> {
+  const cacheKey = `fileCommitHistory:${filePath}`
+  const cachedData = await githubCache.get<GitHubCommit[]>(cacheKey)
+  if (cachedData) {
+    return cachedData
+  }
+
   const response = await fetch(
     `${GITHUB_API_BASE}/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${encodeURIComponent(filePath)}&per_page=10`,
     {
@@ -57,6 +149,8 @@ export async function getFileCommitHistory(
     throw new Error(result.error.message)
   }
 
+  await githubCache.set(cacheKey, result.data)
+
   return result.data
 }
 
@@ -67,6 +161,12 @@ export async function getFileContentAtCommit(
   filePath: string,
   sha: string,
 ): Promise<string | null> {
+  const cacheKey = `fileContentAtCommit:${filePath}`
+  const cachedData = await githubCache.get<string | null>(cacheKey)
+  if (cachedData) {
+    return cachedData
+  }
+
   const response = await fetch(
     `${GITHUB_API_BASE}/repos/${REPO_OWNER}/${REPO_NAME}/contents/${encodeURIComponent(filePath)}?ref=${sha}`,
     {
@@ -82,10 +182,15 @@ export async function getFileContentAtCommit(
 
   const data = githubFileContent.safeParse(await response.json())
   if (data.success && data.data.encoding === "base64") {
-    return atob(data.data.content)
+    const res = atob(data.data.content)
+    await githubCache.set(cacheKey, res)
+    return res
   }
 
-  return data.success ? data.data.content : null
+  const res = data.success ? data.data.content : null
+  await githubCache.set(cacheKey, res)
+
+  return res
 }
 
 /**
