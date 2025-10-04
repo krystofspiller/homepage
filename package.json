@@ -23,7 +23,7 @@
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.9",
     "@astrojs/mdx": "^4.3.6",
-    "@tailwindcss/vite": "^4.1.13",
+    "@tailwindcss/vite": "^4.1.14",
     "alpinejs": "^3.15.0",
     "astro": "^5.14.1",
     "butteruptoasts": "^2.0.1",
@@ -32,7 +32,7 @@
     "nanostores": "^1.0.1",
     "sharp": "^0.34.4",
     "tailwind-merge": "^3.3.1",
-    "tailwindcss": "^4.1.13",
+    "tailwindcss": "^4.1.14",
     "tippy.js": "^6.3.7",
     "zod": "^4.1.11"
   },
