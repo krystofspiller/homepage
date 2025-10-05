@@ -42,7 +42,8 @@ const calculatedTarget =
       mask-repeat: no-repeat;
     }
   }
-  a[href*="//"]:not([href*="krystofs.com"]):hover
+  a[href*="//"]:not([href*="krystofs.com"]):hover,
+  a[href*="//"]:not([href*="krystofs.com"]):focus
   {
     &:after {
       background-color: #e6805f;
@@ -53,7 +54,7 @@ const calculatedTarget =
 <Element
   data-include-icon={!excludeIcon}
   class={twMerge(
-    "underline transition duration-0 hover:bg-linear-(--gradient-accent) hover:bg-clip-text hover:text-transparent hover:duration-150 group-hover:bg-linear-(--gradient-accent) group-hover:bg-clip-text group-hover:text-transparent group-hover:duration-150",
+    "underline transition duration-0 hover:bg-linear-(--gradient-accent) hover:bg-clip-text hover:text-transparent hover:duration-150 group-hover:bg-linear-(--gradient-accent) group-hover:bg-clip-text group-hover:text-transparent group-hover:duration-150 focus:bg-linear-(--gradient-accent) focus:bg-clip-text focus:text-transparent focus:duration-150 group-focus:bg-linear-(--gradient-accent) group-focus:bg-clip-text group-focus:text-transparent group-focus:duration-150",
     className,
   )}
   target={calculatedTarget}

@@ -4,7 +4,7 @@ import Billing from "@assets/images/billing.astro"
 import CompanyHeading from "@components/CompanyHeading.astro"
 import CurrencyProviders from "@assets/images/currency-providers.astro"
 import Divider from "@components/Divider.astro"
-import FunAtParties from "@assets/images/fun-at-parties.astro"
+import FunAtParties from "@assets/images/fun-at-parties.svg"
 import Heading from "@components/Heading.astro"
 import Image from "@components/Image.astro"
 import LanguageToolExample from "@components/content/LanguageToolExample.astro"
@@ -26,7 +26,8 @@ import capdeskLogo from "@assets/images/capdesk.svg"
 import cartaLogo from "@assets/images/carta.svg"
 import commitMessage from "@assets/images/commit-message.avif"
 import dataIntegrityChecker from "@assets/images/data-integrity-checker.avif"
-import eagle from "@assets/audio/eagle.mp3"
+import eagleMp3 from "@assets/audio/eagle.mp3"
+import eagleOpus from "@assets/audio/eagle.opus"
 import fundraising from "@assets/images/fundraising.avif"
 import linkChecker from "@assets/images/link-checker.avif"
 import modal from "@assets/images/modal.avif"
@@ -34,7 +35,8 @@ import newAppRelease from "@assets/images/new-app-release.avif"
 import openapi from "@assets/images/openapi.avif"
 import portchainLogo from "@assets/images/portchain.svg"
 import systematicLogo from "@assets/images/systematic.svg"
-import trampoline from "@assets/audio/trampoline.mp3"
+import trampolineMp3 from "@assets/audio/trampoline.mp3"
+import trampolineOpus from "@assets/audio/trampoline.opus"
 
 const yearsOfExperience = Math.abs(
   new Date(Date.now() - new Date(2020, 1, 1).getTime()).getFullYear() - 1970,
@@ -146,7 +148,10 @@ const yearsOfExperience = Math.abs(
       <span class="cursor-pointer" id="us">North America</span>.
     </Paragraph>
     <div class="relative" id="us-eagle">
-      <audio class="hidden" controls src={eagle}></audio>
+      <audio class="hidden" controls>
+        <source src={eagleOpus} type="audio/ogg; codecs=opus" />
+        <source src={eagleMp3} type="audio/mpeg" />
+      </audio>
       <div
         class="animate-move-offset absolute -top-[50px] left-[calc(50%-100px)] h-0 w-0 scale-100 rotate-180 text-8xl opacity-0"
       >
@@ -159,8 +164,11 @@ const yearsOfExperience = Math.abs(
         class="relative"
         ><Link className="relative z-1" href="#general">more</Link><Link
           href="/fun-at-parties"
-          ><FunAtParties
-            className="absolute top-[18px] -left-[10px] z-0 hover:[&_path]:fill-[url(#fun-at-parties-linear)]"
+          ><Image
+            src={FunAtParties}
+            alt="Fun at parties"
+            renderSvgAsRaw
+            class="absolute top-[18px] -left-[10px] z-0 hover:[&_path]:fill-[url(#fun-at-parties-linear)]"
           /></Link
         ></span
       >
@@ -626,8 +634,10 @@ const yearsOfExperience = Math.abs(
       src={newAppRelease}
       alt="Example Slack message of new app release"
     />
-    <audio id="trampoline-audio" class="hidden" controls src={trampoline}
-    ></audio>
+    <audio id="trampoline-audio" class="hidden" controls>
+      <source src={trampolineOpus} type="audio/ogg; codecs=opus" />
+      <source src={trampolineMp3} type="audio/mpeg" />
+    </audio>
 
     <Heading data-as="h4" id="grammar-checker">Grammar checker</Heading>
     <Paragraph>
@@ -969,7 +979,7 @@ const yearsOfExperience = Math.abs(
 
     function animateBackground() {
       const imgs = usStyle
-        ? ["cowboy.png", "eagle.png", "usa.png"]
+        ? ["cowboy.avif", "eagle.avif", "usa.avif"]
         : [
             "astro.svg",
             "csharp.svg",

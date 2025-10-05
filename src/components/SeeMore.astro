@@ -7,7 +7,7 @@ import Paragraph from "./Paragraph.astro"
   <span
     tabindex="0"
     x-show="!expanded"
-    class="cursor-pointer underline"
+    class="cursor-pointer underline decoration-zinc-400 transition duration-0 group-hover:bg-linear-(--gradient-accent) group-hover:bg-clip-text group-hover:text-transparent group-hover:duration-150 group-focus:bg-linear-(--gradient-accent) group-focus:bg-clip-text group-focus:text-transparent group-focus:duration-150 hover:bg-linear-(--gradient-accent) hover:bg-clip-text hover:text-transparent hover:duration-150 focus:bg-linear-(--gradient-accent) focus:bg-clip-text focus:text-transparent focus:duration-150"
     @click="expanded = !expanded"
     @keydown.enter="expanded = !expanded">See more...</span
   >

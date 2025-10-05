@@ -13,7 +13,8 @@ import Link from "./Link.astro"
 import Piano from "@assets/icons/piano.astro"
 
 import oiia from "@assets/images/oiia.gif"
-import oiiamp3 from "@assets/audio/oiia.mp3"
+import oiiaMp3 from "@assets/audio/oiia.mp3"
+import oiiaOpus from "@assets/audio/oiia.opus"
 import Heading from "./Heading.astro"
 import { env } from "env"
 
@@ -203,8 +204,11 @@ const [duolingoStreak, youTubeVideoId] = await Promise.all([
     id="cat-overlay"
     class="fixed top-0 left-0 z-50 hidden h-[100vh] w-[100vw] items-center justify-center bg-neutral-950/70 transition-all delay-150 duration-500"
   >
-    <Image src={oiia} class="h-auto w-auto" alt="OIIA" />
-    <audio class="hidden" controls src={oiiamp3}></audio>
+    <Image src={oiia} class="h-auto w-auto" alt="OIIA" loading="eager" />
+    <audio class="hidden" controls>
+      <source src={oiiaOpus} type="audio/ogg; codecs=opus" />
+      <source src={oiiaMp3} type="audio/mpeg" />
+    </audio>
   </div>
 </section>
 
