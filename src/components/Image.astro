@@ -8,16 +8,12 @@ type Props = LocalImageProps & {
 
 const { src, alt, renderSvgAsRaw = false, ...rest } = Astro.props
 
-function isImageMetadata(src: LocalImageProps["src"]): src is ImageMetadata {
-  return src.hasOwnProperty("format")
-}
-
 // Check if the source is a GIF file - if so, don't convert to AVIF
-const isGif = isImageMetadata(src) && src.format === "gif"
+const isGif = "format" in src && src.format === "gif"
 
 // Render SVGs raw
 let svgContent = null
-if (renderSvgAsRaw && isImageMetadata(src) && src.format === "svg") {
+if (renderSvgAsRaw && "format" in src && src.format === "svg") {
   svgContent = await import(/* @vite-ignore */ src.src + "?raw").then(
     (m) => m.default,
   )
