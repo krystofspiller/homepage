@@ -4,7 +4,7 @@ import Billing from "@assets/images/billing.astro"
 import CompanyHeading from "@components/CompanyHeading.astro"
 import CurrencyProviders from "@assets/images/currency-providers.astro"
 import Divider from "@components/Divider.astro"
-import FunAtParties from "@assets/images/fun-at-parties.svg"
+import FunAtParties from "@assets/images/fun-at-parties.astro"
 import Heading from "@components/Heading.astro"
 import Image from "@components/Image.astro"
 import LanguageToolExample from "@components/content/LanguageToolExample.astro"
@@ -164,11 +164,8 @@ const yearsOfExperience = Math.abs(
         class="relative"
         ><Link className="relative z-1" href="#general">more</Link><Link
           href="/fun-at-parties"
-          ><Image
-            src={FunAtParties}
-            alt="Fun at parties"
-            renderSvgAsRaw
-            class="absolute top-[18px] -left-[10px] z-0 hover:[&_path]:fill-[url(#fun-at-parties-linear)]"
+          ><FunAtParties
+            className="absolute top-[18px] -left-[10px] z-0 hover:[&_path]:fill-[url(#fun-at-parties-linear)]"
           /></Link
         ></span
       >
