@@ -1,0 +1,8 @@
+/*.opus
+  Cache-Control: public, max-age=2592000, immutable
+
+/*.mp3
+  Cache-Control: public, max-age=2592000, immutable
+
+/*
+  Cache-Control: public, max-age=604800 # 1 week default for other assets
