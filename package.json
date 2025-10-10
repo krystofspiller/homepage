@@ -33,7 +33,7 @@
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.14",
     "tippy.js": "^6.3.7",
-    "zod": "^4.1.11"
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.1",
