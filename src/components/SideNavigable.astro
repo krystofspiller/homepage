@@ -1,5 +1,6 @@
 ---
 import { parseHTML } from "linkedom"
+import { twMerge } from "tailwind-merge"
 import Link from "./Link.astro"
 
 const html = await Astro.slots.render("default")
@@ -41,7 +42,10 @@ getHeadings(document, toc)
             {toc.map((val, index) => (
               <li
                 data-id={val.id}
-                class={`transition-colors duration-300 ${index === 0 ? "text-white" : ""}`}
+                class={twMerge(
+                  "transition-colors duration-300",
+                  index === 0 ? "text-white" : "",
+                )}
                 style={`margin-left: ${val.level - minLevel}rem`}
               >
                 <Link className="!no-underline" href={`#${val.id}`}>

@@ -1,4 +1,6 @@
 ---
+import { twMerge } from "tailwind-merge"
+
 interface Props {
   type?: "warning" | "error"
 }
@@ -10,6 +12,7 @@ const classMap = {
 }
 ---
 
-<span class={`underline decoration-2 underline-offset-4 ${classMap[type]}`}
+<span
+  class={twMerge("underline decoration-2 underline-offset-4", classMap[type])}
   ><slot /></span
 >

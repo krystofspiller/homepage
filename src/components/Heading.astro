@@ -1,4 +1,6 @@
 ---
+import { twMerge } from "tailwind-merge"
+
 import Divider from "./Divider.astro"
 
 interface Props {
@@ -16,6 +18,9 @@ const classMap = {
 ---
 
 <Element
-  class={`mb-1 scroll-mt-15 font-semibold text-zinc-100 ${classMap[Element]}`}
+  class={twMerge(
+    "mb-1 scroll-mt-15 font-semibold text-zinc-100",
+    classMap[Element],
+  )}
   {...rest}><slot />{Element === "h2" && <Divider />}</Element
 >

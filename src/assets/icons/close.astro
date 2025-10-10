@@ -1,9 +1,11 @@
 ---
+import { twMerge } from "tailwind-merge"
+
 const { size = "size-3" } = Astro.props
 ---
 
 <svg
-  class={`cursor-pointer transition hover:scale-115 ${size}`}
+  class={twMerge("cursor-pointer transition hover:scale-115", size)}
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 32 32"
   ><path

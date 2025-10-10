@@ -1,4 +1,6 @@
 ---
+import { twMerge } from "tailwind-merge"
+
 import Image from "@components/Image.astro"
 
 import Github from "@assets/icons/github.astro"
@@ -14,7 +16,10 @@ const currentPath = Astro.url.pathname
 ---
 
 <header
-  class={`fixed z-100 flex ${HEADER_HEIGHT.tailwindClass} w-full items-center justify-center bg-neutral-950 p-2`}
+  class={twMerge(
+    "fixed z-100 flex w-full items-center justify-center bg-neutral-950 p-2",
+    HEADER_HEIGHT.tailwindClass,
+  )}
 >
   <nav class="flex w-full max-w-screen-sm items-center justify-center gap-2">
     <div class="flex items-center gap-1">
