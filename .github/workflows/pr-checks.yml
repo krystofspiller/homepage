@@ -3,9 +3,6 @@ on:
   pull_request:
     branches:
       - main
-  push:
-    branches-ignore:
-      - main
 jobs:
   pr-checks:
     runs-on: ubuntu-latest
@@ -18,3 +15,7 @@ jobs:
       - uses: actions/checkout@v5
       - name: Setup and test
         uses: ./.github/actions/setup-and-test
+        env:
+          ENV: test
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
