@@ -1,0 +1,19 @@
+name: PR checks
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches-ignore:
+      - main
+jobs:
+  pr-checks:
+    runs-on: ubuntu-latest
+    name: PR Checks
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+    timeout-minutes: 10
+    steps:
+      - name: Setup and test
+        uses: ./.github/actions/setup-and-test
