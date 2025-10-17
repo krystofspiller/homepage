@@ -12,7 +12,7 @@ jobs:
     with:
       env: production
       install-deps: true
-      run-checks: true
+      run-checks-and-tests: true
 
   deploy:
     needs: setup-and-test
