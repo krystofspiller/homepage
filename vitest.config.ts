@@ -4,6 +4,6 @@ import { configDefaults } from "vitest/config"
 
 export default getViteConfig({
   test: {
-    exclude: [...configDefaults.exclude, "src/tests/**.spec.ts"],
+    exclude: [...configDefaults.exclude, "tests/**.spec.ts"],
   },
 })

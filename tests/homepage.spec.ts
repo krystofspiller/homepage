@@ -34,6 +34,25 @@ test("show large profile pic on hove", async ({ page }) => {
   await expect(link).toBeVisible()
 })
 
+test.only("no console errors or warnings", async ({ page }) => {
+  const consoleMessages: string[] = []
+  const ignoredMessages = ["warning: Unrecognized feature: 'web-share'."]
+
+  page.on("console", (msg) => {
+    if (msg.type() === "debug") {
+      return
+    }
+
+    consoleMessages.push(`${msg.type()}: ${msg.text()}`)
+  })
+
+  // Navigate to the page and wait for it to load
+  await page.goto("/")
+  await page.waitForLoadState("networkidle")
+
+  expect(consoleMessages.sort()).toEqual(ignoredMessages.sort())
+})
+
 test.describe("easter eggs", () => {
   test("clicking North America triggers easter egg", async ({ page }) => {
     const easterEgg = page.getByRole("img", { name: "Easter egg #1" })
