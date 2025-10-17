@@ -5,15 +5,15 @@
     "node": ">=22.0.0"
   },
   "scripts": {
-    "dev": "pnpm run scripts:generate-blog-versions && astro dev",
+    "dev": "astro dev",
     "build": "pnpm run scripts:generate-blog-versions && astro build",
     "test": "vitest",
     "test:playwright": "playwright test",
     "test:playwright:ui": "playwright test --ui",
     "format": "prettier --write .",
     "format:ci": "prettier --check .",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.astro",
-    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx,.astro --fix",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.astro --fix",
+    "lint:ci": "eslint . --ext .js,.jsx,.ts,.tsx,.astro",
     "scripts:check-links": "pnpm tsx src/scripts/check-links.ts",
     "scripts:generate-blog-versions": "pnpm tsx src/scripts/generate-blog-versions.ts",
     "clean": "rm -rf dist .astro .cache .wrangler playwright-report test-results src/data/blog-versions",

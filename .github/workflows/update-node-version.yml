@@ -6,7 +6,10 @@ on:
   workflow_dispatch:
 
 jobs:
+  setup:
+    uses: ./.github/workflows/setup-and-test.yml
   update-node-version:
+    needs: setup
     runs-on: ubuntu-latest
     name: Update Node.js Version
     timeout-minutes: 10

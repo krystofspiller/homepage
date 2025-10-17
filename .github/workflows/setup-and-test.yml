@@ -1,0 +1,54 @@
+name: Setup and test
+
+on:
+  workflow_call:
+    inputs:
+      env:
+        description: "Environment to use for testing"
+        required: false
+        type: string
+        default: "test"
+      install-deps:
+        description: "Install dependencies"
+        required: false
+        type: boolean
+        default: false
+      run-checks:
+        description: "Run checks"
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  setup-and-test:
+    runs-on: ubuntu-latest
+    name: Setup and test
+    env:
+      ENV: ${{ inputs.env }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+          cache: "pnpm"
+      - run: pnpm install
+        if: inputs.run-checks == true || inputs.install-deps == true
+      - name: Lint
+        run: pnpm run lint:ci
+        if: inputs.run-checks == true
+      - name: Format
+        run: pnpm run format:ci
+        if: inputs.run-checks == true
+      - name: Build
+        run: pnpm run build
+        if: inputs.run-checks == true
+      - name: Test
+        run: pnpm run test
+        if: inputs.run-checks == true
+        env:
+          ENV: test

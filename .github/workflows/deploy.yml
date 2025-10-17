@@ -7,22 +7,18 @@ on:
     branches:
       - main
 jobs:
+  setup-and-test:
+    uses: ./.github/workflows/setup-and-test.yml
+    with:
+      env: production
+      install-deps: true
+      run-checks: true
+
   deploy:
+    needs: setup-and-test
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    env:
-      ENV: production
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
     steps:
-      - uses: actions/checkout@v5
-      - name: Setup and test
-        uses: ./.github/actions/setup-and-test
-        env:
-          ENV: production
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:

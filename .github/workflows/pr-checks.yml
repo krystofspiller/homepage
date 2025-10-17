@@ -5,17 +5,7 @@ on:
       - main
 jobs:
   pr-checks:
-    runs-on: ubuntu-latest
-    name: PR Checks
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v5
-      - name: Setup and test
-        uses: ./.github/actions/setup-and-test
-        env:
-          ENV: test
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+    uses: ./.github/workflows/setup-and-test.yml
+    with:
+      install-deps: true
+      run-checks: true
