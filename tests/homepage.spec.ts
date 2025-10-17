@@ -34,7 +34,7 @@ test("show large profile pic on hove", async ({ page }) => {
   await expect(link).toBeVisible()
 })
 
-test.only("no console errors or warnings", async ({ page }) => {
+test("no console errors or warnings", async ({ page }) => {
   const consoleMessages: string[] = []
   const ignoredMessages = ["warning: Unrecognized feature: 'web-share'."]
 
