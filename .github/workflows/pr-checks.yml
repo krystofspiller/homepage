@@ -5,4 +5,4 @@ on:
       - main
 jobs:
   checks:
-    uses: ./.github/workflows/reusable/checks.yml
+    uses: ./.github/workflows/reusable-checks.yml
