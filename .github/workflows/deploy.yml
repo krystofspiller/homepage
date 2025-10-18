@@ -7,13 +7,21 @@ on:
     branches:
       - main
 jobs:
+  checks:
+    uses: ./.github/workflows/reusable-checks.yml
   deploy:
+    needs: checks
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: ./.github/workflows/reusable-checks.yml
-        with:
-          env: production
+      - uses: actions/checkout@v5
+      - uses: ./.github/actions/setup
+      - name: Build
+        run: pnpm run build
+        env:
+          ENV: production
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:

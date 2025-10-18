@@ -2,17 +2,11 @@ name: Checks
 
 on:
   workflow_call:
-    inputs:
-      env:
-        description: "Environment to use for testing"
-        required: false
-        type: string
-        default: "test"
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      ENV: ${{ inputs.env }}
+      ENV: test
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
     steps:
