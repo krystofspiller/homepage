@@ -24,8 +24,6 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
-        with:
-          install-deps: true
       - name: Build
         run: pnpm run build
   lint-and-format:
@@ -35,8 +33,6 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
-        with:
-          install-deps: true
       - name: Lint
         run: pnpm run lint:ci
       - name: Format
@@ -48,8 +44,6 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
-        with:
-          install-deps: true
       - name: Test
         run: pnpm run test
         env:
