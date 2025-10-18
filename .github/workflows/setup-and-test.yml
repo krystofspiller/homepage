@@ -64,6 +64,7 @@ jobs:
         env:
           ENV: test
       - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
         with:
           name: playwright-report
           path: playwright-report/

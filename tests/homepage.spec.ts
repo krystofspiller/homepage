@@ -24,7 +24,7 @@ test("see more reveals more content", async ({ page }) => {
   await expect(text).toBeVisible()
 })
 
-test("show large profile pic on hove", async ({ page }) => {
+test("show large profile pic on hover", async ({ page }) => {
   const link = page.getByRole("link", { name: "Krystof's profile" })
 
   await expect(link).not.toBeVisible()
