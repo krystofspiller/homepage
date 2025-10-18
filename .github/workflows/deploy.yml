@@ -7,18 +7,15 @@ on:
     branches:
       - main
 jobs:
-  setup-and-test:
-    uses: ./.github/workflows/setup-and-test.yml
-    with:
-      env: production
-      install-deps: true
-      run-checks-and-tests: true
-
   deploy:
-    needs: setup-and-test
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      - uses: ./.github/workflows/setup-and-test.yml
+        with:
+          env: production
+          install-deps: true
+          run-checks-and-tests: true
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:

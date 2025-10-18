@@ -4,16 +4,13 @@ on:
     - cron: "0 4 * * SAT"
   workflow_dispatch:
 jobs:
-  setup:
-    uses: ./.github/workflows/setup-and-test.yml
-    with:
-      install-deps: true
-
   check-links:
-    needs: setup
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      - uses: ./.github/workflows/setup-and-test.yml
+        with:
+          install-deps: true
       - name: Check links
         run: pnpm run scripts:check-links -- ci
   notify-on-failure:
