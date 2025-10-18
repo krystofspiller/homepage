@@ -24,7 +24,7 @@ test("see more reveals more content", async ({ page }) => {
   await expect(text).toBeVisible()
 })
 
-test("show large profile pic on hove", async ({ page }) => {
+test("show large profile pic on hover", async ({ page }) => {
   const link = page.getByRole("link", { name: "Krystof's profile" })
 
   await expect(link).not.toBeVisible()
@@ -34,7 +34,7 @@ test("show large profile pic on hove", async ({ page }) => {
   await expect(link).toBeVisible()
 })
 
-test.only("no console errors or warnings", async ({ page }) => {
+test("no console errors or warnings", async ({ page }) => {
   const consoleMessages: string[] = []
   const ignoredMessages = ["warning: Unrecognized feature: 'web-share'."]
 
@@ -43,14 +43,18 @@ test.only("no console errors or warnings", async ({ page }) => {
       return
     }
 
-    consoleMessages.push(`${msg.type()}: ${msg.text()}`)
+    const message = `${msg.type()}: ${msg.text()}`
+    if (ignoredMessages.includes(message)) {
+      return
+    }
+    consoleMessages.push(message)
   })
 
   // Navigate to the page and wait for it to load
   await page.goto("/")
   await page.waitForLoadState("networkidle")
 
-  expect(consoleMessages.sort()).toEqual(ignoredMessages.sort())
+  expect(consoleMessages).toEqual([])
 })
 
 test.describe("easter eggs", () => {
