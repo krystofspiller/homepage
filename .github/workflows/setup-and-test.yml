@@ -22,6 +22,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
     steps:
+      - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
         with:
           install-deps: true
@@ -32,6 +33,7 @@ jobs:
     timeout-minutes: 5
     if: inputs.run-checks-and-tests == true
     steps:
+      - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
         with:
           install-deps: true
@@ -44,6 +46,7 @@ jobs:
     timeout-minutes: 5
     if: inputs.run-checks-and-tests == true
     steps:
+      - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
         with:
           install-deps: true
@@ -56,6 +59,7 @@ jobs:
     timeout-minutes: 5
     if: inputs.run-checks-and-tests == true
     steps:
+      - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
         with:
           install-deps: true

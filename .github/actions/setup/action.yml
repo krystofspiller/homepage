@@ -1,10 +1,8 @@
 name: "Setup"
-description: "Checkout, setup pnpm and Node, install dependencies"
+description: "Setup pnpm and Node, install dependencies"
 runs:
   using: "composite"
   steps:
-    - name: Checkout
-      uses: actions/checkout@v5
     - name: Setup pnpm
       uses: pnpm/action-setup@v4
       with:
