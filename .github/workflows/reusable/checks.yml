@@ -1,4 +1,4 @@
-name: Setup and test
+name: Checks
 
 on:
   workflow_call:
@@ -8,12 +8,6 @@ on:
         required: false
         type: string
         default: "test"
-      run-checks-and-tests:
-        description: "Run checks and tests"
-        required: false
-        type: boolean
-        default: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,7 +23,6 @@ jobs:
   lint-and-format:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    if: inputs.run-checks-and-tests == true
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -40,7 +33,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    if: inputs.run-checks-and-tests == true
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -51,12 +43,9 @@ jobs:
   playwright:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    if: inputs.run-checks-and-tests == true
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
-        with:
-          install-deps: true
       - name: Install Playwright Browsers
         run: pnpm exec playwright install chromium --only-shell
       - name: Run Playwright tests

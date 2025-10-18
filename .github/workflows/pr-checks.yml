@@ -1,10 +1,8 @@
-name: ""
+name: "PR"
 on:
   pull_request:
     branches:
       - main
 jobs:
-  pr-checks:
-    uses: ./.github/workflows/setup-and-test.yml
-    with:
-      run-checks-and-tests: true
+  checks:
+    uses: ./.github/workflows/reusable/checks.yml

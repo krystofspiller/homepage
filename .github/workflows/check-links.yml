@@ -8,9 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
-        with:
-          install-deps: true
       - name: Check links
         run: pnpm run scripts:check-links -- ci
   notify-on-failure:
