@@ -12,7 +12,7 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - uses: ./.github/workflows/setup-and-test.yml
+      - uses: ./.github/actions/setup
       - name: Get current Node.js version from .nvmrc
         id: current-version
         run: |

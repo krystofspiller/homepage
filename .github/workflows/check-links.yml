@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: ./.github/workflows/setup-and-test.yml
+      - uses: ./.github/actions/setup
         with:
           install-deps: true
       - name: Check links

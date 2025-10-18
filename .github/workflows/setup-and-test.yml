@@ -22,7 +22,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
     steps:
-      - uses: ./.github/workflows/setup-and-test.yml
+      - uses: ./.github/actions/setup
         with:
           install-deps: true
       - name: Build
@@ -32,7 +32,7 @@ jobs:
     timeout-minutes: 5
     if: inputs.run-checks-and-tests == true
     steps:
-      - uses: ./.github/workflows/setup-and-test.yml
+      - uses: ./.github/actions/setup
         with:
           install-deps: true
       - name: Lint
@@ -44,7 +44,7 @@ jobs:
     timeout-minutes: 5
     if: inputs.run-checks-and-tests == true
     steps:
-      - uses: ./.github/workflows/setup-and-test.yml
+      - uses: ./.github/actions/setup
         with:
           install-deps: true
       - name: Test
@@ -56,7 +56,7 @@ jobs:
     timeout-minutes: 5
     if: inputs.run-checks-and-tests == true
     steps:
-      - uses: ./.github/workflows/setup-and-test.yml
+      - uses: ./.github/actions/setup
         with:
           install-deps: true
       - name: Install Playwright Browsers

@@ -7,5 +7,4 @@ jobs:
   pr-checks:
     uses: ./.github/workflows/setup-and-test.yml
     with:
-      install-deps: true
       run-checks-and-tests: true
