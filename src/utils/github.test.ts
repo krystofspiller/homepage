@@ -1,13 +1,23 @@
 import { beforeEach, describe, it, expect, vi } from "vitest"
 
+// Mock fetch before importing the module
+global.fetch = vi.fn()
+
+// Mock the file system to prevent cache persistence
+vi.mock("node:fs", () => ({
+  promises: {
+    mkdir: vi.fn(),
+    writeFile: vi.fn(),
+    readFile: vi.fn().mockRejectedValue(new Error("File not found")),
+    unlink: vi.fn(),
+  },
+}))
+
 import {
   getBlogPostVersions,
   getBlogPostVersionContent,
   type GithubFileContent,
 } from "./github"
-
-// Mock fetch
-global.fetch = vi.fn()
 
 describe("GitHub API", () => {
   beforeEach(() => {
