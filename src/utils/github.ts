@@ -1,9 +1,9 @@
 import { createHash } from "node:crypto"
+import { env } from "env"
 import { promises as fs } from "node:fs"
 import { join } from "node:path"
-
-import { env } from "env"
 import { z } from "zod"
+import { DEFAULT_CACHE_TTL } from "./constants"
 
 // Cache interface for GitHub API responses
 interface CacheEntry<T> {
@@ -15,7 +15,6 @@ interface CacheEntry<T> {
 // File-based cache for GitHub API responses
 class GitHubCache {
   private cacheDir: string
-  private defaultTTL = 5 * 60 * 1000 // 5 minutes in milliseconds
 
   constructor() {
     this.cacheDir = join(process.cwd(), ".cache", "github")
@@ -39,7 +38,7 @@ class GitHubCache {
   async set<T>(
     key: string,
     data: T,
-    ttl: number = this.defaultTTL,
+    ttl: number = DEFAULT_CACHE_TTL,
   ): Promise<void> {
     try {
       await this.ensureCacheDir()
@@ -88,26 +87,26 @@ class GitHubCache {
 const githubCache = new GitHubCache()
 
 const githubCommit = z.object({
-  sha: z.string(),
   commit: z.object({
     author: z.object({
       date: z.string(),
     }),
   }),
+  sha: z.string(),
 })
 const githubCommitResponse = z.array(githubCommit)
 const githubFileContent = z.object({
-  sha: z.string(),
   content: z.string(),
   encoding: z.string(),
+  sha: z.string(),
 })
 const blogVersion = z.object({
-  sha: z.string(),
   date: z.string(),
+  sha: z.string(),
 })
 
 type GitHubCommit = z.infer<typeof githubCommit>
-export type GithubFileContent = z.infer<typeof githubFileContent>
+type GithubFileContent = z.infer<typeof githubFileContent>
 type BlogVersion = z.infer<typeof blogVersion>
 
 const GITHUB_API_BASE = "https://api.github.com"
@@ -122,9 +121,9 @@ const headers = {
 /**
  * Fetches commit history for a specific file in the repository
  */
-export async function getFileCommitHistory(
+const getFileCommitHistory = async (
   filePath: string,
-): Promise<GitHubCommit[]> {
+): Promise<GitHubCommit[]> => {
   const cacheKey = `fileCommitHistory:${filePath}`
   const cachedData = await githubCache.get<GitHubCommit[]>(cacheKey)
   if (cachedData) {
@@ -140,7 +139,7 @@ export async function getFileCommitHistory(
 
   if (!response.ok) {
     throw new Error(
-      `GitHub API error: ${response.status} ${response.statusText}. Headers: ${JSON.stringify(Array.from(response.headers.entries()))}`,
+      `GitHub API error: ${response.status} ${response.statusText}. Headers: ${JSON.stringify([...response.headers.entries()])}`,
     )
   }
 
@@ -157,10 +156,10 @@ export async function getFileCommitHistory(
 /**
  * Fetches the content of a file at a specific commit
  */
-export async function getFileContentAtCommit(
+const getFileContentAtCommit = async (
   filePath: string,
   sha: string,
-): Promise<string | null> {
+): Promise<string | null> => {
   const cacheKey = `fileContentAtCommit:${filePath}`
   const cachedData = await githubCache.get<string | null>(cacheKey)
   if (cachedData) {
@@ -181,40 +180,54 @@ export async function getFileContentAtCommit(
   }
 
   const data = githubFileContent.safeParse(await response.json())
-  if (data.success && data.data.encoding === "base64") {
-    const res = atob(data.data.content)
-    await githubCache.set(cacheKey, res)
-    return res
+  if (!data.success) {
+    return null
   }
 
-  const res = data.success ? data.data.content : null
+  const res =
+    data.data.encoding === "base64"
+      ? atob(data.data.content)
+      : data.data.content
   await githubCache.set(cacheKey, res)
-
   return res
 }
 
 /**
  * Gets blog post versions from GitHub commit history
  */
-export async function getBlogPostVersions(
+const getBlogPostVersions = async (
   fileName: string,
-): Promise<BlogVersion[]> {
+): Promise<BlogVersion[]> => {
   const filePath = `src/data/blog/${fileName}.mdx`
   const commits = await getFileCommitHistory(filePath)
 
   return commits.map((commit) => ({
-    sha: commit.sha,
     date: commit.commit.author.date,
+    sha: commit.sha,
   }))
 }
 
 /**
  * Gets the content of a specific version of a blog post
  */
-export async function getBlogPostVersionContent(
+const getBlogPostVersionContent = async (
   fileName: string,
   sha: string,
-): Promise<string | null> {
+): Promise<string | null> => {
   const filePath = `src/data/blog/${fileName}.mdx`
-  return await getFileContentAtCommit(filePath, sha)
+  try {
+    return await getFileContentAtCommit(filePath, sha)
+  } catch (error) {
+    // oxlint-disable-next-line no-console
+    console.error(error)
+    throw error
+  }
 }
+
+export {
+  getBlogPostVersionContent,
+  getBlogPostVersions,
+  getFileCommitHistory,
+  getFileContentAtCommit,
+}
+export type { GithubFileContent }

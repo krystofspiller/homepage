@@ -1,22 +1,21 @@
 ---
 import "../styles/global.css"
 
+import { ClientRouter } from "astro:transitions"
+
+import Banners from "@components/Banners.astro"
+import Footer from "@components/Footer.astro"
+import Header from "@components/Header.astro"
 import Spinner from "@components/Spinner.astro"
 import Tooltip from "@components/Tooltip.astro"
-import { ClientRouter } from "astro:transitions"
-import Header from "@components/Header.astro"
-import Footer from "@components/Footer.astro"
-import Banners from "@components/Banners.astro"
+
+import { YEARS_OF_EXPERIENCE } from "@utils/constants"
 
 const title = Astro.props.title
   ? `${Astro.props.title} | Krystof Spiller`
   : "Krystof Spiller"
 
 const lookingForJob = false
-
-const yearsOfExperience = Math.abs(
-  new Date(Date.now() - new Date(2020, 1, 1).getTime()).getFullYear() - 1970,
-)
 ---
 
 <!doctype html>
@@ -57,7 +56,7 @@ const yearsOfExperience = Math.abs(
     <title>{title}</title>
     <meta
       name="description"
-      content={`Krystof Spiller is a detail-oriented software engineer with ${yearsOfExperience} years of experience.`}
+      content={`Krystof Spiller is a detail-oriented software engineer with ${YEARS_OF_EXPERIENCE} years of experience.`}
     />
     <ClientRouter />
     <Tooltip />
@@ -86,40 +85,51 @@ const yearsOfExperience = Math.abs(
 </html>
 
 <script>
+  import { GREETING_MESSAGE } from "@utils/constants"
   import { usesSideNavigable } from "@utils/store"
 
+  // oxlint-disable-next-line no-console
+  console.log(...GREETING_MESSAGE)
+
   document.addEventListener("astro:page-load", () => {
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      anchor.addEventListener("click", function (e) {
+    for (const anchor of document.querySelectorAll('a[href^="#"]')) {
+      anchor.addEventListener("click", (e) => {
         e.preventDefault()
 
         const href = anchor.getAttribute("href")
-        if (!href) return
+        if (!href) {
+          return
+        }
 
-        const currentUrl = new URL(window.location.href)
+        const currentUrl = new URL(globalThis.location.href)
         currentUrl.hash = href
-        window.history.pushState(null, "", currentUrl.toString())
+        globalThis.history.replaceState(null, "", currentUrl.toString())
 
         document.querySelector(href)?.scrollIntoView({
           behavior: "smooth",
         })
       })
-    })
+    }
   })
   document.addEventListener("astro:before-preparation", () => {
     const loading = document.querySelector("#loading")
-    if (!loading) return
+    if (!loading) {
+      return
+    }
 
     loading.classList.add("flex")
     loading.classList.remove("hidden")
 
-    window.setTimeout(function () {
+    const BACKGROUND_OVERLAY_DELAY = 50
+    globalThis.setTimeout(() => {
       loading.classList.add("opacity-100")
-    }, 50)
+    }, BACKGROUND_OVERLAY_DELAY)
   })
   document.addEventListener("astro:after-preparation", () => {
     const loading = document.querySelector("#loading")
-    if (!loading) return
+    if (!loading) {
+      return
+    }
 
     loading.classList.add("hidden")
     loading.classList.remove("flex")
@@ -127,8 +137,8 @@ const yearsOfExperience = Math.abs(
   })
 
   usesSideNavigable.subscribe((value) => {
-    document.getElementById("main-content")?.classList.toggle("pb-14", value)
-    document.getElementById("main-content")?.classList.toggle("pb-0", !value)
+    document.querySelector("#main-content")?.classList.toggle("pb-14", value)
+    document.querySelector("#main-content")?.classList.toggle("pb-0", !value)
   })
 </script>
 

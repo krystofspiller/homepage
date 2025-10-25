@@ -15,10 +15,6 @@ updates:
         patterns:
           - "tailwindcss"
           - "@tailwindcss/vite"
-      typescript-eslint:
-        patterns:
-          - "@typescript-eslint/eslint-plugin"
-          - "@typescript-eslint/parser"
   - package-ecosystem: "github-actions"
     directory: "/"
     open-pull-requests-limit: 5

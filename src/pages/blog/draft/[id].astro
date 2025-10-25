@@ -2,16 +2,14 @@
 import BlogPostLayout from "@components/BlogPostLayout.astro"
 import { postsIncludingDrafts } from "src/data/common"
 
-export async function getStaticPaths() {
-  return postsIncludingDrafts.map((post) => {
-    return {
-      params: { id: post.id },
-      props: { post },
-    }
-  })
-}
-
 const { post } = Astro.props
+
+// oxlint-disable-next-line explicit-module-boundary-types explicit-function-return-type
+export const getStaticPaths = () =>
+  postsIncludingDrafts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }))
 ---
 
 <BlogPostLayout post={post} />

@@ -1,16 +1,16 @@
 ---
+import EasterEggs from "./EasterEggs.astro"
 import { twMerge } from "tailwind-merge"
-
-import Image from "@components/Image.astro"
 
 import Github from "@assets/icons/github.astro"
 import Email from "@assets/icons/email.astro"
-import ContainerHover from "@components/ContainerHover.astro"
 import Linkedin from "@assets/icons/linkedin.astro"
-import EasterEggs from "./EasterEggs.astro"
-import { HEADER_HEIGHT } from "@utils/tokens"
-
 import profile from "@assets/images/profile.avif"
+
+import Image from "@components/Image.astro"
+import ContainerHover from "@components/ContainerHover.astro"
+
+import { HEADER_HEIGHT } from "@utils/constants"
 
 const currentPath = Astro.url.pathname
 ---

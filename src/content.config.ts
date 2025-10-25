@@ -1,19 +1,19 @@
-import { glob } from "astro/loaders"
 import { defineCollection, z } from "astro:content"
+import { glob } from "astro/loaders"
 
-export const commonSchema = z.object({
-  title: z.string(),
-  pubDate: z.coerce.date(),
+const commonSchema = z.object({
   draft: z.boolean().optional(),
+  pubDate: z.coerce.date(),
+  title: z.string(),
 })
 
 const blog = defineCollection<typeof commonSchema>({
-  loader: glob({ pattern: "**/*.mdx", base: "./src/data/blog" }),
+  loader: glob({ base: "./src/data/blog", pattern: "**/*.mdx" }),
   schema: commonSchema,
 })
 
 const blogVersions = defineCollection<typeof commonSchema>({
-  loader: glob({ pattern: "**/*.mdx", base: "./src/data/blog-versions" }),
+  loader: glob({ base: "./src/data/blog-versions", pattern: "**/*.mdx" }),
   schema: commonSchema,
 })
 

@@ -1,10 +1,9 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container"
-import { describe, expect, test } from "vitest"
 
 import Link from "./Link.astro"
 
 describe("Link", () => {
-  test.each([
+  it.each([
     ["https://", "https://example.com"],
     ["mailto:", "mailto:email@example.com"],
   ])("has target _blank if href starts with %s", async (_, href) => {
@@ -14,7 +13,7 @@ describe("Link", () => {
     expect(result).toContain('target="_blank"')
   })
 
-  test.each([
+  it.each([
     ["https://", "https://example.com"],
     ["mailto:", "mailto:email@example.com"],
   ])(
@@ -29,7 +28,7 @@ describe("Link", () => {
     },
   )
 
-  test.each([["# (anchor)", "#anchor"]])(
+  it.each([["# (anchor)", "#anchor"]])(
     "has target _self if href starts with %s",
     async (_, href) => {
       const container = await AstroContainer.create()
@@ -41,7 +40,7 @@ describe("Link", () => {
     },
   )
 
-  test.each([["# (anchor)", "#anchor"]])(
+  it.each([["# (anchor)", "#anchor"]])(
     "target can be overwritten to _blank if href starts with %s",
     async (_, href) => {
       const container = await AstroContainer.create()

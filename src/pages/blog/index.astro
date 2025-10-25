@@ -3,7 +3,7 @@ import ArticleCard from "@components/ArticleCard.astro"
 import BaseLayout from "@layouts/BaseLayout.astro"
 import { posts } from "src/data/common"
 
-const sortedPosts = posts.sort(
+const sortedPosts = posts.toSorted(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 )
 ---

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { atom } from "nanostores"
 
 enum EasterEggs {
@@ -7,7 +6,7 @@ enum EasterEggs {
   OIIA = 3,
 }
 
-export const easterEggCounter = atom<Array<EasterEggs>>([])
-export const usesSideNavigable = atom<boolean>(false)
+const easterEggCounter = atom<EasterEggs[]>([])
+const usesSideNavigable = atom<boolean>(false)
 
-export { EasterEggs }
+export { EasterEggs, easterEggCounter, usesSideNavigable }

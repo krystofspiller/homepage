@@ -27,7 +27,7 @@ import easterEggOIIA from "@assets/images/easter-egg-oiia.avif"
 </div>
 
 <script>
-  import { easterEggCounter } from "@utils/store"
+  import { EasterEggs, easterEggCounter } from "@utils/store"
   import butterup from "butteruptoasts"
   import confetti from "canvas-confetti"
 
@@ -37,40 +37,40 @@ import easterEggOIIA from "@assets/images/easter-egg-oiia.avif"
 
   easterEggCounter.subscribe((value) => {
     for (const id of value) {
-      const img = document.getElementById(`easterEgg-${id}`)
+      const img = document.querySelector(`#easterEgg-${id}`)
       if (img) {
         img.classList.remove("hidden")
       }
     }
 
-    if (value.length === 3 && !confettiFired) {
+    if (value.length === Object.keys(EasterEggs).length / 2 && !confettiFired) {
       confettiFired = true
 
       butterup.toast({
-        title: "🎉 Hooray!",
-        message: "You found all easter eggs!",
-        location: "top-right",
-        type: "success",
-        theme: "butterupcustom",
         dismissable: true,
         duration: 1000,
+        location: "top-right",
+        message: "You found all easter eggs!",
+        theme: "butterupcustom",
+        title: "🎉 Hooray!",
         toastLife: 1000,
+        type: "success",
       })
 
       confetti({
-        particleCount: 100,
         angle: 60,
+        origin: { x: 0, y: 0.7 },
+        particleCount: 100,
         spread: 60,
         startVelocity: 60,
-        origin: { y: 0.7, x: 0 },
       })
 
       confetti({
-        particleCount: 100,
         angle: 120,
+        origin: { x: 1, y: 0.7 },
+        particleCount: 100,
         spread: 60,
         startVelocity: 60,
-        origin: { y: 0.7, x: 1 },
       })
     }
   })
