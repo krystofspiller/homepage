@@ -11,5 +11,5 @@ const year = new Date().getFullYear()
 </footer>
 
 <script is:inline>
-  document.getElementById("footer-year").innerText = new Date().getFullYear()
+  document.querySelector("#footer-year").textContent = new Date().getFullYear()
 </script>

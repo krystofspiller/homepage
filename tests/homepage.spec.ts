@@ -1,4 +1,5 @@
-import { test, expect } from "@playwright/test"
+import { expect, test } from "@playwright/test"
+import { GREETING_MESSAGE } from "@utils/constants"
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/")
@@ -36,7 +37,10 @@ test("show large profile pic on hover", async ({ page }) => {
 
 test("no console errors or warnings", async ({ page }) => {
   const consoleMessages: string[] = []
-  const ignoredMessages = ["warning: Unrecognized feature: 'web-share'."]
+  const ignoredMessages = new Set([
+    "warning: Unrecognized feature: 'web-share'.",
+    `log: ${GREETING_MESSAGE.join(" ")}`,
+  ])
 
   page.on("console", (msg) => {
     if (msg.type() === "debug") {
@@ -44,7 +48,7 @@ test("no console errors or warnings", async ({ page }) => {
     }
 
     const message = `${msg.type()}: ${msg.text()}`
-    if (ignoredMessages.includes(message)) {
+    if (ignoredMessages.has(message)) {
       return
     }
     consoleMessages.push(message)
@@ -57,7 +61,7 @@ test("no console errors or warnings", async ({ page }) => {
   expect(consoleMessages).toEqual([])
 })
 
-test.describe("easter eggs", () => {
+test.describe("Easter eggs", () => {
   test("clicking North America triggers easter egg", async ({ page }) => {
     const easterEgg = page.getByRole("img", { name: "Easter egg #1" })
 

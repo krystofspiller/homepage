@@ -26,8 +26,8 @@ import capdeskLogo from "@assets/images/capdesk.svg"
 import cartaLogo from "@assets/images/carta.svg"
 import commitMessage from "@assets/images/commit-message.avif"
 import dataIntegrityChecker from "@assets/images/data-integrity-checker.avif"
-import eagleMp3 from "/audio/eagle.mp3"
-import eagleOpus from "/audio/eagle.opus"
+import eagleMp3 from "@public/audio/eagle.mp3"
+import eagleOpus from "@public/audio/eagle.opus"
 import fundraising from "@assets/images/fundraising.avif"
 import linkChecker from "@assets/images/link-checker.avif"
 import modal from "@assets/images/modal.avif"
@@ -35,15 +35,10 @@ import newAppRelease from "@assets/images/new-app-release.avif"
 import openapi from "@assets/images/openapi.avif"
 import portchainLogo from "@assets/images/portchain.svg"
 import systematicLogo from "@assets/images/systematic.svg"
-import trampolineMp3 from "/audio/trampoline.mp3"
-import trampolineOpus from "/audio/trampoline.opus"
+import trampolineOpus from "@public/audio/trampoline.opus"
+import trampolineMp3 from "@public/audio/trampoline.mp3"
 
-const yearsOfExperience = Math.abs(
-  new Date(Date.now() - new Date(2020, 1, 1).getTime()).getFullYear() - 1970,
-)
-
-// TODO: Refactor tooltips to address accessibility issues (Floating UI?)
-// TODO: Setup StoryBook - split components into design system and components
+import { YEARS_OF_EXPERIENCE } from "@utils/constants"
 ---
 
 <BaseLayout>
@@ -136,7 +131,7 @@ const yearsOfExperience = Math.abs(
         >detail</span
       >-oriented software engineer with <strong
         class="font-medium text-zinc-100"
-        >{yearsOfExperience} years of experience</strong
+        >{YEARS_OF_EXPERIENCE} years of experience</strong
       > in fullstack web development. I'm targeting roles involving TypeScript, React,
       Ruby and Go with an opportunity to transfer to
       <span class="cursor-pointer" id="us">North America</span>.
@@ -731,7 +726,8 @@ const yearsOfExperience = Math.abs(
 </BaseLayout>
 
 <script is:inline>
-  function isElementInViewport(element) {
+  // oxlint-disable-next-line explicit-function-return-type
+  const isElementInViewport = (element) => {
     const rect = element.getBoundingClientRect()
 
     return (
@@ -743,11 +739,12 @@ const yearsOfExperience = Math.abs(
     )
   }
 
-  function onVisibilityChange(element, callback) {
+  const onVisibilityChange = (element, callback) => {
     let previousIsVisible = false
-    return function () {
+    // oxlint-disable-next-line explicit-function-return-type
+    return () => {
       const isVisible = isElementInViewport(element)
-      if (isVisible != previousIsVisible) {
+      if (isVisible !== previousIsVisible) {
         previousIsVisible = isVisible
         callback(element)
       }
@@ -756,9 +753,8 @@ const yearsOfExperience = Math.abs(
 
   const handler = onVisibilityChange(
     document.querySelector("#billing-revamp-project"),
-    function (element) {
-      const projectElement = element.children[0].children[0]
-      const warStoryElement = element.children[0].children[1]
+    function handler(element) {
+      const [projectElement, warStoryElement] = element.children[0].children
 
       if (!projectElement || !warStoryElement) {
         return
@@ -778,7 +774,7 @@ const yearsOfExperience = Math.abs(
     addEventListener("load", handler, false)
     addEventListener("scroll", handler, false)
     addEventListener("resize", handler, false)
-  } else if (window.attachEvent) {
+  } else if (globalThis.attachEvent) {
     attachEvent("onload", handler)
     attachEvent("onscroll", handler)
     attachEvent("onresize", handler)
@@ -786,80 +782,86 @@ const yearsOfExperience = Math.abs(
 </script>
 
 <script>
-  import { easterEggCounter, EasterEggs } from "@utils/store"
-  import { HEADER_HEIGHT } from "@utils/tokens"
+  import { EasterEggs, easterEggCounter } from "@utils/store"
   import confetti from "canvas-confetti"
-  import { gsap } from "gsap"
   import { ScrollTrigger } from "gsap/ScrollTrigger"
+  import { gsap } from "gsap"
+  import {
+    HEADER_HEIGHT,
+    NARROW_CONTENT_WIDTH,
+    TAILWIND_BREAKPOINTS_IN_PX,
+  } from "@utils/constants"
 
-  async function init() {
-    if (window.location.pathname !== "/") return
+  const shapeFromImage = async (imageData: {
+    src: string
+    scalar?: number
+  }): Promise<{
+    bitmap: ImageBitmap
+    matrix: [number, number, number, number, number, number]
+    type: "bitmap"
+  }> => {
+    const { src, scalar = 1 } = imageData
+    const scale = 1 / scalar
+
+    const img = new Image()
+    img.src = src
+
+    await new Promise((resolve) => img.addEventListener("load", resolve))
+
+    const size = 10 * scalar
+
+    const sWidth = img.naturalWidth
+    const sHeight = img.naturalHeight
+
+    const width = size
+    const height = (size * sHeight) / sWidth
+
+    const canvas = new OffscreenCanvas(width, height)
+    const ctx = canvas.getContext("2d")
+    ctx?.drawImage(img, 0, 0, sWidth, sHeight, 0, 0, width, height)
+
+    return {
+      bitmap: canvas.transferToImageBitmap(),
+      matrix: [scale, 0, 0, scale, (-width * scale) / 2, (-height * scale) / 2],
+      type: "bitmap",
+    }
+  }
+
+  const init = async (): Promise<void> => {
+    if (globalThis.location.pathname !== "/") {
+      return
+    }
 
     const trampolineTl = gsap
       .timeline({ paused: true })
       .from("#trampoline", {
-        scale: 1,
         duration: 0,
+        scale: 1,
       })
       .to("#trampoline", {
-        scale: 0.5,
         duration: 0.15,
         ease: "power2.out",
+        scale: 0.5,
       })
       .to("#trampoline", {
-        scale: 1,
         duration: 1.5,
         ease: "elastic.out(1, 0.3)",
+        scale: 1,
       })
 
-    async function shapeFromImage(imageData: { src: string; scalar?: number }) {
-      const { src, scalar = 1 } = imageData
-      const scale = 1 / scalar
-
-      const img = new Image()
-      img.src = src
-
-      await new Promise((res) => img.addEventListener("load", res))
-
-      const size = 10 * scalar
-
-      const sWidth = img.naturalWidth
-      const sHeight = img.naturalHeight
-
-      const width = size
-      const height = (size * sHeight) / sWidth
-
-      const canvas = new OffscreenCanvas(width, height)
-      const ctx = canvas.getContext("2d")
-      ctx?.drawImage(img, 0, 0, sWidth, sHeight, 0, 0, width, height)
-
-      return {
-        type: "bitmap",
-        bitmap: canvas.transferToImageBitmap(),
-        matrix: [
-          scale,
-          0,
-          0,
-          scale,
-          (-width * scale) / 2,
-          (-height * scale) / 2,
-        ],
-      }
-    }
-
     const tramp1 = await shapeFromImage({
-      src: "/icons/trampoline1.avif",
       scalar: 10,
+      src: "/icons/trampoline1.avif",
     })
     const tramp2 = await shapeFromImage({
-      src: "/icons/trampoline2.avif",
       scalar: 10,
+      src: "/icons/trampoline2.avif",
     })
     const trampoline = document.querySelector("#trampoline")
     trampoline?.addEventListener("click", () => {
-      easterEggCounter.set(
-        Array.from(new Set(easterEggCounter.get()).add(EasterEggs.TRAMPOLINE)),
-      )
+      easterEggCounter.set([
+        ...new Set(easterEggCounter.get()).add(EasterEggs.TRAMPOLINE),
+      ])
 
       const trampolineAudio = document.querySelector(
         "#trampoline-audio",
@@ -877,29 +879,31 @@ const yearsOfExperience = Math.abs(
       const y = (rect.top + rect.height / 2) / window.innerHeight
 
       confetti({
+        decay: 0.92,
+        flat: true,
+        origin: { y },
         particleCount: 10,
+        scalar: 10,
+        shapes: [tramp1, tramp2],
         spread: 150,
         startVelocity: 20,
-        origin: { y },
-        scalar: 10,
-        decay: 0.92,
-        shapes: [tramp1, tramp2],
-        flat: true,
         ticks: 50,
       })
     })
 
     gsap.registerPlugin(ScrollTrigger)
 
-    const bodyWidth = parseInt(getComputedStyle(document.body).width)
+    const bodyWidth = Number.parseInt(getComputedStyle(document.body).width, 10)
 
-    if (bodyWidth >= 1024) {
-      ;[
+    if (bodyWidth >= TAILWIND_BREAKPOINTS_IN_PX.lg) {
+      const triggers = [
         ["#leftHalfMoon", 1],
         ["#rightHalfMoon", -1],
-      ].forEach(([t, f]) => {
-        const trigger = t as string
-        const factor = f as number
+      ] as [string, number][]
+
+      for (const [t, f] of triggers) {
+        const trigger = t
+        const factor = f
 
         gsap
           .timeline({
@@ -907,45 +911,46 @@ const yearsOfExperience = Math.abs(
               gsap
                 .timeline({
                   scrollTrigger: {
-                    trigger,
-                    start: `top ${HEADER_HEIGHT.pxNumber - 3}px`,
                     end: "+=500",
                     scrub: true,
+                    start: `top ${HEADER_HEIGHT.pxNumber - 3}px`,
+                    trigger,
                   },
                 })
                 .from(trigger, {
+                  duration: 0,
+                  ease: "none",
+                  rotation: 2 * factor,
                   x: 0,
                   y: 0,
-                  rotation: 2 * factor,
-                  ease: "none",
-                  duration: 0,
                 })
                 .to(trigger, {
+                  ease: "none",
+                  rotation: -15 * factor,
                   x: -150 * factor,
                   y: 100,
-                  rotation: -15 * factor,
-                  ease: "none",
                 })
             },
           })
           .from(trigger, {
+            display: "block",
+            duration: 2,
+            ease: "power1.out",
+            rotation: 45 * factor,
+            scale: 0.1,
             x: -300 * factor,
             y: -150,
-            rotation: 45 * factor,
-            ease: "power1.out",
-            duration: 2,
-            scale: 0.1,
-            display: "block",
           })
           .to(trigger, {
             display: "block",
             duration: 0,
           })
-      })
+      }
     }
 
-    const width = parseInt(
+    const width = Number.parseInt(
       getComputedStyle(document.querySelector("#top-content") as Element).width,
+      10,
     )
 
     const c = document.querySelector("#background-canvas") as HTMLCanvasElement
@@ -954,21 +959,31 @@ const yearsOfExperience = Math.abs(
     let cw = (c.width = width)
     const ch = (c.height = 324)
     let radius = Math.max(cw, ch)
-    let factor = width / 576
+    let factor = width / NARROW_CONTENT_WIDTH
     let usStyle = false
-    let tl: gsap.core.Timeline | null = null
-    const particles = Array(99)
+    let tl: gsap.core.Timeline = gsap.timeline()
+    const PARTICLES_COUNT = 99
+    const particles = Array.from({ length: PARTICLES_COUNT }, () => ({
+      alpha: 0,
+      img: new Image(),
+      rotate: 0,
+      scale: 0,
+      x: 0,
+      y: 0,
+    }))
 
     let firstDraw = true
-    function onFirstDraw() {
-      if (!firstDraw) return
+    const onFirstDraw = (): void => {
+      if (!firstDraw) {
+        return
+      }
 
       firstDraw = false
 
       c.classList.remove("opacity-0")
     }
 
-    function animateBackground() {
+    const animateBackground = (): void => {
       const imgs = usStyle
         ? ["cowboy.avif", "eagle.avif", "usa.avif"]
         : [
@@ -993,58 +1008,57 @@ const yearsOfExperience = Math.abs(
             "vite.svg",
           ]
 
-      for (let i = 0; i < particles.length; i++) {
+      for (let i = 0; i < particles.length; i += 1) {
+        const img = new Image()
+        img.src = `${globalThis.location.origin}/icons/${imgs[i % imgs.length]}`
         particles[i] = {
           x: 0,
           y: 0,
           scale: 0,
           rotate: 0,
           alpha: 0,
-          img: new Image(),
+          img,
         }
-        particles[i].img.src =
-          `${window.location.origin}/icons/${imgs[i % imgs.length]}`
       }
 
+      const PARTICLES_ROTATION_FACTOR = 10
       tl = gsap
         .timeline({ onUpdate: draw })
         .fromTo(
           particles,
           {
+            alpha: 1.5,
+            rotate: 0,
+            scale: 1,
             x: (i) => {
               const angle = (i / particles.length) * Math.PI * 2 - Math.PI / 2
-              return Math.cos(angle * 10) * radius
+              return Math.cos(angle * PARTICLES_ROTATION_FACTOR) * radius
             },
             y: (i) => {
               const angle = (i / particles.length) * Math.PI * 2 - Math.PI / 2
-              return Math.sin(angle * 10) * radius
+              return Math.sin(angle * PARTICLES_ROTATION_FACTOR) * radius
             },
-            scale: 1,
-            rotate: 0,
-            alpha: 1.5,
           },
           {
+            alpha: -0.2,
             duration: 30,
+            rotate: 3,
+            scale: 0,
+            stagger: { each: -0.3, repeat: -1 },
             x: 0,
             y: 0,
-            scale: 0,
-            alpha: -0.2,
-            rotate: 3,
-            stagger: { each: -0.3, repeat: -1 },
           },
           0,
         )
-        .seek(99)
+        .seek(PARTICLES_COUNT)
     }
 
-    animateBackground()
-
-    function draw() {
+    const draw = (): void => {
       onFirstDraw()
 
       particles.sort((a, b) => a.scale - b.scale) // sort by scale to set z-indexing
       ctx.clearRect(0, 0, cw, ch)
-      particles.forEach((p) => {
+      for (const p of particles) {
         ctx.translate(cw / 2, ch / 2)
         ctx.rotate(p.rotate - 2)
         const resizeFactor = 100 / Math.max(p.img.height, p.img.width)
@@ -1057,36 +1071,49 @@ const yearsOfExperience = Math.abs(
           p.img.height * p.scale * factor * resizeFactor,
         )
         ctx.resetTransform()
-      })
+      }
     }
 
-    const catEars = document.getElementById("cat-ears")
+    animateBackground()
+
+    const catEars = document.querySelector("#cat-ears")
 
     catEars?.addEventListener("click", () => {
-      easterEggCounter.set(
-        Array.from(new Set(easterEggCounter.get()).add(EasterEggs.OIIA)),
-      )
+      easterEggCounter.set([
+        ...new Set(easterEggCounter.get()).add(EasterEggs.OIIA),
+      ])
     })
 
     const us = document.querySelector("#us")
     us?.addEventListener("click", () => {
       us.innerHTML = "🇺🇸"
-      easterEggCounter.set(
-        Array.from(new Set(easterEggCounter.get()).add(EasterEggs.US)),
-      )
+      easterEggCounter.set([
+        ...new Set(easterEggCounter.get()).add(EasterEggs.US),
+      ])
       const usEagle = document.querySelector("#us-eagle")
-      if (!usEagle || usEagle.children.length < 2) return
+      if (!usEagle || usEagle.children.length < 2) {
+        return
+      }
 
-      const bodyWidth = parseInt(getComputedStyle(document.body).width)
+      const bodyWidth = Number.parseInt(
+        getComputedStyle(document.body).width,
+        10,
+      )
 
+      const TIME_UNTIL_EAGLE_IN_SCREEN = 200
       setTimeout(() => {
         ;(usEagle.children[0] as HTMLAudioElement).play()
-      }, 200)
+      }, TIME_UNTIL_EAGLE_IN_SCREEN)
 
-      usEagle.children[1]!.outerHTML = `
+      const EAGLE_IMG_SIZE = 150
+      const [, eagleImg] = usEagle.children
+      if (!eagleImg) {
+        return
+      }
+      eagleImg.outerHTML = `
           <div
             class="animate-move-offset absolute h-0 w-0 left-[calc(50%-100px)] -top-[50px] scale-100 opacity-0"
-            style='offset-path: path("M${bodyWidth / 2 + 150},0 Q0,100 -${bodyWidth / 2 + 150},0");'
+            style='offset-path: path("M${bodyWidth / 2 + EAGLE_IMG_SIZE},0 Q0,100 -${bodyWidth / 2 + EAGLE_IMG_SIZE},0");'
           >
             <div class="rotate-180 text-8xl">🦅</div>
           </div>
@@ -1094,33 +1121,36 @@ const yearsOfExperience = Math.abs(
 
       if (!usStyle) {
         c.classList.add("opacity-0")
+        const TIME_UNTIL_BACKGROUND_FADED = 2000
         setTimeout(() => {
           usStyle = true
           animateBackground()
           firstDraw = true
-        }, 2000)
+        }, TIME_UNTIL_BACKGROUND_FADED)
       }
     })
 
     window.addEventListener("resize", () => {
-      const width = parseInt(
+      const width = Number.parseInt(
         getComputedStyle(document.querySelector("#top-content") as Element)
           .width,
+        10,
       )
-      cw = c.width = width
+      cw = width
+      c.width = width
       radius = Math.max(cw, ch)
-      factor = width / 576
-      tl?.invalidate()
+      factor = width / NARROW_CONTENT_WIDTH
+      tl.invalidate()
     })
 
     c.addEventListener("pointerup", () => {
       gsap.to(tl, {
-        timeScale: tl?.isActive() ? 0 : 1,
+        timeScale: tl.isActive() ? 0 : 1,
       })
     })
   }
 
-  document.addEventListener("astro:page-load", () => {
-    init()
+  document.addEventListener("astro:page-load", async () => {
+    await init()
   })
 </script>

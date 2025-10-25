@@ -6,25 +6,24 @@ import Link from "./Link.astro"
 const html = await Astro.slots.render("default")
 const { document } = parseHTML(html)
 
-type Toc = Array<{ level: number; name: string; id: string | null }>
+type Toc = { level: number; name: string; id: string | null }[]
 
 const toc: Toc = []
 let minLevel = Number.MAX_SAFE_INTEGER
-function getHeadings(content: Document | HTMLElement | null, toc: Toc) {
+const getHeadings = (
+  content: Document | HTMLElement | null,
+  toc: Toc,
+): void => {
   const children = content?.children ?? []
   for (const c of children) {
     const child = c as HTMLElement
     if (["H2", "H3", "H4"].includes(child.tagName)) {
-      const help = child.tagName.split("H")
-      if (help.length !== 2) {
-        continue
-      }
-      const level = parseInt(child.tagName.split("H")[1]!)
+      const level = Number.parseInt(child.tagName.replace("H", ""), 10)
       minLevel = Math.min(minLevel, level)
       toc.push({
-        level,
-        name: child.getAttribute("data-toc") ?? child.innerText?.trim(),
         id: child.getAttribute("id"),
+        level,
+        name: child.dataset.toc ?? child.textContent?.trim() ?? "",
       })
     }
     getHeadings(child, toc)
@@ -78,33 +77,34 @@ getHeadings(document, toc)
 <script>
   import { usesSideNavigable } from "@utils/store"
 
-  const mobileTocSelect = document.getElementById("mobile-toc-select")
+  const mobileTocSelect = document.querySelector("#mobile-toc-select")
   usesSideNavigable.set(!!mobileTocSelect)
 </script>
 
 <script is:inline data-astro-rerun define:vars={{ toc }}>
-  const mobileSelect = document.getElementById("mobile-toc-select")
+  const mobileSelect = document.querySelector("#mobile-toc-select")
   mobileSelect?.addEventListener("change", (e) => {
     const selectedId = e.target.value
     if (!selectedId) {
       return
     }
 
-    const element = document.getElementById(selectedId)
+    const element = document.querySelector(`#${selectedId}`)
     element?.scrollIntoView({ behavior: "smooth" })
   })
 
   // Register scroll events for all toc elements
   const tocElements = []
   for (const row of toc) {
-    const element = document.getElementById(row.id)
+    const element = document.querySelector(`#${row.id}`)
     if (element) {
       tocElements.push({ element, id: row.id })
     }
   }
 
   // Function to update active navigation item based on scroll position
-  function updateActiveNavItem() {
+  // oxlint-disable-next-line explicit-function-return-type
+  const updateActiveNavItem = () => {
     if (toc.length === 0) {
       return
     }
@@ -123,11 +123,11 @@ getHeadings(document, toc)
 
     // Update navigation items
     const navItems = document.querySelectorAll("[data-id]")
-    navItems.forEach((item) => {
-      const isActive = item.getAttribute("data-id") === activeId
+    for (const item of navItems) {
+      const isActive = item.dataset.id === activeId
       item.classList.toggle("text-white", isActive)
       item.classList.toggle("text-zinc-400", !isActive)
-    })
+    }
 
     // Update mobile select
     if (activeId && mobileSelect) {

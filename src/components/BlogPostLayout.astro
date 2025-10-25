@@ -2,16 +2,18 @@
 import { render } from "astro:content"
 
 import SideNavigable from "@components/SideNavigable.astro"
-import BaseLayout from "@layouts/BaseLayout.astro"
 import Paragraph from "@components/Paragraph.astro"
+
+import BaseLayout from "@layouts/BaseLayout.astro"
+
 import { getBlogPostVersions } from "@utils/github"
 
 const { post, includeVersions } = Astro.props
 const { Content } = await render(post)
 
 const postId = post.id.split("-")[0] ?? post.id
-const sha = post.id.split("-")[1] ?? null
-const versions = includeVersions ? await getBlogPostVersions(postId) : null
+const [, sha] = post.id.split("-")
+const versions = includeVersions ? await getBlogPostVersions(postId) : []
 ---
 
 <BaseLayout>
@@ -53,14 +55,14 @@ const versions = includeVersions ? await getBlogPostVersions(postId) : null
 </BaseLayout>
 
 <script define:vars={{ postId }}>
-  const versionSelect = document.getElementById("version-select")
+  const versionSelect = document.querySelector("#version-select")
 
   if (versionSelect) {
-    versionSelect.addEventListener("change", async (event) => {
+    versionSelect.addEventListener("change", (event) => {
       const selectedSha = event.target.value
 
       // redirect to the new version
-      window.location.href = `/blog/${postId}-${selectedSha}`
+      globalThis.location.href = `/blog/${postId}-${selectedSha}`
     })
   }
 </script>
