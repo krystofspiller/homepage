@@ -8,8 +8,8 @@ import alpinejs from "@astrojs/alpinejs"
 import "./env"
 
 export default defineConfig({
-  port: 4321,
   integrations: [alpinejs(), mdx()],
+  port: 4321,
   vite: {
     plugins: [tailwindcss()],
   },

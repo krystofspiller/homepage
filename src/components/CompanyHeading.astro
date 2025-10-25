@@ -2,19 +2,20 @@
 import { twMerge } from "tailwind-merge"
 import Image from "@components/Image.astro"
 import type { LocalImageProps } from "astro:assets"
-import YearRange, { type YearRangeProps } from "@components/YearRange.astro"
+import YearRange from "@components/YearRange.astro"
+import type { YearRangeProps } from "@components/YearRange.astro"
 
 type Props = YearRangeProps &
   LocalImageProps & {
     id: string
     alt: string
     imgHeight: string
-    ["data-toc"]?: string
+    "data-toc"?: string
   }
 
 const {
   id,
-  ["data-toc"]: dataToc,
+  "data-toc": dataToc,
   from,
   to,
   note,

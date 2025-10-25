@@ -2,7 +2,7 @@
 import Image from "@components/Image.astro"
 
 import PureGrinding from "@assets/images/pure-grinding.avif"
-import CatEars from "@assets/icons/cat_ears.astro"
+import CatEars from "@assets/icons/cat-ears.astro"
 import Duolingo from "@assets/icons/duolingo.svg"
 import Via from "@assets/icons/via.astro"
 import Electron from "@assets/icons/electron.svg"
@@ -13,14 +13,20 @@ import Link from "./Link.astro"
 import Piano from "@assets/icons/piano.astro"
 
 import oiia from "@assets/images/oiia.gif"
-import oiiaMp3 from "/audio/oiia.mp3"
-import oiiaOpus from "/audio/oiia.opus"
+import oiiaMp3 from "@public/audio/oiia.mp3"
+import oiiaOpus from "@public/audio/oiia.opus"
 import Heading from "./Heading.astro"
 import { env } from "env"
+import { z } from "zod"
+import { YOUTUBE_VIDEO_ID_DEFAULT } from "@utils/constants"
 
 let showDuolingo = true
 
-async function getDuolingoStreak() {
+const duolingoSchema = z.object({
+  streak: z.number(),
+})
+
+const getDuolingoStreak = async (): Promise<number> => {
   try {
     const response = await fetch(
       "https://www.duolingo.com/2017-06-30/users/1102654541",
@@ -30,14 +36,17 @@ async function getDuolingoStreak() {
     }
 
     const json = await response.json()
-    return json.streak
+    const { streak } = duolingoSchema.parse(json)
+    return streak
   } catch {
     showDuolingo = false
   }
+
+  return 0
 }
 
 let showYouTube = true
-async function getLatestYouTubeVideo() {
+const getLatestYouTubeVideo = async (): Promise<string> => {
   try {
     const youtubeVideosUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId=PL7-fKc8SwbfOk3eZyIk_sbKjR7YMO6lfW&key=${env.YOUTUBE_API_KEY}`
     const response = await fetch(youtubeVideosUrl)
@@ -46,19 +55,20 @@ async function getLatestYouTubeVideo() {
     }
 
     const json = await response.json()
-    return json.items.reduce(
-      (acc: any, val: any) => {
-        const date = Date.parse(val.contentDetails.videoPublishedAt)
-        if (date > acc[1]) {
-          acc = [val.contentDetails.videoId, date]
-        }
-        return acc
-      },
-      ["id", 0],
-    )[0]
+    let acc: [string, number] = ["id", 0]
+    for (const item of json.items) {
+      const date = Date.parse(item.contentDetails.videoPublishedAt)
+      if (date > acc[1]) {
+        acc = [item.contentDetails.videoId, date]
+      }
+    }
+
+    return acc[0]
   } catch {
     showYouTube = false
   }
+
+  return YOUTUBE_VIDEO_ID_DEFAULT
 }
 
 const [duolingoStreak, youTubeVideoId] = await Promise.all([
@@ -213,21 +223,24 @@ const [duolingoStreak, youTubeVideoId] = await Promise.all([
 </section>
 
 <script is:inline>
-  const catEars = document.getElementById("cat-ears")
+  const catEars = document.querySelector("#cat-ears")
 
   catEars?.addEventListener("click", () => {
-    const catOverlay = document.getElementById("cat-overlay")
-    if (!catOverlay) return
+    const catOverlay = document.querySelector("#cat-overlay")
+    if (!catOverlay) {
+      return
+    }
 
-    const catOverlayAudio = catOverlay.children[1]
+    const [, catOverlayAudio] = catOverlay.children
     catOverlayAudio.play()
 
     catOverlay.classList.add("flex")
     catOverlay.classList.remove("hidden")
 
-    window.setTimeout(function () {
+    const CAT_OVERLAY_DURATION = 2500
+    globalThis.setTimeout(() => {
       catOverlay.classList.add("hidden")
       catOverlay.classList.remove("flex")
-    }, 2500)
+    }, CAT_OVERLAY_DURATION)
   })
 </script>

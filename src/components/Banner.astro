@@ -19,12 +19,16 @@ import Close from "@assets/icons/close.astro"
 
 <script>
   document.addEventListener("astro:page-load", () => {
-    const close = document.getElementById("close")
-    if (!close) return
+    const close = document.querySelector("#close")
+    if (!close) {
+      return
+    }
 
     close.addEventListener("click", () => {
-      const banner = document.getElementById("banner")
-      if (!banner) return
+      const banner = document.querySelector("#banner")
+      if (!banner) {
+        return
+      }
 
       banner.classList.add("hidden")
       banner.classList.remove("flex")

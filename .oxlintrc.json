@@ -1,0 +1,76 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "eslint",
+    "import",
+    "node",
+    "oxc",
+    "promise",
+    "regex",
+    "typescript",
+    "unicorn",
+    "vitest"
+  ],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "perf": "error",
+    "pedantic": "error",
+    "style": "error",
+    "restriction": "error",
+    "nursery": "error"
+  },
+  "env": {
+    "builtin": true
+  },
+  "rules": {
+    "eslint/id-length": "off",
+    "eslint/max-lines-per-function": "off",
+    "eslint/max-lines": "off",
+    "eslint/no-continue": "off",
+    "eslint/no-duplicate-imports": [
+      "error",
+      { "allowSeparateTypeImports": true }
+    ],
+    "eslint/no-magic-numbers": "off",
+    "eslint/no-param-reassign": "off",
+    "eslint/no-ternary": "off",
+    "eslint/no-undef": "off",
+    "eslint/sort-imports": "off",
+    "eslint/sort-keys": "off",
+    "import/max-dependencies": "off",
+    "import/no-default-export": "off",
+    "import/no-named-export": "off",
+    "import/no-unassigned-import": "off",
+    "import/prefer-default-export": "off",
+    "import/unambiguous": "off",
+    "jest/no-conditional-in-test": "off",
+    "jest/no-hooks": "off",
+    "jest/no-untyped-mock-factory": "off",
+    "jest/prefer-lowercase-title": [
+      "error",
+      {
+        "ignore": ["describe"]
+      }
+    ],
+    "jest/prefer-spy-on": "off",
+    "jest/require-hook": "off",
+    "node/no-process-env": "off",
+    "oxc/no-async-await": "off",
+    "oxc/no-optional-chaining": "off",
+    "oxc/no-rest-spread-properties": "off",
+    "promise/avoid-new": "off",
+    "promise/prefer-await-to-callbacks": "off",
+    "unicorn/filename-case": [
+      "error",
+      { "cases": { "kebabCase": true, "pascalCase": true } }
+    ],
+    "unicorn/no-null": "off"
+  },
+  "ignorePatterns": [
+    "dist/**",
+    ".astro/**",
+    "playwright-report/**",
+    "test-results/**"
+  ]
+}

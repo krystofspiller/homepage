@@ -20,12 +20,13 @@ const calculatedTarget =
   // Since gradient is used on hover making the font color transparent, the underline is done
   // using `text-decoration-line` and the color needs to be set dynamically from parent element
   const anchors = document.querySelectorAll("a")
-  anchors.forEach((anchor) => {
-    const parentElement = anchor.parentElement
-    if (!parentElement) return
-
-    anchor.style.textDecorationColor = getComputedStyle(parentElement)["color"]
-  })
+  for (const anchor of anchors) {
+    const { parentElement } = anchor
+    if (parentElement) {
+      anchor.style.textDecorationColor =
+        getComputedStyle(parentElement)["color"]
+    }
+  }
 </script>
 
 <style>

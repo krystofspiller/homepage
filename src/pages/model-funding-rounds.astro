@@ -1,6 +1,8 @@
 ---
 import Link from "@components/Link.astro"
 import BaseLayout from "@layouts/BaseLayout.astro"
+
+// LinkedIn doesn't support anchors in the URL, so we need to redirect to the page with the anchor
 ---
 
 <BaseLayout
@@ -10,5 +12,5 @@ import BaseLayout from "@layouts/BaseLayout.astro"
 >
 
 <script>
-  window.location.href = "/#model-funding-rounds"
+  globalThis.location.href = "/#model-funding-rounds"
 </script>

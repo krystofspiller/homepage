@@ -8,6 +8,7 @@ const isCi = env.ENV === "ci"
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+
 export default defineConfig({
   testDir: "./tests",
   fullyParallel: true,
@@ -36,7 +37,7 @@ export default defineConfig({
   /* Run your local dev server before starting the tests */
   webServer: {
     command: "npm run dev",
-    url: "http://localhost:4321",
     reuseExistingServer: !isCi,
+    url: "http://localhost:4321",
   },
 })
