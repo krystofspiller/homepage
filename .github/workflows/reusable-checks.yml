@@ -46,7 +46,7 @@ jobs:
         run: pnpm exec playwright test
         env:
           ENV: ci
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         if: ${{ !cancelled() }}
         with:
           name: playwright-report
