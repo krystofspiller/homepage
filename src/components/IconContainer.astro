@@ -1,20 +1,25 @@
 ---
-const { name, tooltip } = Astro.props
+import TooltipInline from "./TooltipInline.astro"
 
-const Element = tooltip ? "button" : "div"
+const { name, tooltip } = Astro.props
 ---
 
-<Element
-  data-tooltip={tooltip}
-  class="flex w-fit flex-col items-center justify-center transition-all hover:[&_.img]:scale-120"
->
+<TooltipInline enabled={!!tooltip}>
   <div
-    class="inline-flex flex-col items-center justify-center rounded-md border border-zinc-600 bg-zinc-800 p-3"
+    slot="trigger"
+    class="flex w-fit flex-col items-center justify-center transition-all hover:[&_.img]:scale-120"
   >
-    <div class="img transition"><slot /></div>
+    <div
+      class="inline-flex flex-col items-center justify-center rounded-md border border-zinc-600 bg-zinc-800 p-3"
+    >
+      <div class="img transition">
+        <slot />
+      </div>
+    </div>
+    <span
+      class="mt-1 text-center font-sans text-sm text-zinc-400"
+      set:html={name}
+    />
   </div>
-  <span
-    class="mt-1 text-center font-sans text-sm text-zinc-400"
-    set:html={name}
-  />
-</Element>
+  <span slot="content">{tooltip}</span>
+</TooltipInline>

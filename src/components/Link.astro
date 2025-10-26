@@ -43,8 +43,9 @@ const calculatedTarget =
       mask-repeat: no-repeat;
     }
   }
-  a[href*="//"]:not([href*="krystofs.com"]):hover,
-  a[href*="//"]:not([href*="krystofs.com"]):focus
+
+  a[href*="//"][data-include-icon*="true"]:not([href*="krystofs.com"]):hover,
+  a[href*="//"][data-include-icon*="true"]:not([href*="krystofs.com"]):focus
   {
     &:after {
       background-color: #e6805f;

@@ -9,16 +9,20 @@ import Electron from "@assets/icons/electron.svg"
 import React from "@assets/icons/react.svg"
 import Docker from "@assets/icons/docker.svg"
 import Dtu from "@assets/icons/dtu.svg"
-import Link from "./Link.astro"
 import Piano from "@assets/icons/piano.astro"
-
 import oiia from "@assets/images/oiia.gif"
+
 import oiiaMp3 from "@public/audio/oiia.mp3"
 import oiiaOpus from "@public/audio/oiia.opus"
+
+import { YOUTUBE_VIDEO_ID_DEFAULT } from "@utils/constants"
+
 import Heading from "./Heading.astro"
+import Link from "./Link.astro"
+import TooltipInline from "./TooltipInline.astro"
+
 import { env } from "env"
 import { z } from "zod"
-import { YOUTUBE_VIDEO_ID_DEFAULT } from "@utils/constants"
 
 let showDuolingo = true
 
@@ -142,18 +146,28 @@ const [duolingoStreak, youTubeVideoId] = await Promise.all([
       >&nbsp;
     </div>
     <div class="flex w-fit items-center gap-3 p-2">
-      <button
-        data-tooltip='<a href="https://www.electronjs.org" target="_blank">Electron</a>'
-        ><Image class="h-6 w-auto" src={Electron} alt="Electron logo" /></button
-      >
-      <button
-        data-tooltip='<a href="https://react.dev" target="_blank">React</a>'
-        ><Image class="h-6 w-auto" src={React} alt="React logo" /></button
-      >
-      <button
-        data-tooltip='<a href="https://www.docker.com" target="_blank">Docker</a>'
-        ><Image class="h-6 w-auto" src={Docker} alt="Docker logo" /></button
-      >
+      <TooltipInline>
+        <Image
+          slot="trigger"
+          class="h-6 w-auto"
+          src={Electron}
+          alt="Electron logo"
+        />
+        <Link slot="content" href="https://www.electronjs.org">Electron</Link>
+      </TooltipInline>
+      <TooltipInline>
+        <Image slot="trigger" class="h-6 w-auto" src={React} alt="React logo" />
+        <Link slot="content" href="https://react.dev">React</Link>
+      </TooltipInline>
+      <TooltipInline>
+        <Image
+          slot="trigger"
+          class="h-6 w-auto"
+          src={Docker}
+          alt="Docker logo"
+        />
+        <Link slot="content" href="https://www.docker.com">Docker</Link>
+      </TooltipInline>
     </div>
   </div>
 
@@ -212,7 +226,7 @@ const [duolingoStreak, youTubeVideoId] = await Promise.all([
 
   <div
     id="cat-overlay"
-    class="fixed top-0 left-0 z-50 hidden h-[100vh] w-[100vw] items-center justify-center bg-neutral-950/70 transition-all delay-150 duration-500"
+    class="fixed top-0 left-0 z-50 hidden h-screen w-screen items-center justify-center bg-neutral-950/70 transition-all delay-150 duration-500"
   >
     <Image src={oiia} class="h-auto w-auto" alt="OIIA" />
     <audio class="hidden" controls>

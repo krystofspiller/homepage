@@ -176,10 +176,17 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
       alt="Portchain logo"
       from={2025}
     />
-    <Heading data-as="h4" id="terminal-integrations">
+    <Heading
+      data-as="h4"
+      id="terminal-integrations"
+      data-toc="Terminal integrations"
+    >
       <TooltipInline
-        tooltip="In shipping, vessels transport containers between ports. A terminal is a place in a port where containers are loaded and unloaded from the vessel."
-        >Terminal</TooltipInline
+        ><span slot="content"
+          >In shipping, vessels transport containers between ports. A terminal
+          is a place in a port where containers are loaded and unloaded from the
+          vessel.</span
+        ><span slot="trigger">Terminal</span></TooltipInline
       > integrations
     </Heading>
     <Paragraph>
@@ -229,16 +236,20 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
     <Paragraph>
       I have driven increased product demand by developing a calculator that
       helps founders model unpriced funding rounds.<SeeMore
-        >The solution involved an <abbr
-          title='<a href="https://en.wikipedia.org/wiki/Request_for_Comments" target="_blank">Request For Comments</a>'
-          >RFC</abbr
-        >-like process to come up with the best solution as this was the first
-        public page (i.e. not behind auth, obviously excluding a sign in/sign up
-        flow). At the time we were also in a rebranding transition where the
-        homepage was already transitioned and the idea was to use the new design
-        on all public facing pages so the calculator should also follow the new
-        design. It uses many primitive components and other more complex
-        components some of which I helped building. <Link
+        >The solution involved an <TooltipInline>
+          <span slot="trigger">RFC</span>
+          <span slot="content"
+            ><Link href="https://en.wikipedia.org/wiki/Request_for_Comments"
+              >Request For Comments</Link
+            ></span
+          >
+        </TooltipInline>-like process to come up with the best solution as this
+        was the first public page (i.e. not behind auth, obviously excluding a
+        sign in/sign up flow). At the time we were also in a rebranding
+        transition where the homepage was already transitioned and the idea was
+        to use the new design on all public facing pages so the calculator
+        should also follow the new design. It uses many primitive components and
+        other more complex components some of which I helped building. <Link
           href="https://www.app.europe.carta.com/convertible_securities_calculator/?skip=true"
           >Check it out for yourself!</Link
         >
@@ -273,8 +284,15 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
         This was the longest running project I worked on and wrote around 90% of
         it when it comes solely to the changes in the app codebase. First step
         was a migration <TooltipInline
-          tooltip='This was supposed to be relatively simple. But it&apos;s <a href="https://www.youtube.com/watch?v=Wdyndb17K58" target="_blank">Stripe</a> we&apos;re talking about <span class="text-white">🙂</span> I&apos;ve ran into most of the issues described in that video and many more during this project. Migrating from one instance to another is a hell that made me into the man I&apos;m today.'
-          >from one Stripe instance to another</TooltipInline
+          ><span slot="content"
+            >This was supposed to be relatively simple. But it's <Link
+              href="https://www.youtube.com/watch?v=Wdyndb17K58">Stripe</Link
+            > we're talking about <span class="text-white">🙂</span> I've ran into
+            most of the issues described in that video and many more during this
+            project. Migrating from one instance to another is a hell that made me
+            into the man I'm today.</span
+          ><span slot="trigger">from one Stripe instance to another</span
+          ></TooltipInline
         >. The next step involved changing how the app is interacting with
         Stripe where previously it was the app recording changes to customer
         subscriptions using Stripe's API and now the idea was to make these
@@ -285,8 +303,8 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
         a change to the pricing packages where there was previously a single package
         and additional customer features were enabled on an ad-hoc basis and now
         there would be multiple packages with certain pre-enabled features.</SeeMore
-      >
-    </Paragraph>
+      ></Paragraph
+    >
     <Billing />
 
     <Heading data-as="h4" id="fundraising" data-toc="Early-stage fundraising">
@@ -339,8 +357,15 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
           >180 currently circulating currencies recognized by UN</Link
         > and some of those started to appear in the app and it became cumbersome
         to deal with them <TooltipInline
-          tooltip='The exchange rate for the missing currency had to be found and manually added to the database. As we had to do this via a manual task due to compliance (<span class="text-white">💀</span>), it was anything but fun. Not to mention this exchange rate became out-of-date soon and would result in incorrect conversions. So we had to bite the <a href="https://xkcd.com/1319/" target="_blank">automation</a> bullet eventually.'
-          >manually</TooltipInline
+          ><span slot="content"
+            >The exchange rate for the missing currency had to be found and
+            manually added to the database. As we had to do this via a manual
+            task due to compliance, it was anything but fun. Not to mention this
+            exchange rate became out-of-date soon and would result in incorrect
+            conversions. So we had to bite the <Link
+              href="https://xkcd.com/1319/">automation</Link
+            > bullet eventually.</span
+          ><span slot="trigger">manually</span></TooltipInline
         >.<span class="mt-3 block">
           I used <Link href="https://exchangeratesapi.io/"
             >Exchangerates API</Link
@@ -364,8 +389,22 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
           non-existent page. At some point we encountered a few links that were
           invalid and instead of just fixing those and moving on with our life I
           wrote a script to <TooltipInline
-            tooltip='I thought this would be a matter of simply <span class="font-mono">curl</span>ing the page with a parameter to return the HTTP response status code. How naive I was. I had to use <a class="font-mono" href="https://github.com/lwthiker/curl-impersonate" target="_blank">curl-impersonate</a> to mimic a browser making the request for it to go through on many pages. There was also the question of redirecting where for example Zendesk (Support Center) puts an ID as well as the name of the support article into the URL so when the name of the article was adjusted the link still worked but returned a redirect 3xx code. I made <span class="font-mono">curl-impersonate</span> return the redirect URL as well and included it in the result message.'
-            >check external links</TooltipInline
+            ><span slot="content"
+              >I thought this would be a matter of simply <span
+                class="font-mono">curl</span
+              >ing the page with a parameter to return the HTTP response status
+              code. How naïve I was. I had to use <Link
+                className="font-mono"
+                href="https://github.com/lwthiker/curl-impersonate"
+                >curl-impersonate</Link
+              > to mimic a browser making the request for it to go through on many
+              pages. There was also the question of redirecting where for example
+              Zendesk (Support Center) puts an ID as well as the name of the support
+              article into the URL so when the name of the article was adjusted the
+              link still worked but returned a redirect 3xx code. I made <span
+                class="font-mono">curl-impersonate</span
+              > return the redirect URL as well and included it in the result message.</span
+            ><span slot="trigger">check external links</span></TooltipInline
           > that I set up to run on GitHub Actions on a weekly basis and send a result
           to an #automated-checks Slack channel. In this way, these issues became
           more visible and otherwise invalid links that would be in the app for many
@@ -419,8 +458,12 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
     <Paragraph>
       Maintained product quality by implementing data integrity checks.<SeeMore>
         My colleague implemented a framework for adding data integrity <TooltipInline
-          tooltip="We had a policy for no check constraints in the database so while some of these checks could have been handled differently, this was still a better solution for majority of the checked cases due to the sheer complexity of the domain and the resultant data."
-          >checks</TooltipInline
+          ><span slot="content"
+            >We had a policy for no check constraints in the database so while
+            some of these checks could have been handled differently, this was
+            still a better solution for majority of the checked cases due to the
+            sheer complexity of the domain and the resultant data.</span
+          ><span slot="trigger">checks</span></TooltipInline
         > to notify us of instances where invalid data got into the database and
         also automatically fix them if an automatic fix is possible. I wrote checks
         dealing with detecting and autofixing trailing whitespace in attributes like
@@ -438,8 +481,10 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
     <SeeMore>
       <span slot="before-see-more">
         Maintained coding conventions and simplified codebase using <TooltipInline
-          tooltip="A process and a tool for code analysis to flag programming errors, bugs, stylistics errors and suspicious constructs."
-          >linting</TooltipInline
+          ><span slot="content"
+            >A process and a tool for code analysis to flag programming errors,
+            bugs, stylistics errors and suspicious constructs.</span
+          ><span slot="trigger">linting</span></TooltipInline
         > rules as well as prevented subtle bugs.
       </span>
       <div slot="after-see-more" class="mb-6 flex flex-col gap-3">
@@ -448,23 +493,35 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
       </div>
       <Paragraph>
         Maintained coding conventions and simplified codebase using <TooltipInline
-          tooltip="A process and a tool for code analysis to flag programming errors, bugs, stylistics errors and suspicious constructs."
-          >linting</TooltipInline
+          ><span slot="content"
+            >A process and a tool for code analysis to flag programming errors,
+            bugs, stylistics errors and suspicious constructs.</span
+          ><span slot="trigger">linting</span></TooltipInline
         > rules as well as prevented subtle bugs. This involved playing around with
-        <abbr
-          title='Read more about <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree" target="_blank"><strong class="font-bold">A</strong>bstract <strong class="font-bold">S</strong>yntax <strong class="font-bold">T</strong>rees</a> for some light nighttime reading.'
-          >ASTs</abbr
-        >. I made linter rules for both frontend (ESLint) and backend (RuboCop).
-        Frontend one was about linting a stylistic error to follow our coding
-        conventions (i.e. no more pointing it out in code reviews). In the
-        backend, I made two linting rules which are a tad more complex:
+        <TooltipInline>
+          <span slot="trigger">ASTs</span>
+          <span slot="content"
+            >Read more about <Link
+              href="https://en.wikipedia.org/wiki/Abstract_syntax_tree"
+              ><strong class="font-bold">A</strong>bstract <strong
+                class="font-bold">S</strong
+              >yntax <strong class="font-bold">T</strong>rees</Link
+            > for some light nighttime reading.</span
+          >
+        </TooltipInline>. I made linter rules for both frontend (ESLint) and
+        backend (RuboCop). Frontend one was about linting a stylistic error to
+        follow our coding conventions (i.e. no more pointing it out in code
+        reviews). In the backend, I made two linting rules which are a tad more
+        complex:
       </Paragraph>
       <List type="decimal">
         <li>
           <strong class="font-bold"
             ><TooltipInline
-              tooltip="Specification for a machine-readable interface definition language for describing web services."
-              >OpenAPI</TooltipInline
+              ><span slot="content"
+                >Specification for a machine-readable interface definition
+                language for describing web services.</span
+              ><span slot="trigger">OpenAPI</span></TooltipInline
             > helper enforcement</strong
           > - writing the OpenAPI specifications can be a bit cumbersome, there's
           a lot of boilerplate that needs to be written making bigger types hundreds

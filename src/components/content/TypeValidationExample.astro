@@ -1,10 +1,8 @@
 ---
-import { twMerge } from "tailwind-merge"
 
-const { margin = "m-0" } = Astro.props
 ---
 
-<div class={twMerge("flex grid-cols-2 flex-col sm:grid", margin)}>
+<div class="flex grid-cols-2 flex-col sm:grid">
   <div>
     <p class="text-lg leading-8 text-zinc-400">Frontend type:</p>
     <pre
@@ -27,7 +25,7 @@ const { margin = "m-0" } = Astro.props
 }</pre>
   </div>
 </div>
-<div>
+<div class="mb-6">
   <p class="text-lg leading-8 text-zinc-400">Type validation output:</p>
   <pre
     class="whitespace-pre-line text-zinc-100"
