@@ -7,7 +7,6 @@ import Banners from "@components/Banners.astro"
 import Footer from "@components/Footer.astro"
 import Header from "@components/Header.astro"
 import Spinner from "@components/Spinner.astro"
-import Tooltip from "@components/Tooltip.astro"
 
 import { YEARS_OF_EXPERIENCE } from "@utils/constants"
 
@@ -59,15 +58,14 @@ const lookingForJob = false
       content={`Krystof Spiller is a detail-oriented software engineer with ${YEARS_OF_EXPERIENCE} years of experience.`}
     />
     <ClientRouter />
-    <Tooltip />
   </head>
   <body
-    class="selection:bg-orange h-full min-h-[100vh] bg-neutral-950 font-sans text-white selection:text-white"
+    class="selection:bg-orange h-full min-h-screen bg-neutral-950 font-sans text-white selection:text-white"
   >
     {lookingForJob ? <Banners /> : <Header lookingForJob={lookingForJob} />}
     <div
       id="main-content"
-      class="mx-auto flex h-full min-h-[100vh] max-w-screen-sm flex-col justify-between px-6 pt-14 pb-14 selection:bg-gray-600 selection:text-white sm:px-8 lg:pb-0"
+      class="mx-auto flex h-full min-h-screen max-w-screen-sm flex-col justify-between px-6 pt-14 pb-14 selection:bg-gray-600 selection:text-white sm:px-8 lg:pb-0"
     >
       <div>
         {lookingForJob && <Header lookingForJob={lookingForJob} />}
@@ -77,7 +75,7 @@ const lookingForJob = false
     </div>
     <div
       id="loading"
-      class="fixed top-0 left-0 z-50 hidden h-[100vh] w-[100vw] items-center justify-center bg-neutral-950/70 opacity-0 transition-all delay-150 duration-500"
+      class="fixed top-0 left-0 z-50 hidden h-screen w-screen items-center justify-center bg-neutral-950/70 opacity-0 transition-all delay-150 duration-500"
     >
       <Spinner />
     </div>
@@ -87,27 +85,53 @@ const lookingForJob = false
 <script>
   import { GREETING_MESSAGE } from "@utils/constants"
   import { usesSideNavigable } from "@utils/store"
+  import { initTooltip } from "@components/tooltip/tooltip"
 
   // oxlint-disable-next-line no-console
   console.log(...GREETING_MESSAGE)
 
   document.addEventListener("astro:page-load", () => {
+    const buttons = document.querySelectorAll('[id^="tooltip-button-"]')
+    for (const button of buttons) {
+      const [, tooltipId] = button.id.split("tooltip-button-")
+      const tooltip = document.querySelector(`#tooltip-content-${tooltipId}`)
+      const arrow = document.querySelector(`#tooltip-arrow-${tooltipId}`)
+      if (
+        button &&
+        tooltip instanceof HTMLElement &&
+        arrow instanceof HTMLElement
+      ) {
+        initTooltip(button, tooltip, arrow)
+      }
+    }
+
     for (const anchor of document.querySelectorAll('a[href^="#"]')) {
+      let timeout: NodeJS.Timeout | null = null
       anchor.addEventListener("click", (e) => {
         e.preventDefault()
-
+        if (timeout) {
+          clearTimeout(timeout)
+        }
         const href = anchor.getAttribute("href")
         if (!href) {
           return
         }
-
         const currentUrl = new URL(globalThis.location.href)
         currentUrl.hash = href
         globalThis.history.replaceState(null, "", currentUrl.toString())
-
-        document.querySelector(href)?.scrollIntoView({
+        const element = document.querySelector(href) as HTMLElement | null
+        element?.scrollIntoView({
           behavior: "smooth",
         })
+
+        // Make element focusable if it isn't already, then focus
+        // Add a small delay to ensure smooth scrolling completes
+        timeout = setTimeout(() => {
+          if (element && !element.hasAttribute("tabindex")) {
+            element.setAttribute("tabindex", "-1")
+          }
+          element?.focus()
+        }, 800)
       })
     }
   })

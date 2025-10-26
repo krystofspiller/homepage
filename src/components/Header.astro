@@ -9,6 +9,7 @@ import profile from "@assets/images/profile.avif"
 
 import Image from "@components/Image.astro"
 import ContainerHover from "@components/ContainerHover.astro"
+import TooltipInline from "@components/TooltipInline.astro"
 
 import { HEADER_HEIGHT } from "@utils/constants"
 
@@ -37,32 +38,30 @@ const currentPath = Astro.url.pathname
         <Github />
       </ContainerHover>
     </div>
-    <button
-      style="cursor: default;"
-      class="ml-2"
-      data-tooltip="TooltipRef#krystof"
-      ><Image
+    <TooltipInline class="ml-2 cursor-default">
+      <Image
+        slot="trigger"
         class="w-6 max-w-6 rounded-full"
         loading="eager"
         width={96}
         height={96}
         src={profile}
         alt="Krystof's profile"
-      /></button
-    >
-    <div id="tooltip-krystof">
-      <div class="flex items-center justify-center">
-        You found me&nbsp;<span class="text-white">🕵️</span>
-      </div><a
-        href="https://www.youtube.com/watch?v=wyx6JDQCslE"
-        target="_blank"
-        ><Image
-          class="mt-1 w-64 max-w-64 rounded-lg"
-          loading="eager"
-          src={profile}
-          alt="Krystof's profile"
-        /></a
-      >
-    </div>
+      />
+      <div slot="content">
+        <div class="flex items-center justify-center">
+          You found me&nbsp;<span class="text-white">🕵️</span>
+        </div><a
+          href="https://www.youtube.com/watch?v=wyx6JDQCslE"
+          target="_blank"
+          ><Image
+            class="mt-1 w-64 max-w-64 rounded-lg"
+            loading="eager"
+            src={profile}
+            alt="Krystof's profile"
+          /></a
+        >
+      </div>
+    </TooltipInline>
   </nav>
 </header>

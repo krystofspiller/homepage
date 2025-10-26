@@ -1,9 +1,66 @@
 ---
+import { twMerge } from "tailwind-merge"
+
 interface Props {
-  tooltip: string
+  class?: string
+  enabled?: boolean
 }
 
-const { tooltip } = Astro.props
+const { class: className, enabled = true } = Astro.props
+const tooltipId = Math.random().toString(36).slice(2, 10)
 ---
 
-<span tabindex="0" data-tooltip={tooltip}><slot /></span>
+<style is:global>
+  [id^="tooltip-content-"] a[href*="//"][data-include-icon*="true"]:not([href*="krystofs.com"])
+  {
+    text-decoration: underline !important;
+    text-decoration-color: #e6805f !important;
+
+    &:after {
+      background-color: #e6805f !important;
+    }
+  }
+
+  [id^="tooltip-content-"] a[href*="//"][data-include-icon*="true"]:not([href*="krystofs.com"]):hover,
+  [id^="tooltip-content-"] a[href*="//"][data-include-icon*="true"]:not([href*="krystofs.com"]):focus
+  {
+    background: linear-gradient(90deg, #e65f5f, #e6c75f);
+    color: transparent;
+    background-clip: text;
+  }
+</style>
+
+{
+  enabled ? (
+    <span
+      class={twMerge(
+        "text-decoration-thickness-[1.5px] cursor-help underline decoration-neutral-300 decoration-dotted underline-offset-1 transition duration-0 group-hover:bg-linear-(--gradient-accent) group-hover:bg-clip-text group-hover:text-transparent group-hover:duration-150 group-focus:bg-linear-(--gradient-accent) group-focus:bg-clip-text group-focus:text-transparent group-focus:duration-150 hover:bg-linear-(--gradient-accent) hover:bg-clip-text hover:text-transparent hover:duration-150 focus:bg-linear-(--gradient-accent) focus:bg-clip-text focus:text-transparent focus:duration-150",
+        className,
+      )}
+      id={`tooltip-button-${tooltipId}`}
+      aria-describedby="tooltip"
+    >
+      <slot name="trigger" />
+    </span>
+  ) : (
+    <slot name="trigger" />
+  )
+}
+
+{
+  enabled && (
+    <span
+      id={`tooltip-content-${tooltipId}`}
+      class="leading-1.4 invisible absolute top-0 left-0 block w-max max-w-[350px] rounded-sm rounded-b-sm bg-black text-sm font-normal text-white opacity-0 transition-[opacity,visibility] duration-300"
+      role="tooltip"
+    >
+      <span class="block bg-linear-(--gradient-accent) bg-clip-text px-2 py-1.5 text-transparent">
+        <slot name="content" />
+      </span>
+      <span
+        class="absolute h-2 w-2 rotate-45 bg-black"
+        id={`tooltip-arrow-${tooltipId}`}
+      />
+    </span>
+  )
+}

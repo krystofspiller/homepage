@@ -47,7 +47,7 @@ getHeadings(document, toc)
                 )}
                 style={`margin-left: ${val.level - minLevel}rem`}
               >
-                <Link className="!no-underline" href={`#${val.id}`}>
+                <Link className="no-underline!" href={`#${val.id}`}>
                   {val.name}
                 </Link>
               </li>
