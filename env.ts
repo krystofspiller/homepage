@@ -40,9 +40,7 @@ export const env = createEnv({
       z.literal("production"),
     ]),
     GITHUB_TOKEN: getGithubToken(),
-    YOUTUBE_API_KEY: isTest
-      ? z.string().default("test-key")
-      : z.string().length(YOUTUBE_API_KEY_LENGTH),
+    YOUTUBE_API_KEY: z.string().length(YOUTUBE_API_KEY_LENGTH),
   },
 
   /**
