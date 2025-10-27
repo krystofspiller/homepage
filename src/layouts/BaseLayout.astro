@@ -67,10 +67,10 @@ const lookingForJob = false
       id="main-content"
       class="mx-auto flex h-full min-h-screen max-w-screen-sm flex-col justify-between px-6 pt-14 pb-14 selection:bg-gray-600 selection:text-white sm:px-8 lg:pb-0"
     >
-      <div>
+      <main>
         {lookingForJob && <Header lookingForJob={lookingForJob} />}
         <slot />
-      </div>
+      </main>
       <Footer />
     </div>
     <div

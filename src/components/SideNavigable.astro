@@ -36,7 +36,7 @@ getHeadings(document, toc)
   {
     toc.length > 0 && (
       <>
-        <div class="sticky top-16 ml-[576px] hidden h-0 min-w-56 text-xs leading-6 text-zinc-400 lg:block">
+        <nav class="sticky top-16 ml-[576px] hidden h-0 min-w-56 text-xs leading-6 text-zinc-400 lg:block">
           <ul class="h-[calc(100vh-4rem)] overflow-scroll p-4 pt-0">
             {toc.map((val, index) => (
               <li
@@ -53,8 +53,8 @@ getHeadings(document, toc)
               </li>
             ))}
           </ul>
-        </div>
-        <div class="fixed bottom-0 left-0 z-100 flex h-14 w-full items-center justify-center bg-neutral-950 p-2 text-zinc-400 lg:hidden">
+        </nav>
+        <nav class="fixed bottom-0 left-0 z-100 flex h-14 w-full items-center justify-center bg-neutral-950 p-2 text-zinc-400 lg:hidden">
           <select
             class="rounded-lg border border-transparent p-2.5 pr-10 text-zinc-400 outline-none focus:border-blue-500 focus:ring-blue-500"
             id="mobile-toc-select"
@@ -67,7 +67,7 @@ getHeadings(document, toc)
               </option>
             ))}
           </select>
-        </div>
+        </nav>
       </>
     )
   }
