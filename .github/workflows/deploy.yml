@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
       - name: Build
-        run: pnpm run build
+        run: pnpm build
         env:
           ENV: production
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

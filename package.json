@@ -16,7 +16,7 @@
     "lint:ci": "oxlint",
     "scripts:check-links": "tsx src/scripts/check-links.ts",
     "clean": "rm -rf dist .astro .cache .wrangler playwright-report test-results src/data/blog-versions",
-    "clean:all": "pnpm run clean && rm -rf node_modules"
+    "clean:all": "pnpm clean && rm -rf node_modules"
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.9",

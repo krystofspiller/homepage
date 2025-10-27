@@ -15,6 +15,15 @@ const youtubeVideosSchema = z.object({
 
 export const getLatestYouTubeVideo = async (): Promise<string> => {
   try {
+    // oxlint-disable-next-line no-console
+    console.log("API Key", env.YOUTUBE_API_KEY)
+    // oxlint-disable-next-line no-console
+    console.log("API Key length", env.YOUTUBE_API_KEY.length)
+    // oxlint-disable-next-line no-console
+    console.log(
+      "API Key in base64",
+      Buffer.from(env.YOUTUBE_API_KEY).toString("base64"),
+    )
     const youtubeVideosUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId=PL7-fKc8SwbfOk3eZyIk_sbKjR7YMO6lfW&key=${env.YOUTUBE_API_KEY}`
     const response = await fetch(youtubeVideosUrl)
     if (!response.ok) {
