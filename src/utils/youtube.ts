@@ -18,8 +18,6 @@ export const getLatestYouTubeVideo = async (): Promise<string> => {
     const youtubeVideosUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId=PL7-fKc8SwbfOk3eZyIk_sbKjR7YMO6lfW&key=${env.YOUTUBE_API_KEY}`
     const response = await fetch(youtubeVideosUrl)
     if (!response.ok) {
-      // oxlint-disable-next-line no-console
-      console.error("Error fetching latest YouTube video:", response.statusText)
       return YOUTUBE_VIDEO_ID_DEFAULT
     }
 
@@ -34,9 +32,7 @@ export const getLatestYouTubeVideo = async (): Promise<string> => {
     }
 
     return acc[0]
-  } catch (error) {
-    // oxlint-disable-next-line no-console
-    console.error("Error fetching latest YouTube video:", error)
+  } catch {
     return YOUTUBE_VIDEO_ID_DEFAULT
   }
 }
