@@ -33,7 +33,7 @@ jobs:
       - uses: ./.github/actions/setup
       - name: Test
         run: |
-          echo "YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}" >> .env.test
+          echo "YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}" >> .env
           pnpm test
 
   playwright:
