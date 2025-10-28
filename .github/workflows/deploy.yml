@@ -9,6 +9,8 @@ on:
 jobs:
   checks:
     uses: ./.github/workflows/reusable-checks.yml
+    secrets:
+      YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
   deploy:
     needs: checks
     runs-on: ubuntu-latest

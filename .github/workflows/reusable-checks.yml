@@ -2,6 +2,9 @@ name: Checks
 
 on:
   workflow_call:
+    secrets:
+      YOUTUBE_API_KEY:
+        required: true
 env:
   ENV: test
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -28,19 +31,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 3
-    env:
-      YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
       - name: Test
-        run: |
-          echo "YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}" >> .env
-
-          YOUTUBE_API_KEY="${{ secrets.YOUTUBE_API_KEY }}" \
-          pnpm test
-        env:
-          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: pnpm test
 
   playwright:
     runs-on: ubuntu-latest
