@@ -29,9 +29,7 @@ const getGithubToken = (): z.ZodDefault<z.ZodString> | z.ZodString => {
 }
 
 // Load .env file
-const envConfig = config({ quiet: true })
-// oxlint-disable-next-line no-console
-console.log("DEBUG env.parsed", envConfig.parsed, "env.error", envConfig.error)
+config({ quiet: true })
 
 export const env = createEnv({
   server: {
