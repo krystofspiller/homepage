@@ -2,18 +2,22 @@ name: Checks
 
 on:
   workflow_call:
+    secrets:
+      YOUTUBE_API_KEY:
+        required: true
+env:
+  ENV: test
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      ENV: test
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
       - name: Build
-        run: pnpm run build
+        run: pnpm build
   lint-and-format:
     runs-on: ubuntu-latest
     timeout-minutes: 3
@@ -21,9 +25,9 @@ jobs:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
       - name: Lint
-        run: pnpm run lint:ci
+        run: pnpm lint:ci
       - name: Format
-        run: pnpm run format:ci
+        run: pnpm format:ci
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 3
@@ -31,9 +35,8 @@ jobs:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
       - name: Test
-        run: pnpm run test
-        env:
-          ENV: test
+        run: pnpm test
+
   playwright:
     runs-on: ubuntu-latest
     timeout-minutes: 5
