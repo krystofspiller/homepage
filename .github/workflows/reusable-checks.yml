@@ -3,12 +3,12 @@ name: Checks
 on:
   workflow_call:
     secrets:
-      YOUTUBE_API_KEY:
+      youtube_api_key:
         required: true
 env:
   ENV: test
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+  YOUTUBE_API_KEY: ${{ secrets.youtube_api_key }}
 
 jobs:
   build:
