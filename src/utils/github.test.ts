@@ -1,7 +1,7 @@
 import { getBlogPostVersionContent, getBlogPostVersions } from "./github"
 import type { GithubFileContent } from "./github"
-
-globalThis.fetch = vi.fn()
+import { server } from "@mocks/node"
+import { http, HttpResponse } from "msw"
 
 // Mock filesystem to prevent caching
 vi.mock("node:fs", () => ({
@@ -19,29 +19,30 @@ describe("GitHub API", () => {
   })
 
   it("should fetch blog post versions", async () => {
-    const mockCommits = [
-      {
-        commit: {
-          author: {
-            date: "2024-01-01T12:00:00Z",
-          },
-        },
-        sha: "abc123",
-      },
-      {
-        commit: {
-          author: {
-            date: "2024-01-01T10:00:00Z",
-          },
-        },
-        sha: "def456",
-      },
-    ]
-
-    ;(fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
-      json: () => mockCommits,
-      ok: true,
-    })
+    server.use(
+      http.get(
+        "https://api.github.com/repos/krystofspiller/homepage/commits",
+        () =>
+          HttpResponse.json([
+            {
+              commit: {
+                author: {
+                  date: "2024-01-01T12:00:00Z",
+                },
+              },
+              sha: "abc123",
+            },
+            {
+              commit: {
+                author: {
+                  date: "2024-01-01T10:00:00Z",
+                },
+              },
+              sha: "def456",
+            },
+          ]),
+      ),
+    )
 
     const versions = await getBlogPostVersions("test-post")
 
@@ -57,17 +58,12 @@ describe("GitHub API", () => {
   })
 
   it("should handle API errors gracefully", async () => {
-    // Clear any previous mocks and set up a new one for this test
-    vi.clearAllMocks()
-
-    const mockResponse = {
-      headers: new Headers(),
-      ok: false,
-      status: 404,
-      statusText: "Not Found",
-    }
-
-    ;(fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce(mockResponse)
+    server.use(
+      http.get(
+        "https://api.github.com/repos/krystofspiller/homepage/commits",
+        () => HttpResponse.json(null, { status: 404 }),
+      ),
+    )
 
     await expect(getBlogPostVersions("nonexistent-post")).rejects.toThrow(
       "GitHub API error: 404 Not Found",
@@ -75,19 +71,18 @@ describe("GitHub API", () => {
   })
 
   it("should fetch file content at specific commit", async () => {
-    // Clear any previous mocks and set up a new one for this test
-    vi.clearAllMocks()
-
     const mockContent: GithubFileContent = {
       content: btoa("---\ntitle: Test\n---\n\n# Hello World"),
       encoding: "base64",
       sha: "abc123",
     }
 
-    ;(fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
-      json: () => mockContent,
-      ok: true,
-    })
+    server.use(
+      http.get(
+        "https://api.github.com/repos/krystofspiller/homepage/contents/*",
+        () => HttpResponse.json(mockContent),
+      ),
+    )
 
     const content = await getBlogPostVersionContent(
       "test-post",
