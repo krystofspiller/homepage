@@ -254,6 +254,7 @@ const main = async (): Promise<void> => {
         ] satisfies [string, string][])
       : []),
   ]
+  console.log("DEBUG expectedFails", expectedFails)
   for (const link of links) {
     const { httpCode, redirectUrl } = checkLink(link)
     if (httpCode === "200") {
