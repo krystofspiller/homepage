@@ -106,6 +106,7 @@ const extractLinks = (text: string): string[] => {
     .filter((url) => !/\${.+}/.test(url)) // Remove URLs with variable interpolation
     .filter((url) => !url.includes("www.w3.org")) // Remove W3C URLs
     .filter((url) => !url.includes("localhost")) // Remove localhost URLs
+    .filter((url) => !url.endsWith("/*")) // Remove URLs ending with wildcard (used in tests)
 }
 
 const readAllFiles = async (
@@ -216,20 +217,41 @@ const main = async (): Promise<void> => {
     httpCode: string | undefined
     redirectUrl: string | undefined
   }[] = []
-  const expectedFails = [
+  const expectedFails: [string, string][] = [
     ["999", "https://www.linkedin.com/in/krystof-spiller"],
     ["999", "https://www.linkedin.com/in/maria-muhandes"],
     ["302", "https://player.vimeo.com"],
     ...(isCi
-      ? [
-          "https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap",
-          "https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap",
-          "https://open.spotify.com/embed/playlist/1i1czz9lUslWTzFr5cHomk?utm_source=generator&theme=0",
-          "https://player.vimeo.com/video/1065493306?autoplay=1&dnt=1&background=1",
-          "https://en.wikipedia.org/w/index.php?title=List_of_circulating_currencies&oldid=1275996218#:~:text=There%20are%20180%20currencies",
-          "https://player.vimeo.com/video/885736465?autoplay=1&dnt=1&background=1",
-          "https://player.vimeo.com/video/1065496020?autoplay=1&dnt=1&background=1",
-        ]
+      ? ([
+          [
+            "999",
+            "https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap",
+          ],
+          [
+            "999",
+            "https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap",
+          ],
+          [
+            "999",
+            "https://open.spotify.com/embed/playlist/1i1czz9lUslWTzFr5cHomk?utm_source=generator&theme=0",
+          ],
+          [
+            "401",
+            "https://player.vimeo.com/video/1065493306?autoplay=1&dnt=1&background=1",
+          ],
+          [
+            "999",
+            "https://en.wikipedia.org/w/index.php?title=List_of_circulating_currencies&oldid=1275996218#:~:text=There%20are%20180%20currencies",
+          ],
+          [
+            "401",
+            "https://player.vimeo.com/video/885736465?autoplay=1&dnt=1&background=1",
+          ],
+          [
+            "401",
+            "https://player.vimeo.com/video/1065496020?autoplay=1&dnt=1&background=1",
+          ],
+        ] satisfies [string, string][])
       : []),
   ]
   for (const link of links) {
