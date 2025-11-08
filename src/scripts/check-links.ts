@@ -106,6 +106,7 @@ const extractLinks = (text: string): string[] => {
     .filter((url) => !/\${.+}/.test(url)) // Remove URLs with variable interpolation
     .filter((url) => !url.includes("www.w3.org")) // Remove W3C URLs
     .filter((url) => !url.includes("localhost")) // Remove localhost URLs
+    .filter((url) => !url.endsWith("/*")) // Remove URLs ending with wildcard (used in tests)
 }
 
 const readAllFiles = async (
