@@ -30,6 +30,7 @@ import eagleMp3 from "@public/audio/eagle.mp3"
 import eagleOpus from "@public/audio/eagle.opus"
 import fundraising from "@assets/images/fundraising.avif"
 import linkChecker from "@assets/images/link-checker.avif"
+import mapleSyrup from "@assets/images/maple-syrup.gif"
 import modal from "@assets/images/modal.avif"
 import newAppRelease from "@assets/images/new-app-release.avif"
 import openapi from "@assets/images/openapi.avif"
@@ -134,7 +135,7 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
         >{YEARS_OF_EXPERIENCE} years of experience</strong
       > in fullstack web development. I'm targeting roles involving TypeScript, React,
       Ruby and Go with an opportunity to transfer to
-      <span class="cursor-pointer" id="us">North America</span>.
+      <span class="cursor-pointer" id="north-america">North America</span>.
     </Paragraph>
     <div class="relative" id="us-eagle">
       <audio class="hidden" controls>
@@ -145,6 +146,16 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
         class="animate-move-offset absolute -top-[50px] left-[calc(50%-100px)] h-0 w-0 scale-100 rotate-180 text-8xl opacity-0"
       >
       </div>
+    </div>
+    <div
+      id="maple-syrup"
+      class="fixed right-0 bottom-0 z-1000 h-auto w-auto opacity-0 transition duration-300"
+    >
+      <Image
+        src={mapleSyrup}
+        class="h-auto w-auto"
+        alt="Pouring maple syrup on pancakes"
+      />
     </div>
     <p class="text-lg leading-8 text-zinc-400">
       Read about my <Link href="#professional-contributions"
@@ -1016,7 +1027,7 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
     const ch = (c.height = 324)
     let radius = Math.max(cw, ch)
     let factor = width / NARROW_CONTENT_WIDTH
-    let usStyle = false
+    let naStyle = false
     let tl: gsap.core.Timeline = gsap.timeline()
     const PARTICLES_COUNT = 99
     const particles = Array.from({ length: PARTICLES_COUNT }, () => ({
@@ -1040,8 +1051,8 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
     }
 
     const animateBackground = (): void => {
-      const imgs = usStyle
-        ? ["cowboy.avif", "eagle.avif", "usa.avif"]
+      const imgs = naStyle
+        ? ["canada.avif", "cowboy.avif", "eagle.avif", "maple.avif", "usa.avif"]
         : [
             "astro.svg",
             "csharp.svg",
@@ -1140,16 +1151,39 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
       ])
     })
 
-    const us = document.querySelector("#us")
-    us?.addEventListener("click", () => {
-      us.innerHTML = "🇺🇸"
+    const northAmerica = document.querySelector("#north-america")
+    let mapleSyrupHideTimeout: NodeJS.Timeout | null = null
+    let mapleSyrupShowTimeout: NodeJS.Timeout | null = null
+    northAmerica?.addEventListener("click", () => {
+      if (mapleSyrupHideTimeout) {
+        globalThis.clearTimeout(mapleSyrupHideTimeout)
+      }
+      if (mapleSyrupShowTimeout) {
+        globalThis.clearTimeout(mapleSyrupShowTimeout)
+      }
+
       easterEggCounter.set([
-        ...new Set(easterEggCounter.get()).add(EasterEggs.US),
+        ...new Set(easterEggCounter.get()).add(EasterEggs.NORTH_AMERICA),
       ])
       const usEagle = document.querySelector("#us-eagle")
       if (!usEagle || usEagle.children.length < 2) {
         return
       }
+
+      const mapleSyrup = document.querySelector("#maple-syrup")
+      if (!mapleSyrup) {
+        return
+      }
+
+      const MAPLE_SYRUP_SHOW_DURATION = 500
+      mapleSyrupShowTimeout = globalThis.setTimeout(() => {
+        mapleSyrup.classList.remove("opacity-0")
+      }, MAPLE_SYRUP_SHOW_DURATION)
+
+      const MAPLE_SYRUP_HIDE_DURATION = 2000
+      mapleSyrupHideTimeout = globalThis.setTimeout(() => {
+        mapleSyrup.classList.add("opacity-0")
+      }, MAPLE_SYRUP_HIDE_DURATION)
 
       const bodyWidth = Number.parseInt(
         getComputedStyle(document.body).width,
@@ -1175,11 +1209,11 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
           </div>
         `
 
-      if (!usStyle) {
+      if (!naStyle) {
         c.classList.add("opacity-0")
         const TIME_UNTIL_BACKGROUND_FADED = 2000
         setTimeout(() => {
-          usStyle = true
+          naStyle = true
           animateBackground()
           firstDraw = true
         }, TIME_UNTIL_BACKGROUND_FADED)
