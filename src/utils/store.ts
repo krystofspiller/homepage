@@ -1,7 +1,7 @@
 import { atom } from "nanostores"
 
 enum EasterEggs {
-  US = 1,
+  NORTH_AMERICA = 1,
   TRAMPOLINE = 2,
   OIIA = 3,
 }
