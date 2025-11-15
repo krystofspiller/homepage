@@ -1,4 +1,26 @@
+import type { Placement } from "@floating-ui/dom"
 import { arrow, computePosition, flip, offset, shift } from "@floating-ui/dom"
+import { z } from "zod"
+
+const placementValues = [
+  "top",
+  "right",
+  "bottom",
+  "left",
+  "top-start",
+  "top-end",
+  "right-start",
+  "right-end",
+  "bottom-start",
+  "bottom-end",
+  "left-start",
+  "left-end",
+] as const satisfies readonly Placement[]
+
+const SplitOriginalSchema = z
+  .enum(placementValues)
+  .transform((placement) => placement.split("-")[0])
+  .pipe(z.enum(["top", "right", "bottom", "left"]))
 
 export const initTooltip = (
   button: Element,
@@ -34,10 +56,8 @@ export const initTooltip = (
       bottom: "top",
       left: "right",
     }
-    const [staticSideIndex, _] = placement.split("-")
-    const staticSide = staticSideIndex
-      ? map[staticSideIndex as keyof typeof map]
-      : "top"
+    const staticSideIndex = SplitOriginalSchema.parse(placement)
+    const staticSide = map[staticSideIndex]
 
     Object.assign(arrowElement.style, {
       left: arrowX === null ? "" : `${arrowX}px`,
@@ -55,7 +75,7 @@ export const initTooltip = (
     }
     tooltip.style.visibility = "visible"
     tooltip.style.opacity = "1"
-    update()
+    void update()
   }
 
   const hideTooltip = (): void => {

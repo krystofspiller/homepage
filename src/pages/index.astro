@@ -927,7 +927,7 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
     const trampoline = document.querySelector("#trampoline")
     trampoline?.addEventListener("click", () => {
       easterEggCounter.set([
-        ...new Set(easterEggCounter.get()).add(EasterEggs.TRAMPOLINE),
+        ...new Set(easterEggCounter.get()).add(EasterEggs.enum.TRAMPOLINE),
       ])
 
       const trampolineAudio = document.querySelector(
@@ -1147,7 +1147,7 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
 
     catEars?.addEventListener("click", () => {
       easterEggCounter.set([
-        ...new Set(easterEggCounter.get()).add(EasterEggs.OIIA),
+        ...new Set(easterEggCounter.get()).add(EasterEggs.enum.OIIA),
       ])
     })
 
@@ -1163,7 +1163,7 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
       }
 
       easterEggCounter.set([
-        ...new Set(easterEggCounter.get()).add(EasterEggs.NORTH_AMERICA),
+        ...new Set(easterEggCounter.get()).add(EasterEggs.enum.NORTH_AMERICA),
       ])
       const usEagle = document.querySelector("#us-eagle")
       if (!usEagle || usEagle.children.length < 2) {

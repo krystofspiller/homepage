@@ -1,3 +1,4 @@
+// oxlint-disable no-unsafe-argument
 import { experimental_AstroContainer as AstroContainer } from "astro/container"
 import { JSDOM } from "jsdom"
 

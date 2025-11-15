@@ -1,4 +1,5 @@
 ---
+import { EasterEggs as EasterEggsEnum } from "@utils/store"
 import Image from "@components/Image.astro"
 import easterEggNA from "@assets/images/easter-egg-na.avif"
 import easterEggTrampoline from "@assets/images/easter-egg-trampoline.avif"
@@ -7,19 +8,19 @@ import easterEggOIIA from "@assets/images/easter-egg-oiia.avif"
 
 <div class="flex shrink-0 gap-1">
   <Image
-    id="easterEgg-1"
+    id={`easterEgg-${EasterEggsEnum.enum.NORTH_AMERICA}`}
     class="hidden h-10 w-auto"
     src={easterEggNA}
     alt="Easter egg #1"
   />
   <Image
-    id="easterEgg-2"
+    id={`easterEgg-${EasterEggsEnum.enum.TRAMPOLINE}`}
     class="hidden h-10 w-auto"
     src={easterEggTrampoline}
     alt="Easter egg #2"
   />
   <Image
-    id="easterEgg-3"
+    id={`easterEgg-${EasterEggsEnum.enum.OIIA}`}
     class="hidden h-10 w-auto"
     src={easterEggOIIA}
     alt="Easter egg #3"
@@ -43,7 +44,10 @@ import easterEggOIIA from "@assets/images/easter-egg-oiia.avif"
       }
     }
 
-    if (value.length === Object.keys(EasterEggs).length / 2 && !confettiFired) {
+    if (
+      value.length === Object.keys(EasterEggs.enum).length &&
+      !confettiFired
+    ) {
       confettiFired = true
 
       butterup.toast({

@@ -21,7 +21,7 @@ export const getLatestYouTubeVideo = async (): Promise<string> => {
       return YOUTUBE_VIDEO_ID_DEFAULT
     }
 
-    const json = await response.json()
+    const json: unknown = await response.json()
     const { items } = youtubeVideosSchema.parse(json)
     let acc: [string, number] = ["id", 0]
     for (const item of items) {

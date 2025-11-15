@@ -3,5 +3,6 @@
 Welcome to the source code of my homepage built with Astro!
 
 <!-- TODO: explore view transitions further, make animation of headings from blog index to article headings -->
-<!-- TODO: can we recreate something like the scrolling snap in gsap? basically keep some of the momentum of the animation, overshoot and snap back -->
-<!-- TODO: Setup StoryBook - split components into design system and components -->
+<!-- TODO: work on HabitVille -->
+<!-- TODO: update resume -->
+<!-- TODO: update Portchain section -->

@@ -12,8 +12,8 @@
     "test:playwright:ui": "playwright test --ui",
     "format": "prettier --write .",
     "format:ci": "prettier --check .",
-    "lint": "oxlint --fix",
-    "lint:ci": "oxlint",
+    "lint": "oxlint --type-aware --fix",
+    "lint:ci": "oxlint --type-aware",
     "scripts:check-links": "tsx src/scripts/check-links.ts",
     "clean": "rm -rf dist .astro .cache .wrangler playwright-report test-results src/data/blog-versions",
     "clean:all": "pnpm clean && rm -rf node_modules"
@@ -48,6 +48,7 @@
     "linkedom": "^0.18.12",
     "msw": "^2.12.0",
     "oxlint": "^1.26.0",
+    "oxlint-tsgolint": "^0.6.0",
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.7.1",
