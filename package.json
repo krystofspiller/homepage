@@ -52,7 +52,7 @@
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.7.1",
     "tsx": "^4.20.6",
-    "vitest": "^4.0.8",
+    "vitest": "^4.0.9",
     "wrangler": "^4.46.0"
   }
 }
