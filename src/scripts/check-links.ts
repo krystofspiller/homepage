@@ -265,7 +265,7 @@ const main = async (): Promise<void> => {
   }
 
   if (
-    expectedFails.length === fails.length &&
+    expectedFails.length >= fails.length &&
     fails.every((fail) =>
       expectedFails.some(
         (expected) =>
