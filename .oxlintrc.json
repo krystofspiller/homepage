@@ -36,6 +36,7 @@
     "eslint/no-param-reassign": "off",
     "eslint/no-ternary": "off",
     "eslint/no-undef": "off",
+    "eslint/no-void": "off",
     "eslint/sort-imports": "off",
     "eslint/sort-keys": "off",
     "import/max-dependencies": "off",

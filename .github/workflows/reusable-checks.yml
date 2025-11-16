@@ -11,19 +11,14 @@ env:
   YOUTUBE_API_KEY: ${{ secrets.youtube_api_key }}
 
 jobs:
-  build:
+  build-lint-format:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
       - name: Build
         run: pnpm build
-  lint-and-format:
-    runs-on: ubuntu-latest
-    timeout-minutes: 3
-    steps:
-      - uses: actions/checkout@v5
-      - uses: ./.github/actions/setup
       - name: Lint
         run: pnpm lint:ci
       - name: Format

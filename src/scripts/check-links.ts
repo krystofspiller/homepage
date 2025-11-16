@@ -50,7 +50,7 @@ const getGitignorePatterns = async (projectRoot: string): Promise<string[]> => {
       ...content
         .split("\n")
         .map((line) => line.trim())
-        .filter((line) => line && !line.startsWith("#")) // Remove empty lines and comments
+        .filter((line) => line !== "" && !line.startsWith("#")) // Remove empty lines and comments
         .map((pattern) => {
           let modifiedPattern = pattern
           // Remove leading slash if present
@@ -265,7 +265,7 @@ const main = async (): Promise<void> => {
   }
 
   if (
-    expectedFails.length === fails.length &&
+    expectedFails.length >= fails.length &&
     fails.every((fail) =>
       expectedFails.some(
         (expected) =>

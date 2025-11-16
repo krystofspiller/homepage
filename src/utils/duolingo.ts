@@ -13,7 +13,7 @@ export const getDuolingoStreak = async (): Promise<number | null> => {
       return null
     }
 
-    const json = await response.json()
+    const json: unknown = await response.json()
     const { streak } = duolingoSchema.parse(json)
     return streak
   } catch {

@@ -6,11 +6,19 @@ import { z } from "zod"
 import { DEFAULT_CACHE_TTL } from "./constants"
 
 // Cache interface for GitHub API responses
-interface CacheEntry<T> {
-  data: T
-  timestamp: number
-  ttl: number
-}
+const cacheEntrySchema = <T>(
+  schema: z.ZodType<T>,
+): z.ZodObject<{
+  data: z.ZodType<T>
+  timestamp: z.ZodNumber
+  ttl: z.ZodNumber
+}> =>
+  z.object({
+    data: schema,
+    timestamp: z.number(),
+    ttl: z.number(),
+  })
+type CacheEntry<T> = z.infer<ReturnType<typeof cacheEntrySchema<T>>>
 
 // File-based cache for GitHub API responses
 class GitHubCache {
@@ -18,7 +26,6 @@ class GitHubCache {
 
   constructor() {
     this.cacheDir = join(process.cwd(), ".cache", "github")
-    this.ensureCacheDir()
   }
 
   private async ensureCacheDir(): Promise<void> {
@@ -54,11 +61,11 @@ class GitHubCache {
     }
   }
 
-  async get<T>(key: string): Promise<T | null> {
+  async get<T>(key: string, schema: z.ZodType<T>): Promise<T | null> {
     try {
       const filePath = this.getCacheFilePath(key)
       const content = await fs.readFile(filePath, "utf8")
-      const entry: CacheEntry<T> = JSON.parse(content)
+      const entry = cacheEntrySchema(schema).parse(JSON.parse(content))
 
       const now = Date.now()
       if (now - entry.timestamp > entry.ttl) {
@@ -125,7 +132,7 @@ const getFileCommitHistory = async (
   filePath: string,
 ): Promise<GitHubCommit[]> => {
   const cacheKey = `fileCommitHistory:${filePath}`
-  const cachedData = await githubCache.get<GitHubCommit[]>(cacheKey)
+  const cachedData = await githubCache.get(cacheKey, githubCommitResponse)
   if (cachedData) {
     return cachedData
   }
@@ -161,8 +168,8 @@ const getFileContentAtCommit = async (
   sha: string,
 ): Promise<string | null> => {
   const cacheKey = `fileContentAtCommit:${filePath}`
-  const cachedData = await githubCache.get<string | null>(cacheKey)
-  if (cachedData) {
+  const cachedData = await githubCache.get(cacheKey, z.string().nullable())
+  if (cachedData !== null) {
     return cachedData
   }
 

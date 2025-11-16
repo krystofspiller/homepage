@@ -24,7 +24,7 @@ const generateBlogVersions = async (): Promise<void> => {
           fileNameWithoutExtension,
           version.sha,
         )
-        if (content) {
+        if (content !== null) {
           fs.writeFileSync(
             `./src/data/blog-versions/${fileNameWithoutExtension}-${version.sha}.mdx`,
             content,

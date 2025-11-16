@@ -26,8 +26,8 @@ import capdeskLogo from "@assets/images/capdesk.svg"
 import cartaLogo from "@assets/images/carta.svg"
 import commitMessage from "@assets/images/commit-message.avif"
 import dataIntegrityChecker from "@assets/images/data-integrity-checker.avif"
-import eagleMp3 from "@public/audio/eagle.mp3"
-import eagleOpus from "@public/audio/eagle.opus"
+import eagleMp3 from "@assets/audio/eagle.mp3"
+import eagleOpus from "@assets/audio/eagle.opus"
 import fundraising from "@assets/images/fundraising.avif"
 import linkChecker from "@assets/images/link-checker.avif"
 import mapleSyrup from "@assets/images/maple-syrup.gif"
@@ -36,8 +36,8 @@ import newAppRelease from "@assets/images/new-app-release.avif"
 import openapi from "@assets/images/openapi.avif"
 import portchainLogo from "@assets/images/portchain.svg"
 import systematicLogo from "@assets/images/systematic.svg"
-import trampolineOpus from "@public/audio/trampoline.opus"
-import trampolineMp3 from "@public/audio/trampoline.mp3"
+import trampolineOpus from "@assets/audio/trampoline.opus"
+import trampolineMp3 from "@assets/audio/trampoline.mp3"
 
 import { YEARS_OF_EXPERIENCE } from "@utils/constants"
 ---
@@ -927,7 +927,7 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
     const trampoline = document.querySelector("#trampoline")
     trampoline?.addEventListener("click", () => {
       easterEggCounter.set([
-        ...new Set(easterEggCounter.get()).add(EasterEggs.TRAMPOLINE),
+        ...new Set(easterEggCounter.get()).add(EasterEggs.enum.TRAMPOLINE),
       ])
 
       const trampolineAudio = document.querySelector(
@@ -1147,7 +1147,7 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
 
     catEars?.addEventListener("click", () => {
       easterEggCounter.set([
-        ...new Set(easterEggCounter.get()).add(EasterEggs.OIIA),
+        ...new Set(easterEggCounter.get()).add(EasterEggs.enum.OIIA),
       ])
     })
 
@@ -1163,7 +1163,7 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
       }
 
       easterEggCounter.set([
-        ...new Set(easterEggCounter.get()).add(EasterEggs.NORTH_AMERICA),
+        ...new Set(easterEggCounter.get()).add(EasterEggs.enum.NORTH_AMERICA),
       ])
       const usEagle = document.querySelector("#us-eagle")
       if (!usEagle || usEagle.children.length < 2) {
