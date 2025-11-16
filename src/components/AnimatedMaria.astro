@@ -7,7 +7,7 @@ const { delay = 0, text } = Astro.props
 ---
 
 <div
-  class="animate-amazing-move hover-animation-pause absolute h-[12rem] w-[12rem]"
+  class="animate-amazing-move hover-animation-pause absolute h-48 w-48"
   style={`animation-delay: ${delay}s;`}
 >
   <div class="absolute">
@@ -19,7 +19,7 @@ const { delay = 0, text } = Astro.props
       alt=""
     />
   </div>
-  <div class="h-[12rem] w-[12rem]">
+  <div class="h-48 w-48">
     <Star text={text} delay={delay} />
   </div>
 </div>
