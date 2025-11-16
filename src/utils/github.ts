@@ -107,14 +107,13 @@ const githubFileContent = z.object({
   encoding: z.string(),
   sha: z.string(),
 })
-const blogVersion = z.object({
-  date: z.string(),
-  sha: z.string(),
-})
 
 type GitHubCommit = z.infer<typeof githubCommit>
 type GithubFileContent = z.infer<typeof githubFileContent>
-type BlogVersion = z.infer<typeof blogVersion>
+interface BlogVersion {
+  date: string
+  sha: string
+}
 
 const GITHUB_API_BASE = "https://api.github.com"
 const REPO_OWNER = "krystofspiller"
