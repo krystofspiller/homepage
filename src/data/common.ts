@@ -1,6 +1,6 @@
 import { getCollection } from "astro:content"
 
-import { env } from "../../env"
+import { env } from "env"
 
 const posts = await getCollection("blog", ({ data }) =>
   env.ENV === "production" ? !(data.draft ?? false) : true,
