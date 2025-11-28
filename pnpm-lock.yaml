@@ -94,14 +94,14 @@ importers:
         specifier: ^0.8.3
         version: 0.8.3
       prettier:
-        specifier: ^3.6.2
-        version: 3.6.2
+        specifier: ^3.7.2
+        version: 3.7.2
       prettier-plugin-astro:
         specifier: ^0.14.1
         version: 0.14.1
       prettier-plugin-tailwindcss:
         specifier: ^0.7.1
-        version: 0.7.1(prettier-plugin-astro@0.14.1)(prettier@3.6.2)
+        version: 0.7.1(prettier-plugin-astro@0.14.1)(prettier@3.7.2)
       tsx:
         specifier: ^4.20.6
         version: 4.20.6
@@ -1678,10 +1678,6 @@ packages:
   cookie-es@1.2.2:
     resolution: {integrity: sha512-+W7VmiVINB+ywl1HGXJXmrqkOhpKrIiVZV6tQuV54ZyQC7MMuBt81Vc336GMLoHBq5hV/F9eXgt5Mnx0Rha5Fg==}
 
-  cookie@1.0.2:
-    resolution: {integrity: sha512-9Kr/j4O16ISv8zBBhJoi4bXOYNTkFLOqSL3UDB0njXxCXNezjeyVrJyGOWtgfs/q2km1gwBcfH8q1yEGoMYunA==}
-    engines: {node: '>=18'}
-
   cookie@1.1.1:
     resolution: {integrity: sha512-ei8Aos7ja0weRpFzJnEA9UHJ/7XQmqglbRwnf2ATjcB9Wq874VKH9kfjjirM6UhU2/E5fFYadylyhFldcqSidQ==}
     engines: {node: '>=18'}
@@ -2574,8 +2570,8 @@ packages:
       prettier-plugin-svelte:
         optional: true
 
-  prettier@3.6.2:
-    resolution: {integrity: sha512-I7AIg5boAr5R0FFtJ6rCfD+LFsWHp81dolrFD8S79U9tb8Az2nGrJncnMSnys+bpQJfRUzqs9hnA81OAA3hCuQ==}
+  prettier@3.7.2:
+    resolution: {integrity: sha512-n3HV2J6QhItCXndGa3oMWvWFAgN1ibnS7R9mt6iokScBOC0Ul9/iZORmU2IWUMcyAQaMPjTlY3uT34TqocUxMA==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -4605,8 +4601,6 @@ snapshots:
 
   cookie-es@1.2.2: {}
 
-  cookie@1.0.2: {}
-
   cookie@1.1.1: {}
 
   crossws@0.3.5:
@@ -5881,16 +5875,16 @@ snapshots:
   prettier-plugin-astro@0.14.1:
     dependencies:
       '@astrojs/compiler': 2.13.0
-      prettier: 3.6.2
+      prettier: 3.7.2
       sass-formatter: 0.7.9
 
-  prettier-plugin-tailwindcss@0.7.1(prettier-plugin-astro@0.14.1)(prettier@3.6.2):
+  prettier-plugin-tailwindcss@0.7.1(prettier-plugin-astro@0.14.1)(prettier@3.7.2):
     dependencies:
-      prettier: 3.6.2
+      prettier: 3.7.2
     optionalDependencies:
       prettier-plugin-astro: 0.14.1
 
-  prettier@3.6.2: {}
+  prettier@3.7.2: {}
 
   prismjs@1.30.0: {}
 
