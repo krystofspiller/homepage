@@ -298,9 +298,9 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
             >This was supposed to be relatively simple. But it's <Link
               href="https://www.youtube.com/watch?v=Wdyndb17K58">Stripe</Link
             > we're talking about <span class="text-white">🙂</span> I've ran into
-            most of the issues described in that video and many more during this
-            project. Migrating from one instance to another is a hell that made me
-            into the man I'm today.</span
+            most of the issues described in that video and many more during this project.
+            Migrating from one instance to another is a hell that made me into the
+            man I'm today.</span
           ><span slot="trigger">from one Stripe instance to another</span
           ></TooltipInline
         >. The next step involved changing how the app is interacting with
@@ -311,8 +311,8 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
           >self-service customer portal</Link
         > and update the app data via webhook events from Stripe. It also involved
         a change to the pricing packages where there was previously a single package
-        and additional customer features were enabled on an ad-hoc basis and now
-        there would be multiple packages with certain pre-enabled features.</SeeMore
+        and additional customer features were enabled on an ad-hoc basis and now there
+        would be multiple packages with certain pre-enabled features.</SeeMore
       ></Paragraph
     >
     <Billing />
@@ -379,11 +379,10 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
         >.<span class="mt-3 block">
           I used <Link href="https://exchangeratesapi.io/"
             >Exchangerates API</Link
-          > to get a more comprehensive list of the exchange rates. As we didn't
-          call the API everytime we needed the exchange rate but instead stored it
-          in a database (we also needed historical exchange rates in some cases),
-          new exchange rates were automatically added to the database on a daily
-          basis.</span
+          > to get a more comprehensive list of the exchange rates. As we didn't call
+          the API everytime we needed the exchange rate but instead stored it in a
+          database (we also needed historical exchange rates in some cases), new exchange
+          rates were automatically added to the database on a daily basis.</span
         >
       </SeeMore>
     </Paragraph>
@@ -474,11 +473,11 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
             still a better solution for majority of the checked cases due to the
             sheer complexity of the domain and the resultant data.</span
           ><span slot="trigger">checks</span></TooltipInline
-        > to notify us of instances where invalid data got into the database and
-        also automatically fix them if an automatic fix is possible. I wrote checks
-        dealing with detecting and autofixing trailing whitespace in attributes like
-        names, emails and domain specific identifiers which could cause subtle bugs
-        in filtering and matching items.</SeeMore
+        > to notify us of instances where invalid data got into the database and also
+        automatically fix them if an automatic fix is possible. I wrote checks dealing
+        with detecting and autofixing trailing whitespace in attributes like names,
+        emails and domain specific identifiers which could cause subtle bugs in filtering
+        and matching items.</SeeMore
       >
     </Paragraph>
     <Image
@@ -535,18 +534,17 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
             > helper enforcement</strong
           > - writing the OpenAPI specifications can be a bit cumbersome, there's
           a lot of boilerplate that needs to be written making bigger types hundreds
-          of lines long. I wrote a helper to simplify this where majority of the
-          use cases that previously took anywhere from 1 to 10 lines could now be
-          reduced to a single line of code making it more readable. Converting the
-          whole OpenAPI specification to use this helper would a large effort for
-          an individual and there would still be the problem with my colleagues not
-          being aware of this helper and writing new specifications without it. This
-          linter rule therefore produced <UnderlinedText type="warning"
+          of lines long. I wrote a helper to simplify this where majority of the use
+          cases that previously took anywhere from 1 to 10 lines could now be reduced
+          to a single line of code making it more readable. Converting the whole OpenAPI
+          specification to use this helper would a large effort for an individual
+          and there would still be the problem with my colleagues not being aware
+          of this helper and writing new specifications without it. This linter rule
+          therefore produced <UnderlinedText type="warning"
             >warnings</UnderlinedText
           > (and <UnderlinedText type="error">errors</UnderlinedText> in some cases)
-          to enforce its usage suggesting fellow colleagues to convert it to use
-          the helper. The idea was that the <UnderlinedText
-            >warnings</UnderlinedText
+          to enforce its usage suggesting fellow colleagues to convert it to use the
+          helper. The idea was that the <UnderlinedText>warnings</UnderlinedText
           > would be changed to <UnderlinedText type="error"
             >errors</UnderlinedText
           > once the conversion is complete so that it would be written in this more
@@ -557,8 +555,8 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
           <strong class="font-bold"
             >Check strings looking like constants actually exist</strong
           > - in Ruby, we were sometimes forced to write a constant, such as a class
-          name, as a string. The static type checker for Ruby, called Sorbet, we
-          used obviously didn't check strings and such strings sometimes became obsolete
+          name, as a string. The static type checker for Ruby, called Sorbet, we used
+          obviously didn't check strings and such strings sometimes became obsolete
           when the class was refactored or removed and could cause an issue. This
           linter rule checked that all strings that looked like such constants actually
           referred to an existing constant in the codebase.
@@ -617,17 +615,17 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
             have standardized branch name and conventional commits
           </li>
         </List>
-        During the various stages, we have enforced this name both in CI as well
-        as in Git commit hooks for faster feedback. At the last stage, where every
-        change required a conventional commit message and happened on a branch called
-        something like
+        During the various stages, we have enforced this name both in CI as well as
+        in Git commit hooks for faster feedback. At the last stage, where every change
+        required a conventional commit message and happened on a branch called something
+        like
         <span class="font-mono">feat/JIRA-123-optional-description</span> it became
         a bit tedious to always include <span class="font-mono"
           >feat(JIRA-123):</span
         >
         in the commit message. I wrote a commit message Git hook that took the type
-        of the commit and scope (Jira ticket) from the branch name and formatted
-        an otherwise plain message according to the conventional commit specification.
+        of the commit and scope (Jira ticket) from the branch name and formatted an
+        otherwise plain message according to the conventional commit specification.
         Small time safer but mostly one less thing to think about.
       </SeeMore>
     </Paragraph>
@@ -675,10 +673,10 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
         Jira ID and a short description and posted this in a #release Slack channel.
         I implemented a task that ran on every deployment to Heroku which compiled
         a list of Jiras from the last deployment, got the Jira tasks descriptions,
-        the author (developer) of that change, found a related Slack account and
-        tagged them in the automated Slack message (developers were encouraged to
-        provide additional context, especially when it was related to a bug they
-        fixed for someone from a support of other department).</SeeMore
+        the author (developer) of that change, found a related Slack account and tagged
+        them in the automated Slack message (developers were encouraged to provide
+        additional context, especially when it was related to a bug they fixed for
+        someone from a support of other department).</SeeMore
       >
     </Paragraph>
     <Image

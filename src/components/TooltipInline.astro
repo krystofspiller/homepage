@@ -11,8 +11,8 @@ const tooltipId = Math.random().toString(36).slice(2, 10)
 ---
 
 <style is:global>
-  [id^="tooltip-content-"] a[href*="//"][data-include-icon*="true"]:not([href*="krystofs.com"])
-  {
+  [id^="tooltip-content-"]
+    a[href*="//"][data-include-icon*="true"]:not([href*="krystofs.com"]) {
     text-decoration: underline !important;
     text-decoration-color: #e6805f !important;
 
@@ -21,9 +21,10 @@ const tooltipId = Math.random().toString(36).slice(2, 10)
     }
   }
 
-  [id^="tooltip-content-"] a[href*="//"][data-include-icon*="true"]:not([href*="krystofs.com"]):hover,
-  [id^="tooltip-content-"] a[href*="//"][data-include-icon*="true"]:not([href*="krystofs.com"]):focus
-  {
+  [id^="tooltip-content-"]
+    a[href*="//"][data-include-icon*="true"]:not([href*="krystofs.com"]):hover,
+  [id^="tooltip-content-"]
+    a[href*="//"][data-include-icon*="true"]:not([href*="krystofs.com"]):focus {
     background: linear-gradient(90deg, #e65f5f, #e6c75f);
     color: transparent;
     background-clip: text;
