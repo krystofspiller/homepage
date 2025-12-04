@@ -13,7 +13,7 @@ jobs:
       youtube_api_key: ${{ secrets.YOUTUBE_API_KEY }}
   deploy:
     needs: checks
-    runs-on: ubuntu-latest
+    runs-on: ubicloud-standard-2
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v6
@@ -33,7 +33,7 @@ jobs:
   notify-on-failure:
     needs: deploy
     if: failure()
-    runs-on: ubuntu-latest
+    runs-on: ubicloud-standard-2
     steps:
       - name: Send push notification
         run: |
@@ -47,7 +47,7 @@ jobs:
   notify-on-success:
     needs: deploy
     if: success()
-    runs-on: ubuntu-latest
+    runs-on: ubicloud-standard-2
     steps:
       - name: Get Dependabot PR count
         id: dependabot-prs
