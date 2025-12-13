@@ -22,7 +22,7 @@
     "@astrojs/alpinejs": "^0.4.9",
     "@astrojs/mdx": "^4.3.13",
     "@floating-ui/dom": "^1.7.4",
-    "@tailwindcss/vite": "^4.1.17",
+    "@tailwindcss/vite": "^4.1.18",
     "alpinejs": "^3.15.2",
     "astro": "^5.16.4",
     "butteruptoasts": "^2.0.1",
@@ -31,7 +31,7 @@
     "nanostores": "^1.1.0",
     "sharp": "^0.34.5",
     "tailwind-merge": "^3.4.0",
-    "tailwindcss": "^4.1.17",
+    "tailwindcss": "^4.1.18",
     "zod": "^4.1.13"
   },
   "devDependencies": {
