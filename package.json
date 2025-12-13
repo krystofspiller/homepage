@@ -47,7 +47,7 @@
     "jsdom": "^27.2.0",
     "linkedom": "^0.18.12",
     "msw": "^2.12.4",
-    "oxlint": "^1.31.0",
+    "oxlint": "^1.32.0",
     "oxlint-tsgolint": "^0.8.6",
     "prettier": "^3.7.4",
     "prettier-plugin-astro": "^0.14.1",
