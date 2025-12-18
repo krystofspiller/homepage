@@ -871,7 +871,9 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
     const img = new Image()
     img.src = src
 
-    await new Promise((resolve) => img.addEventListener("load", resolve))
+    await new Promise((resolve) => {
+      img.addEventListener("load", resolve)
+    })
 
     const size = 10 * scalar
 
