@@ -2,7 +2,7 @@
   "name": "homepage",
   "type": "module",
   "engines": {
-    "node": ">=24.0.0"
+    "node": ">=24 <25"
   },
   "scripts": {
     "dev": "astro dev",

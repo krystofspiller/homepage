@@ -1,0 +1,68 @@
+name: Update Node
+
+on:
+  schedule:
+    - cron: "0 6 * * SAT" # Run every Saturday at 6 AM UTC
+  workflow_dispatch:
+
+jobs:
+  update-node:
+    runs-on: ubuntu-latest
+    name: Update Node
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v6
+      - uses: ./.github/actions/setup
+
+      - name: Check if update is needed
+        id: update-needed
+        run: |
+          CURRENT=$(echo "$(cat .nvmrc)")
+          LATEST=$(curl -s https://nodejs.org/dist/index.json | jq -r '.[] | select(.lts != false) | .version' | head -1)
+          echo "current=$CURRENT" >> $GITHUB_OUTPUT
+          echo "latest=$LATEST" >> $GITHUB_OUTPUT
+
+          if [ "$CURRENT" != "$LATEST" ]; then
+            echo "update_needed=true" >> $GITHUB_OUTPUT
+            echo "Update needed: $CURRENT -> $LATEST"
+          else
+            echo "update_needed=false" >> $GITHUB_OUTPUT
+            echo "Node is already up to date: $CURRENT"
+          fi
+
+      - name: Update .nvmrc file
+        if: steps.update-needed.outputs.update_needed == 'true'
+        run: |
+          echo "${{ steps.update-needed.outputs.latest }}" > .nvmrc
+          echo "Updated .nvmrc to version ${{ steps.update-needed.outputs.latest }}"
+
+      - name: Update @types/node
+        if: steps.update-needed.outputs.update_needed == 'true'
+        run: |
+          MAJOR_VERSION_LATEST=$(echo ${{ steps.update-needed.outputs.latest }} | sed 's/\.[0-9]*.[0-9]*$//')
+          npm install --force @types/node@${MAJOR_VERSION_LATEST}
+          git add package-lock.json
+          git add package.json
+          echo "Updated @types/node"
+
+      - name: Update engines in package.json
+        if: steps.update-needed.outputs.update_needed == 'true'
+        run: |
+          MAJOR_VERSION_LATEST=$(echo ${{ steps.update-needed.outputs.latest }} | sed 's/\.[0-9]*.[0-9]*$//')
+          NEXT_MAJOR_VERSION=$((MAJOR_VERSION_LATEST + 1))
+          jq ".engines.node = \">=${MAJOR_VERSION_LATEST} <${NEXT_MAJOR_VERSION}\"" package.json > temp.json && mv temp.json package.json
+          git add package.json
+          echo "Updated engines in package.json"
+
+      - name: Create PR
+        if: steps.update-needed.outputs.update_needed == 'true'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          commit-message: "chore: auto-update Node to ${{ steps.update-needed.outputs.latest }}"
+          title: "chore: auto-update Node to ${{ steps.update-needed.outputs.latest }}"
+          body: |
+            This PR updates Node from version `${{ steps.update-needed.outputs.current }}` to the latest LTS version `${{ steps.update-needed.outputs.latest }}`.
+
+            This PR was automatically created by the Update Node workflow.
+          branch: update-node-version-${{ steps.latest-version.outputs.latest }}
