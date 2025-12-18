@@ -78,7 +78,7 @@ getHeadings(document, toc)
   import { usesSideNavigable } from "@utils/store"
 
   const mobileTocSelect = document.querySelector("#mobile-toc-select")
-  usesSideNavigable.set(!!mobileTocSelect)
+  usesSideNavigable.set(Boolean(mobileTocSelect))
 </script>
 
 <script is:inline data-astro-rerun define:vars={{ toc }}>

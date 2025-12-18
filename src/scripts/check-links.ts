@@ -97,7 +97,7 @@ const shouldIgnore = (name: string, ignorePatterns: string[]): boolean =>
 // Function to extract HTTP/HTTPS links from text
 const extractLinks = (text: string): string[] => {
   const urlRegex = /https?:\/\/[^\s<>"|\\^`[\]]+/g
-  const matches = text.match(urlRegex) || []
+  const matches = text.match(urlRegex) ?? []
 
   // Clean up URLs
   return matches
