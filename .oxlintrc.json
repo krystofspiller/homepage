@@ -26,6 +26,7 @@
     "eslint/id-length": "off",
     "eslint/max-lines-per-function": "off",
     "eslint/max-lines": "off",
+    "eslint/max-statements": "off",
     "eslint/no-continue": "off",
     "eslint/no-duplicate-imports": [
       "error",

@@ -1,4 +1,5 @@
-const DEFAULT_CACHE_TTL = 300_000 // 5 minutes in milliseconds
+// 5 minutes in milliseconds
+const DEFAULT_CACHE_TTL = 300_000
 
 const GREETING_MESSAGE = [
   `%c
