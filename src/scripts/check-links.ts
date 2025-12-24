@@ -50,7 +50,8 @@ const getGitignorePatterns = async (projectRoot: string): Promise<string[]> => {
       ...content
         .split("\n")
         .map((line) => line.trim())
-        .filter((line) => line !== "" && !line.startsWith("#")) // Remove empty lines and comments
+        // Remove empty lines and comments
+        .filter((line) => line !== "" && !line.startsWith("#"))
         .map((pattern) => {
           let modifiedPattern = pattern
           // Remove leading slash if present
@@ -64,7 +65,8 @@ const getGitignorePatterns = async (projectRoot: string): Promise<string[]> => {
           return modifiedPattern
         }),
       ...additionalPatterns,
-    ].filter((pattern, index, arr) => arr.indexOf(pattern) === index) // Remove duplicates
+      // Remove duplicates
+    ].filter((pattern, index, arr) => arr.indexOf(pattern) === index)
   } catch {
     console.warn("Could not read .gitignore file, using default patterns")
     return [
@@ -100,13 +102,20 @@ const extractLinks = (text: string): string[] => {
   const matches = text.match(urlRegex) ?? []
 
   // Clean up URLs
-  return matches
-    .map((url) => url.replace(/[.,;?)\]>"'`]+$/, ""))
-    .filter((url, index, arr) => arr.indexOf(url) === index) // Remove duplicates
-    .filter((url) => !/\${.+}/.test(url)) // Remove URLs with variable interpolation
-    .filter((url) => !url.includes("www.w3.org")) // Remove W3C URLs
-    .filter((url) => !url.includes("localhost")) // Remove localhost URLs
-    .filter((url) => !url.endsWith("/*")) // Remove URLs ending with wildcard (used in tests)
+  return (
+    matches
+      .map((url) => url.replace(/[.,;?)\]>"'`]+$/, ""))
+      // Remove duplicates
+      .filter((url, index, arr) => arr.indexOf(url) === index)
+      // Remove URLs with variable interpolation
+      .filter((url) => !/\${.+}/.test(url))
+      // Remove W3C URLs
+      .filter((url) => !url.includes("www.w3.org"))
+      // Remove localhost URLs
+      .filter((url) => !url.includes("localhost"))
+      // Remove URLs ending with wildcard (used in tests)
+      .filter((url) => !url.endsWith("/*"))
+  )
 }
 
 const readAllFiles = async (

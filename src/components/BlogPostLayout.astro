@@ -61,7 +61,7 @@ const versions = includeVersions ? await getBlogPostVersions(postId) : []
     versionSelect.addEventListener("change", (event) => {
       const selectedSha = event.target.value
 
-      // redirect to the new version
+      // Redirect to the new version
       globalThis.location.href = `/blog/${postId}-${selectedSha}`
     })
   }

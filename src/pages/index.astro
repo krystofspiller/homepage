@@ -1123,7 +1123,8 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
     const draw = (): void => {
       onFirstDraw()
 
-      particles.sort((a, b) => a.scale - b.scale) // sort by scale to set z-indexing
+      // Sort by scale to set z-indexing
+      particles.sort((a, b) => a.scale - b.scale)
       ctx.clearRect(0, 0, cw, ch)
       for (const p of particles) {
         ctx.translate(cw / 2, ch / 2)
