@@ -19,7 +19,7 @@ jobs:
         id: update-needed
         run: |
           CURRENT=$(echo "$(cat .nvmrc)")
-          LATEST=$(curl -s https://nodejs.org/dist/index.json | jq -r '.[] | select(.lts != false) | .version' | head -1)
+          LATEST=$(curl -s https://nodejs.org/dist/index.json | jq -r '.[] | select(.lts != false) | .version' | head -1 | sed 's/v//')
           echo "current=$CURRENT" >> $GITHUB_OUTPUT
           echo "latest=$LATEST" >> $GITHUB_OUTPUT
 
