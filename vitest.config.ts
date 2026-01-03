@@ -4,7 +4,7 @@ import { configDefaults } from "vitest/config"
 
 export default getViteConfig({
   test: {
-    exclude: [...configDefaults.exclude, "tests/**.spec.ts"],
+    exclude: [...configDefaults.exclude, "e2e/**.test.ts"],
     globals: true,
     setupFiles: ["vitest.setup.ts"],
   },
