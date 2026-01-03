@@ -10,7 +10,7 @@ const isCi = env.ENV === "ci"
  */
 
 export default defineConfig({
-  testDir: "./tests",
+  testDir: "./playwright",
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: Boolean(isCi),
