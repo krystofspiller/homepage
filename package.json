@@ -54,6 +54,6 @@
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tsx": "^4.21.0",
     "vitest": "^4.0.16",
-    "wrangler": "^4.56.0"
+    "wrangler": "^4.58.0"
   }
 }
