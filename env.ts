@@ -3,7 +3,7 @@ import { YOUTUBE_API_KEY_LENGTH } from "./src/utils/constants"
 import { config } from "dotenv"
 import { z } from "zod"
 
-const isTest = process.env.ENV === "test" || process.env.ENV === "ci"
+const isTest = ["test", "ci"].includes(process.env.ENV ?? "")
 const isDev = process.env.ENV === "development"
 
 const getGithubToken = (): z.ZodDefault<z.ZodString> | z.ZodString => {
