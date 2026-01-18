@@ -230,10 +230,5 @@ const getBlogPostVersionContent = async (
   }
 }
 
-export {
-  getBlogPostVersionContent,
-  getBlogPostVersions,
-  getFileCommitHistory,
-  getFileContentAtCommit,
-}
+export { getBlogPostVersionContent, getBlogPostVersions }
 export type { GithubFileContent }

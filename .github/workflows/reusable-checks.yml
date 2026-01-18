@@ -11,7 +11,7 @@ env:
   YOUTUBE_API_KEY: ${{ secrets.youtube_api_key }}
 
 jobs:
-  build-lint-format:
+  checks:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -23,6 +23,8 @@ jobs:
         run: pnpm lint:ci
       - name: Format
         run: pnpm format:ci
+      - name: Knip
+        run: pnpm knip
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 3

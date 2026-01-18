@@ -35,6 +35,7 @@ interface FileInfo {
 // Function to read and parse .gitignore file
 const getGitignorePatterns = async (projectRoot: string): Promise<string[]> => {
   const additionalPatterns = [
+    "package-lock.json",
     ".git*",
     ".vscode*",
     "*.gif",
@@ -230,6 +231,7 @@ const main = async (): Promise<void> => {
     ["999", "https://www.linkedin.com/in/krystof-spiller"],
     ["999", "https://www.linkedin.com/in/maria-muhandes"],
     ["302", "https://player.vimeo.com"],
+    ["302", "https://unpkg.com/knip@5/schema.json"],
     ...(isCi
       ? ([
           [
