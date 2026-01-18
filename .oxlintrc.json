@@ -66,7 +66,8 @@
       "error",
       { "cases": { "kebabCase": true, "pascalCase": true } }
     ],
-    "unicorn/no-null": "off"
+    "unicorn/no-null": "off",
+    "vitest/prefer-describe-function-title": "off"
   },
   "ignorePatterns": [
     "dist/**",
