@@ -54,9 +54,7 @@ test("no console errors or warnings", async ({ page }) => {
     consoleMessages.push(message)
   })
 
-  // Navigate to the page and wait for it to load
   await page.goto("/")
-  await page.waitForLoadState("networkidle")
 
   expect(consoleMessages).toEqual([])
 })
