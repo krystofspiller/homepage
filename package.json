@@ -24,7 +24,7 @@
     "@astrojs/mdx": "^4.3.13",
     "@floating-ui/dom": "^1.7.5",
     "@tailwindcss/vite": "^4.1.18",
-    "alpinejs": "^3.15.5",
+    "alpinejs": "^3.15.6",
     "astro": "^5.17.1",
     "butteruptoasts": "^2.0.1",
     "canvas-confetti": "^1.9.4",
