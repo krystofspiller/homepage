@@ -41,7 +41,7 @@
     "@types/alpinejs": "^3.13.11",
     "@types/canvas-confetti": "^1.9.0",
     "@types/jsdom": "^27.0.0",
-    "@types/node": "^24.10.11",
+    "@types/node": "^24.10.13",
     "dotenv": "^17.3.1",
     "jsdom": "^28.0.0",
     "knip": "^5.83.1",
