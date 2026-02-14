@@ -16,8 +16,8 @@ updates:
           - "tailwindcss"
           - "@tailwindcss/vite"
     ignore:
+      # Ignore updates for @types/node as they are updated in the Update Node workflow
       - dependency-name: "@types/node"
-        update-types: ["version-update:semver-major"]
   - package-ecosystem: "github-actions"
     directory: "/"
     open-pull-requests-limit: 5

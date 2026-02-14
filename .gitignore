@@ -22,3 +22,8 @@ src/data/blog-versions
 
 # Cache directories
 .cache/
+
+# Ignore other package managers
+package-lock.json
+yarn.lock
+bun.lockb
