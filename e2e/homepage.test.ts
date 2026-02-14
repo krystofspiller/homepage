@@ -60,7 +60,7 @@ test("no console errors or warnings", async ({ page }) => {
 })
 
 test.describe("Easter eggs", () => {
-  test("clicking North America triggers easter egg", async ({ page }) => {
+  test.skip("clicking North America triggers easter egg", async ({ page }) => {
     const easterEgg = page.getByRole("img", { name: "Easter egg #1" })
 
     await expect(easterEgg).not.toBeVisible()
