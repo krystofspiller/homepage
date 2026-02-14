@@ -18,7 +18,6 @@ updates:
     ignore:
       # Ignore updates for @types/node as they are updated in the Update Node workflow
       - dependency-name: "@types/node"
-      - dependency-name: "@types/node"
   - package-ecosystem: "github-actions"
     directory: "/"
     open-pull-requests-limit: 5
