@@ -41,7 +41,7 @@ jobs:
         if: steps.update-needed.outputs.update_needed == 'true'
         run: |
           MAJOR_VERSION_LATEST=$(echo ${{ steps.update-needed.outputs.latest }} | sed 's/\.[0-9]*.[0-9]*$//')
-          npm install --force @types/node@${MAJOR_VERSION_LATEST}
+          pnpm install --force @types/node@${MAJOR_VERSION_LATEST}
           git add package-lock.json
           git add package.json
           echo "Updated @types/node"
