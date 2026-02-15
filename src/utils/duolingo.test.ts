@@ -8,7 +8,7 @@ describe("Duolingo API", () => {
 
     const streak = await getDuolingoStreak()
     expect(streak).not.toBeNull()
-    expect(typeof streak).toBe("number")
+    expectTypeOf(streak).toBeNumber()
     expect(streak).toBeGreaterThan(0)
   })
 })
