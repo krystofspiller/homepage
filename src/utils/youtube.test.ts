@@ -9,7 +9,7 @@ describe("YouTube API", () => {
 
     const videoId = await getLatestYouTubeVideo()
     expect(videoId).not.toBe(YOUTUBE_VIDEO_ID_DEFAULT)
-    expect(typeof videoId).toBe("string")
+    expectTypeOf(videoId).toBeString()
     expect(videoId).toHaveLength(YOUTUBE_VIDEO_ID_DEFAULT.length)
   })
 })
