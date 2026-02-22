@@ -3,7 +3,6 @@ import Image from "@components/Image.astro"
 
 import PureGrinding from "@assets/images/pure-grinding.avif"
 import CatEars from "@assets/icons/cat-ears.astro"
-import Duolingo from "@assets/icons/duolingo.svg"
 import Via from "@assets/icons/via.astro"
 import Electron from "@assets/icons/electron.svg"
 import React from "@assets/icons/react.svg"
@@ -20,12 +19,8 @@ import Link from "./Link.astro"
 import TooltipInline from "./TooltipInline.astro"
 
 import { getLatestYouTubeVideo } from "@utils/youtube"
-import { getDuolingoStreak } from "@utils/duolingo"
 
-const [duolingoStreak, youTubeVideoId] = await Promise.all([
-  getDuolingoStreak(),
-  getLatestYouTubeVideo(),
-])
+const youTubeVideoId = await getLatestYouTubeVideo()
 ---
 
 <section class="my-10 mb-6">
@@ -127,24 +122,6 @@ const [duolingoStreak, youTubeVideoId] = await Promise.all([
       /></a
     >
   </Heading>
-
-  {
-    duolingoStreak !== null && (
-      <div class="mt-2 flex items-center gap-2">
-        <div class="relative w-12">
-          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/4 text-sm text-black">
-            {duolingoStreak}
-          </div>
-          <Image class="h-12 w-auto" src={Duolingo} alt="Duolingo logo" />
-        </div>
-        <div class="w-full">
-          <div class="text-lg text-zinc-400">
-            Current Duolingo streak in Korean 🇰🇷 and chess.
-          </div>
-        </div>
-      </div>
-    )
-  }
 
   <div class="mt-2 flex items-center gap-2">
     <div class="w-12 rounded bg-white">
