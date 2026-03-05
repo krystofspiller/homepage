@@ -4,3 +4,7 @@ onlyBuiltDependencies:
   - msw
   - sharp
   - workerd
+
+overrides:
+  rollup@>=4.0.0 <4.59.0: ">=4.59.0"
+  svgo@=4.0.0: ">=4.0.1"
