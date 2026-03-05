@@ -18,11 +18,11 @@ const cacheEntrySchema = <T>(
     timestamp: z.number(),
     ttl: z.number(),
   })
-type CacheEntry<T> = z.infer<ReturnType<typeof cacheEntrySchema<T>>>
+type CacheEntry = z.infer<ReturnType<typeof cacheEntrySchema>>
 
 // File-based cache for GitHub API responses
 class GitHubCache {
-  private cacheDir: string
+  private readonly cacheDir: string
 
   constructor() {
     this.cacheDir = join(process.cwd(), ".cache", "github")
@@ -42,14 +42,14 @@ class GitHubCache {
     return join(this.cacheDir, `${hash}.json`)
   }
 
-  async set<T>(
+  async set(
     key: string,
-    data: T,
+    data: unknown,
     ttl: number = DEFAULT_CACHE_TTL,
   ): Promise<void> {
     try {
       await this.ensureCacheDir()
-      const entry: CacheEntry<T> = {
+      const entry: CacheEntry = {
         data,
         timestamp: Date.now(),
         ttl,

@@ -60,8 +60,8 @@ export const initTooltip = (
     const staticSide = map[staticSideIndex]
 
     Object.assign(arrowElement.style, {
-      left: arrowX === null ? "" : `${arrowX}px`,
-      top: arrowY === null ? "" : `${arrowY}px`,
+      left: arrowX === undefined ? "" : `${arrowX}px`,
+      top: arrowY === undefined ? "" : `${arrowY}px`,
       right: "",
       bottom: "",
       [staticSide]: "-4px",
