@@ -4,14 +4,19 @@ import { server } from "@mocks/node"
 import { http, HttpResponse } from "msw"
 
 // Mock filesystem to prevent caching
-vi.mock("node:fs", () => ({
-  promises: {
-    mkdir: vi.fn(),
-    readFile: vi.fn().mockRejectedValue(new Error("File not found")),
-    writeFile: vi.fn(),
-    unlink: vi.fn(),
-  },
-}))
+vi.mock(import("node:fs"), async (importOriginal) => {
+  const original = await importOriginal()
+  return {
+    ...original,
+    promises: {
+      ...original.promises,
+      mkdir: vi.fn(),
+      readFile: vi.fn().mockRejectedValue(new Error("File not found")),
+      writeFile: vi.fn(),
+      unlink: vi.fn(),
+    },
+  }
+})
 
 describe("GitHub API", () => {
   beforeEach(() => {

@@ -34,8 +34,10 @@
     ],
     "eslint/no-magic-numbers": "off",
     "eslint/no-param-reassign": "off",
+    "eslint/no-shadow": "off",
     "eslint/no-ternary": "off",
     "eslint/no-undef": "off",
+    "eslint/no-undefined": "off",
     "eslint/no-void": "off",
     "eslint/sort-imports": "off",
     "eslint/sort-keys": "off",
@@ -63,6 +65,7 @@
     "oxc/no-rest-spread-properties": "off",
     "promise/avoid-new": "off",
     "promise/prefer-await-to-callbacks": "off",
+    "typescript/prefer-readonly-parameter-types": "off",
     "unicorn/filename-case": [
       "error",
       { "cases": { "kebabCase": true, "pascalCase": true } }

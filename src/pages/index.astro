@@ -1086,6 +1086,28 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
         }
       }
 
+      const draw = (): void => {
+        onFirstDraw()
+
+        // Sort by scale to set z-indexing
+        particles.sort((a, b) => a.scale - b.scale)
+        ctx.clearRect(0, 0, cw, ch)
+        for (const p of particles) {
+          ctx.translate(cw / 2, ch / 2)
+          ctx.rotate(p.rotate - 2)
+          const resizeFactor = 100 / Math.max(p.img.height, p.img.width)
+          ctx.globalAlpha = Math.max(0, p.alpha * factor)
+          ctx.drawImage(
+            p.img,
+            p.x,
+            p.y,
+            p.img.width * p.scale * factor * resizeFactor,
+            p.img.height * p.scale * factor * resizeFactor,
+          )
+          ctx.resetTransform()
+        }
+      }
+
       const PARTICLES_ROTATION_FACTOR = 10
       tl = gsap
         .timeline({ onUpdate: draw })
@@ -1116,28 +1138,6 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
           0,
         )
         .seek(PARTICLES_COUNT)
-    }
-
-    const draw = (): void => {
-      onFirstDraw()
-
-      // Sort by scale to set z-indexing
-      particles.sort((a, b) => a.scale - b.scale)
-      ctx.clearRect(0, 0, cw, ch)
-      for (const p of particles) {
-        ctx.translate(cw / 2, ch / 2)
-        ctx.rotate(p.rotate - 2)
-        const resizeFactor = 100 / Math.max(p.img.height, p.img.width)
-        ctx.globalAlpha = Math.max(0, p.alpha * factor)
-        ctx.drawImage(
-          p.img,
-          p.x,
-          p.y,
-          p.img.width * p.scale * factor * resizeFactor,
-          p.img.height * p.scale * factor * resizeFactor,
-        )
-        ctx.resetTransform()
-      }
     }
 
     animateBackground()
