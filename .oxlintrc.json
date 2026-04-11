@@ -71,7 +71,9 @@
       { "cases": { "kebabCase": true, "pascalCase": true } }
     ],
     "unicorn/no-null": "off",
-    "vitest/prefer-describe-function-title": "off"
+    "vitest/prefer-describe-function-title": "off",
+    "vitest/require-test-timeout": "off",
+    "vitest/prefer-importing-vitest-globals": "off"
   },
   "ignorePatterns": [
     "dist/**",
