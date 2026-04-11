@@ -1,5 +1,6 @@
 import { getBlogPostVersionContent, getBlogPostVersions } from "./github"
 import type { GithubFileContent } from "./github"
+import type { promises as fs } from "node:fs"
 import { server } from "@mocks/node"
 import { http, HttpResponse } from "msw"
 
@@ -10,10 +11,12 @@ vi.mock(import("node:fs"), async (importOriginal) => {
     ...original,
     promises: {
       ...original.promises,
-      mkdir: vi.fn(),
-      readFile: vi.fn().mockRejectedValue(new Error("File not found")),
-      writeFile: vi.fn(),
-      unlink: vi.fn(),
+      mkdir: vi.fn<typeof fs.mkdir>(),
+      readFile: vi
+        .fn<typeof fs.readFile>()
+        .mockRejectedValue(new Error("File not found")),
+      writeFile: vi.fn<typeof fs.writeFile>(),
+      unlink: vi.fn<typeof fs.unlink>(),
     },
   }
 })

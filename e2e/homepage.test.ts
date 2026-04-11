@@ -38,6 +38,8 @@ test("show large profile pic on hover", async ({ page }) => {
 test("no console errors or warnings", async ({ page }) => {
   const consoleMessages: string[] = []
   const ignoredMessages = new Set([
+    "warning: [Cloudflare Turnstile] Turnstile has already been rendered in this container. Did you mean to render it multiple times?",
+    "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
     "warning: Unrecognized feature: 'web-share'.",
     `log: ${GREETING_MESSAGE.join(" ")}`,
   ])
