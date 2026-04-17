@@ -47,7 +47,7 @@
     "knip": "^6.4.1",
     "linkedom": "^0.18.12",
     "msw": "^2.13.4",
-    "oxlint": "^1.59.0",
+    "oxlint": "^1.60.0",
     "oxlint-tsgolint": "^0.21.1",
     "prettier": "^3.8.2",
     "prettier-plugin-astro": "^0.14.1",
