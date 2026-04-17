@@ -51,6 +51,8 @@
     "jest/no-conditional-in-test": "off",
     "jest/no-hooks": "off",
     "jest/no-untyped-mock-factory": "off",
+    "jest/prefer-ending-with-an-expect": "off",
+    "jest/prefer-importing-jest-globals": "off",
     "jest/prefer-lowercase-title": [
       "error",
       {
