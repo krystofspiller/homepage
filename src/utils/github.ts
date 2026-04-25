@@ -24,7 +24,7 @@ type CacheEntry = z.infer<ReturnType<typeof cacheEntrySchema>>
 class GitHubCache {
   private readonly cacheDir: string
 
-  constructor() {
+  public constructor() {
     this.cacheDir = join(process.cwd(), ".cache", "github")
   }
 
@@ -42,7 +42,7 @@ class GitHubCache {
     return join(this.cacheDir, `${hash}.json`)
   }
 
-  async set(
+  public async set(
     key: string,
     data: unknown,
     ttl: number = DEFAULT_CACHE_TTL,
@@ -61,7 +61,7 @@ class GitHubCache {
     }
   }
 
-  async get<T>(key: string, schema: z.ZodType<T>): Promise<T | null> {
+  public async get<T>(key: string, schema: z.ZodType<T>): Promise<T | null> {
     try {
       const filePath = this.getCacheFilePath(key)
       const content = await fs.readFile(filePath, "utf8")
@@ -81,7 +81,7 @@ class GitHubCache {
     }
   }
 
-  async delete(key: string): Promise<void> {
+  public async delete(key: string): Promise<void> {
     try {
       const filePath = this.getCacheFilePath(key)
       await fs.unlink(filePath)
