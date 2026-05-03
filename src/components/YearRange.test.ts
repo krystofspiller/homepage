@@ -23,6 +23,8 @@ const renderYearRangeGetTextContent = async (
 
 describe("YearRange", () => {
   it("return range given valid from and to", async () => {
+    expect.assertions(2)
+
     let result = await renderYearRangeGetTextContent(2022, 2024)
 
     expect(result).toContain("2022-2024")
@@ -33,6 +35,8 @@ describe("YearRange", () => {
   })
 
   it("return range with note given valid from and to and note", async () => {
+    expect.assertions(2)
+
     const note = "part-time"
     let result = await renderYearRangeGetTextContent(2022, 2024, note)
 
@@ -44,24 +48,32 @@ describe("YearRange", () => {
   })
 
   it("return from to Now given larger from than to if from is current year", async () => {
+    expect.assertions(1)
+
     const result = await renderYearRangeGetTextContent(currentYear, 2022)
 
     expect(result).toBe(`${currentYear}-Now`)
   })
 
   it("return from to Now given from as current year", async () => {
+    expect.assertions(1)
+
     const result = await renderYearRangeGetTextContent(currentYear)
 
     expect(result).toBe(`${currentYear}-Now`)
   })
 
   it("return range to current year given from smaller than current year", async () => {
+    expect.assertions(1)
+
     const result = await renderYearRangeGetTextContent(2023)
 
     expect(result).toBe(`2023-${currentYear}`)
   })
 
   it("return range to current year given larger from than to and from being smaller than current year", async () => {
+    expect.assertions(1)
+
     const result = await renderYearRangeGetTextContent(2024, 2022)
 
     expect(result).toBe(`2024-${currentYear}`)

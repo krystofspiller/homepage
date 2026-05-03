@@ -5,6 +5,8 @@ import { http, passthrough } from "msw"
 
 describe("YouTube API", () => {
   it("should fetch latest YouTube video", async () => {
+    expect.assertions(2)
+
     server.use(http.get("https://www.googleapis.com/youtube/*", passthrough))
 
     const videoId = await getLatestYouTubeVideo()
