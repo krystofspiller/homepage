@@ -8,6 +8,8 @@ describe("Link", () => {
     ["https://", "https://example.com"],
     ["mailto:", "mailto:email@example.com"],
   ])("has target _blank if href starts with %s", async (_, href) => {
+    Expect.assertions(1)
+
     const container = await AstroContainer.create()
     const result = await container.renderToString(Link, { props: { href } })
 
@@ -20,6 +22,8 @@ describe("Link", () => {
   ])(
     "target can be overwritten to _self if href starts with %s",
     async (_, href) => {
+      expect.assertions(1)
+
       const container = await AstroContainer.create()
       const result = await container.renderToString(Link, {
         props: { href, target: "_self" },
@@ -32,6 +36,8 @@ describe("Link", () => {
   it.each([["# (anchor)", "#anchor"]])(
     "has target _self if href starts with %s",
     async (_, href) => {
+      expect.assertions(1)
+
       const container = await AstroContainer.create()
       const result = await container.renderToString(Link, {
         props: { href },
@@ -44,6 +50,8 @@ describe("Link", () => {
   it.each([["# (anchor)", "#anchor"]])(
     "target can be overwritten to _blank if href starts with %s",
     async (_, href) => {
+      expect.assertions(1)
+
       const container = await AstroContainer.create()
       const result = await container.renderToString(Link, {
         props: { href, target: "_blank" },

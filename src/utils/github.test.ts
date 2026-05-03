@@ -27,6 +27,8 @@ describe("GitHub API", () => {
   })
 
   it("should fetch blog post versions", async () => {
+    expect.assertions(3)
+
     server.use(
       http.get(
         "https://api.github.com/repos/krystofspiller/homepage/commits",
@@ -66,6 +68,8 @@ describe("GitHub API", () => {
   })
 
   it("should handle API errors gracefully", async () => {
+    expect.assertions(1)
+
     server.use(
       http.get(
         "https://api.github.com/repos/krystofspiller/homepage/commits",
@@ -79,6 +83,8 @@ describe("GitHub API", () => {
   })
 
   it("should fetch file content at specific commit", async () => {
+    expect.assertions(1)
+
     const mockContent: GithubFileContent = {
       content: btoa("---\ntitle: Test\n---\n\n# Hello World"),
       encoding: "base64",
