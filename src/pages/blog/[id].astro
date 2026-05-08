@@ -4,7 +4,7 @@ import { posts, postsVersions } from "src/data/common"
 
 const { post } = Astro.props
 
-// oxlint-disable-next-line explicit-module-boundary-types explicit-function-return-type
+// oxlint-disable-next-line typescript/explicit-module-boundary-types, typescript/explicit-function-return-type
 export const getStaticPaths = () => {
   const basePosts = posts.map((post) => ({
     params: { id: post.id },

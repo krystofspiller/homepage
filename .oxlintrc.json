@@ -67,6 +67,7 @@
     "oxc/no-rest-spread-properties": "off",
     "promise/avoid-new": "off",
     "promise/prefer-await-to-callbacks": "off",
+    "require-unicode-regexp": "off",
     "typescript/prefer-readonly-parameter-types": "off",
     "unicorn/filename-case": [
       "error",
@@ -76,9 +77,19 @@
     "vitest/no-conditional-in-test": "off",
     "vitest/no-hooks": "off",
     "vitest/prefer-describe-function-title": "off",
+    "vitest/require-hook": "off",
     "vitest/require-test-timeout": "off",
-    "vitest/prefer-importing-vitest-globals": "off"
+    "vitest/prefer-importing-vitest-globals": "off",
+    "vitest/prefer-lowercase-title": "off"
   },
+  "overrides": [
+    {
+      "files": ["*test.ts"],
+      "rules": {
+        "vitest/require-hook": "error"
+      }
+    }
+  ],
   "ignorePatterns": [
     "dist/**",
     ".astro/**",
