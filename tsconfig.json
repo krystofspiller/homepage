@@ -6,10 +6,11 @@
     "paths": {
       "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
+      "@data/*": ["./src/data/*"],
       "@layouts/*": ["./src/layouts/*"],
       "@mocks/*": ["./src/mocks/*"],
       "@utils/*": ["./src/utils/*"],
-      "*": ["./*"]
+      "env": ["./env.ts"]
     },
     "types": ["vitest/globals"]
   }

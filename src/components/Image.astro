@@ -8,13 +8,26 @@ type Props = LocalImageProps & {
 
 const { src, alt, ...rest } = Astro.props
 
-// Check if the source is a GIF file - if so, don't convert to AVIF
-const isGif = "format" in src && src.format === "gif"
+const format = "format" in src ? src.format : undefined
+const isGif = format === "gif"
+const isSvg = format === "svg"
 ---
 
-<Picture
-  src={src}
-  alt={alt}
-  formats={isGif ? ["webp"] : ["avif", "webp"]}
-  {...rest}
-/>
+{
+  isSvg ? (
+    <img
+      src={src.src}
+      alt={alt}
+      width={src.width}
+      height={src.height}
+      {...rest}
+    />
+  ) : (
+    <Picture
+      src={src}
+      alt={alt}
+      formats={isGif ? ["webp"] : ["avif", "webp"]}
+      {...rest}
+    />
+  )
+}
