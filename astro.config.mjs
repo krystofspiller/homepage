@@ -12,5 +12,21 @@ export default defineConfig({
   port: 4321,
   vite: {
     plugins: [tailwindcss()],
+    optimizeDeps: {
+      include: [
+        "alpinejs",
+        "astro/virtual-modules/transitions-events.js",
+        "astro/virtual-modules/transitions-router.js",
+        "astro/virtual-modules/transitions-swap-functions.js",
+        "astro/virtual-modules/transitions-types.js",
+        "butteruptoasts",
+        "canvas-confetti",
+        "@floating-ui/dom",
+        "gsap",
+        "gsap/ScrollTrigger",
+        "nanostores",
+        "zod",
+      ],
+    },
   },
 })
