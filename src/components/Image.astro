@@ -15,7 +15,13 @@ const isSvg = format === "svg"
 
 {
   isSvg ? (
-    <img src={src.src} alt={alt} width={src.width} height={src.height} {...rest} />
+    <img
+      src={src.src}
+      alt={alt}
+      width={src.width}
+      height={src.height}
+      {...rest}
+    />
   ) : (
     <Picture
       src={src}
