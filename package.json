@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.5.0",
-    "@astrojs/mdx": "^5.0.4",
+    "@astrojs/mdx": "^5.0.6",
     "@floating-ui/dom": "^1.7.6",
     "@tailwindcss/vite": "^4.3.0",
     "alpinejs": "^3.15.12",
