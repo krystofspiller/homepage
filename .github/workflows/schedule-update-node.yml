@@ -41,7 +41,8 @@ jobs:
         if: steps.update-needed.outputs.update_needed == 'true'
         run: |
           MAJOR_VERSION_LATEST=$(echo ${{ steps.update-needed.outputs.latest }} | sed 's/\.[0-9]*.[0-9]*$//')
-          pnpm install @types/node@${MAJOR_VERSION_LATEST}
+          LATEST_TYPES_NODE_VERSION=$(npm view @types/node@${MAJOR_VERSION_LATEST} version --json | jq -r '.[-1]')
+          pnpm install @types/node@${LATEST_TYPES_NODE_VERSION}
           git add pnpm-lock.yaml
           git add package.json
           echo "Updated @types/node"
@@ -65,4 +66,4 @@ jobs:
             This PR updates Node from version `${{ steps.update-needed.outputs.current }}` to the latest LTS version `${{ steps.update-needed.outputs.latest }}`.
 
             This PR was automatically created by the Update Node workflow.
-          branch: update-node-version-${{ steps.latest-version.outputs.latest }}
+          branch: update-node-version-${{ steps.update-version.outputs.latest }}
