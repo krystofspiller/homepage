@@ -816,7 +816,7 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
 
   const handler = onVisibilityChange(
     document.querySelector("#billing-revamp-project"),
-    function handler(element) {
+    (element) => {
       const [projectElement, warStoryElement] = element.children[0].children
 
       if (!projectElement || !warStoryElement) {
