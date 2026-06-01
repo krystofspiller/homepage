@@ -809,7 +809,7 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
       const isVisible = isElementInViewport(element)
       if (isVisible !== previousIsVisible) {
         previousIsVisible = isVisible
-        callback(element)
+        return callback(element)
       }
     }
   }
