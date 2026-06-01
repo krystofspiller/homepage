@@ -1,7 +1,7 @@
 // oxlint-disable no-await-in-loop
 // oxlint-disable no-console
 
-import { join, relative } from "node:path"
+import path from "node:path"
 import { readFile, readdir } from "node:fs/promises"
 import { execSync } from "node:child_process"
 
@@ -44,7 +44,7 @@ const getGitignorePatterns = async (projectRoot: string): Promise<string[]> => {
     "*.jpg",
   ]
   try {
-    const gitignorePath = join(projectRoot, ".gitignore")
+    const gitignorePath = path.join(projectRoot, ".gitignore")
     const content = await readFile(gitignorePath, "utf8")
 
     return [
@@ -134,8 +134,8 @@ const readAllFiles = async (
         continue
       }
 
-      const fullPath = join(dir, entry.name)
-      const relativePath = relative(baseDir, fullPath)
+      const fullPath = path.join(dir, entry.name)
+      const relativePath = path.relative(baseDir, fullPath)
 
       if (entry.isDirectory()) {
         files.push({

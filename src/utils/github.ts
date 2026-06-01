@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto"
 import { env } from "env"
 import { promises as fs } from "node:fs"
-import { join } from "node:path"
+import path from "node:path"
 import { z } from "zod"
 import { DEFAULT_CACHE_TTL } from "./constants"
 
@@ -25,7 +25,7 @@ class GitHubCache {
   private readonly cacheDir: string
 
   public constructor() {
-    this.cacheDir = join(process.cwd(), ".cache", "github")
+    this.cacheDir = path.join(process.cwd(), ".cache", "github")
   }
 
   private async ensureCacheDir(): Promise<void> {
@@ -39,7 +39,7 @@ class GitHubCache {
   private getCacheFilePath(key: string): string {
     // Create a safe filename from the key using hash
     const hash = createHash("md5").update(key).digest("hex")
-    return join(this.cacheDir, `${hash}.json`)
+    return path.join(this.cacheDir, `${hash}.json`)
   }
 
   public async set(
