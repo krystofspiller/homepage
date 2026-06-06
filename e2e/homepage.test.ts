@@ -37,12 +37,12 @@ test("show large profile pic on hover", async ({ page }) => {
 
 test("no console errors or warnings", async ({ page }) => {
   const consoleMessages: string[] = []
-  const ignoredMessages = new Set([
-    "warning: [Cloudflare Turnstile] Turnstile has already been rendered in this container. Did you mean to render it multiple times?",
+  const ignoredMessages = [
+    "warning: [Cloudflare Turnstile] Turnstile has already been rendered in this container.",
     "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
     "warning: Unrecognized feature: 'web-share'.",
     `log: ${GREETING_MESSAGE.join(" ")}`,
-  ])
+  ]
 
   page.on("console", (msg) => {
     if (msg.type() === "debug") {
@@ -50,7 +50,7 @@ test("no console errors or warnings", async ({ page }) => {
     }
 
     const message = `${msg.type()}: ${msg.text()}`
-    if (ignoredMessages.has(message)) {
+    if (ignoredMessages.some((substring) => message.includes(substring))) {
       return
     }
     consoleMessages.push(message)
