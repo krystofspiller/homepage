@@ -6,26 +6,51 @@ import { z } from "zod"
 const isTest = ["test", "ci"].includes(process.env.ENV ?? "")
 const isDev = process.env.ENV === "development"
 
+/** Personal access token (local dev / optional local production builds). */
+const GITHUB_PAT = /^ghp_[a-zA-Z0-9]{36}$/
+
+const githubPatSchema = z
+  .string()
+  .regex(
+    GITHUB_PAT,
+    "GitHub Personal Access Token must start with 'ghp_' and be 40 characters long",
+  )
+
+/** Legacy GitHub App installation token (Actions GITHUB_TOKEN). */
+const GITHUB_INSTALLATION_TOKEN_LEGACY = /^ghs_[0-9a-zA-Z]{36}$/
+
+/**
+ * Long-form installation token (Actions GITHUB_TOKEN rollout ~2026).
+ * @see https://github.blog/changelog/2026-04-24-notice-about-upcoming-new-format-for-github-app-installation-tokens/
+ */
+const GITHUB_INSTALLATION_TOKEN_LONG =
+  /^ghs_[0-9A-Za-z_-]{10,}(?:\.[0-9A-Za-z_-]{10,}){2,}$/
+
+const isGithubInstallationToken = (token: string): boolean =>
+  GITHUB_INSTALLATION_TOKEN_LEGACY.test(token) ||
+  GITHUB_INSTALLATION_TOKEN_LONG.test(token)
+
+const isGithubProductionToken = (token: string): boolean =>
+  isGithubInstallationToken(token) || GITHUB_PAT.test(token)
+
+const githubProductionTokenSchema = z
+  .string()
+  .max(2048)
+  .refine(
+    isGithubProductionToken,
+    "GitHub token must be a ghs_ installation token (legacy or long-form) or a ghp_ personal access token",
+  )
+
 const getGithubToken = (): z.ZodDefault<z.ZodString> | z.ZodString => {
   if (isTest) {
     return z.string().default("test-key")
   }
 
   if (isDev) {
-    return z
-      .string()
-      .regex(
-        /^ghp_[a-zA-Z0-9]{36}$/,
-        "GitHub Personal Access Token must start with 'ghp_' and be 40 characters long",
-      )
+    return githubPatSchema
   }
 
-  return z
-    .string()
-    .regex(
-      /^[a-zA-Z0-9_-]+$/,
-      "JWT token must contain only letters, numbers, underscores and hyphens",
-    )
+  return githubProductionTokenSchema
 }
 
 // Load .env file
