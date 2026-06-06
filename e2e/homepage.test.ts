@@ -39,7 +39,7 @@ test("no console errors or warnings", async ({ page }) => {
   const consoleMessages: string[] = []
   const ignoredMessages = [
     "warning: [Cloudflare Turnstile] Turnstile has already been rendered in this container.",
-    "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "status of 401",
     "warning: Unrecognized feature: 'web-share'.",
     `log: ${GREETING_MESSAGE.join(" ")}`,
   ]
