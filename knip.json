@@ -1,4 +1,13 @@
 {
-  "$schema": "https://unpkg.com/knip@5/schema.json",
-  "ignore": ["src/data/blog/*.mdx"]
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "ignore": ["src/data/blog/*.mdx"],
+  "paths": {
+    "@assets/*": ["./src/assets/*"],
+    "@components/*": ["./src/components/*"],
+    "@data/*": ["./src/data/*"],
+    "@layouts/*": ["./src/layouts/*"],
+    "@mocks/*": ["./src/mocks/*"],
+    "@utils/*": ["./src/utils/*"],
+    "env": ["./env.ts"]
+  }
 }
