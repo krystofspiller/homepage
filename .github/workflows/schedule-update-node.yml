@@ -66,4 +66,4 @@ jobs:
             This PR updates Node from version `${{ steps.update-needed.outputs.current }}` to the latest LTS version `${{ steps.update-needed.outputs.latest }}`.
 
             This PR was automatically created by the Update Node workflow.
-          branch: update-node-version-${{ steps.update-version.outputs.latest }}
+          branch: chore/update-node-version-${{ steps.update-needed.outputs.latest }}
