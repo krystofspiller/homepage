@@ -76,7 +76,7 @@ importers:
         specifier: ^28.0.3
         version: 28.0.3
       '@types/node':
-        specifier: ^24.13.2
+        specifier: 24.13.2
         version: 24.13.2
       dotenv:
         specifier: ^17.4.2
