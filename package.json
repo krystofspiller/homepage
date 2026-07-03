@@ -20,7 +20,7 @@
     "knip": "knip"
   },
   "dependencies": {
-    "@astrojs/alpinejs": "^0.5.0",
+    "@astrojs/alpinejs": "^1.0.0",
     "@astrojs/mdx": "^6.0.3",
     "@floating-ui/dom": "^1.7.6",
     "@tailwindcss/vite": "^4.3.1",
