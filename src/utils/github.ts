@@ -93,11 +93,12 @@ class GitHubCache {
 
 const githubCache = new GitHubCache()
 
+const githubCommitAuthor = z.object({
+  date: z.string(),
+})
 const githubCommit = z.object({
   commit: z.object({
-    author: z.object({
-      date: z.string(),
-    }),
+    author: githubCommitAuthor,
   }),
   sha: z.string(),
 })

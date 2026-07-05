@@ -18,7 +18,7 @@ const getHeadings = (
   for (const c of children) {
     const child = c as HTMLElement
     if (["H2", "H3", "H4"].includes(child.tagName)) {
-      const level = Number.parseInt(child.tagName.replace("H", ""), 10)
+      const level = Math.trunc(Number(child.tagName.replace("H", "")))
       minLevel = Math.min(minLevel, level)
       toc.push({
         id: child.getAttribute("id"),
