@@ -3,24 +3,39 @@
 
 import path from "node:path"
 import { readFile, readdir } from "node:fs/promises"
-import { execSync } from "node:child_process"
+import { exec } from "node:child_process"
+
+const execAsync = async (command: string): Promise<string> => {
+  const output = await new Promise<string>((resolve, reject) => {
+    exec(command, { encoding: "utf8" }, (error, stdout) => {
+      if (error) {
+        reject(error)
+      } else {
+        resolve(stdout)
+      }
+    })
+  })
+  return output
+}
 
 const isCi = process.argv[2] === "ci"
 
-const setup = (): void => {
+const setup = async (): Promise<void> => {
   console.log("Setup - pull curl-impersonate chrome")
-  const output = execSync("docker pull lwthiker/curl-impersonate:0.6-chrome", {
-    encoding: "utf8",
-  })
+  const output = await execAsync(
+    "docker pull lwthiker/curl-impersonate:0.6-chrome",
+  )
   console.log("Docker pull curl-impersonate chrome:\n", output)
 }
 
-const checkLink = (
+const checkLink = async (
   link: string,
-): { httpCode: string | undefined; redirectUrl: string | undefined } => {
-  const output = execSync(
+): Promise<{
+  httpCode: string | undefined
+  redirectUrl: string | undefined
+}> => {
+  const output = await execAsync(
     `docker run --platform linux/amd64 --rm lwthiker/curl-impersonate:0.6-chrome curl_chrome116 --silent --output /dev/null -w "%{http_code};%{redirect_url}" ${link}`,
-    { encoding: "utf8" },
   )
   const [httpCode, redirectUrl] = output.split(";")
   return { httpCode, redirectUrl }
@@ -266,7 +281,7 @@ const main = async (): Promise<void> => {
       : []),
   ]
   for (const link of links) {
-    const { httpCode, redirectUrl } = checkLink(link)
+    const { httpCode, redirectUrl } = await checkLink(link)
     if (httpCode === "200") {
       console.log(`  ✅ ${link}`)
     } else {
@@ -302,5 +317,5 @@ const main = async (): Promise<void> => {
   }
 }
 
-setup()
+await setup()
 await main()

@@ -1,9 +1,9 @@
 // oxlint-disable no-await-in-loop
 import { getBlogPostVersionContent, getBlogPostVersions } from "@utils/github"
-import fs from "node:fs"
+import { mkdir, readdir, writeFile } from "node:fs/promises"
 
 const generateBlogVersions = async (): Promise<void> => {
-  const fileNames = fs.readdirSync("./src/data/blog")
+  const fileNames = await readdir("./src/data/blog")
 
   for (const fileName of fileNames) {
     if (!fileName.endsWith(".mdx")) {
@@ -14,9 +14,7 @@ const generateBlogVersions = async (): Promise<void> => {
 
     const versions = await getBlogPostVersions(fileNameWithoutExtension)
 
-    if (!fs.existsSync(`./src/data/blog-versions`)) {
-      fs.mkdirSync(`./src/data/blog-versions`, { recursive: true })
-    }
+    await mkdir(`./src/data/blog-versions`, { recursive: true })
 
     await Promise.all(
       versions.map(async (version) => {
@@ -25,7 +23,7 @@ const generateBlogVersions = async (): Promise<void> => {
           version.sha,
         )
         if (content !== null) {
-          fs.writeFileSync(
+          await writeFile(
             `./src/data/blog-versions/${fileNameWithoutExtension}-${version.sha}.mdx`,
             content,
           )

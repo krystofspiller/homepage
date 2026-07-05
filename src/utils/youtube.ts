@@ -2,13 +2,14 @@ import { YOUTUBE_VIDEO_ID_DEFAULT } from "./constants"
 import { env } from "env"
 import { z } from "zod"
 
+const youtubeContentDetails = z.object({
+  videoId: z.string(),
+  videoPublishedAt: z.string(),
+})
 const youtubeVideosSchema = z.object({
   items: z.array(
     z.object({
-      contentDetails: z.object({
-        videoId: z.string(),
-        videoPublishedAt: z.string(),
-      }),
+      contentDetails: youtubeContentDetails,
     }),
   ),
 })

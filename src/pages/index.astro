@@ -958,6 +958,7 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
 
     gsap.registerPlugin(ScrollTrigger)
 
+    // oxlint-disable-next-line unicorn/prefer-number-coercion -- width has "px" suffix; Number() would give NaN
     const bodyWidth = Number.parseInt(getComputedStyle(document.body).width, 10)
 
     if (bodyWidth >= TAILWIND_BREAKPOINTS_IN_PX.lg) {
@@ -1013,6 +1014,7 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
       }
     }
 
+    // oxlint-disable-next-line unicorn/prefer-number-coercion -- width has "px" suffix; Number() would give NaN
     const width = Number.parseInt(
       getComputedStyle(document.querySelector("#top-content") as Element).width,
       10,
@@ -1184,6 +1186,7 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
         mapleSyrup.classList.add("opacity-0")
       }, MAPLE_SYRUP_HIDE_DURATION)
 
+      // oxlint-disable-next-line unicorn/prefer-number-coercion -- width has "px" suffix; Number() would give NaN
       const bodyWidth = Number.parseInt(
         getComputedStyle(document.body).width,
         10,
@@ -1220,6 +1223,7 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
     })
 
     window.addEventListener("resize", () => {
+      // oxlint-disable-next-line unicorn/prefer-number-coercion -- width has "px" suffix; Number() would give NaN
       const width = Number.parseInt(
         getComputedStyle(document.querySelector("#top-content") as Element)
           .width,
