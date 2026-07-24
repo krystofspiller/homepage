@@ -8,6 +8,9 @@ import alpinejs from "@astrojs/alpinejs"
 import "./env"
 
 export default defineConfig({
+  // Astro 7 defaults to 'jsx' whitespace rules; keep HTML-aware compression
+  // So intentional spaces between inline elements are preserved.
+  compressHTML: true,
   integrations: [alpinejs(), mdx()],
   port: 4321,
   vite: {
