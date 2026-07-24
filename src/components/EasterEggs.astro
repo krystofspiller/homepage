@@ -29,9 +29,12 @@ import easterEggOIIA from "@assets/images/easter-egg-oiia.avif"
 
 <script>
   import { EasterEggs, easterEggCounter } from "@utils/store"
-  import butterup from "butteruptoasts"
+  // Vite 8 / Rolldown (Astro 7) no longer auto-unwraps this CJS default export
+  import butterupModule from "butteruptoasts"
   import confetti from "canvas-confetti"
 
+  const butterup =
+    "default" in butterupModule ? butterupModule.default : butterupModule
   butterup.options.toastLife = 5000
 
   let confettiFired = false
