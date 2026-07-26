@@ -12,7 +12,8 @@ updates:
       day: "friday"
       time: "17:00"
       timezone: "Europe/Copenhagen"
-    # Groups are matched in order; first match wins. Majors stay ungrouped for review.
+    # Groups are matched in order; first match wins.
+    # Production majors stay ungrouped so each can be reviewed on its own.
     groups:
       tailwind:
         patterns:
@@ -27,9 +28,6 @@ updates:
           - "minor"
           - "patch"
         exclude-patterns:
-          # Framework upgrades are reviewed manually (never auto-merged).
-          - "astro"
-          - "@astrojs/*"
           - "tailwindcss"
           - "@tailwindcss/*"
       development-minor-and-patch:
