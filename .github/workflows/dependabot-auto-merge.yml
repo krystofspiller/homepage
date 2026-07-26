@@ -1,5 +1,6 @@
 # Enables GitHub auto-merge for low-risk Dependabot PRs once required checks pass.
 #
+# Policy: auto-merge everything except production dependency major bumps.
 # Uses pull_request_target so GITHUB_TOKEN has write access for Dependabot PRs.
 # Do not checkout or execute PR code in this workflow.
 
@@ -31,6 +32,7 @@ jobs:
         env:
           UPDATE_TYPE: ${{ steps.metadata.outputs.update-type }}
           DEPENDENCY_NAMES: ${{ steps.metadata.outputs.dependency-names }}
+          DEPENDENCY_TYPE: ${{ steps.metadata.outputs.dependency-type }}
           DEPENDENCY_GROUP: ${{ steps.metadata.outputs.dependency-group }}
           PACKAGE_ECOSYSTEM: ${{ steps.metadata.outputs.package-ecosystem }}
         run: |
@@ -38,32 +40,16 @@ jobs:
 
           echo "update-type=$UPDATE_TYPE"
           echo "dependency-names=$DEPENDENCY_NAMES"
+          echo "dependency-type=$DEPENDENCY_TYPE"
           echo "dependency-group=$DEPENDENCY_GROUP"
           echo "package-ecosystem=$PACKAGE_ECOSYSTEM"
 
           eligible=true
           reason=""
 
-          case "$UPDATE_TYPE" in
-            version-update:semver-patch|version-update:semver-minor) ;;
-            *)
-              eligible=false
-              reason="update type is ${UPDATE_TYPE:-unknown} (only patch/minor auto-merge)"
-              ;;
-          esac
-
-          # Deny-list: framework packages — any mention blocks auto-merge.
-          if [ "$eligible" = true ]; then
-            IFS=',' read -r -a deps <<< "$DEPENDENCY_NAMES"
-            for dep in "${deps[@]}"; do
-              dep_trimmed="${dep#"${dep%%[![:space:]]*}"}"
-              dep_trimmed="${dep_trimmed%"${dep_trimmed##*[![:space:]]}"}"
-              if [ "$dep_trimmed" = "astro" ] || [[ "$dep_trimmed" == @astrojs/* ]]; then
-                eligible=false
-                reason="contains denied dependency: $dep_trimmed"
-                break
-              fi
-            done
+          if [ "$UPDATE_TYPE" = "version-update:semver-major" ] && [ "$DEPENDENCY_TYPE" = "direct:production" ]; then
+            eligible=false
+            reason="production major bump (${DEPENDENCY_NAMES})"
           fi
 
           {
@@ -96,6 +82,6 @@ jobs:
 
           This PR was **not** enrolled in auto-merge: ${REASON}.
 
-          Patch/minor updates outside the deny-list (\`astro\`, \`@astrojs/*\`) merge automatically once required checks pass. Majors and denied packages need a human (or a follow-up agent).
+          Only **production major** bumps need manual review. Patch/minor updates (including Astro and Tailwind) and non-production majors merge automatically once required checks pass.
           EOF
           )"
