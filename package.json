@@ -48,7 +48,7 @@
     "linkedom": "^0.18.13",
     "msw": "^2.15.0",
     "oxlint": "^1.75.0",
-    "oxlint-tsgolint": "^0.24.0",
+    "oxlint-tsgolint": "^7.0.2001",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.8.1",
