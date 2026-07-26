@@ -1,0 +1,101 @@
+# Enables GitHub auto-merge for low-risk Dependabot PRs once required checks pass.
+#
+# Uses pull_request_target so GITHUB_TOKEN has write access for Dependabot PRs.
+# Do not checkout or execute PR code in this workflow.
+
+name: Dependabot auto-merge
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - reopened
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    steps:
+      - name: Fetch Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Decide merge eligibility
+        id: policy
+        env:
+          UPDATE_TYPE: ${{ steps.metadata.outputs.update-type }}
+          DEPENDENCY_NAMES: ${{ steps.metadata.outputs.dependency-names }}
+          DEPENDENCY_GROUP: ${{ steps.metadata.outputs.dependency-group }}
+          PACKAGE_ECOSYSTEM: ${{ steps.metadata.outputs.package-ecosystem }}
+        run: |
+          set -euo pipefail
+
+          echo "update-type=$UPDATE_TYPE"
+          echo "dependency-names=$DEPENDENCY_NAMES"
+          echo "dependency-group=$DEPENDENCY_GROUP"
+          echo "package-ecosystem=$PACKAGE_ECOSYSTEM"
+
+          eligible=true
+          reason=""
+
+          case "$UPDATE_TYPE" in
+            version-update:semver-patch|version-update:semver-minor) ;;
+            *)
+              eligible=false
+              reason="update type is ${UPDATE_TYPE:-unknown} (only patch/minor auto-merge)"
+              ;;
+          esac
+
+          # Deny-list: framework packages — any mention blocks auto-merge.
+          if [ "$eligible" = true ]; then
+            IFS=',' read -r -a deps <<< "$DEPENDENCY_NAMES"
+            for dep in "${deps[@]}"; do
+              dep_trimmed="${dep#"${dep%%[![:space:]]*}"}"
+              dep_trimmed="${dep_trimmed%"${dep_trimmed##*[![:space:]]}"}"
+              if [ "$dep_trimmed" = "astro" ] || [[ "$dep_trimmed" == @astrojs/* ]]; then
+                eligible=false
+                reason="contains denied dependency: $dep_trimmed"
+                break
+              fi
+            done
+          fi
+
+          {
+            echo "eligible=$eligible"
+            echo "reason=$reason"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Enable auto-merge
+        if: steps.policy.outputs.eligible == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          gh pr edit "$PR_URL" --add-label "dependencies" --add-label "automerge"
+          gh pr merge --auto --squash "$PR_URL"
+          echo "Enabled auto-merge (squash) for $PR_URL"
+
+      - name: Mark for manual review
+        if: steps.policy.outputs.eligible != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          REASON: ${{ steps.policy.outputs.reason }}
+        run: |
+          gh pr edit "$PR_URL" --add-label "dependencies" --add-label "needs-manual-review"
+          gh pr comment "$PR_URL" --body "$(cat <<EOF
+          ### Dependabot auto-merge skipped
+
+          This PR was **not** enrolled in auto-merge: ${REASON}.
+
+          Patch/minor updates outside the deny-list (\`astro\`, \`@astrojs/*\`) merge automatically once required checks pass. Majors and denied packages need a human (or a follow-up agent).
+          EOF
+          )"

@@ -4,25 +4,58 @@ version: 2
 updates:
   - package-ecosystem: "npm"
     directory: "/"
-    open-pull-requests-limit: 15
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+    schedule:
+      interval: "weekly"
+      day: "friday"
+      time: "17:00"
+      timezone: "Europe/Copenhagen"
+    # Groups are matched in order; first match wins. Majors stay ungrouped for review.
+    groups:
+      tailwind:
+        patterns:
+          - "tailwindcss"
+          - "@tailwindcss/*"
+        update-types:
+          - "minor"
+          - "patch"
+      production-minor-and-patch:
+        dependency-type: "production"
+        update-types:
+          - "minor"
+          - "patch"
+        exclude-patterns:
+          # Framework upgrades are reviewed manually (never auto-merged).
+          - "astro"
+          - "@astrojs/*"
+          - "tailwindcss"
+          - "@tailwindcss/*"
+      development-minor-and-patch:
+        dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
+    ignore:
+      # Updated by the Update Node workflow
+      - dependency-name: "@types/node"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "github-actions"
     schedule:
       interval: "weekly"
       day: "friday"
       time: "17:00"
       timezone: "Europe/Copenhagen"
     groups:
-      tailwind:
+      github-actions-minor-and-patch:
         patterns:
-          - "tailwindcss"
-          - "@tailwindcss/vite"
-    ignore:
-      # Ignore updates for @types/node as they are updated in the Update Node workflow
-      - dependency-name: "@types/node"
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    open-pull-requests-limit: 5
-    schedule:
-      interval: "weekly"
-      day: "friday"
-      time: "17:00"
-      timezone: "Europe/Copenhagen"
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
