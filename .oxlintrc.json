@@ -62,6 +62,7 @@
     "jest/prefer-spy-on": "off",
     "jest/require-hook": "off",
     "node/no-process-env": "off",
+    "node/no-top-level-await": "off",
     "oxc/no-async-await": "off",
     "oxc/no-optional-chaining": "off",
     "oxc/no-rest-spread-properties": "off",
