@@ -1023,8 +1023,10 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
     const c = document.querySelector("#background-canvas") as HTMLCanvasElement
     const ctx = c.getContext("2d") as CanvasRenderingContext2D
 
-    let cw = (c.width = width)
-    const ch = (c.height = 324)
+    c.width = width
+    let cw = width
+    c.height = 324
+    const ch = 324
     let radius = Math.max(cw, ch)
     let factor = width / NARROW_CONTENT_WIDTH
     let naStyle = false
