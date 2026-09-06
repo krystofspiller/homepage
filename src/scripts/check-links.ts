@@ -96,7 +96,10 @@ const checkLink = async (
       result.httpCode === "" ||
       result.httpCode === "000")
   ) {
-    return { httpCode: String(result.exitCode), redirectUrl: result.redirectUrl }
+    return {
+      httpCode: String(result.exitCode),
+      redirectUrl: result.redirectUrl,
+    }
   }
 
   return { httpCode: result.httpCode, redirectUrl: result.redirectUrl }
