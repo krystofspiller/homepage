@@ -5,6 +5,9 @@ import path from "node:path"
 import { readFile, readdir } from "node:fs/promises"
 import { exec } from "node:child_process"
 
+const CURL_IMAGE = "lwthiker/curl-impersonate:0.6-chrome"
+const CURL_SSL_VERIFY_FAILED = 60
+
 const execAsync = async (command: string): Promise<string> => {
   const output = await new Promise<string>((resolve, reject) => {
     exec(command, { encoding: "utf8" }, (error, stdout) => {
@@ -18,14 +21,45 @@ const execAsync = async (command: string): Promise<string> => {
   return output
 }
 
+const runCurl = async (
+  link: string,
+  extraArgs: string[] = [],
+): Promise<{
+  httpCode: string | undefined
+  redirectUrl: string | undefined
+  exitCode: number
+}> => {
+  const extra = extraArgs.length > 0 ? ` ${extraArgs.join(" ")}` : ""
+  const command = `docker run --platform linux/amd64 --rm ${CURL_IMAGE} curl_chrome116 --silent --output /dev/null -w "%{http_code};%{redirect_url}"${extra} ${JSON.stringify(link)}`
+
+  const { exitCode, stdout } = await new Promise<{
+    exitCode: number
+    stdout: string
+  }>((resolve) => {
+    exec(command, { encoding: "utf8" }, (error, stdout) => {
+      let exitCode = 0
+      if (error) {
+        exitCode = typeof error.code === "number" ? error.code : 1
+      }
+      resolve({ exitCode, stdout })
+    })
+  })
+
+  const [httpCode, redirectUrl] = stdout.trim().split(";")
+  return { exitCode, httpCode, redirectUrl }
+}
+
 const isCi = process.argv[2] === "ci"
 
 const setup = async (): Promise<void> => {
   console.log("Setup - pull curl-impersonate chrome")
-  const output = await execAsync(
-    "docker pull lwthiker/curl-impersonate:0.6-chrome",
-  )
+  const output = await execAsync(`docker pull ${CURL_IMAGE}`)
   console.log("Docker pull curl-impersonate chrome:\n", output)
+}
+
+const vimeoPlayerVideoId = (link: string): string | undefined => {
+  const match = /^https:\/\/player\.vimeo\.com\/video\/(?<id>\d+)/.exec(link)
+  return match?.groups?.id
 }
 
 const checkLink = async (
@@ -34,11 +68,41 @@ const checkLink = async (
   httpCode: string | undefined
   redirectUrl: string | undefined
 }> => {
-  const output = await execAsync(
-    `docker run --platform linux/amd64 --rm lwthiker/curl-impersonate:0.6-chrome curl_chrome116 --silent --output /dev/null -w "%{http_code};%{redirect_url}" ${link}`,
-  )
-  const [httpCode, redirectUrl] = output.split(";")
-  return { httpCode, redirectUrl }
+  const videoId = vimeoPlayerVideoId(link)
+  // Player embeds 401 to curl; oembed still 200s when the video exists.
+  const requestUrl =
+    videoId === undefined
+      ? link
+      : `https://vimeo.com/api/oembed.json?url=https://vimeo.com/${videoId}`
+
+  const result = await runCurl(requestUrl)
+
+  // Stale CA bundle in curl-impersonate 0.6 can fail TLS (curl 60).
+  // Retry without verification so we still record the real HTTP status.
+  if (result.exitCode === CURL_SSL_VERIFY_FAILED) {
+    const insecure = await runCurl(requestUrl, ["-k"])
+    if (
+      insecure.httpCode !== undefined &&
+      insecure.httpCode !== "" &&
+      insecure.httpCode !== "000"
+    ) {
+      return { httpCode: insecure.httpCode, redirectUrl: insecure.redirectUrl }
+    }
+  }
+
+  if (
+    result.exitCode !== 0 &&
+    (result.httpCode === undefined ||
+      result.httpCode === "" ||
+      result.httpCode === "000")
+  ) {
+    return {
+      httpCode: String(result.exitCode),
+      redirectUrl: result.redirectUrl,
+    }
+  }
+
+  return { httpCode: result.httpCode, redirectUrl: result.redirectUrl }
 }
 
 interface FileInfo {
@@ -246,7 +310,7 @@ const main = async (): Promise<void> => {
     ["999", "https://www.linkedin.com/in/krystof-spiller"],
     ["999", "https://www.linkedin.com/in/maria-muhandes"],
     ["302", "https://player.vimeo.com"],
-    ["302", "https://unpkg.com/knip@5/schema.json"],
+    ["302", "https://unpkg.com/knip@6/schema.json"],
     ...(isCi
       ? ([
           [
@@ -262,20 +326,8 @@ const main = async (): Promise<void> => {
             "https://open.spotify.com/embed/playlist/1i1czz9lUslWTzFr5cHomk?utm_source=generator&theme=0",
           ],
           [
-            "401",
-            "https://player.vimeo.com/video/1065493306?autoplay=1&dnt=1&background=1",
-          ],
-          [
             "999",
             "https://en.wikipedia.org/w/index.php?title=List_of_circulating_currencies&oldid=1275996218#:~:text=There%20are%20180%20currencies",
-          ],
-          [
-            "401",
-            "https://player.vimeo.com/video/885736465?autoplay=1&dnt=1&background=1",
-          ],
-          [
-            "401",
-            "https://player.vimeo.com/video/1065496020?autoplay=1&dnt=1&background=1",
           ],
         ] satisfies [string, string][])
       : []),
