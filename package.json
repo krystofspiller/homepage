@@ -21,19 +21,19 @@
   },
   "dependencies": {
     "@astrojs/alpinejs": "^1.0.0",
-    "@astrojs/mdx": "^8.0.0",
+    "@astrojs/mdx": "^8.0.1",
     "@floating-ui/dom": "^1.8.0",
     "@tailwindcss/vite": "^4.3.3",
-    "alpinejs": "^3.17.2",
-    "astro": "^7.3.1",
+    "alpinejs": "^3.17.3",
+    "astro": "^7.3.2",
     "butteruptoasts": "^2.0.1",
     "canvas-confetti": "^1.9.4",
     "gsap": "^3.15.0",
     "nanostores": "^1.5.3",
     "sharp": "^0.35.4",
-    "tailwind-merge": "^3.6.0",
+    "tailwind-merge": "^3.7.0",
     "tailwindcss": "^4.3.3",
-    "zod": "^4.5.4"
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@playwright/test": "^1.63.0",
