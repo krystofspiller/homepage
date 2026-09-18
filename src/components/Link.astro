@@ -42,7 +42,7 @@ const calculatedTarget =
       mask-repeat: no-repeat;
     }
   }
-
+  
   a[href*="//"][data-include-icon*="true"]:not([href*="krystofs.com"]):hover,
   a[href*="//"][data-include-icon*="true"]:not([href*="krystofs.com"]):focus {
     &:after {
@@ -58,5 +58,6 @@ const calculatedTarget =
     className,
   )}
   target={calculatedTarget}
-  href={href}><slot /></Element
->
+  href={href}
+  ><slot
+/></Element>

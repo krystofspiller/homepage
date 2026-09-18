@@ -47,13 +47,11 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
     <div
       id="leftHalfMoon"
       class="absolute -left-[200px] hidden h-[320px] w-[180px] rotate-2 rounded-tl-[160px] rounded-tr-[20px] rounded-br-[20px] rounded-bl-[160px] shadow-[0px_0px_32px_0px_var(--color-orange)]"
-    >
-    </div>
+    ></div>
     <div
       id="rightHalfMoon"
       class="absolute left-[calc(100%+20px)] hidden h-[320px] w-[180px] -rotate-2 rounded-tl-[20px] rounded-tr-[160px] rounded-br-[160px] rounded-bl-[20px] shadow-[0px_0px_32px_0px_var(--color-orange)]"
-    >
-    </div>
+    ></div>
     <div
       id="top-content"
       class="from-orange-30 flex w-full bg-radial to-transparent to-70% mask-[linear-gradient(to_right,transparent_0,black_50px,black_calc(100%-50px),transparent_100%)]"
@@ -63,15 +61,18 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
       >
         <canvas
           id="background-canvas"
-          class="opacity-0 transition duration-2000"></canvas>
+          class="opacity-0 transition duration-2000"
+        ></canvas>
         <div
           class="absolute top-1/2 left-1/2 flex w-full -translate-x-1/2 -translate-y-3/4 flex-col items-center justify-center text-center"
         >
           <h1 class="block text-4xl font-light">
-            Hi <span
+            Hi
+            <span
               class="animate-wave hover:animate-wave-infinite inline-block origin-[75%_75%]"
               >👋</span
-            > I'm
+            >
+            I'm
             <span class="relative">
               <svg
                 width="280"
@@ -107,7 +108,7 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
               >
                 <g class="sparkles">
                   <path
-                    style="animation-delay: 2s; transform-box: fill-box;"
+                    style="animation-delay: 2s; transform-box: fill-box"
                     class="animate-sparkle origin-center transform-[scale(0)]"
                     fill="white"
                     d="M99.18160965 12.79394657s1.61168639-8.41658446 3.0442965 0c0 0 8.05843194 1.43261013 0 2.86522025 0 0-1.43261011 8.59566072-3.0442965 0-4.83505916-.89538133-4.47690663-1.79076265 0-2.86522025z"
@@ -128,12 +129,13 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
 
   <div class="mb-12">
     <Paragraph>
-      I'm a <span class="effect-shine text-lg leading-8 text-[#f0f0ff]"
-        >detail</span
-      >-oriented software engineer with <strong
-        class="font-medium text-zinc-100"
+      I'm a
+      <span class="effect-shine text-lg leading-8 text-[#f0f0ff]">detail</span
+      >-oriented software engineer with
+      <strong class="font-medium text-zinc-100"
         >{YEARS_OF_EXPERIENCE} years of experience</strong
-      > in fullstack web development working with TypeScript, React, Ruby.
+      >
+      in fullstack web development working with TypeScript, React, Ruby.
     </Paragraph>
     <div class="relative" id="us-eagle">
       <audio class="hidden" controls>
@@ -142,8 +144,7 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
       </audio>
       <div
         class="animate-move-offset absolute -top-[50px] left-[calc(50%-100px)] h-0 w-0 scale-100 rotate-180 text-8xl opacity-0"
-      >
-      </div>
+      ></div>
     </div>
     <div
       id="maple-syrup"
@@ -156,18 +157,18 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
       />
     </div>
     <p class="text-lg leading-8 text-zinc-400">
-      Read about my <Link href="#professional-contributions"
-        >professional contributions</Link
-      ><span>, <Link href="#skills">skills</Link>, </span> and <span
-        class="relative"
-        ><Link className="relative z-1" href="#general">more</Link><Link
-          href="/fun-at-parties"
+      Read about my
+      <Link href="#professional-contributions">professional contributions</Link
+      ><span>, <Link href="#skills">skills</Link>, </span> and
+      <span class="relative"
+        ><Link className="relative z-1" href="#general">more</Link
+        ><Link href="/fun-at-parties"
           ><FunAtParties
             className="absolute top-[18px] -left-[10px] z-0 hover:[&_path]:fill-[url(#fun-at-parties-linear)]"
-          /></Link
-        ></span
+        /></Link></span
       >
-      below or see <Link href="https://krystofspiller.github.io/cv/resume.pdf"
+      below or see
+      <Link href="https://krystofspiller.github.io/cv/resume.pdf"
         >my resume</Link
       >.
     </p>
@@ -196,13 +197,16 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
           is a place in a port where containers are loaded and unloaded from the
           vessel.</span
         ><span slot="trigger">Terminal</span></TooltipInline
-      > integrations
+      >
+      integrations
     </Heading>
     <Paragraph>
       I've integrated Portchain's data platform with terminals from Central
-      America and Southern Europe using REST APIs. <SeeMore
+      America and Southern Europe using REST APIs.
+      <SeeMore
         >These integrations periodically check for updates from terminals, match
-        their schedules with Portchain's data and synchronize between the two.</SeeMore
+        their schedules with Portchain's data and synchronize between the
+        two.</SeeMore
       >
     </Paragraph>
     <Heading data-as="h5">Other</Heading>
@@ -243,21 +247,24 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
     </Heading>
     <Paragraph>
       I have driven increased product demand by developing a calculator that
-      helps founders model unpriced funding rounds.<SeeMore
-        >The solution involved an <TooltipInline>
+      helps founders model unpriced funding
+      rounds.<SeeMore>The solution involved an
+        <TooltipInline>
           <span slot="trigger">RFC</span>
           <span slot="content"
             ><Link href="https://en.wikipedia.org/wiki/Request_for_Comments"
               >Request For Comments</Link
             ></span
           >
-        </TooltipInline>-like process to come up with the best solution as this
-        was the first public page (i.e. not behind auth, obviously excluding a
-        sign in/sign up flow). At the time we were also in a rebranding
-        transition where the homepage was already transitioned and the idea was
-        to use the new design on all public facing pages so the calculator
-        should also follow the new design. It uses many primitive components and
-        other more complex components some of which I helped building. <Link
+        </TooltipInline
+        >-like process to come up with the best solution as this was the first
+        public page (i.e. not behind auth, obviously excluding a sign in/sign up
+        flow). At the time we were also in a rebranding transition where the
+        homepage was already transitioned and the idea was to use the new design
+        on all public facing pages so the calculator should also follow the new
+        design. It uses many primitive components and other more complex
+        components some of which I helped building.
+        <Link
           href="https://www.app.europe.carta.com/convertible_securities_calculator/?skip=true"
           >Check it out for yourself!</Link
         >
@@ -270,7 +277,8 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
         loading="lazy"
         src="https://player.vimeo.com/video/1065493306?autoplay=1&dnt=1&background=1"
         width="640"
-        height="360"></iframe>
+        height="360"
+      ></iframe>
     </div>
 
     <Heading
@@ -278,9 +286,10 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
       id="billing-revamp-project"
       data-toc="Billing revamp project"
     >
-      Billing revamp&nbsp;<span class="relative"
-        ><span class="absolute w-24 opacity-0">project</span><span
-          class="absolute w-24"
+      Billing
+      revamp&nbsp;<span class="relative"
+        ><span class="absolute w-24 opacity-0">project</span
+        ><span class="absolute w-24"
           ><span class="animate-glow text-black">war story</span></span
         ></span
       >
@@ -288,31 +297,36 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
     <Paragraph>
       I enabled better sales offering and streamlined customer billing
       management by revamping billing in a Ruby on Rails app integration with
-      Stripe and HubSpot.<SeeMore>
+      Stripe and
+      HubSpot.<SeeMore>
         This was the longest running project I worked on and wrote around 90% of
         it when it comes solely to the changes in the app codebase. First step
-        was a migration <TooltipInline
+        was a migration
+        <TooltipInline
           ><span slot="content"
-            >This was supposed to be relatively simple. But it's <Link
-              href="https://www.youtube.com/watch?v=Wdyndb17K58">Stripe</Link
-            > we're talking about <span class="text-white">🙂</span> I've ran into
-            most of the issues described in that video and many more during this project.
-            Migrating from one instance to another is a hell that made me into the
-            man I'm today.</span
-          ><span slot="trigger">from one Stripe instance to another</span
+            >This was supposed to be relatively simple. But it's
+            <Link href="https://www.youtube.com/watch?v=Wdyndb17K58"
+              >Stripe</Link
+            >
+            we're talking about <span class="text-white">🙂</span> I've ran into
+            most of the issues described in that video and many more during this
+            project. Migrating from one instance to another is a hell that made
+            me into the man I'm today.</span
+          ><span slot="trigger"
+            >from one Stripe instance to another</span
           ></TooltipInline
         >. The next step involved changing how the app is interacting with
         Stripe where previously it was the app recording changes to customer
         subscriptions using Stripe's API and now the idea was to make these
-        changes from the <Link
-          href="https://docs.stripe.com/customer-management"
+        changes from the
+        <Link href="https://docs.stripe.com/customer-management"
           >self-service customer portal</Link
-        > and update the app data via webhook events from Stripe. It also involved
-        a change to the pricing packages where there was previously a single package
-        and additional customer features were enabled on an ad-hoc basis and now there
-        would be multiple packages with certain pre-enabled features.</SeeMore
-      ></Paragraph
-    >
+        >
+        and update the app data via webhook events from Stripe. It also involved
+        a change to the pricing packages where there was previously a single
+        package and additional customer features were enabled on an ad-hoc basis
+        and now there would be multiple packages with certain pre-enabled
+        features.</SeeMore></Paragraph>
     <Billing />
 
     <Heading data-as="h4" id="fundraising" data-toc="Early-stage fundraising">
@@ -320,7 +334,8 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
     </Heading>
     <Paragraph>
       This project helps early-stage startups in fundraising and offering them
-      inexpensive assistance on tax relief to ensure their success. <SeeMore
+      inexpensive assistance on tax relief to ensure their success.
+      <SeeMore
         >Services included are round modelling calculator, creating and filing
         advance assurance, SEIS & EIS, and templates for ASAs & SAFEs. Major
         challenge in this project was a tight deadline that was agreed on few
@@ -342,7 +357,8 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
       <SeeMore
         >These included a backoffice part, where our colleagues fulfilling the
         request were able to manage and update progress on the requests, and the
-        end customer part, where customers were able to request these services.</SeeMore
+        end customer part, where customers were able to request these
+        services.</SeeMore
       >
     </Paragraph>
     <Workflows margin="mb-6" />
@@ -355,33 +371,39 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
       Currency exchange rate provider
     </Heading>
     <Paragraph>
-      I provided affordable currency exchange rate solution for 200+ currencies.<SeeMore
-        >While the app had a multi-currency support from the time I joined, the
-        currencies that were supported were those available from <Link
+      I provided affordable currency exchange rate solution for 200+
+      currencies.<SeeMore>While the app had a multi-currency support from the
+        time I joined, the currencies that were supported were those available
+        from
+        <Link
           href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
           >European Central Bank</Link
-        > which contains 30 currencies. Meanwhile, there are <Link
+        >
+        which contains 30 currencies. Meanwhile, there are
+        <Link
           href="https://en.wikipedia.org/w/index.php?title=List_of_circulating_currencies&oldid=1275996218#:~:text=There%20are%20180%20currencies"
           >180 currently circulating currencies recognized by UN</Link
-        > and some of those started to appear in the app and it became cumbersome
-        to deal with them <TooltipInline
+        >
+        and some of those started to appear in the app and it became cumbersome
+        to deal with them
+        <TooltipInline
           ><span slot="content"
             >The exchange rate for the missing currency had to be found and
             manually added to the database. As we had to do this via a manual
             task due to compliance, it was anything but fun. Not to mention this
             exchange rate became out-of-date soon and would result in incorrect
-            conversions. So we had to bite the <Link
-              href="https://xkcd.com/1319/">automation</Link
-            > bullet eventually.</span
+            conversions. So we had to bite the
+            <Link href="https://xkcd.com/1319/">automation</Link> bullet
+            eventually.</span
           ><span slot="trigger">manually</span></TooltipInline
         >.<span class="mt-3 block">
-          I used <Link href="https://exchangeratesapi.io/"
-            >Exchangerates API</Link
-          > to get a more comprehensive list of the exchange rates. As we didn't call
-          the API everytime we needed the exchange rate but instead stored it in a
-          database (we also needed historical exchange rates in some cases), new exchange
-          rates were automatically added to the database on a daily basis.</span
-        >
+          I used
+          <Link href="https://exchangeratesapi.io/">Exchangerates API</Link> to
+          get a more comprehensive list of the exchange rates. As we didn't call
+          the API everytime we needed the exchange rate but instead stored it in
+          a database (we also needed historical exchange rates in some cases),
+          new exchange rates were automatically added to the database on a daily
+          basis.</span>
       </SeeMore>
     </Paragraph>
     <CurrencyProviders margin="mb-6" />
@@ -390,34 +412,41 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
       Automated invalid link checker
     </Heading>
     <Paragraph>
-      Addressed invalid links by automatically checking and reporting them.<SeeMore
+      Addressed invalid links by automatically checking and reporting
+      them.<SeeMore
         ><span class="mb-3 block"
           >An external link can change and suddenly you're linking to a
           non-existent page. At some point we encountered a few links that were
           invalid and instead of just fixing those and moving on with our life I
-          wrote a script to <TooltipInline
+          wrote a script to
+          <TooltipInline
             ><span slot="content"
-              >I thought this would be a matter of simply <span
-                class="font-mono">curl</span
-              >ing the page with a parameter to return the HTTP response status
-              code. How naïve I was. I had to use <Link
+              >I thought this would be a matter of simply
+              <span class="font-mono">curl</span>ing the page with a parameter
+              to return the HTTP response status code. How naïve I was. I had to
+              use
+              <Link
                 className="font-mono"
                 href="https://github.com/lwthiker/curl-impersonate"
                 >curl-impersonate</Link
-              > to mimic a browser making the request for it to go through on many
-              pages. There was also the question of redirecting where for example
-              Zendesk (Support Center) puts an ID as well as the name of the support
-              article into the URL so when the name of the article was adjusted the
-              link still worked but returned a redirect 3xx code. I made <span
-                class="font-mono">curl-impersonate</span
-              > return the redirect URL as well and included it in the result message.</span
+              >
+              to mimic a browser making the request for it to go through on many
+              pages. There was also the question of redirecting where for
+              example Zendesk (Support Center) puts an ID as well as the name of
+              the support article into the URL so when the name of the article
+              was adjusted the link still worked but returned a redirect 3xx
+              code. I made <span class="font-mono">curl-impersonate</span>
+              return the redirect URL as well and included it in the result
+              message.</span
             ><span slot="trigger">check external links</span></TooltipInline
-          > that I set up to run on GitHub Actions on a weekly basis and send a result
-          to an #automated-checks Slack channel. In this way, these issues became
-          more visible and otherwise invalid links that would be in the app for many
-          months were fixed within a week.</span
+          >
+          that I set up to run on GitHub Actions on a weekly basis and send a
+          result to an #automated-checks Slack channel. In this way, these
+          issues became more visible and otherwise invalid links that would be
+          in the app for many months were fixed within a week.</span
         ><span class="mb-3 block"
-          >This check has been <Link
+          >This check has been
+          <Link
             href="https://github.com/krystofspiller/homepage/blob/main/src/scripts/check-links.ts"
             >implemented for this blog as well</Link
           >.</span
@@ -432,7 +461,8 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
 
     <Heading data-as="h4" id="modals">Improved modal component</Heading>
     <Paragraph>
-      Improved both UX and DX by improving a modal component. <SeeMore
+      Improved both UX and DX by improving a modal component.
+      <SeeMore
         ><span class="mb-3 block"
           >The way we were writing most of the modals was by directly using the
           design system components as opposed to a more complete modal
@@ -447,11 +477,13 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
           buttons was sometimes different and when it came to modals with forms,
           the form being reset after a successful submit caused a flicker while
           the modal was fading out which was visually distracting.
-        </span><span class="mb-3 block">
+        </span
+        ><span class="mb-3 block">
           I implemented a modal component to make implementing consistent modals
           simpler, including support for forms, where all of the aforementioned
           concerns were handled by default. These models can be seen in action
-          in the <Link href="#model-funding-rounds"
+          in the
+          <Link href="#model-funding-rounds"
             >funding rounds calculator above</Link
           >.
         </span></SeeMore
@@ -463,20 +495,22 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
       >Data integrity checks</Heading
     >
     <Paragraph>
-      Maintained product quality by implementing data integrity checks.<SeeMore>
-        My colleague implemented a framework for adding data integrity <TooltipInline
+      Maintained product quality by implementing data integrity
+      checks.<SeeMore>
+        My colleague implemented a framework for adding data integrity
+        <TooltipInline
           ><span slot="content"
             >We had a policy for no check constraints in the database so while
             some of these checks could have been handled differently, this was
             still a better solution for majority of the checked cases due to the
             sheer complexity of the domain and the resultant data.</span
           ><span slot="trigger">checks</span></TooltipInline
-        > to notify us of instances where invalid data got into the database and also
-        automatically fix them if an automatic fix is possible. I wrote checks dealing
-        with detecting and autofixing trailing whitespace in attributes like names,
-        emails and domain specific identifiers which could cause subtle bugs in filtering
-        and matching items.</SeeMore
-      >
+        >
+        to notify us of instances where invalid data got into the database and
+        also automatically fix them if an automatic fix is possible. I wrote
+        checks dealing with detecting and autofixing trailing whitespace in
+        attributes like names, emails and domain specific identifiers which
+        could cause subtle bugs in filtering and matching items.</SeeMore>
     </Paragraph>
     <Image
       class="mb-6 w-full"
@@ -487,39 +521,45 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
     <Heading data-as="h4" id="linter-rules">Linter rules</Heading>
     <SeeMore>
       <span slot="before-see-more">
-        Maintained coding conventions and simplified codebase using <TooltipInline
+        Maintained coding conventions and simplified codebase using
+        <TooltipInline
           ><span slot="content"
             >A process and a tool for code analysis to flag programming errors,
             bugs, stylistics errors and suspicious constructs.</span
           ><span slot="trigger">linting</span></TooltipInline
-        > rules as well as prevented subtle bugs.
+        >
+        rules as well as prevented subtle bugs.
       </span>
       <div slot="after-see-more" class="mb-6 flex flex-col gap-3">
         <OpenApiHelperExample />
         <StringConstantsExistsExample />
       </div>
       <Paragraph>
-        Maintained coding conventions and simplified codebase using <TooltipInline
+        Maintained coding conventions and simplified codebase using
+        <TooltipInline
           ><span slot="content"
             >A process and a tool for code analysis to flag programming errors,
             bugs, stylistics errors and suspicious constructs.</span
           ><span slot="trigger">linting</span></TooltipInline
-        > rules as well as prevented subtle bugs. This involved playing around with
+        >
+        rules as well as prevented subtle bugs. This involved playing around
+        with
         <TooltipInline>
           <span slot="trigger">ASTs</span>
           <span slot="content"
-            >Read more about <Link
-              href="https://en.wikipedia.org/wiki/Abstract_syntax_tree"
-              ><strong class="font-bold">A</strong>bstract <strong
-                class="font-bold">S</strong
-              >yntax <strong class="font-bold">T</strong>rees</Link
-            > for some light nighttime reading.</span
+            >Read more about
+            <Link href="https://en.wikipedia.org/wiki/Abstract_syntax_tree"
+              ><strong class="font-bold">A</strong>bstract
+              <strong class="font-bold">S</strong>yntax
+              <strong class="font-bold">T</strong>rees</Link
+            >
+            for some light nighttime reading.</span
           >
-        </TooltipInline>. I made linter rules for both frontend (ESLint) and
-        backend (RuboCop). Frontend one was about linting a stylistic error to
-        follow our coding conventions (i.e. no more pointing it out in code
-        reviews). In the backend, I made two linting rules which are a tad more
-        complex:
+        </TooltipInline
+        >. I made linter rules for both frontend (ESLint) and backend (RuboCop).
+        Frontend one was about linting a stylistic error to follow our coding
+        conventions (i.e. no more pointing it out in code reviews). In the
+        backend, I made two linting rules which are a tad more complex:
       </Paragraph>
       <List type="decimal">
         <li>
@@ -529,35 +569,39 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
                 >Specification for a machine-readable interface definition
                 language for describing web services.</span
               ><span slot="trigger">OpenAPI</span></TooltipInline
-            > helper enforcement</strong
-          > - writing the OpenAPI specifications can be a bit cumbersome, there's
-          a lot of boilerplate that needs to be written making bigger types hundreds
-          of lines long. I wrote a helper to simplify this where majority of the use
-          cases that previously took anywhere from 1 to 10 lines could now be reduced
-          to a single line of code making it more readable. Converting the whole OpenAPI
-          specification to use this helper would a large effort for an individual
-          and there would still be the problem with my colleagues not being aware
-          of this helper and writing new specifications without it. This linter rule
-          therefore produced <UnderlinedText type="warning"
-            >warnings</UnderlinedText
-          > (and <UnderlinedText type="error">errors</UnderlinedText> in some cases)
-          to enforce its usage suggesting fellow colleagues to convert it to use the
-          helper. The idea was that the <UnderlinedText>warnings</UnderlinedText
-          > would be changed to <UnderlinedText type="error"
-            >errors</UnderlinedText
-          > once the conversion is complete so that it would be written in this more
+            >
+            helper enforcement</strong
+          >
+          - writing the OpenAPI specifications can be a bit cumbersome, there's
+          a lot of boilerplate that needs to be written making bigger types
+          hundreds of lines long. I wrote a helper to simplify this where
+          majority of the use cases that previously took anywhere from 1 to 10
+          lines could now be reduced to a single line of code making it more
+          readable. Converting the whole OpenAPI specification to use this
+          helper would a large effort for an individual and there would still be
+          the problem with my colleagues not being aware of this helper and
+          writing new specifications without it. This linter rule therefore
+          produced <UnderlinedText type="warning">warnings</UnderlinedText> (and
+          <UnderlinedText type="error">errors</UnderlinedText> in some cases) to
+          enforce its usage suggesting fellow colleagues to convert it to use
+          the helper. The idea was that the
+          <UnderlinedText>warnings</UnderlinedText> would be changed to
+          <UnderlinedText type="error">errors</UnderlinedText> once the
+          conversion is complete so that it would be written in this more
           concise and readable format.
           <OpenApiHelperExample />
         </li>
         <li>
           <strong class="font-bold"
             >Check strings looking like constants actually exist</strong
-          > - in Ruby, we were sometimes forced to write a constant, such as a class
-          name, as a string. The static type checker for Ruby, called Sorbet, we used
-          obviously didn't check strings and such strings sometimes became obsolete
-          when the class was refactored or removed and could cause an issue. This
-          linter rule checked that all strings that looked like such constants actually
-          referred to an existing constant in the codebase.
+          >
+          - in Ruby, we were sometimes forced to write a constant, such as a
+          class name, as a string. The static type checker for Ruby, called
+          Sorbet, we used obviously didn't check strings and such strings
+          sometimes became obsolete when the class was refactored or removed and
+          could cause an issue. This linter rule checked that all strings that
+          looked like such constants actually referred to an existing constant
+          in the codebase.
           <StringConstantsExistsExample />
         </li>
       </List>
@@ -568,7 +612,8 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
     </Heading>
     <Paragraph>
       Increased developer's confidence and prevented minor bugs by ensuring
-      frontend matches backend.<SeeMore>
+      frontend matches
+      backend.<SeeMore>
         The OpenAPI specification was used to generate TypeScript types in the
         frontend. Since the OpenAPI specification was written by hand, there
         could be and were discrepancies between what was described in the
@@ -594,15 +639,16 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
     </Heading>
     <Paragraph data-as="div">
       Streamlined minor process by automatically formatting commit messages
-      according to conventional message format. <SeeMore
-        >During my tenure, we have evolved our requirements for commit and
+      according to conventional message format.
+      <SeeMore>During my tenure, we have evolved our requirements for commit and
         branch names as follows:
         <List type="decimal">
           <li>No expected format for branches or commits</li>
           <li>
             <Link href="https://www.conventionalcommits.org/en/v1.0.0/"
               >Conventional commits</Link
-            > required for features
+            >
+            required for features
           </li>
           <li>
             Standardized branch names and conventional commits required
@@ -613,18 +659,17 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
             have standardized branch name and conventional commits
           </li>
         </List>
-        During the various stages, we have enforced this name both in CI as well as
-        in Git commit hooks for faster feedback. At the last stage, where every change
-        required a conventional commit message and happened on a branch called something
-        like
-        <span class="font-mono">feat/JIRA-123-optional-description</span> it became
-        a bit tedious to always include <span class="font-mono"
-          >feat(JIRA-123):</span
-        >
-        in the commit message. I wrote a commit message Git hook that took the type
-        of the commit and scope (Jira ticket) from the branch name and formatted an
-        otherwise plain message according to the conventional commit specification.
-        Small time safer but mostly one less thing to think about.
+        During the various stages, we have enforced this name both in CI as well
+        as in Git commit hooks for faster feedback. At the last stage, where
+        every change required a conventional commit message and happened on a
+        branch called something like
+        <span class="font-mono">feat/JIRA-123-optional-description</span> it
+        became a bit tedious to always include
+        <span class="font-mono">feat(JIRA-123):</span> in the commit message. I
+        wrote a commit message Git hook that took the type of the commit and
+        scope (Jira ticket) from the branch name and formatted an otherwise
+        plain message according to the conventional commit specification. Small
+        time safer but mostly one less thing to think about.
       </SeeMore>
     </Paragraph>
     <Image
@@ -664,17 +709,17 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
     <Paragraph>
       Freed up engineering lead time by automating app release announcements in
       Slack.<SeeMore
-        >We used Heroku for hosting and deployed the latest Git <span
-          class="font-mono">main</span
-        > branch on every new change. We had a process in place where once a week
-        one of the engineering leads compiled a list of all the changes with their
-        Jira ID and a short description and posted this in a #release Slack channel.
-        I implemented a task that ran on every deployment to Heroku which compiled
-        a list of Jiras from the last deployment, got the Jira tasks descriptions,
-        the author (developer) of that change, found a related Slack account and tagged
-        them in the automated Slack message (developers were encouraged to provide
-        additional context, especially when it was related to a bug they fixed for
-        someone from a support of other department).</SeeMore
+        >We used Heroku for hosting and deployed the latest Git
+        <span class="font-mono">main</span> branch on every new change. We had a
+        process in place where once a week one of the engineering leads compiled
+        a list of all the changes with their Jira ID and a short description and
+        posted this in a #release Slack channel. I implemented a task that ran
+        on every deployment to Heroku which compiled a list of Jiras from the
+        last deployment, got the Jira tasks descriptions, the author (developer)
+        of that change, found a related Slack account and tagged them in the
+        automated Slack message (developers were encouraged to provide
+        additional context, especially when it was related to a bug they fixed
+        for someone from a support of other department).</SeeMore
       >
     </Paragraph>
     <Image
@@ -690,11 +735,13 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
 
     <Heading data-as="h4" id="grammar-checker">Grammar checker</Heading>
     <Paragraph>
-      Improved copy quality through automated grammar and spellchecking.<SeeMore
-        >Using <Link href="https://languagetool.org/">LanguageTool</Link> I implemented
-        a check in GitHub Actions that checked grammar including spellchecks. This
-        involved compiling the list of translations from a YML file into a human-readable
-        form which is what LanguageTool expects.</SeeMore
+      Improved copy quality through automated grammar and
+      spellchecking.<SeeMore
+        >Using <Link href="https://languagetool.org/">LanguageTool</Link> I
+        implemented a check in GitHub Actions that checked grammar including
+        spellchecks. This involved compiling the list of translations from a YML
+        file into a human-readable form which is what LanguageTool
+        expects.</SeeMore
       >
     </Paragraph>
     <LanguageToolExample />
@@ -711,23 +758,24 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
         loading="lazy"
         src="https://player.vimeo.com/video/885736465?autoplay=1&dnt=1&background=1"
         width="640"
-        height="360"></iframe>
+        height="360"
+      ></iframe>
     </div>
 
     <Heading data-as="h4" id="openapi">OpenAPI</Heading>
     <Paragraph>
       Laid the foundation for future enhancements such as automated TypeScript
-      type generation by adding OpenAPI.<SeeMore
+      type generation by adding
+      OpenAPI.<SeeMore
         >Found the tooling and implemented the helpers for adding OpenAPI 2.0
         (later upgraded to version 3.0) and implemented it on a few regular
         cases as well as some exceptional ones. This was used later by the team
         for generating TypeScript types for frontend which increased our
-        efficiency. It led to other initiatives, such as my work on <Link
-          href="#linter-rules">linters</Link
-        > and
+        efficiency. It led to other initiatives, such as my work on
+        <Link href="#linter-rules">linters</Link> and
         <Link href="#type-validation">frontend to backend type validation</Link>
-        later on to improve our workflow and get as much as possible from the coupling
-        of backend to frontend this afforded us.</SeeMore
+        later on to improve our workflow and get as much as possible from the
+        coupling of backend to frontend this afforded us.</SeeMore
       >
     </Paragraph>
     <Image
@@ -753,16 +801,16 @@ import { YEARS_OF_EXPERIENCE } from "@utils/constants"
     >
     <Paragraph>
       Accelerated developer velocity for hospital task system app for nurses and
-      orderlies by streamlining dependency management and build system.<SeeMore>
+      orderlies by streamlining dependency management and build
+      system.<SeeMore>
         The team had a strict policy for dependency management and actually
         maintained their own repository of dependencies. This was initially done
-        through quite a large <Link
-          href="https://git-scm.com/book/en/v2/Git-Tools-Submodules"
+        through quite a large
+        <Link href="https://git-scm.com/book/en/v2/Git-Tools-Submodules"
           >Git submodule</Link
         >. I've made it so that the team was able to use our own repository of
         dependencies as if they were using the original repository which
-        simplified the workflow to a large extent.</SeeMore
-      >
+        simplified the workflow to a large extent.</SeeMore>
     </Paragraph>
 
     <Heading data-as="h5">Other</Heading>
