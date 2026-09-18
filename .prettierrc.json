@@ -8,5 +8,6 @@
       }
     }
   ],
-  "semi": false
+  "semi": false,
+  "astroCompressHTML": true
 }

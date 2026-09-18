@@ -10,18 +10,16 @@ const sortedPosts = posts.toSorted(
 
 <BaseLayout>
   <div class="mt-4 flex-col space-y-4">
-    {
-      sortedPosts.map((post) => (
-        <ArticleCard
-          title={post.data.title}
-          subtitle={post.data.pubDate.toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-          })}
-          slug={post.id}
-        />
-      ))
-    }
+    {sortedPosts.map((post) => (
+      <ArticleCard
+        title={post.data.title}
+        subtitle={post.data.pubDate.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        })}
+        slug={post.id}
+      />
+    ))}
   </div>
 </BaseLayout>

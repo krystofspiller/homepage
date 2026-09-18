@@ -9,14 +9,12 @@ const calculatedTarget =
     : "_self")
 ---
 
-{
-  !href ? (
-    <span {...props} class={className}>
-      <slot />
-    </span>
-  ) : (
-    <a class={className} href={href} target={calculatedTarget}>
-      <slot />
-    </a>
-  )
-}
+{!href ? (
+  <span {...props} class={className}>
+    <slot />
+  </span>
+) : (
+  <a class={className} href={href} target={calculatedTarget}>
+    <slot />
+  </a>
+)}

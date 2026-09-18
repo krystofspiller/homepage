@@ -13,21 +13,19 @@ const isGif = format === "gif"
 const isSvg = format === "svg"
 ---
 
-{
-  isSvg ? (
-    <img
-      src={src.src}
-      alt={alt}
-      width={src.width}
-      height={src.height}
-      {...rest}
-    />
-  ) : (
-    <Picture
-      src={src}
-      alt={alt}
-      formats={isGif ? ["webp"] : ["avif", "webp"]}
-      {...rest}
-    />
-  )
-}
+{isSvg ? (
+  <img
+    src={src.src}
+    alt={alt}
+    width={src.width}
+    height={src.height}
+    {...rest}
+  />
+) : (
+  <Picture
+    src={src}
+    alt={alt}
+    formats={isGif ? ["webp"] : ["avif", "webp"]}
+    {...rest}
+  />
+)}
