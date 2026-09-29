@@ -27,3 +27,5 @@ src/data/blog-versions
 package-lock.json
 yarn.lock
 bun.lockb
+# Local-only Portchain work summary
+portchain-sixteen-months.*
