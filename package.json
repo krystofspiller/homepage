@@ -36,23 +36,23 @@
     "zod": "^4.6.5"
   },
   "devDependencies": {
-    "@playwright/test": "^1.63.0",
+    "@playwright/test": "^1.64.0",
     "@t3-oss/env-core": "^0.13.11",
     "@types/alpinejs": "^3.17.0",
     "@types/canvas-confetti": "^1.9.0",
     "@types/jsdom": "^30.0.0",
     "@types/node": "24.13.4",
-    "dotenv": "^18.0.5",
+    "dotenv": "^18.0.7",
     "jsdom": "^30.1.2",
-    "knip": "^6.39.0",
+    "knip": "^6.41.0",
     "linkedom": "^0.18.13",
-    "msw": "^3.0.2",
-    "oxlint": "^1.87.0",
-    "oxlint-tsgolint": "^7.0.2003",
-    "prettier": "^3.9.9",
-    "prettier-plugin-astro": "^1.1.0",
+    "msw": "^3.0.3",
+    "oxlint": "^1.88.0",
+    "oxlint-tsgolint": "^7.0.2004",
+    "prettier": "^3.9.10",
+    "prettier-plugin-astro": "^1.1.1",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "tsx": "^4.23.15",
-    "vitest": "^5.0.3"
+    "vitest": "^5.0.4"
   }
 }
