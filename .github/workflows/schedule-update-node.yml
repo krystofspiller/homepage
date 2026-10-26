@@ -65,5 +65,7 @@ jobs:
           body: |
             This PR updates Node from version `${{ steps.update-needed.outputs.current }}` to the latest LTS version `${{ steps.update-needed.outputs.latest }}`.
 
+            Release notes: https://nodejs.org/en/download/archive/v${{ steps.update-needed.outputs.latest }}
+
             This PR was automatically created by the Update Node workflow.
           branch: chore/update-node-version-${{ steps.update-needed.outputs.latest }}
