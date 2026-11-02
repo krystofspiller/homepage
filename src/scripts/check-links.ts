@@ -12,7 +12,8 @@ const execAsync = async (command: string): Promise<string> => {
   const output = await new Promise<string>((resolve, reject) => {
     exec(command, { encoding: "utf8" }, (error, stdout) => {
       if (error) {
-        reject(error)
+        // Node 26 ExecException is Omit<ErrnoException,"code"> — not Error-assignable.
+        reject(new Error(error.message, { cause: error }))
       } else {
         resolve(stdout)
       }
