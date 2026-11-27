@@ -44,15 +44,15 @@
     "@types/node": "26.6.6",
     "dotenv": "^18.0.10",
     "jsdom": "^31.0.1",
-    "knip": "^6.45.1",
+    "knip": "^6.48.0",
     "linkedom": "^0.18.15",
-    "msw": "^3.0.6",
-    "oxlint": "^1.94.0",
-    "oxlint-tsgolint": "^7.0.2007",
+    "msw": "^3.0.7",
+    "oxlint": "^1.95.0",
+    "oxlint-tsgolint": "^7.0.2008",
     "prettier": "^3.10.1",
     "prettier-plugin-astro": "^1.1.2",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "tsx": "^4.23.15",
-    "vitest": "^5.1.0"
+    "vitest": "^5.1.1"
   }
 }
